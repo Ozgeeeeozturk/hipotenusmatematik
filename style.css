@@ -547,3 +547,6 @@ section{padding-block:44px;scroll-margin-top:calc(var(--header-h) + var(--safe-t
   .auth-form{padding:16px 16px 20px}
   .auth-top .logo span{font-size:1.4rem}
 }
+/* Oyunlar: seçili tema şeridi */
+.tema-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--yellow-light);border:2px solid var(--yellow);border-radius:14px;padding:10px 14px;margin:0 0 16px;font-weight:700}
+.tema-bar[hidden]{display:none}

@@ -63,10 +63,11 @@ function validateContent(template, content) {
 // ---- Veri işlemleri (Supabase) ----
 const DB = {
   ok() { return !!sb; },
-  async list({ grade, template, mine, limit = 60 } = {}) {
+  async list({ grade, template, unit, mine, limit = 60 } = {}) {
     let q = sb.from('activities').select('id,title,template,grade,unit,owner_name,owner_id,play_count,is_public,created_at').order('created_at', { ascending: false }).limit(limit);
     if (grade) q = q.eq('grade', grade);
     if (template) q = q.eq('template', template);
+    if (unit) q = q.eq('unit', unit);
     if (mine) q = q.eq('owner_id', mine); else q = q.eq('is_public', true);
     const { data, error } = await q;
     if (error) throw error;
@@ -264,21 +265,21 @@ function confetti() {
 
 // ---- Hazır etkileşimli oyunlar ----
 const BUILTIN_GAMES = [
-  { href: 'aci-ustasi.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Açı Ustası: Verilmeyen Açıyı Bul', text: 'Doğru açı ve tam açıda renkli parçalarla', grades: [5], color: 'y' },
-  { href: 'pergel.html', icon: '⭕', type: 'Sürükle-Bırak', title: 'Pergel ile Çember Çiz', text: 'Pergeli döndür, yarıçap ve çapı keşfet', grades: [5], color: 'm' },
-  { href: 'yaricap-tasi.html', icon: '📏', type: 'Sürükle-Bırak', title: 'Yarıçapları Taşı: Dikdörtgenin Kenarları', text: 'Yarıçapları kenarlara taşı, çevreyi bul', grades: [5], color: 'l' },
-  { href: 'es-dogru.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Eş Doğru Parçaları: L’ye Bak', text: 'Kareli kâğıtta eş doğru parçalarını bul ve çiz', grades: [5], color: 'y' },
-  { href: 'saat-aci.html', icon: '⏰', type: 'Görsel Soru', title: 'Saatteki Açılar', text: 'Akrep ile yelkovan arasındaki açının çeşidini bul', grades: [5], color: 'm' },
-  { href: 'acinim.html', icon: '🧊', type: '3B Etkinlik', title: 'Küp ve Prizma Açınımı', text: 'Cismi aç, kapat ve her yönden döndür', grades: [7], color: 'l' },
-  { href: 'cekirge.html', icon: '🦗', type: 'Sayı Doğrusu', title: 'Zıpzıp Çekirge', text: 'Yolu ölç, sıçrayışı bul, noktaları yerleştir', grades: [7], color: 'm' },
-  { href: 'termometre.html', icon: '🌡️', type: 'Görsel Soru', title: 'Termometre Okuma', text: 'Negatif sıcaklıkları oku, ayarla, karşılaştır', grades: [7], color: 'y' },
+  { href: 'aci-ustasi.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Açı Ustası: Verilmeyen Açıyı Bul', text: 'Doğru açı ve tam açıda renkli parçalarla', grades: [5], unit: 'Geometrik Şekiller', color: 'y' },
+  { href: 'pergel.html', icon: '⭕', type: 'Sürükle-Bırak', title: 'Pergel ile Çember Çiz', text: 'Pergeli döndür, yarıçap ve çapı keşfet', grades: [5], unit: 'Geometrik Şekiller', color: 'm' },
+  { href: 'yaricap-tasi.html', icon: '📏', type: 'Sürükle-Bırak', title: 'Yarıçapları Taşı: Dikdörtgenin Kenarları', text: 'Yarıçapları kenarlara taşı, çevreyi bul', grades: [5], unit: 'Geometrik Nicelikler', color: 'l' },
+  { href: 'es-dogru.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Eş Doğru Parçaları: L’ye Bak', text: 'Kareli kâğıtta eş doğru parçalarını bul ve çiz', grades: [5], unit: 'Geometrik Şekiller', color: 'y' },
+  { href: 'saat-aci.html', icon: '⏰', type: 'Görsel Soru', title: 'Saatteki Açılar', text: 'Akrep ile yelkovan arasındaki açının çeşidini bul', grades: [5], unit: 'Geometrik Şekiller', color: 'm' },
+  { href: 'acinim.html', icon: '🧊', type: '3B Etkinlik', title: 'Küp ve Prizma Açınımı', text: 'Cismi aç, kapat ve her yönden döndür', grades: [7], unit: 'Geometrik Nicelikler (1)', color: 'l' },
+  { href: 'cekirge.html', icon: '🦗', type: 'Sayı Doğrusu', title: 'Zıpzıp Çekirge', text: 'Yolu ölç, sıçrayışı bul, noktaları yerleştir', grades: [7], unit: 'Sayılar ve Nicelikler (1)', color: 'm' },
+  { href: 'termometre.html', icon: '🌡️', type: 'Görsel Soru', title: 'Termometre Okuma', text: 'Negatif sıcaklıkları oku, ayarla, karşılaştır', grades: [7], unit: 'Sayılar ve Nicelikler (1)', color: 'y' },
 ];
 function builtinCard(g) {
   return `<a class="card act-card has-grade ${g.color}" href="${g.href}">
     <div class="act-top"><span class="act-ic" aria-hidden="true">${g.icon}</span><span class="act-type">${g.type}</span><span class="sinif-kose" aria-label="${g.grades.join('–')}. sınıf"><b>${g.grades.join('–')}.</b>Sınıf</span></div>
     <h3>${g.title}</h3>
     <p>${g.text}</p>
-    <div class="act-meta"><span class="plays">✨ Yeni</span></div>
+    <div class="act-meta">${g.unit ? `<span class="tag">${esc(g.unit)}</span>` : ''}<span class="plays">✨ Yeni</span></div>
   </a>`;
 }
 

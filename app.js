@@ -37,7 +37,7 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>'
 const UNIT_SUB = { 5: { 'Sayılar ve Nicelikler (1)': 'Doğal Sayılar ve İşlemler', 'Sayılar ve Nicelikler (2)': 'Kesirler' } };
 const unitLabel = (g, u) => (UNIT_SUB[g] && UNIT_SUB[g][u] ? `${u}: ${UNIT_SUB[g][u]}` : u);
 const unitListHTML = g => `<ol class="unit-list">${UNITS[g].map((u, i) =>
-  `<li><a href="#"${UNIT_NO[g] ? ` data-no="${UNIT_NO[g][i]}"` : ''}>${esc(unitLabel(g, u))}</a></li>`).join('')}</ol>`;
+  `<li><a href="oyunlar.html?sinif=${g}&amp;tema=${encodeURIComponent(u)}"${UNIT_NO[g] ? ` data-no="${UNIT_NO[g][i]}"` : ''} title="${esc(u)} oyunları">${esc(unitLabel(g, u))}</a></li>`).join('')}</ol>`;
 
 // ---- Güvenli depolama (gizli pencerede hata vermesin) ----
 const store = {

@@ -59,6 +59,8 @@
     <button class="chip" id="mineChip" aria-pressed="false" hidden>🍎 Etkinliklerim</button>
   </div>
 
+  <div class="tema-bar" id="temaBar" hidden></div>
+
   <div class="grid" id="list" aria-live="polite">
     <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
   </div>
@@ -73,7 +75,7 @@
   initPage();
   const $ = id => document.getElementById(id);
   const params = new URLSearchParams(location.search);
-  const f = { grade: params.get('sinif') || '', template: params.get('tur') || '', mine: params.get('benim') === '1' };
+  const f = { grade: params.get('sinif') || '', template: params.get('tur') || '', unit: params.get('tema') || '', mine: params.get('benim') === '1' };
 
   const me = await Auth.refresh().catch(() => Auth.current());
   const teacher = me && me.role === 'ogretmen';
@@ -86,7 +88,15 @@
     document.querySelectorAll('[data-tpl]').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.tpl === f.template)));
     $('mineChip').setAttribute('aria-pressed', String(f.mine));
     const q = new URLSearchParams();
-    if (f.grade) q.set('sinif', f.grade); if (f.template) q.set('tur', f.template); if (f.mine) q.set('benim', '1');
+    if (f.grade) q.set('sinif', f.grade); if (f.unit) q.set('tema', f.unit); if (f.template) q.set('tur', f.template); if (f.mine) q.set('benim', '1');
+    const bar = $('temaBar'), units = UNITS[f.grade] || [], ui = units.indexOf(f.unit);
+    if (f.unit && ui < 0) f.unit = '';
+    bar.hidden = !f.unit;
+    if (f.unit) {
+      const no = UNIT_NO[f.grade] ? `${UNIT_NO[f.grade][ui]}. Tema: ` : '';
+      bar.innerHTML = `<span>🔖 <b>${f.grade}. Sınıf</b> · ${no}${esc(unitLabel(f.grade, f.unit))}</span><button class="chip" id="temaClear">✕ Tüm temalar</button>`;
+      $('temaClear').addEventListener('click', () => { f.unit = ''; load(); });
+    }
     try { history.replaceState(null, '', q.toString() ? `?${q}` : location.pathname); } catch {}
   };
 
@@ -98,19 +108,19 @@
     if (!DB.ok()) { list.innerHTML = '<div class="empty"><b>Oyunlar şu an açılamıyor</b><p>Lütfen daha sonra tekrar dene.</p></div>'; return; }
     list.innerHTML = '<div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>';
     try {
-      const rows = await DB.list({ grade: f.grade ? Number(f.grade) : null, template: f.template === 'dragdrop' ? '__yok__' : (f.template || null), mine: f.mine ? me.id : null });
+      const rows = await DB.list({ grade: f.grade ? Number(f.grade) : null, unit: f.unit || null, template: f.template === 'dragdrop' ? '__yok__' : (f.template || null), mine: f.mine ? me.id : null });
       if (my !== reqNo) return;
-      const built = f.mine || (f.template && f.template !== 'dragdrop') ? [] : BUILTIN_GAMES.filter(g => !f.grade || g.grades.includes(Number(f.grade)));
+      const built = f.mine || (f.template && f.template !== 'dragdrop') ? [] : BUILTIN_GAMES.filter(g => (!f.grade || g.grades.includes(Number(f.grade))) && (!f.unit || g.unit === f.unit));
       if (rows.length || built.length) { list.innerHTML = built.map(builtinCard).join('') + rows.map(activityCard).join(''); return; }
       list.innerHTML = f.mine
         ? '<div class="empty"><b>Henüz etkinlik hazırlamadın</b><p>Bir şablon seç, sorularını yaz; birkaç dakikada öğrencilerin oynamaya başlasın.</p><a class="btn btn-yellow" href="olustur.html">＋ İlk Etkinliğini Oluştur</a></div>'
-        : `<div class="empty"><b>Bu seçimde henüz oyun yok</b><p>${teacher ? 'İlk oyunu sen hazırlayabilirsin!' : 'Öğretmenler yeni oyunlar ekledikçe burada görünecek. Başka bir sınıf ya da tür seçmeyi dene.'}</p>${teacher ? '<a class="btn btn-yellow" href="olustur.html">＋ Yeni Etkinlik</a>' : ''}</div>`;
+        : `<div class="empty"><b>${f.unit ? 'Bu temada henüz oyun yok' : 'Bu seçimde henüz oyun yok'}</b><p>${teacher ? 'İlk oyunu sen hazırlayabilirsin!' : 'Öğretmenler yeni oyunlar ekledikçe burada görünecek. Başka bir sınıf ya da tür seçmeyi dene.'}</p>${teacher ? '<a class="btn btn-yellow" href="olustur.html">＋ Yeni Etkinlik</a>' : ''}</div>`;
     } catch {
       if (my === reqNo) list.innerHTML = '<div class="empty"><b>Oyunlar yüklenemedi</b><p>İnternet bağlantını kontrol edip tekrar dene.</p><button class="btn btn-yellow" onclick="location.reload()">Yenile</button></div>';
     }
   }
 
-  document.querySelectorAll('[data-grade]').forEach(c => c.addEventListener('click', () => { f.grade = c.dataset.grade; load(); }));
+  document.querySelectorAll('[data-grade]').forEach(c => c.addEventListener('click', () => { f.grade = c.dataset.grade; f.unit = ''; load(); }));
   document.querySelectorAll('[data-tpl]').forEach(c => c.addEventListener('click', () => { f.template = c.dataset.tpl; load(); }));
   $('mineChip').addEventListener('click', () => { f.mine = !f.mine; load(); });
   load();
