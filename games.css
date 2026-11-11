@@ -445,3 +445,5 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .ws-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
 .ws-btns .btn{padding:9px 14px;font-size:.92rem}
 @media (max-width:480px){.ws-card{grid-template-columns:1fr}.ws-thumb{max-width:220px;margin:0 auto}}
+.act-card.has-grade .act-type{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:480px){.act-card.has-grade .act-type{display:none}}
