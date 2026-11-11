@@ -286,11 +286,11 @@ function builtinCard(g) {
 // ---- Etkinlik kartı (listeler için) ----
 function activityCard(a) {
   const t = TEMPLATES[a.template] || TEMPLATES.quiz;
-  return `<a class="card act-card ${t.color}" href="oyun.html?id=${encodeURIComponent(a.id)}">
-    <div class="act-top"><span class="act-ic" aria-hidden="true">${t.icon}</span><span class="act-type">${t.short}</span></div>
+  return `<a class="card act-card ${a.grade ? 'has-grade ' : ''}${t.color}" href="oyun.html?id=${encodeURIComponent(a.id)}">
+    <div class="act-top"><span class="act-ic" aria-hidden="true">${t.icon}</span><span class="act-type">${t.short}</span>${a.grade ? `<span class="sinif-kose" aria-label="${a.grade}. sınıf"><b>${a.grade}.</b>Sınıf</span>` : ''}</div>
     <h3>${esc(a.title)}</h3>
     <p>${a.unit ? esc(a.unit) : 'Genel'}${a.owner_name ? ` · ${esc(shortName(a.owner_name))}` : ''}</p>
-    <div class="act-meta">${a.grade ? `<span class="tag">${a.grade}. Sınıf</span>` : ''}<span class="plays">▶ ${a.play_count || 0}</span>${a.is_public === false ? '<span class="tag priv">Gizli</span>' : ''}</div>
+    <div class="act-meta"><span class="plays">▶ ${a.play_count || 0}</span>${a.is_public === false ? '<span class="tag priv">Gizli</span>' : ''}</div>
   </a>`;
 }
 

@@ -74,7 +74,7 @@
   $('playHead').innerHTML = `
     <div class="act-ic ${t.color}" style="background:var(--${t.color === 'm' ? 'mint' : t.color === 'l' ? 'lilac' : 'yellow'}-light)" aria-hidden="true">${t.icon}</div>
     <div><h1>${esc(act.title)}</h1>
-    <p>${t.name}${act.grade ? ` · ${act.grade}. Sınıf` : ''}${act.unit ? ` · ${esc(act.unit)}` : ''}${act.owner_name ? ` · Hazırlayan: ${esc(shortName(act.owner_name))}` : ''}</p></div>`;
+    <p>${t.name}${act.unit ? ` · ${esc(act.unit)}` : ''}${act.owner_name ? ` · Hazırlayan: ${esc(shortName(act.owner_name))}` : ''}</p></div>${act.grade ? `<span class="sinif-rozet big">${act.grade}. Sınıf</span>` : ''}`;
 
   const me = Auth.current();
   if (me && me.id === act.owner_id) {
