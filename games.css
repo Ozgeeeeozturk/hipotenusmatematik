@@ -366,3 +366,8 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 /* Sınıf rozeti (sağ üst) */
 .sinif-rozet{margin-left:auto;flex-shrink:0;background:var(--yellow);color:var(--ink);font-weight:800;font-size:.82rem;border-radius:999px;padding:4px 12px;box-shadow:0 2px 0 rgba(45,36,64,.15);white-space:nowrap}
 .sinif-rozet.big{font-size:.95rem;padding:6px 14px;align-self:flex-start}
+/* Kartın sağ üst çeyrek dairesinde sınıf */
+.act-card.has-grade::after{width:118px;height:118px;right:-38px;top:-38px;opacity:.75}
+.sinif-kose{position:absolute;top:13px;right:3px;width:64px;z-index:2;display:grid;justify-items:center;line-height:1;color:var(--ink);font-weight:800;font-size:.78rem;pointer-events:none}
+.sinif-kose b{font-family:'Baloo 2',cursive;font-size:1.65rem;line-height:.95}
+.act-card.has-grade .act-top{padding-right:58px}

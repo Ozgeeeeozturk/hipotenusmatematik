@@ -272,8 +272,8 @@ const BUILTIN_GAMES = [
   { href: 'acinim.html', icon: '🧊', type: '3B Etkinlik', title: 'Küp ve Prizma Açınımı', text: 'Cismi aç, kapat ve her yönden döndür', grades: [7], color: 'l' },
 ];
 function builtinCard(g) {
-  return `<a class="card act-card ${g.color}" href="${g.href}">
-    <div class="act-top"><span class="act-ic" aria-hidden="true">${g.icon}</span><span class="act-type">${g.type}</span><span class="sinif-rozet">${g.grades.join('–')}. Sınıf</span></div>
+  return `<a class="card act-card has-grade ${g.color}" href="${g.href}">
+    <div class="act-top"><span class="act-ic" aria-hidden="true">${g.icon}</span><span class="act-type">${g.type}</span><span class="sinif-kose" aria-label="${g.grades.join('–')}. sınıf"><b>${g.grades.join('–')}.</b>Sınıf</span></div>
     <h3>${g.title}</h3>
     <p>${g.text}</p>
     <div class="act-meta"><span class="plays">✨ Yeni</span></div>
