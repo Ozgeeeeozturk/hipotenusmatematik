@@ -4,14 +4,14 @@
 // 5, 6 ve 7. sınıflar: Türkiye Yüzyılı Maarif Modeli temaları, MEB'in resmi sırasıyla (tymm.meb.gov.tr, 2026-2027)
 // 8. sınıf: 2018 öğretim programı üniteleri
 const UNITS = {
-  // 5. sınıf: MEB 2026-2027 ders kitabındaki sıra (tymm.meb.gov.tr/kitap/25 ve /26)
+  // 5, 6 ve 7. sınıf: MEB 2026-2027 ders kitaplarındaki tema sırası (tymm.meb.gov.tr ders kitapları)
   5: ['Geometrik Şekiller','Sayılar ve Nicelikler (1)','Geometrik Nicelikler','Sayılar ve Nicelikler (2)',
       'İstatistiksel Araştırma Süreci','İşlemlerle Cebirsel Düşünme','Veriden Olasılığa'],
-  6: ['Sayılar ve Nicelikler (1)','Sayılar ve Nicelikler (2)','İşlemlerle Cebirsel Düşünme ve Değişimler','Geometrik Şekiller',
-      'Geometrik Nicelikler','İstatistiksel Araştırma Süreci','Veriden Olasılığa'],
-  7: ['Sayılar ve Nicelikler (1)','Sayılar ve Nicelikler (2)','İşlemlerle Cebirsel Düşünme ve Değişimler','Dönüşüm',
-      'Geometrik Nicelikler (1)','Geometrik Nicelikler (2)','Geometrik Şekiller','İstatistiksel Araştırma Süreci',
-      'Veriden Olasılığa'],
+  6: ['Sayılar ve Nicelikler (1)','Veriden Olasılığa','Sayılar ve Nicelikler (2)','İstatistiksel Araştırma Süreci',
+      'Geometrik Şekiller','İşlemlerle Cebirsel Düşünme ve Değişimler','Geometrik Nicelikler'],
+  7: ['Sayılar ve Nicelikler (1)','Geometrik Nicelikler (1)','İstatistiksel Araştırma Süreci','Dönüşüm',
+      'Geometrik Şekiller','Sayılar ve Nicelikler (2)','Veriden Olasılığa','İşlemlerle Cebirsel Düşünme ve Değişimler',
+      'Geometrik Nicelikler (2)'],
   8: ['Çarpanlar ve Katlar','Üslü İfadeler','Kareköklü İfadeler','Veri Analizi','Basit Olayların Olasılığı',
       'Cebirsel İfadeler ve Özdeşlikler','Doğrusal Denklemler','Eşitsizlikler','Üçgenler','Eşlik ve Benzerlik',
       'Dönüşüm Geometrisi','Geometrik Cisimler'],
@@ -19,8 +19,8 @@ const UNITS = {
 // Resmi tema numaraları: Maarif Modeli'nde bazı temalar iki bölüm hâlinde aynı numarayı taşır
 const UNIT_NO = {
   5: ['1', '2', '3', '4', '5', '6', '7'],
-  6: ['1', '1', '2', '3', '4', '5', '6'],
-  7: ['1', '1', '2', '3', '4', '4', '5', '6', '7'],
+  6: ['1', '2', '3', '4', '5', '6', '7'],
+  7: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
 };
 const UNIT_WORD = g => (UNIT_NO[g] ? 'tema' : 'ünite');
 const UNIT_TITLE = g => (UNIT_NO[g] ? 'Temaları' : 'Üniteleri');
