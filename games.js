@@ -270,7 +270,7 @@ const BUILTIN_GAMES = [
   { href: 'es-dogru.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Eş Doğru Parçaları: L’ye Bak', text: 'Kareli kâğıtta eş doğru parçalarını bul ve çiz', grades: [5], color: 'y' },
   { href: 'saat-aci.html', icon: '⏰', type: 'Görsel Soru', title: 'Saatteki Açılar', text: 'Akrep ile yelkovan arasındaki açının çeşidini bul', grades: [5], color: 'm' },
   { href: 'acinim.html', icon: '🧊', type: '3B Etkinlik', title: 'Küp ve Prizma Açınımı', text: 'Cismi aç, kapat ve her yönden döndür', grades: [7], color: 'l' },
-  { href: 'cekirge.html', icon: '🦗', type: 'Sayı Doğrusu', title: 'Zıpzıp Çekirge', text: 'Yolu ölç, sıçrayışı bul, noktaları yerleştir', grades: [6], color: 'm' },
+  { href: 'cekirge.html', icon: '🦗', type: 'Sayı Doğrusu', title: 'Zıpzıp Çekirge', text: 'Yolu ölç, sıçrayışı bul, noktaları yerleştir', grades: [7], color: 'm' },
 ];
 function builtinCard(g) {
   return `<a class="card act-card has-grade ${g.color}" href="${g.href}">
