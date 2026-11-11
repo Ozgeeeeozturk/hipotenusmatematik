@@ -9,7 +9,7 @@
 
   // Bulma turları: [x1,y1,x2,y2] (birim), seçenekler ve doğru çift. İlki kitaptaki soru.
   const FIND = [
-    { segs: [[1, 4, 5, 0], [11, 1, 16, 3], [10, 7, 13, 3], [5, 4, 9, 7], [14, 4, 15, 8]], opts: [[1, 3], [4, 5], [2, 5], [3, 4]], ans: 3 },
+    { segs: [[1, 4, 5, 0], [11, 1, 16, 3], [10, 7, 13, 3], [5, 4, 9, 7], [15, 4, 16, 8]], opts: [[1, 3], [4, 5], [2, 5], [3, 4]], ans: 3 },
     { segs: [[1, 2, 3, 7], [5, 6, 10, 4], [7, 1, 12, 1], [12, 7, 16, 5], [14, 1, 17, 3]], opts: [[1, 2], [3, 5], [2, 4], [1, 4]], ans: 0 },
     { segs: [[1, 6, 4, 6], [2, 1, 6, 3], [7, 7, 9, 4], [11, 2, 11, 5], [12, 7, 17, 4]], opts: [[2, 5], [1, 4], [1, 3], [3, 4]], ans: 1 },
     { segs: [[1, 1, 3, 5], [4, 7, 7, 6], [6, 1, 11, 2], [9, 7, 13, 4], [13, 1, 17, 3]], opts: [[3, 4], [2, 3], [1, 5], [1, 4]], ans: 2 },
@@ -25,7 +25,8 @@
   </div>`;
 
   let idx = 0, score = 0;
-  const gen = n => `${n}’${['', 'in', 'nin', 'ün', 'ün', 'in'][n]}`;
+  const NM = ['a', 'b', 'c', 'd', 'e'];
+  const gen = n => `${NM[n - 1]}’${['nın', 'nin', 'nin', 'nin', 'nin'][n - 1]}`;
   const legs = s => [Math.abs(s[2] - s[0]), Math.abs(s[3] - s[1])];
   const X = v => PAD + v * U;
 
@@ -60,7 +61,7 @@
     // etiketi doğru parçasına dik yönde, yukarı-sola kaydır
     let nx = -(y2 - y1), ny = x2 - x1; const len = Math.hypot(nx, ny) || 1;
     nx /= len; ny /= len; if (ny > 0 || (ny === 0 && nx > 0)) { nx = -nx; ny = -ny; }
-    return `<g class="ed-seg"${id != null ? ` data-s="${id}" tabindex="0" role="button" aria-label="${label}. doğru parçası"` : ''}>
+    return `<g class="ed-seg"${id != null ? ` data-s="${id}" tabindex="0" role="button" aria-label="${label} doğru parçası"` : ''}>
       <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="transparent" stroke-width="30"/>
       <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="4.5" stroke-linecap="round"/>
       <circle cx="${x1}" cy="${y1}" r="6" fill="#E5484D"/><circle cx="${x2}" cy="${y2}" r="6" fill="#E5484D"/>
@@ -81,7 +82,7 @@
       <svg viewBox="0 0 ${cols * U + 2 * PAD} ${rows * U + 2 * PAD + 14}" class="ed-board" id="edBoard" role="img" aria-label="Birim kareli zeminde 5 doğru parçası"></svg>
       <div class="ed-chips" id="edChips" aria-live="polite"><span class="ed-empty">👆 Bir doğru parçasına dokun</span></div>
       <div class="pg-quiz">
-        <div class="g-options pg-opts">${R.opts.map((o, i) => `<button class="g-opt c${i}" data-i="${i}"><b>${'ABCD'[i]}</b>${o[0]} ile ${o[1]}</button>`).join('')}</div>
+        <div class="g-options pg-opts">${R.opts.map((o, i) => `<button class="g-opt c${i}" data-i="${i}"><b>${'ABCD'[i]}</b>${NM[o[0] - 1]} ile ${NM[o[1] - 1]}</button>`).join('')}</div>
         <p class="pg-fb" id="edFb" aria-live="polite"></p>
       </div>
       <div class="aci-actions" id="edActions"></div>`;
@@ -90,9 +91,9 @@
     function draw() {
       svg.innerHTML = gridSVG(cols, rows)
         + [...shown].map(i => lSVG(R.segs[i])).join('')
-        + R.segs.map((s, i) => segSVG(s, SEG[i], i + 1, i)).join('');
+        + R.segs.map((s, i) => segSVG(s, SEG[i], NM[i], i)).join('');
       stage.querySelector('#edChips').innerHTML = shown.size
-        ? [...shown].sort().map(i => chip(i + 1, R.segs[i], SEG[i])).join('')
+        ? [...shown].sort().map(i => chip(NM[i], R.segs[i], SEG[i])).join('')
         : '<span class="ed-empty">👆 Bir doğru parçasına dokun</span>';
     }
     const toggle = i => { shown.has(i) ? shown.delete(i) : shown.add(i); draw(); };
@@ -111,7 +112,7 @@
       const same = h === h2 ? 'aynı yönde' : 'döndürülmüş';
       const fb = stage.querySelector('#edFb');
       fb.className = 'pg-fb ' + (ok ? 'ok' : 'no');
-      fb.innerHTML = `${ok ? '✓ Doğru!' : `✗ Doğru cevap: ${a} ile ${b}.`} ${gen(a)} L’si ${h} yatay, ${v} dikey; ${gen(b)} L’si ${h2} yatay, ${v2} dikey. L’ler eş (${same}), doğru parçaları da eş.`;
+      fb.innerHTML = `${ok ? '✓ Doğru!' : `✗ Doğru cevap: ${NM[a - 1]} ile ${NM[b - 1]}.`} ${gen(a)} L’si ${h} yatay, ${v} dikey; ${gen(b)} L’si ${h2} yatay, ${v2} dikey. L’ler eş (${same}), doğru parçaları da eş.`;
       nextBtn();
     }));
     draw();
