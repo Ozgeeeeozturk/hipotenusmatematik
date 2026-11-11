@@ -371,3 +371,38 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .sinif-kose{position:absolute;top:4px;right:-12px;width:64px;z-index:2;display:grid;justify-items:center;line-height:1;color:var(--ink);font-weight:800;font-size:.78rem;pointer-events:none}
 .sinif-kose b{font-family:'Baloo 2',cursive;font-size:1.65rem;line-height:.95}
 .act-card.has-grade .act-top{padding-right:58px}
+/* Zıpzıp Çekirge */
+.ck-steps{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;list-style:none;padding:0;margin:0 0 10px}
+.ck-steps li{background:#F6F3FA;color:var(--muted);border-radius:999px;padding:5px 12px;font-weight:800;font-size:.85rem}
+.ck-steps li.on{background:var(--lilac);color:#fff}
+.ck-steps li.done{background:var(--mint);color:var(--ink)}
+.ck-steps li.done::after{content:" ✓"}
+.ck-board{display:block;width:100%;max-width:760px;margin:0 auto;background:#FFFDF7;border-radius:18px;border:2px solid var(--lilac-light);touch-action:none;user-select:none;-webkit-user-select:none}
+.ck-axis{stroke:#2D2440;stroke-width:3}
+.ck-tick{stroke:#2D2440;stroke-width:1.6}
+.ck-tick.key{stroke:#E5484D}
+.ck-num{font-family:'Baloo 2',cursive;font-weight:800;font-size:17px;fill:#6B6380}
+.ck-num.end{font-size:21px;fill:#2D2440}
+.ck-num.let{font-size:20px;fill:#E8501E}
+.ck-num.rev{font-size:16px;fill:#2E9E78}
+.ck-part{font-family:'Baloo 2',cursive;font-weight:800;font-size:16px;paint-order:stroke;stroke:#FFFDF7;stroke-width:4px}
+.ck-handle{cursor:grab}
+.ck-hand{font-weight:800;font-size:15px;fill:#2D2440;pointer-events:none}
+.ck-jl{font-family:'Baloo 2',cursive;font-weight:800;font-size:17px;fill:#E8501E;paint-order:stroke;stroke:#FFFDF7;stroke-width:4px}
+.ck-frog{font-size:44px}
+.ck-panel{margin-top:12px}
+.ck-ask{text-align:center;font-weight:700;margin-bottom:12px}
+.ck-lens{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.ck-len{width:48px;height:48px;border-radius:14px;border:3px solid var(--lilac-light);background:#fff;font:800 1.3rem 'Baloo 2',cursive;color:var(--ink);cursor:pointer}
+.ck-len.on{background:var(--yellow);border-color:#E0B820}
+.ck-len:disabled{opacity:.6;cursor:default}
+.ck-inputs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.ck-in{display:grid;justify-items:center;gap:4px;font-weight:800}
+.ck-in b{font-family:'Baloo 2',cursive;font-size:1.3rem;color:#E8501E}
+.ck-in input{width:72px;height:50px;text-align:center;font:800 1.4rem 'Baloo 2',cursive;border:3px solid var(--lilac-light);border-radius:14px;color:var(--ink);background:#fff}
+.ck-in.ok input{border-color:#2E9E78;background:#E8F8F1}
+.ck-in.no input{border-color:var(--danger);animation:shake .4s}
+.ck-in small{font-size:.8rem;color:#2E9E78;min-height:1em}
+.ck-signs{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:8px;font-weight:700;color:var(--muted)}
+.ck-minus{width:44px;height:40px;border-radius:12px;border:2px solid var(--lilac-light);background:#fff;font:800 1.4rem 'Nunito',sans-serif;cursor:pointer}
+@media (max-width:640px){.ck-num{font-size:28px}.ck-num.end{font-size:34px}.ck-num.let{font-size:32px}.ck-num.rev{font-size:22px}.ck-part{font-size:28px}.ck-jl{font-size:28px}.ck-frog{font-size:58px}.ck-board{height:auto}}
