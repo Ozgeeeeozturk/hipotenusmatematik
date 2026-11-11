@@ -270,6 +270,7 @@ const BUILTIN_GAMES = [
   { href: 'yaricap-tasi.html', icon: '📏', type: 'Sürükle-Bırak', title: 'Yarıçapları Taşı: Dikdörtgenin Kenarları', text: 'Yarıçapları kenarlara taşı, çevreyi bul', grades: [5], unit: 'Geometrik Nicelikler', color: 'l' },
   { href: 'es-dogru.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Eş Doğru Parçaları: L’ye Bak', text: 'Kareli kâğıtta eş doğru parçalarını bul ve çiz', grades: [5], unit: 'Geometrik Şekiller', color: 'y' },
   { href: 'saat-aci.html', icon: '⏰', type: 'Görsel Soru', title: 'Saatteki Açılar', text: 'Akrep ile yelkovan arasındaki açının çeşidini bul', grades: [5], unit: 'Geometrik Şekiller', color: 'm' },
+  { href: 'ucgen-avcisi.html', icon: '🔺', type: 'Keşif Oyunu', title: 'Üçgen Avcısı: Dar, Dik, Geniş', text: 'Dik çizgiyi bul, üçüncü köşeyi seç', grades: [5], unit: 'Geometrik Şekiller', color: 'l' },
   { href: 'acinim.html', icon: '🧊', type: '3B Etkinlik', title: 'Küp ve Prizma Açınımı', text: 'Cismi aç, kapat ve her yönden döndür', grades: [7], unit: 'Geometrik Nicelikler (1)', color: 'l' },
   { href: 'cekirge.html', icon: '🦗', type: 'Sayı Doğrusu', title: 'Zıpzıp Çekirge', text: 'Yolu ölç, sıçrayışı bul, noktaları yerleştir', grades: [7], unit: 'Sayılar ve Nicelikler (1)', color: 'm' },
   { href: 'termometre.html', icon: '🌡️', type: 'Görsel Soru', title: 'Termometre Okuma', text: 'Negatif sıcaklıkları oku, ayarla, karşılaştır', grades: [7], unit: 'Sayılar ve Nicelikler (1)', color: 'y' },

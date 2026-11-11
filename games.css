@@ -447,3 +447,21 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 @media (max-width:480px){.ws-card{grid-template-columns:1fr}.ws-thumb{max-width:220px;margin:0 auto}}
 .act-card.has-grade .act-type{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media (max-width:480px){.act-card.has-grade .act-type{display:none}}
+/* Üçgen Avcısı */
+.ua-board{display:block;width:100%;max-width:560px;margin:0 auto;background:#FFFEFA;border-radius:16px;border:2px solid var(--lilac-light);touch-action:none;user-select:none;-webkit-user-select:none}
+.ua-board.drag{cursor:grab}
+.ua-grid line{stroke:#DCD5E8;stroke-width:1;stroke-dasharray:3 3}
+.ua-lab{font-family:'Baloo 2',cursive;font-weight:800;font-size:18px;fill:#2D2440;paint-order:stroke;stroke:#FFFEFA;stroke-width:4px;pointer-events:none}
+.ua-deg{font-family:'Baloo 2',cursive;font-weight:800;font-size:15px;paint-order:stroke;stroke:#FFFEFA;stroke-width:4px;pointer-events:none}
+.ua-perp{stroke:#2E9E78;stroke-width:2.5;stroke-dasharray:8 6}
+.ua-dome{fill:none;stroke:#E8701E;stroke-width:2.5;stroke-dasharray:6 6;opacity:.8}
+.ua-cand{cursor:pointer}
+.ua-cand.on circle:nth-child(2){r:9}
+.ua-drag circle:nth-child(2){animation:pgPulse 1.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.ua-legend{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:10px 0 0;font-weight:800;font-size:.88rem;color:var(--muted)}
+.ua-legend span{display:inline-flex;align-items:center;gap:6px}
+.ua-legend i{width:14px;height:14px;border-radius:4px}
+.ua-tools{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.ua-tools .btn-ghost-dark.on{background:var(--mint);border-color:var(--mint-dark)}
+.ua-goal{border-radius:8px;padding:0 6px;font-weight:800}
+@media (max-width:640px){.ua-lab{font-size:24px}.ua-deg{font-size:20px}}
