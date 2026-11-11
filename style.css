@@ -85,7 +85,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .dropdown{
   position:absolute;top:calc(100% + 8px);left:50%;
   transform:translate(-50%,8px);
-  min-width:460px;
+  min-width:360px;
   background:var(--white);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
@@ -102,7 +102,7 @@ button{font:inherit;color:inherit;cursor:pointer}
   font-size:1.05rem;margin-bottom:8px;padding-bottom:6px;
   border-bottom:2px dashed var(--mint);
 }
-.unit-list{list-style:none;counter-reset:u;display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.unit-list{list-style:none;counter-reset:u;display:grid;grid-template-columns:1fr;gap:0}
 .unit-list li{counter-increment:u;min-width:0}
 .unit-list li a{
   display:flex;align-items:center;gap:10px;
@@ -256,8 +256,9 @@ section{padding-block:44px;scroll-margin-top:calc(var(--header-h) + var(--safe-t
 }
 .grade-units h4{font-family:'Baloo 2',cursive;font-size:1.1rem;color:var(--lilac-dark);margin:0 0 6px 4px}
 @keyframes unitsOpen{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-.grade-units .unit-list{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-.grade-units .unit-list li a{font-size:.92rem;padding:7px 8px;background:var(--white)}
+.grade-units .unit-list{grid-template-columns:1fr;background:var(--white);border-radius:12px;overflow:hidden}
+.grade-units .unit-list li a{font-size:.92rem;padding:8px 10px;border-radius:0;border-bottom:1px solid #F3EEDC}
+.grade-units .unit-list li:last-child a{border-bottom:0}
 
 /* Video kartları */
 .video-thumb{
