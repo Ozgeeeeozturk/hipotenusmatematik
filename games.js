@@ -266,6 +266,7 @@ function confetti() {
 const BUILTIN_GAMES = [
   { href: 'aci-ustasi.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Açı Ustası: Verilmeyen Açıyı Bul', text: 'Doğru açı ve tam açıda renkli parçalarla', grades: [5, 6, 7], color: 'y' },
   { href: 'pergel.html', icon: '⭕', type: 'Sürükle-Bırak', title: 'Pergel ile Çember Çiz', text: 'Pergeli döndür, yarıçap ve çapı keşfet', grades: [5, 6, 7], color: 'm' },
+  { href: 'yaricap-tasi.html', icon: '📏', type: 'Sürükle-Bırak', title: 'Yarıçapları Taşı: Dikdörtgenin Kenarları', text: 'Yarıçapları kenarlara taşı, çevreyi bul', grades: [5, 6, 7], color: 'l' },
 ];
 function builtinCard(g) {
   return `<a class="card act-card ${g.color}" href="${g.href}">

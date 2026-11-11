@@ -277,3 +277,19 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .g-options.pg-opts{grid-template-columns:repeat(4,1fr);gap:10px}
 .pg-opts .g-opt{justify-content:center;min-height:56px;padding:10px;font-size:1.15rem}
 @media (max-width:640px){.g-options.pg-opts{grid-template-columns:1fr 1fr}}
+/* Yarıçapları Taşı */
+.yt-board{display:block;width:100%;max-width:600px;max-height:62vh;margin:0 auto;background:#FBF9FE;border-radius:18px;border:2px solid var(--lilac-light);touch-action:none;user-select:none;-webkit-user-select:none}
+.yt-piece{cursor:grab;outline:none}
+.yt-piece.drag{cursor:grabbing;filter:drop-shadow(0 4px 6px rgba(45,36,64,.35))}
+.yt-piece:focus-visible line:nth-child(2){stroke-width:10}
+.yt-lab{font-family:'Baloo 2',cursive;font-weight:800;font-size:17px;paint-order:stroke;stroke:#fff;stroke-width:4px;pointer-events:none}
+.yt-lane{stroke:#B9AECB;stroke-width:4;stroke-dasharray:8 7;stroke-linecap:round}
+.yt-lane.ok{stroke:#2E9E78;stroke-dasharray:none;opacity:.35}
+.yt-tick{stroke:#B9AECB;stroke-width:2}
+.yt-guide{stroke:#C9C0D8;stroke-width:1.5;stroke-dasharray:3 4}
+.yt-q{font-family:'Baloo 2',cursive;font-weight:800;font-size:17px;fill:#9A90AC}
+.yt-total{font-family:'Baloo 2',cursive;font-weight:800;font-size:19px;fill:#2E9E78}
+.pg-info.yt-info{grid-template-columns:repeat(3,1fr)}
+@media (max-width:640px){.pg-info.yt-info{grid-template-columns:1fr 1fr}.pg-info.yt-info > div:last-child{grid-column:1/-1}}
+#ytHint{min-height:3em}
+@media (max-width:640px){.yt-lab{font-size:24px;stroke-width:5px}.yt-q,.yt-total{font-size:25px}}
