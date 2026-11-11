@@ -268,6 +268,7 @@ const BUILTIN_GAMES = [
   { href: 'pergel.html', icon: '⭕', type: 'Sürükle-Bırak', title: 'Pergel ile Çember Çiz', text: 'Pergeli döndür, yarıçap ve çapı keşfet', grades: [5, 6, 7], color: 'm' },
   { href: 'yaricap-tasi.html', icon: '📏', type: 'Sürükle-Bırak', title: 'Yarıçapları Taşı: Dikdörtgenin Kenarları', text: 'Yarıçapları kenarlara taşı, çevreyi bul', grades: [5, 6, 7], color: 'l' },
   { href: 'es-dogru.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Eş Doğru Parçaları: L’ye Bak', text: 'Kareli kâğıtta eş doğru parçalarını bul ve çiz', grades: [5, 6], color: 'y' },
+  { href: 'saat-aci.html', icon: '⏰', type: 'Görsel Soru', title: 'Saatteki Açılar', text: 'Akrep ile yelkovan arasındaki açının çeşidini bul', grades: [5, 6], color: 'm' },
 ];
 function builtinCard(g) {
   return `<a class="card act-card ${g.color}" href="${g.href}">

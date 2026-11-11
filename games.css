@@ -312,3 +312,18 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .ed-chip i{font-style:normal;font-family:'Baloo 2',cursive;font-size:1.1rem}
 .ed-empty{color:var(--muted);font-weight:700;align-self:center}
 @media (max-width:640px){.ed-lab{font-size:26px}.ed-num{font-size:27px}}
+/* Saatteki Açılar */
+.sa-note p{font-size:clamp(1.05rem,3vw,1.3rem)}
+.sa-note small{display:block;margin-top:8px;font-weight:700;color:var(--muted);font-size:.92rem;line-height:1.4}
+.sa-box{display:grid;justify-items:center;gap:8px;margin:6px 0 4px}
+.sa-clock{width:min(300px,78vw);height:auto;filter:drop-shadow(0 6px 10px rgba(45,36,64,.18))}
+.sa-num{font-family:'Baloo 2',cursive;font-weight:800;font-size:22px;fill:#2D2440}
+.sa-deg{font-family:'Baloo 2',cursive;font-weight:800;font-size:20px;fill:#2D2440;paint-order:stroke;stroke:#FBFAF6;stroke-width:5px;animation:piecePop .35s ease-out;transform-box:fill-box;transform-origin:center}
+.sa-legend{display:flex;gap:18px;font-weight:700;color:var(--muted);font-size:.9rem}
+.sa-legend span{display:inline-flex;align-items:center;gap:6px}
+.sa-legend i{display:inline-block;border-radius:4px}
+.sa-legend .sa-h{width:18px;height:8px;background:#2D2440}
+.sa-legend .sa-m{width:30px;height:5px;background:#E5484D}
+.sa-badge{background:var(--yellow);border-radius:999px;padding:6px 18px;font-weight:800;animation:piecePop .35s ease-out}
+.sa-badge b{font-family:"Baloo 2",cursive;font-size:1.3rem}
+.pg-opts .g-opt{white-space:nowrap}
