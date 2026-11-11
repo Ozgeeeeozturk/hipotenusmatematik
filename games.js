@@ -264,19 +264,19 @@ function confetti() {
 
 // ---- Hazır etkileşimli oyunlar ----
 const BUILTIN_GAMES = [
-  { href: 'aci-ustasi.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Açı Ustası: Verilmeyen Açıyı Bul', text: 'Doğru açı ve tam açıda renkli parçalarla', grades: [5, 6, 7], color: 'y' },
-  { href: 'pergel.html', icon: '⭕', type: 'Sürükle-Bırak', title: 'Pergel ile Çember Çiz', text: 'Pergeli döndür, yarıçap ve çapı keşfet', grades: [5, 6, 7], color: 'm' },
-  { href: 'yaricap-tasi.html', icon: '📏', type: 'Sürükle-Bırak', title: 'Yarıçapları Taşı: Dikdörtgenin Kenarları', text: 'Yarıçapları kenarlara taşı, çevreyi bul', grades: [5, 6, 7], color: 'l' },
-  { href: 'es-dogru.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Eş Doğru Parçaları: L’ye Bak', text: 'Kareli kâğıtta eş doğru parçalarını bul ve çiz', grades: [5, 6], color: 'y' },
-  { href: 'saat-aci.html', icon: '⏰', type: 'Görsel Soru', title: 'Saatteki Açılar', text: 'Akrep ile yelkovan arasındaki açının çeşidini bul', grades: [5, 6], color: 'm' },
-  { href: 'acinim.html', icon: '🧊', type: '3B Etkinlik', title: 'Küp ve Prizma Açınımı', text: 'Cismi aç, kapat ve her yönden döndür', grades: [5, 6], color: 'l' },
+  { href: 'aci-ustasi.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Açı Ustası: Verilmeyen Açıyı Bul', text: 'Doğru açı ve tam açıda renkli parçalarla', grades: [5], color: 'y' },
+  { href: 'pergel.html', icon: '⭕', type: 'Sürükle-Bırak', title: 'Pergel ile Çember Çiz', text: 'Pergeli döndür, yarıçap ve çapı keşfet', grades: [5], color: 'm' },
+  { href: 'yaricap-tasi.html', icon: '📏', type: 'Sürükle-Bırak', title: 'Yarıçapları Taşı: Dikdörtgenin Kenarları', text: 'Yarıçapları kenarlara taşı, çevreyi bul', grades: [5], color: 'l' },
+  { href: 'es-dogru.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Eş Doğru Parçaları: L’ye Bak', text: 'Kareli kâğıtta eş doğru parçalarını bul ve çiz', grades: [5], color: 'y' },
+  { href: 'saat-aci.html', icon: '⏰', type: 'Görsel Soru', title: 'Saatteki Açılar', text: 'Akrep ile yelkovan arasındaki açının çeşidini bul', grades: [5], color: 'm' },
+  { href: 'acinim.html', icon: '🧊', type: '3B Etkinlik', title: 'Küp ve Prizma Açınımı', text: 'Cismi aç, kapat ve her yönden döndür', grades: [7], color: 'l' },
 ];
 function builtinCard(g) {
   return `<a class="card act-card ${g.color}" href="${g.href}">
-    <div class="act-top"><span class="act-ic" aria-hidden="true">${g.icon}</span><span class="act-type">${g.type}</span></div>
+    <div class="act-top"><span class="act-ic" aria-hidden="true">${g.icon}</span><span class="act-type">${g.type}</span><span class="sinif-rozet">${g.grades.join('–')}. Sınıf</span></div>
     <h3>${g.title}</h3>
     <p>${g.text}</p>
-    <div class="act-meta"><span class="tag">${g.grades[0]}–${g.grades[g.grades.length - 1]}. Sınıf</span><span class="plays">✨ Yeni</span></div>
+    <div class="act-meta"><span class="plays">✨ Yeni</span></div>
   </a>`;
 }
 

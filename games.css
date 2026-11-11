@@ -363,3 +363,6 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .an-pairs{list-style:none;padding:0;margin:0;display:grid;gap:6px;justify-content:center;font-weight:700}
 .an-pairs li{display:flex;align-items:center;gap:6px}
 .an-pairs i{width:16px;height:16px;border-radius:4px;border:1.5px solid rgba(45,36,64,.5)}
+/* Sınıf rozeti (sağ üst) */
+.sinif-rozet{margin-left:auto;flex-shrink:0;background:var(--yellow);color:var(--ink);font-weight:800;font-size:.82rem;border-radius:999px;padding:4px 12px;box-shadow:0 2px 0 rgba(45,36,64,.15);white-space:nowrap}
+.sinif-rozet.big{font-size:.95rem;padding:6px 14px;align-self:flex-start}
