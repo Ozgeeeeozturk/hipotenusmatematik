@@ -406,3 +406,30 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .ck-signs{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:8px;font-weight:700;color:var(--muted)}
 .ck-minus{width:44px;height:40px;border-radius:12px;border:2px solid var(--lilac-light);background:#fff;font:800 1.4rem 'Nunito',sans-serif;cursor:pointer}
 @media (max-width:640px){.ck-num{font-size:28px}.ck-num.end{font-size:34px}.ck-num.let{font-size:32px}.ck-num.rev{font-size:22px}.ck-part{font-size:28px}.ck-jl{font-size:28px}.ck-frog{font-size:58px}.ck-board{height:auto}}
+/* Termometre Okuma */
+.tm-pair{display:flex;justify-content:center;gap:clamp(8px,4vw,40px);margin:4px 0 10px;touch-action:none}
+.tm-svg{width:min(165px,40vw);height:auto;user-select:none;-webkit-user-select:none}
+.tm-svg.drag{cursor:ns-resize;width:min(190px,52vw)}
+.tm-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;fill:#2D2440}
+.tm-num.zero{font-size:16px}
+.tm-unit{font-weight:800;font-size:15px;fill:#2D2440}
+.tm-city{font-family:'Baloo 2',cursive;font-weight:800;font-size:18px;fill:#2D2440}
+.tm-liq{transition:y .15s,height .15s}
+.tm-tag text{font-family:'Baloo 2',cursive;font-weight:800;font-size:16px}
+.tm-tag{animation:piecePop .35s ease-out;transform-box:fill-box;transform-origin:center}
+.tm-handle{animation:pgPulse 1.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.tm-target{background:var(--yellow);border-radius:8px;padding:0 6px}
+.tm-nudge{display:flex;gap:10px;justify-content:center;margin-bottom:6px}
+.tm-step{padding:8px 16px;border-radius:12px;font-weight:800}
+.tm-table{display:grid;gap:8px;max-width:520px;margin:0 auto}
+.tm-th,.tm-row{display:grid;grid-template-columns:44px 1fr 1fr;gap:8px;align-items:center}
+.tm-th b{color:#fff;text-align:center;padding:8px;border-radius:10px;font-weight:800}
+.tm-row{border:0;background:none;padding:0;font:inherit;cursor:pointer;color:var(--ink)}
+.tm-row span{font-weight:800;font-size:1.1rem;background:#F1F9FA;border-radius:10px;padding:9px 0}
+.tm-row em{font-style:normal;font-family:'Baloo 2',cursive;font-weight:800;font-size:1.3rem;padding:6px;border-radius:10px;text-align:center}
+.tm-row em:nth-of-type(1){background:#E8F6FB}
+.tm-row em:nth-of-type(2){background:#FDECEA}
+.tm-row:hover:not(:disabled) em{outline:3px solid var(--lilac-light)}
+.tm-row.right em,.tm-row.right span{background:#2E9E78;color:#fff}
+.tm-row.wrong em,.tm-row.wrong span{background:var(--danger);color:#fff}
+.tm-row:disabled{cursor:default}

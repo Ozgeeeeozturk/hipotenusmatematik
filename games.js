@@ -271,6 +271,7 @@ const BUILTIN_GAMES = [
   { href: 'saat-aci.html', icon: '⏰', type: 'Görsel Soru', title: 'Saatteki Açılar', text: 'Akrep ile yelkovan arasındaki açının çeşidini bul', grades: [5], color: 'm' },
   { href: 'acinim.html', icon: '🧊', type: '3B Etkinlik', title: 'Küp ve Prizma Açınımı', text: 'Cismi aç, kapat ve her yönden döndür', grades: [7], color: 'l' },
   { href: 'cekirge.html', icon: '🦗', type: 'Sayı Doğrusu', title: 'Zıpzıp Çekirge', text: 'Yolu ölç, sıçrayışı bul, noktaları yerleştir', grades: [7], color: 'm' },
+  { href: 'termometre.html', icon: '🌡️', type: 'Görsel Soru', title: 'Termometre Okuma', text: 'Negatif sıcaklıkları oku, ayarla, karşılaştır', grades: [7], color: 'y' },
 ];
 function builtinCard(g) {
   return `<a class="card act-card has-grade ${g.color}" href="${g.href}">
