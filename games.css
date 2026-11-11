@@ -368,6 +368,6 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .sinif-rozet.big{font-size:.95rem;padding:6px 14px;align-self:flex-start}
 /* Kartın sağ üst çeyrek dairesinde sınıf */
 .act-card.has-grade::after{width:118px;height:118px;right:-38px;top:-38px;opacity:.75}
-.sinif-kose{position:absolute;top:13px;right:3px;width:64px;z-index:2;display:grid;justify-items:center;line-height:1;color:var(--ink);font-weight:800;font-size:.78rem;pointer-events:none}
+.sinif-kose{position:absolute;top:9px;right:-6px;width:64px;z-index:2;display:grid;justify-items:center;line-height:1;color:var(--ink);font-weight:800;font-size:.78rem;pointer-events:none}
 .sinif-kose b{font-family:'Baloo 2',cursive;font-size:1.65rem;line-height:.95}
 .act-card.has-grade .act-top{padding-right:58px}
