@@ -101,7 +101,7 @@
           <div class="field"><label for="fGrade">Sınıf</label>
             <select class="input" id="fGrade">${[5, 6, 7, 8].map(g => `<option value="${g}" ${st.grade == g ? 'selected' : ''}>${g}. Sınıf</option>`).join('')}</select></div>
           <div class="field"><label for="fUnit">Ünite</label>
-            <select class="input" id="fUnit"><option value="">Genel</option>${UNITS[st.grade].map(u => `<option ${st.unit === u ? 'selected' : ''}>${esc(u)}</option>`).join('')}</select></div>
+            <select class="input" id="fUnit"><option value="">Genel</option>${UNITS[st.grade].map(u => `<option value="${esc(u)}" ${st.unit === u ? 'selected' : ''}>${esc(unitLabel(st.grade, u))}</option>`).join('')}</select></div>
         </div>
         <label class="switch" for="fPublic"><input type="checkbox" id="fPublic" ${st.is_public ? 'checked' : ''}> Yayında olsun (kapalıysa taslak olarak kalır, yalnızca sen görürsün)</label>
       </div>

@@ -4,8 +4,9 @@
 // 5, 6 ve 7. sınıflar: Türkiye Yüzyılı Maarif Modeli temaları, MEB'in resmi sırasıyla (tymm.meb.gov.tr, 2026-2027)
 // 8. sınıf: 2018 öğretim programı üniteleri
 const UNITS = {
-  5: ['Sayılar ve Nicelikler (1)','Sayılar ve Nicelikler (2)','İşlemlerle Cebirsel Düşünme','Geometrik Şekiller',
-      'Geometrik Nicelikler','İstatistiksel Araştırma Süreci','Veriden Olasılığa'],
+  // 5. sınıf: MEB 2026-2027 ders kitabındaki sıra (tymm.meb.gov.tr/kitap/25 ve /26)
+  5: ['Geometrik Şekiller','Sayılar ve Nicelikler (1)','Geometrik Nicelikler','Sayılar ve Nicelikler (2)',
+      'İstatistiksel Araştırma Süreci','İşlemlerle Cebirsel Düşünme','Veriden Olasılığa'],
   6: ['Sayılar ve Nicelikler (1)','Sayılar ve Nicelikler (2)','İşlemlerle Cebirsel Düşünme ve Değişimler','Geometrik Şekiller',
       'Geometrik Nicelikler','İstatistiksel Araştırma Süreci','Veriden Olasılığa'],
   7: ['Sayılar ve Nicelikler (1)','Sayılar ve Nicelikler (2)','İşlemlerle Cebirsel Düşünme ve Değişimler','Dönüşüm',
@@ -17,7 +18,7 @@ const UNITS = {
 };
 // Resmi tema numaraları: Maarif Modeli'nde bazı temalar iki bölüm hâlinde aynı numarayı taşır
 const UNIT_NO = {
-  5: ['1', '1', '2', '3', '4', '5', '6'],
+  5: ['1', '2', '3', '4', '5', '6', '7'],
   6: ['1', '1', '2', '3', '4', '5', '6'],
   7: ['1', '1', '2', '3', '4', '4', '5', '6', '7'],
 };
@@ -25,15 +26,18 @@ const UNIT_WORD = g => (UNIT_NO[g] ? 'tema' : 'ünite');
 const UNIT_TITLE = g => (UNIT_NO[g] ? 'Temaları' : 'Üniteleri');
 const unitCount = g => (UNIT_NO[g] ? new Set(UNIT_NO[g]).size : UNITS[g].length);
 const GRADE_TEXT = {
-  5: 'Sayılar ve nicelikler, cebirsel düşünme, veriden olasılığa',
+  5: 'Geometrik şekiller, doğal sayılar, kesirler, istatistik ve olasılık',
   6: 'Sayılar, cebirsel düşünme ve değişimler, geometri',
   7: 'Sayılar, cebir, dönüşüm ve geometrik nicelikler',
   8: 'Üslü, kareköklü ifadeler ve LGS hazırlığı',
 };
 
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// Ders kitabındaki alt başlıklar (yalnızca gösterim; kayıtlı etkinlikler kısa adı kullanır)
+const UNIT_SUB = { 5: { 'Sayılar ve Nicelikler (1)': 'Doğal Sayılar ve İşlemler', 'Sayılar ve Nicelikler (2)': 'Kesirler' } };
+const unitLabel = (g, u) => (UNIT_SUB[g] && UNIT_SUB[g][u] ? `${u}: ${UNIT_SUB[g][u]}` : u);
 const unitListHTML = g => `<ol class="unit-list">${UNITS[g].map((u, i) =>
-  `<li><a href="#"${UNIT_NO[g] ? ` data-no="${UNIT_NO[g][i]}"` : ''}>${esc(u)}</a></li>`).join('')}</ol>`;
+  `<li><a href="#"${UNIT_NO[g] ? ` data-no="${UNIT_NO[g][i]}"` : ''}>${esc(unitLabel(g, u))}</a></li>`).join('')}</ol>`;
 
 // ---- Güvenli depolama (gizli pencerede hata vermesin) ----
 const store = {
