@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Matematik Oyunları | Hipotenüs</title>
+<link rel="canonical" href="https://hipotenusmatematik.com/oyunlar.html">
+<meta name="description" content="5, 6, 7 ve 8. sınıflar için matematik oyunları: test, eşleştirme, doğru mu yanlış mı.">
+<meta name="theme-color" content="#2E9E78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="games.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <a href="index.html" class="logo" aria-label="Hipotenüs ana sayfa">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <polygon points="6,42 6,8 42,42" fill="#9EE6C9" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+        <line x1="6" y1="8" x2="42" y2="42" stroke="#FFD84D" stroke-width="4" stroke-linecap="round"/>
+        <rect x="6" y="34" width="8" height="8" fill="none" stroke="#fff" stroke-width="2"/>
+      </svg>
+      <span>Hipoten<b>ü</b>s</span>
+    </a>
+    <div class="bar-actions">
+      <a class="btn-login btn-ghost" href="index.html"><span aria-hidden="true">🏠</span><span class="lbl">Ana Sayfa</span></a>
+      <div id="userArea"></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" style="padding-bottom:48px">
+  <div class="page-head">
+    <div><h1>Oyunlar</h1><p>Öğretmenlerin hazırladığı matematik oyunlarını oyna, skor tablosuna adını yazdır.</p></div>
+    <a class="btn btn-yellow" id="newBtn" href="olustur.html" hidden>＋ Yeni Etkinlik</a>
+  </div>
+
+  <div class="filters" role="group" aria-label="Sınıf">
+    <button class="chip" data-grade="" aria-pressed="true">Tüm sınıflar</button>
+    <button class="chip" data-grade="5" aria-pressed="false">5. Sınıf</button>
+    <button class="chip" data-grade="6" aria-pressed="false">6. Sınıf</button>
+    <button class="chip" data-grade="7" aria-pressed="false">7. Sınıf</button>
+    <button class="chip" data-grade="8" aria-pressed="false">8. Sınıf</button>
+    <span class="chip-sep" aria-hidden="true"></span>
+    <button class="chip" data-tpl="" aria-pressed="true">Tüm türler</button>
+    <button class="chip" data-tpl="quiz" aria-pressed="false">📝 Test</button>
+    <button class="chip" data-tpl="match" aria-pressed="false">🔗 Eşleştirme</button>
+    <button class="chip" data-tpl="truefalse" aria-pressed="false">⚡ Doğru/Yanlış</button>
+    <button class="chip" data-tpl="dragdrop" aria-pressed="false">✋ Sürükle-Bırak</button>
+    <button class="chip" id="mineChip" aria-pressed="false" hidden>🍎 Etkinliklerim</button>
+  </div>
+
+  <div class="grid" id="list" aria-live="polite">
+    <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+  </div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="games.js"></script>
+<script>
+(async function () {
+  initPage();
+  const $ = id => document.getElementById(id);
+  const params = new URLSearchParams(location.search);
+  const f = { grade: params.get('sinif') || '', template: params.get('tur') || '', mine: params.get('benim') === '1' };
+
+  const me = await Auth.refresh().catch(() => Auth.current());
+  const teacher = me && me.role === 'ogretmen';
+  if (teacher) { $('newBtn').hidden = false; $('mineChip').hidden = false; }
+  else f.mine = false;
+  if (!f.grade && me && me.grade && !params.has('sinif')) f.grade = String(me.grade); // öğrenci kendi sınıfıyla başlar
+
+  const sync = () => {
+    document.querySelectorAll('[data-grade]').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.grade === f.grade)));
+    document.querySelectorAll('[data-tpl]').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.tpl === f.template)));
+    $('mineChip').setAttribute('aria-pressed', String(f.mine));
+    const q = new URLSearchParams();
+    if (f.grade) q.set('sinif', f.grade); if (f.template) q.set('tur', f.template); if (f.mine) q.set('benim', '1');
+    try { history.replaceState(null, '', q.toString() ? `?${q}` : location.pathname); } catch {}
+  };
+
+  let reqNo = 0;
+  async function load() {
+    sync();
+    const my = ++reqNo;
+    const list = $('list');
+    if (!DB.ok()) { list.innerHTML = '<div class="empty"><b>Oyunlar şu an açılamıyor</b><p>Lütfen daha sonra tekrar dene.</p></div>'; return; }
+    list.innerHTML = '<div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>';
+    try {
+      const rows = await DB.list({ grade: f.grade ? Number(f.grade) : null, template: f.template === 'dragdrop' ? '__yok__' : (f.template || null), mine: f.mine ? me.id : null });
+      if (my !== reqNo) return;
+      const built = f.mine || (f.template && f.template !== 'dragdrop') ? [] : BUILTIN_GAMES.filter(g => !f.grade || g.grades.includes(Number(f.grade)));
+      if (rows.length || built.length) { list.innerHTML = built.map(builtinCard).join('') + rows.map(activityCard).join(''); return; }
+      list.innerHTML = f.mine
+        ? '<div class="empty"><b>Henüz etkinlik hazırlamadın</b><p>Bir şablon seç, sorularını yaz; birkaç dakikada öğrencilerin oynamaya başlasın.</p><a class="btn btn-yellow" href="olustur.html">＋ İlk Etkinliğini Oluştur</a></div>'
+        : `<div class="empty"><b>Bu seçimde henüz oyun yok</b><p>${teacher ? 'İlk oyunu sen hazırlayabilirsin!' : 'Öğretmenler yeni oyunlar ekledikçe burada görünecek. Başka bir sınıf ya da tür seçmeyi dene.'}</p>${teacher ? '<a class="btn btn-yellow" href="olustur.html">＋ Yeni Etkinlik</a>' : ''}</div>`;
+    } catch {
+      if (my === reqNo) list.innerHTML = '<div class="empty"><b>Oyunlar yüklenemedi</b><p>İnternet bağlantını kontrol edip tekrar dene.</p><button class="btn btn-yellow" onclick="location.reload()">Yenile</button></div>';
+    }
+  }
+
+  document.querySelectorAll('[data-grade]').forEach(c => c.addEventListener('click', () => { f.grade = c.dataset.grade; load(); }));
+  document.querySelectorAll('[data-tpl]').forEach(c => c.addEventListener('click', () => { f.template = c.dataset.tpl; load(); }));
+  $('mineChip').addEventListener('click', () => { f.mine = !f.mine; load(); });
+  load();
+})();
+</script>
+</body>
+</html>

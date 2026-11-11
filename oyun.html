@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Oyun | Hipotenüs</title>
+<meta name="theme-color" content="#2E9E78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="games.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <a href="index.html" class="logo" aria-label="Hipotenüs ana sayfa">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <polygon points="6,42 6,8 42,42" fill="#9EE6C9" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+        <line x1="6" y1="8" x2="42" y2="42" stroke="#FFD84D" stroke-width="4" stroke-linecap="round"/>
+        <rect x="6" y="34" width="8" height="8" fill="none" stroke="#fff" stroke-width="2"/>
+      </svg>
+      <span>Hipoten<b>ü</b>s</span>
+    </a>
+    <div class="bar-actions">
+      <a class="btn-login btn-ghost" href="oyunlar.html"><span aria-hidden="true">🎲</span><span class="lbl">Tüm Oyunlar</span></a>
+      <div id="userArea"></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap play-wrap">
+  <div class="play-head" id="playHead">
+    <div class="skeleton" style="height:56px;width:100%"></div>
+  </div>
+  <div class="game-stage" id="stage"><div class="skeleton" style="height:260px"></div></div>
+  <div class="owner-bar" id="ownerBar" hidden></div>
+  <section class="board" id="board" hidden aria-live="polite">
+    <h2>🏆 En İyi 10</h2>
+    <ol id="boardList"></ol>
+  </section>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="games.js"></script>
+<script>
+(async function () {
+  initPage();
+  const $ = id => document.getElementById(id);
+  const id = new URLSearchParams(location.search).get('id');
+  const fail = (title, text) => {
+    $('playHead').innerHTML = '';
+    $('stage').innerHTML = `<div class="g-intro"><div class="big-ic">🧭</div><h2>${title}</h2><p>${text}</p><a class="btn btn-yellow" href="oyunlar.html">Oyunlara Dön</a></div>`;
+  };
+  if (!DB.ok()) return fail('Oyunlar şu an açılamıyor', 'Bağlantı ayarlarında bir sorun var. Lütfen daha sonra tekrar dene.');
+  if (!id) return fail('Oyun bulunamadı', 'Bu bağlantı eksik görünüyor. Oyunlar sayfasından bir oyun seç.');
+
+  let act;
+  try { act = await DB.get(id); }
+  catch (e) { return fail('Oyun yüklenemedi', 'İnternet bağlantını kontrol edip sayfayı yenile.'); }
+  if (!act) return fail('Oyun bulunamadı', 'Bu oyun silinmiş ya da gizli olabilir.');
+
+  const t = TEMPLATES[act.template];
+  document.title = `${act.title} | Hipotenüs`;
+  $('playHead').innerHTML = `
+    <div class="act-ic ${t.color}" style="background:var(--${t.color === 'm' ? 'mint' : t.color === 'l' ? 'lilac' : 'yellow'}-light)" aria-hidden="true">${t.icon}</div>
+    <div><h1>${esc(act.title)}</h1>
+    <p>${t.name}${act.grade ? ` · ${act.grade}. Sınıf` : ''}${act.unit ? ` · ${esc(act.unit)}` : ''}${act.owner_name ? ` · Hazırlayan: ${esc(shortName(act.owner_name))}` : ''}</p></div>`;
+
+  const me = Auth.current();
+  if (me && me.id === act.owner_id) {
+    const bar = $('ownerBar'); bar.hidden = false;
+    bar.innerHTML = `<a class="btn btn-mint" href="olustur.html?id=${encodeURIComponent(act.id)}">✏️ Düzenle</a>
+      <button class="btn btn-lilac" id="shareBtn">🔗 Bağlantıyı Kopyala</button>
+      ${act.is_public ? '' : '<span class="tag priv" style="align-self:center">Bu oyun gizli; yalnızca sen görüyorsun</span>'}`;
+  } else {
+    $('ownerBar').hidden = false;
+    $('ownerBar').innerHTML = `<button class="btn btn-lilac" id="shareBtn">🔗 Bağlantıyı Kopyala</button>`;
+  }
+  $('shareBtn').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(`${SITE_URL}/oyun.html?id=${act.id}`); toast('Oyun bağlantısı kopyalandı. Öğrencilerinle paylaşabilirsin!'); }
+    catch { toast(`Bağlantı: <b>${SITE_URL}/oyun.html?id=${act.id}</b>`, 6000); }
+  });
+
+  // Skor tablosu
+  async function loadBoard() {
+    try {
+      const rows = await DB.board(act.id);
+      const u = Auth.current();
+      $('board').hidden = false;
+      $('boardList').innerHTML = rows.length
+        ? rows.map(r => `<li class="${u && r.user_id === u.id ? 'me' : ''}"><span>${esc(r.player_name)}</span><b>${r.score}/${r.total}</b><span class="t">${fmtTime(r.time_ms)}</span></li>`).join('')
+        : '<p class="empty-b">Henüz kimse oynamadı. İlk sen ol!</p>';
+    } catch { $('board').hidden = true; }
+  }
+  loadBoard();
+
+  // Başlangıç ekranı
+  const n = (act.content.items || []).length;
+  let counted = false;
+  $('stage').innerHTML = `
+    <div class="g-intro">
+      <div class="big-ic" aria-hidden="true">${t.icon}</div>
+      <h2 style="font-family:'Baloo 2',cursive;font-size:1.6rem">${t.name}</h2>
+      <p>${t.desc} Bu oyunda <b>${n} ${t.unitWord}</b> var.${act.template === 'truefalse' ? ` Her ifade için <b>${t.seconds} saniyen</b> var.` : ''}</p>
+      <button class="btn btn-yellow" id="startBtn">▶ Başla</button>
+      ${me ? '' : '<p style="font-size:.9rem">Skorunun tabloya yazılması için <a href="giris.html" style="color:var(--lilac-dark);font-weight:800;text-decoration:underline">giriş yap</a>.</p>'}
+    </div>`;
+  $('startBtn').addEventListener('click', () => {
+    if (!counted) { counted = true; DB.played(act.id); }
+    playActivity($('stage'), act, {
+      onFinish: async r => {
+        const box = document.getElementById('gSave'); if (!box) return;
+        const u = Auth.current();
+        if (!u) { box.innerHTML = 'Skorunu tabloya yazdırmak için <a href="giris.html">giriş yap</a>.'; return; }
+        box.textContent = 'Skorun kaydediliyor…';
+        try { await DB.addScore(act.id, shortName(u.name), r.score, r.total, r.time_ms); box.textContent = '✓ Skorun tabloya kaydedildi.'; loadBoard(); }
+        catch { box.textContent = 'Skorun kaydedilemedi. İnternet bağlantını kontrol et.'; }
+      },
+    });
+  });
+  $('startBtn').focus({ preventScroll: true });
+})();
+</script>
+</body>
+</html>

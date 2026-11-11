@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /olustur.html
+Disallow: /sifre-yenile.html
+
+Sitemap: https://hipotenusmatematik.com/sitemap.xml

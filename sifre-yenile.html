@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Şifre Yenile | Hipotenüs</title>
+<meta name="theme-color" content="#2E9E78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+
+<div class="auth-top">
+  <a href="index.html" class="logo" aria-label="Hipotenüs ana sayfa">
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <polygon points="6,42 6,8 42,42" fill="#fff" stroke="#2E9E78" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="6" y1="8" x2="42" y2="42" stroke="#FFD84D" stroke-width="4" stroke-linecap="round"/>
+      <rect x="6" y="34" width="8" height="8" fill="none" stroke="#2E9E78" stroke-width="2"/>
+    </svg>
+    <span>Hipoten<b>ü</b>s</span>
+  </a>
+  <a href="index.html" class="back-link">← Ana Sayfa</a>
+</div>
+
+<main class="auth-main">
+  <div class="auth-card">
+    <div class="auth-head">
+      <h1>Yeni şifre belirle</h1>
+      <p>Hesabın için yeni bir şifre seç.</p>
+    </div>
+
+    <div class="auth-form" id="waitPanel">
+      <p class="hint" style="text-align:center;font-size:.95rem">Bağlantı kontrol ediliyor…</p>
+    </div>
+
+    <div class="auth-form" id="badPanel" hidden>
+      <div class="sent-ic" aria-hidden="true">⏳</div>
+      <p class="sent-text">Bu şifre yenileme bağlantısının süresi dolmuş ya da daha önce kullanılmış. Giriş ekranından yeni bir bağlantı isteyebilirsin.</p>
+      <a class="btn btn-lilac" href="giris.html" style="justify-content:center">Giriş ekranına git</a>
+    </div>
+
+    <form class="auth-form" id="newPassForm" novalidate hidden>
+      <div class="form-error" id="passError" role="alert" hidden></div>
+      <div class="field">
+        <label for="newPass">Yeni şifre</label>
+        <div class="pass-wrap">
+          <input class="input" id="newPass" type="password" autocomplete="new-password" placeholder="En az 6 karakter" minlength="6" required>
+          <button type="button" class="pass-toggle" data-target="newPass">Göster</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="newPass2">Yeni şifre (tekrar)</label>
+        <input class="input" id="newPass2" type="password" autocomplete="new-password" placeholder="Aynı şifreyi tekrar yaz" required>
+      </div>
+      <button class="btn btn-yellow" type="submit">Şifremi Kaydet</button>
+    </form>
+  </div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+  let shown = false;
+  const showForm = () => { if (shown) return; shown = true; $('waitPanel').hidden = true; $('newPassForm').hidden = false; $('newPass').focus(); };
+  const showBad = () => { if (shown) return; $('waitPanel').hidden = true; $('badPanel').hidden = false; };
+
+  if (!Auth.ready || /error=/.test(location.hash + location.search)) { showBad(); }
+  else {
+    // Supabase bağlantıdaki anahtarı okuyup geçici oturum açar
+    Auth.onChange(event => { if (event === 'PASSWORD_RECOVERY' || event === 'SIGNED_IN') showForm(); });
+    setTimeout(async () => { (await Auth.refresh()) ? showForm() : showBad(); }, 2500);
+  }
+
+  document.querySelector('.pass-toggle').addEventListener('click', e => {
+    const inp = $('newPass'), vis = inp.type === 'password';
+    inp.type = vis ? 'text' : 'password'; e.target.textContent = vis ? 'Gizle' : 'Göster';
+  });
+
+  $('newPassForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const box = $('passError'), p1 = $('newPass'), p2 = $('newPass2'), btn = e.target.querySelector('button[type=submit]');
+    const fail = (m, i) => { box.textContent = m; box.hidden = false; i.setAttribute('aria-invalid', 'true'); i.focus(); };
+    if (p1.value.length < 6) return fail('Şifren en az 6 karakter olmalı.', p1);
+    if (p1.value !== p2.value) return fail('İki şifre aynı değil.', p2);
+    btn.disabled = true; btn.textContent = 'Kaydediliyor…';
+    try {
+      const u = await Auth.updatePassword(p1.value);
+      try { sessionStorage.setItem('hip_flash', `Şifren yenilendi. Hoş geldin, <b>${esc(u.name.split(' ')[0])}</b>!`); } catch {}
+      location.href = 'index.html';
+    } catch (err) { btn.disabled = false; btn.textContent = 'Şifremi Kaydet'; fail(err.message, p1); }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Etkinlik Oluştur | Hipotenüs</title>
+<meta name="theme-color" content="#2E9E78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="games.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <a href="index.html" class="logo" aria-label="Hipotenüs ana sayfa">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <polygon points="6,42 6,8 42,42" fill="#9EE6C9" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+        <line x1="6" y1="8" x2="42" y2="42" stroke="#FFD84D" stroke-width="4" stroke-linecap="round"/>
+        <rect x="6" y="34" width="8" height="8" fill="none" stroke="#fff" stroke-width="2"/>
+      </svg>
+      <span>Hipoten<b>ü</b>s</span>
+    </a>
+    <div class="bar-actions">
+      <a class="btn-login btn-ghost" href="oyunlar.html"><span aria-hidden="true">🎲</span><span class="lbl">Tüm Oyunlar</span></a>
+      <div id="userArea"></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap editor" id="main">
+  <div class="skeleton" style="height:220px;margin-top:24px"></div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="games.js"></script>
+<script>
+(async function () {
+  initPage();
+  const main = document.getElementById('main');
+  const editId = new URLSearchParams(location.search).get('id');
+  const DRAFT = 'hip_draft';
+  const block = (icon, title, text, btn) => {
+    main.innerHTML = `<div class="ed-panel" style="text-align:center;justify-items:center;margin-top:28px">
+      <div style="font-size:3rem">${icon}</div><h2>${title}</h2><p style="color:var(--muted);max-width:460px">${text}</p>${btn || ''}</div>`;
+  };
+
+  if (!DB.ok()) return block('⚠️', 'Şu an açılamıyor', 'Bağlantı ayarlarında bir sorun var.');
+  const me = await Auth.refresh().catch(() => Auth.current());
+  if (!me) return block('🔐', 'Önce giriş yap', 'Etkinlik oluşturmak için öğretmen hesabınla giriş yapmalısın.', '<a class="btn btn-yellow" href="giris.html">Giriş Yap</a>');
+  if (me.role !== 'ogretmen') return block('🍎', 'Bu bölüm öğretmenler için', 'Etkinlikleri öğretmenler hazırlıyor. Sen hazır oyunları oynayabilirsin!', '<a class="btn btn-yellow" href="oyunlar.html">Oyunlara Git</a>');
+
+  const blank = {
+    quiz: () => ({ q: '', options: ['', '', '', ''], correct: -1 }),
+    match: () => ({ left: '', right: '' }),
+    truefalse: () => ({ text: '', answer: null }),
+  };
+  let st = { id: null, template: null, title: '', grade: 5, unit: '', is_public: true, items: [] };
+  let restoredDraft = false;
+
+  if (editId) {
+    let a;
+    try { a = await DB.get(editId); } catch { return block('⚠️', 'Etkinlik yüklenemedi', 'İnternet bağlantını kontrol edip sayfayı yenile.'); }
+    if (!a || a.owner_id !== me.id) return block('🔒', 'Bu etkinliği düzenleyemezsin', 'Yalnızca kendi hazırladığın etkinlikleri düzenleyebilirsin.', '<a class="btn btn-yellow" href="oyunlar.html">Oyunlara Git</a>');
+    st = { id: a.id, template: a.template, title: a.title, grade: a.grade || 5, unit: a.unit || '', is_public: a.is_public, items: a.content.items };
+  } else {
+    const d = store.get(DRAFT, null);
+    if (d && d.template && d.owner === me.id) { st = d.st; restoredDraft = true; }
+  }
+  const saveDraft = () => { if (!st.id && st.template) store.set(DRAFT, { owner: me.id, st }); };
+
+  function render() {
+    const t = st.template && TEMPLATES[st.template];
+    main.innerHTML = `
+      <div class="page-head" style="padding-top:8px"><div>
+        <h1>${st.id ? 'Etkinliği Düzenle' : 'Yeni Etkinlik'}</h1>
+        <p>${st.id ? 'Değişiklikleri kaydettiğinde oyun hemen güncellenir.' : 'Bir şablon seç, içeriği yaz, öğrencilerin oynasın.'}</p>
+      </div></div>
+      ${restoredDraft ? `<div class="form-info" style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap">Kaydetmediğin bir taslak geri yüklendi.<button class="ed-mini" id="dropDraft">Taslağı sil, baştan başla</button></div>` : ''}
+      <div class="ed-panel">
+        <h2>1. Şablon</h2>
+        <div class="tpl-pick">${Object.entries(TEMPLATES).map(([k, v]) => `
+          <button class="card ${v.color}" data-tpl="${k}" aria-pressed="${st.template === k}" ${st.id && st.template !== k ? 'disabled style="opacity:.45"' : ''}>
+            <div class="act-ic">${v.icon}</div><h3>${v.name}</h3><p style="margin:0">${v.desc}</p>
+          </button>`).join('')}
+        </div>
+      </div>
+      ${t ? `
+      <div class="ed-panel">
+        <h2>2. Bilgiler</h2>
+        <div class="field"><label for="fTitle">Etkinlik adı</label>
+          <input class="input" id="fTitle" maxlength="80" placeholder="Örn. Kesirleri Karşılaştırma" value="${esc(st.title)}"></div>
+        <div class="ed-row">
+          <div class="field"><label for="fGrade">Sınıf</label>
+            <select class="input" id="fGrade">${[5, 6, 7, 8].map(g => `<option value="${g}" ${st.grade == g ? 'selected' : ''}>${g}. Sınıf</option>`).join('')}</select></div>
+          <div class="field"><label for="fUnit">Ünite</label>
+            <select class="input" id="fUnit"><option value="">Genel</option>${UNITS[st.grade].map(u => `<option ${st.unit === u ? 'selected' : ''}>${esc(u)}</option>`).join('')}</select></div>
+        </div>
+        <label class="switch" for="fPublic"><input type="checkbox" id="fPublic" ${st.is_public ? 'checked' : ''}> Yayında olsun (kapalıysa taslak olarak kalır, yalnızca sen görürsün)</label>
+      </div>
+      <div class="ed-panel">
+        <h2>3. ${t.name} içeriği <span style="color:var(--muted);font-size:1rem">(${st.items.length}/${t.max} ${t.unitWord})</span></h2>
+        <div class="ed-help">Matematik yazımı: kesir için <code>{3/4}</code> → ${mathFmt('{3/4}')}, üs için <code>2^5</code> → ${mathFmt('2^5')}, karekök için <code>kok(16)</code> → ${mathFmt('kok(16)')}</div>
+        <div class="ed-items" id="items">${st.items.map(itemHTML).join('')}</div>
+        ${st.items.length < t.max ? `<button class="ed-add" id="addItem">＋ ${t.unitWord[0].toLocaleUpperCase('tr') + t.unitWord.slice(1)} ekle</button>` : ''}
+      </div>
+      <div class="form-error" id="edErr" role="alert" hidden></div>
+      <div class="ed-actions">
+        ${st.id ? '<button class="btn btn-plain" id="delBtn" style="background:#FDECEF;color:var(--danger);box-shadow:0 6px 0 #F2C3CC">🗑 Sil</button><span class="spacer"></span>' : ''}
+        <button class="btn btn-lilac" id="previewBtn">👀 Önizle</button>
+        <button class="btn btn-yellow" id="saveBtn">💾 ${st.id ? 'Değişiklikleri Kaydet' : 'Kaydet ve Yayınla'}</button>
+      </div>` : ''}`;
+    bind();
+  }
+
+  function itemHTML(it, i) {
+    const head = `<div class="ed-item-head"><b>${i + 1}.</b>${st.items.length > TEMPLATES[st.template].min ? `<button class="ed-del" data-del="${i}">Sil</button>` : ''}</div>`;
+    if (st.template === 'quiz') return `<div class="ed-item" data-i="${i}">${head}
+      <textarea class="input" data-f="q" placeholder="Soru metni" rows="2">${esc(it.q)}</textarea>
+      ${it.options.map((o, k) => `<div class="ed-opt">
+        <input type="radio" name="c${i}" data-correct="${k}" ${it.correct === k ? 'checked' : ''} aria-label="${k + 1}. şık doğru cevap">
+        <input class="input" data-opt="${k}" placeholder="${String.fromCharCode(65 + k)} şıkkı" value="${esc(o)}">
+        ${it.options.length > 2 ? `<button class="ed-del" data-delopt="${k}" aria-label="Şıkkı sil">✕</button>` : '<span></span>'}
+      </div>`).join('')}
+      <p class="hint">Doğru cevabın yanındaki daireyi işaretle.</p>
+      ${it.options.length < 4 ? '<button class="ed-mini" data-addopt="1">＋ Şık ekle</button>' : ''}
+    </div>`;
+    if (st.template === 'match') return `<div class="ed-item" data-i="${i}">
+      <div class="ed-pair">
+        <input class="input" data-f="left" placeholder="${i + 1}. sol (örn. {1/2})" value="${esc(it.left)}">
+        <span class="eq">⟷</span>
+        <input class="input" data-f="right" placeholder="Eşi (örn. 0,5)" value="${esc(it.right)}">
+        ${st.items.length > TEMPLATES.match.min ? `<button class="ed-del" data-del="${i}" aria-label="Çifti sil">✕</button>` : '<span></span>'}
+      </div></div>`;
+    return `<div class="ed-item" data-i="${i}">
+      <div class="ed-tf">
+        <textarea class="input" data-f="text" rows="2" placeholder="${i + 1}. ifade (örn. 2^3 = 6)">${esc(it.text)}</textarea>
+        <div style="display:grid;gap:8px">
+          <div class="seg">
+            <input type="radio" name="tf${i}" id="tfy${i}" data-tf="1" ${it.answer === true ? 'checked' : ''}><label for="tfy${i}">✓ Doğru</label>
+            <input type="radio" name="tf${i}" id="tfn${i}" data-tf="0" ${it.answer === false ? 'checked' : ''}><label for="tfn${i}">✗ Yanlış</label>
+          </div>
+          ${st.items.length > TEMPLATES.truefalse.min ? `<button class="ed-del" data-del="${i}">Sil</button>` : ''}
+        </div>
+      </div></div>`;
+  }
+
+  function bind() {
+    main.querySelectorAll('[data-tpl]').forEach(b => b.addEventListener('click', () => {
+      const k = b.dataset.tpl; if (st.template === k || st.id) return;
+      // Şablonlar farklı içerik tuttuğu için şablon değişince boş maddelerle başlanır
+      st.template = k;
+      st.items = Array.from({ length: Math.max(TEMPLATES[k].min, 3) }, blank[k]);
+      render(); saveDraft();
+    }));
+    const dd = document.getElementById('dropDraft');
+    if (dd) dd.addEventListener('click', () => { store.del(DRAFT); restoredDraft = false; st = { id: null, template: null, title: '', grade: 5, unit: '', is_public: true, items: [] }; render(); });
+    if (!st.template) return;
+
+    const fT = document.getElementById('fTitle');
+    fT.addEventListener('input', () => { st.title = fT.value; saveDraft(); });
+    document.getElementById('fGrade').addEventListener('change', e => { st.grade = Number(e.target.value); st.unit = ''; render(); saveDraft(); });
+    document.getElementById('fUnit').addEventListener('change', e => { st.unit = e.target.value; saveDraft(); });
+    document.getElementById('fPublic').addEventListener('change', e => { st.is_public = e.target.checked; saveDraft(); });
+
+    const items = document.getElementById('items');
+    items.addEventListener('input', e => {
+      const box = e.target.closest('.ed-item'); if (!box) return;
+      const it = st.items[Number(box.dataset.i)];
+      if (e.target.dataset.f) it[e.target.dataset.f] = e.target.value;
+      if (e.target.dataset.opt !== undefined) it.options[Number(e.target.dataset.opt)] = e.target.value;
+      saveDraft();
+    });
+    items.addEventListener('change', e => {
+      const box = e.target.closest('.ed-item'); if (!box) return;
+      const it = st.items[Number(box.dataset.i)];
+      if (e.target.dataset.correct !== undefined) it.correct = Number(e.target.dataset.correct);
+      if (e.target.dataset.tf !== undefined) it.answer = e.target.dataset.tf === '1';
+      saveDraft();
+    });
+    items.addEventListener('click', e => {
+      const box = e.target.closest('.ed-item'); if (!box) return;
+      const i = Number(box.dataset.i), it = st.items[i];
+      if (e.target.dataset.del !== undefined) { st.items.splice(i, 1); render(); saveDraft(); }
+      else if (e.target.dataset.delopt !== undefined) {
+        const k = Number(e.target.dataset.delopt);
+        it.options.splice(k, 1);
+        if (it.correct === k) it.correct = -1; else if (it.correct > k) it.correct--;
+        render(); saveDraft();
+      } else if (e.target.dataset.addopt) { it.options.push(''); render(); saveDraft(); }
+    });
+    const add = document.getElementById('addItem');
+    if (add) add.addEventListener('click', () => {
+      st.items.push(blank[st.template]()); render(); saveDraft();
+      const last = main.querySelectorAll('.ed-item'); last[last.length - 1].querySelector('input,textarea').focus();
+    });
+
+    const err = document.getElementById('edErr');
+    const check = () => {
+      err.hidden = true;
+      if (st.title.trim().length < 3) return 'Etkinliğe en az 3 harflik bir ad ver.';
+      return validateContent(st.template, clean());
+    };
+    const clean = () => ({ items: st.items.map(it => st.template === 'quiz' ? { q: it.q.trim(), options: it.options.map(o => o.trim()), correct: it.correct }
+      : st.template === 'match' ? { left: it.left.trim(), right: it.right.trim() } : { text: it.text.trim(), answer: it.answer }) });
+    const showErr = m => { err.textContent = m; err.hidden = false; err.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+
+    document.getElementById('previewBtn').addEventListener('click', () => {
+      const m = validateContent(st.template, clean()); if (m) return showErr(m);
+      const back = document.createElement('div'); back.className = 'preview-back';
+      back.innerHTML = `<div class="preview-box"><div class="preview-bar"><span>👀 Önizleme — skor kaydedilmez</span><button class="btn btn-yellow" id="pvClose">Kapat ✕</button></div><div id="pvStage"></div></div>`;
+      document.body.appendChild(back);
+      const close = () => back.remove();
+      back.querySelector('#pvClose').addEventListener('click', close);
+      playActivity(back.querySelector('#pvStage'), { template: st.template, title: st.title, content: clean() }, { preview: true });
+    });
+
+    document.getElementById('saveBtn').addEventListener('click', async e => {
+      const m = check(); if (m) return showErr(m);
+      const btn = e.currentTarget; btn.disabled = true; btn.textContent = 'Kaydediliyor…';
+      try {
+        const id = await DB.save({ id: st.id, template: st.template, title: st.title.trim(), grade: st.grade, unit: st.unit, is_public: st.is_public, content: clean(), owner_name: me.name });
+        store.del(DRAFT);
+        try { sessionStorage.setItem('hip_flash', st.id ? 'Değişiklikler kaydedildi.' : 'Etkinlik yayında! 🎉'); } catch {}
+        location.href = `oyun.html?id=${encodeURIComponent(id)}`;
+      } catch (ex) {
+        btn.disabled = false; btn.textContent = st.id ? '💾 Değişiklikleri Kaydet' : '💾 Kaydet ve Yayınla';
+        showErr(/row-level security|permission/i.test(ex.message || '') ? 'Bu işlem için yetkin yok. Öğretmen hesabıyla giriş yaptığından emin ol.' : 'Kaydedilemedi. İnternet bağlantını kontrol edip tekrar dene.');
+      }
+    });
+
+    const del = document.getElementById('delBtn');
+    if (del) {
+      let armed = false, tmr;
+      del.addEventListener('click', async () => {
+        if (!armed) { armed = true; del.textContent = 'Emin misin? Tekrar bas'; tmr = setTimeout(() => { armed = false; del.textContent = '🗑 Sil'; }, 4000); return; }
+        clearTimeout(tmr); del.disabled = true; del.textContent = 'Siliniyor…';
+        try { await DB.remove(st.id); try { sessionStorage.setItem('hip_flash', 'Etkinlik silindi.'); } catch {} location.href = 'oyunlar.html?benim=1'; }
+        catch { del.disabled = false; del.textContent = '🗑 Sil'; showErr('Silinemedi. Lütfen tekrar dene.'); }
+      });
+    }
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

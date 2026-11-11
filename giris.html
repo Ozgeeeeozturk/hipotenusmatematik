@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Giriş Yap | Hipotenüs</title>
+<meta name="theme-color" content="#2E9E78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Hipotenüs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+
+<div class="auth-top">
+  <a href="index.html" class="logo" aria-label="Hipotenüs ana sayfa">
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <polygon points="6,42 6,8 42,42" fill="#fff" stroke="#2E9E78" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="6" y1="8" x2="42" y2="42" stroke="#FFD84D" stroke-width="4" stroke-linecap="round"/>
+      <rect x="6" y="34" width="8" height="8" fill="none" stroke="#2E9E78" stroke-width="2"/>
+    </svg>
+    <span>Hipoten<b>ü</b>s</span>
+  </a>
+  <a href="index.html" class="back-link">← Ana Sayfa</a>
+</div>
+
+<main class="auth-main">
+  <div class="auth-card">
+    <div class="auth-head">
+      <h1 id="authTitle">Tekrar hoş geldin!</h1>
+      <p id="authSub">Kaldığın yerden devam etmek için giriş yap.</p>
+    </div>
+
+    <div class="form-info" id="setupNotice" hidden style="margin:18px 24px 0">Üyelik sistemi şu an hazırlanıyor. Kısa süre sonra giriş yapabileceksin.</div>
+
+    <div class="auth-tabs" id="authTabs" role="tablist" aria-label="Giriş veya üye ol">
+      <button role="tab" id="tabLogin" aria-selected="true" aria-controls="loginForm">Giriş Yap</button>
+      <button role="tab" id="tabRegister" aria-selected="false" aria-controls="registerForm">Üye Ol</button>
+    </div>
+
+    <!-- GİRİŞ -->
+    <form class="auth-form" id="loginForm" role="tabpanel" aria-labelledby="tabLogin" novalidate>
+      <div class="form-error" id="loginError" role="alert" hidden></div>
+      <div class="field">
+        <label for="loginEmail">E-posta</label>
+        <input class="input" id="loginEmail" type="email" autocomplete="email" inputmode="email" placeholder="ornek@okul.com" required>
+      </div>
+      <div class="field">
+        <label for="loginPass">Şifre</label>
+        <div class="pass-wrap">
+          <input class="input" id="loginPass" type="password" autocomplete="current-password" placeholder="Şifren" required>
+          <button type="button" class="pass-toggle" data-target="loginPass">Göster</button>
+        </div>
+        <button type="button" class="link-btn" data-go="forgot">Şifremi unuttum</button>
+      </div>
+      <button class="btn btn-yellow" type="submit">Giriş Yap</button>
+      <p class="auth-foot">Hesabın yok mu? <button type="button" data-go="register">Hemen üye ol</button></p>
+    </form>
+
+    <!-- KAYIT -->
+    <form class="auth-form" id="registerForm" role="tabpanel" aria-labelledby="tabRegister" novalidate hidden>
+      <div class="form-error" id="regError" role="alert" hidden></div>
+      <div class="field">
+        <label for="regName">Ad Soyad</label>
+        <input class="input" id="regName" type="text" autocomplete="name" placeholder="Adın ve soyadın" required>
+      </div>
+      <div class="field">
+        <label for="regEmail">E-posta</label>
+        <input class="input" id="regEmail" type="email" autocomplete="email" inputmode="email" placeholder="ornek@okul.com" required>
+      </div>
+      <div class="field">
+        <label for="regPass">Şifre</label>
+        <div class="pass-wrap">
+          <input class="input" id="regPass" type="password" autocomplete="new-password" placeholder="En az 6 karakter" minlength="6" required>
+          <button type="button" class="pass-toggle" data-target="regPass">Göster</button>
+        </div>
+      </div>
+      <fieldset class="field" style="border:none">
+        <legend style="font-weight:800;font-size:.9rem;margin-bottom:6px">Ben bir…</legend>
+        <div class="seg">
+          <input type="radio" name="role" id="roleStudent" value="ogrenci" checked><label for="roleStudent">🎒 Öğrenciyim</label>
+          <input type="radio" name="role" id="roleTeacher" value="ogretmen"><label for="roleTeacher">🍎 Öğretmenim</label>
+        </div>
+      </fieldset>
+      <fieldset class="field" id="gradeField" style="border:none">
+        <legend style="font-weight:800;font-size:.9rem;margin-bottom:6px">Sınıfın</legend>
+        <div class="seg grade-pick">
+          <input type="radio" name="grade" id="g5" value="5"><label for="g5">5</label>
+          <input type="radio" name="grade" id="g6" value="6"><label for="g6">6</label>
+          <input type="radio" name="grade" id="g7" value="7"><label for="g7">7</label>
+          <input type="radio" name="grade" id="g8" value="8"><label for="g8">8</label>
+        </div>
+      </fieldset>
+      <label class="check" for="agreePolicy"><input type="checkbox" id="agreePolicy"> <span><a href="gizlilik.html" target="_blank" rel="noopener">Gizlilik Politikası</a>'nı okudum; bilgilerimin bu politikada anlatıldığı şekilde işlenmesini ve yurt dışındaki sunucularda saklanmasını kabul ediyorum.</span></label>
+      <label class="check" for="agreeParent" id="parentRow"><input type="checkbox" id="agreeParent"> <span>13 yaşından küçüksem, üye olmak için velimden izin aldım.</span></label>
+      <button class="btn btn-yellow" type="submit">Üye Ol</button>
+      <p class="auth-foot">Zaten üye misin? <button type="button" data-go="login">Giriş yap</button></p>
+    </form>
+
+    <!-- ŞİFREMİ UNUTTUM -->
+    <form class="auth-form" id="forgotForm" novalidate hidden>
+      <div class="form-error" id="forgotError" role="alert" hidden></div>
+      <p class="hint" style="font-size:.95rem">E-posta adresini yaz, sana şifreni yenilemen için bir bağlantı gönderelim.</p>
+      <div class="field">
+        <label for="forgotEmail">E-posta</label>
+        <input class="input" id="forgotEmail" type="email" autocomplete="email" inputmode="email" placeholder="ornek@okul.com" required>
+      </div>
+      <button class="btn btn-yellow" type="submit">Bağlantı Gönder</button>
+      <p class="auth-foot"><button type="button" data-go="login">← Girişe dön</button></p>
+    </form>
+
+    <!-- E-POSTANI KONTROL ET -->
+    <div class="auth-form" id="sentPanel" hidden>
+      <div class="sent-ic" aria-hidden="true">📬</div>
+      <p class="sent-text" id="sentText"></p>
+      <p class="hint" style="text-align:center">E-posta birkaç dakika içinde gelmezse istenmeyen (spam) klasörüne de bak.</p>
+      <button class="btn btn-lilac" type="button" data-go="login">Giriş ekranına dön</button>
+    </div>
+  </div>
+</main>
+
+<p class="guest" style="padding-bottom:20px"><a href="index.html">Üye olmadan devam et →</a> · <a href="gizlilik.html">Gizlilik</a></p>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+(async function () {
+  const $ = id => document.getElementById(id);
+
+  if (!Auth.ready) {
+    $('setupNotice').hidden = false;
+    document.querySelectorAll('.auth-form button[type=submit]').forEach(b => b.disabled = true);
+  } else if (await Auth.refresh()) {
+    location.replace('index.html'); return; // zaten giriş yapılmış
+  }
+
+  const views = {
+    login:    { form: $('loginForm'),    tab: $('tabLogin'),    title: 'Tekrar hoş geldin!',  sub: 'Kaldığın yerden devam etmek için giriş yap.' },
+    register: { form: $('registerForm'), tab: $('tabRegister'), title: 'Aramıza katıl!',      sub: 'Ücretsiz üye ol, sınıfına özel içeriklere ulaş.' },
+    forgot:   { form: $('forgotForm'),   tab: null,             title: 'Şifreni mi unuttun?', sub: 'Endişelenme, birlikte yenileyelim.' },
+    sent:     { form: $('sentPanel'),    tab: null,             title: 'E-postanı kontrol et', sub: '' },
+  };
+
+  function show(which) {
+    for (const [k, v] of Object.entries(views)) {
+      v.form.hidden = k !== which;
+      if (v.tab) v.tab.setAttribute('aria-selected', String(k === which));
+    }
+    $('authTabs').hidden = !(which === 'login' || which === 'register');
+    $('authTitle').textContent = views[which].title;
+    $('authSub').textContent = views[which].sub;
+    $('authSub').hidden = !views[which].sub;
+    try { history.replaceState(null, '', which === 'register' ? '#uye-ol' : location.pathname); } catch {}
+    const first = views[which].form.querySelector('input');
+    if (first) first.focus({ preventScroll: true });
+  }
+  $('tabLogin').addEventListener('click', () => show('login'));
+  $('tabRegister').addEventListener('click', () => show('register'));
+  document.addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) show(b.dataset.go); });
+  if (location.hash === '#uye-ol') show('register');
+
+  function sent(html) { $('sentText').innerHTML = html; show('sent'); }
+
+  // Şifreyi göster / gizle
+  document.querySelectorAll('.pass-toggle').forEach(b => b.addEventListener('click', () => {
+    const inp = $(b.dataset.target), vis = inp.type === 'password';
+    inp.type = vis ? 'text' : 'password';
+    b.textContent = vis ? 'Gizle' : 'Göster';
+  }));
+
+  // Öğretmen seçilince sınıf alanını gizle
+  const syncRole = () => { $('gradeField').hidden = $('parentRow').hidden = $('roleTeacher').checked; };
+  document.querySelectorAll('input[name="role"]').forEach(r => r.addEventListener('change', syncRole));
+  syncRole();
+
+  const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+  function fail(box, msg, input) {
+    box.textContent = msg; box.hidden = false;
+    document.querySelectorAll('[aria-invalid]').forEach(i => i.removeAttribute('aria-invalid'));
+    if (input) { input.setAttribute('aria-invalid', 'true'); input.focus(); }
+  }
+  // Gönderim sırasında düğmeyi kilitle
+  async function busy(form, label, fn) {
+    const btn = form.querySelector('button[type=submit]'), old = btn.textContent;
+    btn.disabled = true; btn.textContent = label;
+    try { await fn(); } finally { btn.disabled = false; btn.textContent = old; }
+  }
+  function welcome(profile, isNew) {
+    const first = profile.name.split(' ')[0];
+    try { sessionStorage.setItem('hip_flash', isNew ? `Aramıza hoş geldin, <b>${esc(first)}</b>! 🎉` : `Hoş geldin, <b>${esc(first)}</b>!`); } catch {}
+    location.href = 'index.html';
+  }
+
+  $('loginForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const box = $('loginError'), em = $('loginEmail'), pw = $('loginPass');
+    if (!emailOk(em.value)) return fail(box, 'Geçerli bir e-posta adresi yaz.', em);
+    if (!pw.value) return fail(box, 'Şifreni yaz.', pw);
+    busy(e.target, 'Giriş yapılıyor…', async () => {
+      try { welcome(await Auth.login(em.value, pw.value), false); }
+      catch (err) { fail(box, err.message, pw); }
+    });
+  });
+
+  $('registerForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const box = $('regError'), nm = $('regName'), em = $('regEmail'), pw = $('regPass');
+    const role = document.querySelector('input[name="role"]:checked').value;
+    const gradeEl = document.querySelector('input[name="grade"]:checked');
+    if (nm.value.trim().length < 2) return fail(box, 'Adını ve soyadını yaz.', nm);
+    if (!emailOk(em.value)) return fail(box, 'Geçerli bir e-posta adresi yaz.', em);
+    if (pw.value.length < 6) return fail(box, 'Şifren en az 6 karakter olmalı.', pw);
+    if (role === 'ogrenci' && !gradeEl) return fail(box, 'Kaçıncı sınıfta olduğunu seç.', $('g5'));
+    if (!$('agreePolicy').checked) return fail(box, 'Üye olmak için Gizlilik Politikası\'nı kabul etmelisin.', $('agreePolicy'));
+    if (role === 'ogrenci' && !$('agreeParent').checked) return fail(box, 'Üye olmadan önce velinden izin aldığını onaylamalısın.', $('agreeParent'));
+    busy(e.target, 'Hesap açılıyor…', async () => {
+      try {
+        const r = await Auth.register({ name: nm.value, email: em.value, password: pw.value, role, grade: gradeEl ? gradeEl.value : null });
+        if (r.needsConfirm) sent(`Hesabın oluşturuldu! <b>${esc(em.value.trim())}</b> adresine bir onay bağlantısı gönderdik. Bağlantıya tıkladıktan sonra giriş yapabilirsin.`);
+        else welcome(r.profile, true);
+      } catch (err) { fail(box, err.message, em); }
+    });
+  });
+
+  $('forgotForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const box = $('forgotError'), em = $('forgotEmail');
+    if (!emailOk(em.value)) return fail(box, 'Geçerli bir e-posta adresi yaz.', em);
+    busy(e.target, 'Gönderiliyor…', async () => {
+      try { await Auth.resetPassword(em.value); sent(`Bu adrese kayıtlı bir hesap varsa, <b>${esc(em.value.trim())}</b> adresine şifre yenileme bağlantısı gönderdik.`); }
+      catch (err) { fail(box, err.message, em); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
