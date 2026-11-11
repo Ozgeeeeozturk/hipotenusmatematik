@@ -131,7 +131,6 @@
           : `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`}
         <line x1="0" y1="0" x2="${px}" y2="${py}" stroke="#9AA3AD" stroke-width="9" stroke-linecap="round" opacity=".85"/>
         <line x1="0" y1="0" x2="${px}" y2="${py}" stroke="${color}" stroke-width="2.5"/>
-        <circle cx="${mx}" cy="${my}" r="9" fill="#E5484D"/>
         ${done ? `<text x="${r2(mx)}" y="${r2(my - 16)}" text-anchor="middle" class="pg-tag" fill="${color}">r = ${fmt(r)} cm</text>` : ''}
         <circle r="6" fill="#2D2440"/><text x="-12" y="-12" text-anchor="end" class="pg-pt">M</text>
         <g class="pg-pen${done ? ' done' : trace.length ? '' : ' pulse'}"><circle cx="${px}" cy="${py}" r="17" fill="#FFD84D" stroke="#E0B820" stroke-width="3"/><circle cx="${px}" cy="${py}" r="4.5" fill="${color}"/></g>`;
