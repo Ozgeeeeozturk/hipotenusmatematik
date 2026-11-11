@@ -303,3 +303,8 @@ function initPage() {
   Auth.refresh().then(renderUserArea).catch(() => {});
   Auth.onChange(() => renderUserArea());
 }
+
+// ---- Çalışma kâğıtları (PDF) ----
+const WORKSHEETS = [
+  { pdf: 'materyal/nokta-dogru-isin.pdf', thumb: 'materyal/nokta-dogru-isin.png', title: 'Nokta, Doğru, Işın ve Doğru Parçası', text: 'Sembol gösterimleri, modeller, doğru parçası sayma, çizim ve doğru-yanlış soruları.', grade: 5, unit: 'Geometrik Şekiller', info: '12 soru · 2 sayfa', color: 'l' },
+];
