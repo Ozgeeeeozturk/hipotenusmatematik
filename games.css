@@ -327,3 +327,39 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .sa-badge{background:var(--yellow);border-radius:999px;padding:6px 18px;font-weight:800;animation:piecePop .35s ease-out}
 .sa-badge b{font-family:"Baloo 2",cursive;font-size:1.3rem}
 .pg-opts .g-opt{white-space:nowrap}
+/* Küp ve Prizma Açınımı */
+.an-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+.an-tab{border:3px solid var(--lilac-light);background:#fff;border-radius:999px;padding:8px 16px;font:800 1rem 'Nunito',sans-serif;color:var(--ink);cursor:pointer}
+.an-tab.on{background:var(--lilac);border-color:var(--lilac);color:#fff}
+.an-dims{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+.an-dims[hidden]{display:none}
+.an-dim{display:flex;align-items:center;gap:6px;background:#F6F3FA;border-radius:999px;padding:4px 6px 4px 12px;font-weight:800}
+.an-dim span{color:var(--muted);font-size:.9rem}
+.an-dim b{font-family:'Baloo 2',cursive;font-size:1.25rem;min-width:18px;text-align:center}
+.an-dim button{width:32px;height:32px;border-radius:50%;border:0;background:#fff;font:800 1.2rem 'Nunito',sans-serif;cursor:pointer;box-shadow:0 2px 0 var(--lilac-light)}
+.an-scene{position:relative;height:min(440px,62vh);perspective:1100px;perspective-origin:50% 45%;overflow:hidden;border-radius:20px;background:radial-gradient(ellipse at 50% 40%,#FFFFFF,#EEE8F7);border:2px solid var(--lilac-light);touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+.an-scene.grab{cursor:grabbing}
+.an-world{position:absolute;left:50%;top:52%;width:0;height:0;transform-style:preserve-3d}
+.an-world.smooth{transition:transform .6s ease}
+.an-face{position:absolute;transform-style:preserve-3d;box-sizing:border-box;border:2.5px solid rgba(45,36,64,.75);background-color:var(--fc);background-image:linear-gradient(rgba(45,36,64,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(45,36,64,.13) 1px,transparent 1px);display:flex;align-items:center;justify-content:center}
+.an-face > .an-lb{position:absolute;font-family:'Baloo 2',cursive;font-weight:800;font-size:15px;color:#2D2440;background:rgba(255,255,255,.75);border-radius:8px;padding:0 6px;pointer-events:none;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.an-face > .an-lb.back{transform:rotateY(180deg)}
+.an-drag{position:absolute;left:12px;bottom:10px;font-weight:700;font-size:.85rem;color:var(--muted);pointer-events:none}
+.an-fold{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:12px}
+.an-slider{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--muted);font-size:.9rem}
+.an-slider input{width:min(260px,50vw);accent-color:var(--mint-dark)}
+.an-views,.an-nets{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.an-view,.an-net{border:2px solid var(--lilac-light);background:#fff;border-radius:12px;padding:7px 12px;font:800 .92rem 'Nunito',sans-serif;color:var(--ink);cursor:pointer}
+.an-view:hover,.an-net:hover{border-color:var(--lilac)}
+.an-view.on,.an-net.on{background:var(--mint);border-color:var(--mint-dark)}
+.an-nets span{font-weight:800;color:var(--muted);align-self:center}
+.an-net{min-width:42px}
+.an-info{margin-top:16px;text-align:center}
+.an-facts{display:flex;gap:10px;justify-content:center}
+.an-facts div{background:#F6F3FA;border-radius:14px;padding:8px 18px;display:grid}
+.an-facts b{font-family:'Baloo 2',cursive;font-size:1.8rem;line-height:1;color:var(--lilac-dark)}
+.an-facts span{font-weight:800;color:var(--muted);font-size:.85rem}
+.an-rule{font-weight:700;margin:12px 0 6px}
+.an-pairs{list-style:none;padding:0;margin:0;display:grid;gap:6px;justify-content:center;font-weight:700}
+.an-pairs li{display:flex;align-items:center;gap:6px}
+.an-pairs i{width:16px;height:16px;border-radius:4px;border:1.5px solid rgba(45,36,64,.5)}
