@@ -45,7 +45,7 @@
       <rect x="77" y="${yv}" width="14" height="${Y(MIN) + 30 - yv}" fill="${c}" class="tm-liq"/>
       <circle cx="84" cy="${Y(MIN) + 42}" r="27" fill="#3A3F4B"/><circle cx="84" cy="${Y(MIN) + 42}" r="22" fill="${c}"/>
       ${opts.reveal && show ? `<g class="tm-tag"><rect x="98" y="${yv - 13}" width="50" height="26" rx="8" fill="${c}"/><text x="123" y="${yv + 6}" text-anchor="middle" fill="#fff">${nm(v)}</text></g>` : ''}
-      ${opts.drag && show ? `<circle cx="84" cy="${yv}" r="13" fill="#FFD84D" stroke="#E0B820" stroke-width="3" class="tm-handle"/>` : ''}
+      ${opts.drag && show ? `<g class="tm-pointer"><line x1="106" y1="${yv}" x2="70" y2="${yv}" stroke="#2D2440" stroke-width="3"/><path d="M60 ${yv} L72 ${yv - 7} L72 ${yv + 7} Z" fill="#2D2440"/></g><circle cx="120" cy="${yv}" r="13" fill="#FFD84D" stroke="#E0B820" stroke-width="3" class="tm-handle"/>` : ''}
       <text x="84" y="${Y(MIN) + 92}" text-anchor="middle" class="tm-city">${name}</text>
     </svg>`;
   }
