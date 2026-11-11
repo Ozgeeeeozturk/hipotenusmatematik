@@ -285,33 +285,6 @@ function showMemorial(force) {
   back.querySelector('#memClose').focus();
 }
 
-// ---- Giriş videosu: her oturumda bir kez, sağ üstteki ✕ ile kapanır ----
-function showIntroVideo() {
-  const key = 'hip_giris_video';
-  try { if (sessionStorage.getItem(key)) return; } catch {}
-  if (document.querySelector('.memorial-back')) return;
-  const back = document.createElement('div');
-  back.className = 'memorial-back intro-back';
-  back.innerHTML = `
-    <div class="intro-video" role="dialog" aria-modal="true" aria-label="Hoş geldin">
-      <button class="memorial-close" id="introClose" aria-label="Kapat">✕</button>
-      <video src="media/giris.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
-    </div>`;
-  document.body.appendChild(back);
-  document.body.style.overflow = 'hidden';
-  const v = back.querySelector('video');
-  const p = v.play(); if (p && p.catch) p.catch(() => {});
-  const close = () => {
-    try { sessionStorage.setItem(key, '1'); } catch {}
-    v.pause(); back.remove(); document.body.style.overflow = '';
-    document.removeEventListener('keydown', onKey);
-  };
-  const onKey = e => { if (e.key === 'Escape') close(); };
-  document.addEventListener('keydown', onKey);
-  back.querySelector('#introClose').addEventListener('click', close);
-  back.querySelector('#introClose').focus();
-}
-
 // ---- Ana sayfa kurulumu ----
 function initHome() {
   // Menüdeki ünite listeleri
@@ -393,7 +366,7 @@ function initHome() {
 
   // Oturumu Supabase ile doğrula (başka cihazdan çıkış, süresi dolan oturum vb.)
   const rerender = () => { renderUserArea(); renderPersonal(); };
-  Auth.refresh().then(() => { rerender(); showMemorial(); showIntroVideo(); }).catch(() => showIntroVideo());
+  Auth.refresh().then(() => { rerender(); showMemorial(); }).catch(() => {});
   Auth.onChange(event => {
     rerender();
     if (event === 'SIGNED_IN' && /type=signup|access_token/.test(location.hash)) {
