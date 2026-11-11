@@ -465,3 +465,27 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .ua-tools .btn-ghost-dark.on{background:var(--mint);border-color:var(--mint-dark)}
 .ua-goal{border-radius:8px;padding:0 6px;font-weight:800}
 @media (max-width:640px){.ua-lab{font-size:24px}.ua-deg{font-size:20px}}
+/* Çember Atölyesi */
+.cu-wrap{max-width:640px;margin:0 auto}
+.cu-board{display:block;width:100%;height:auto;background:#FFFEFA;border-radius:16px;border:2px solid var(--lilac-light)}
+.cu-grid line{stroke:#E6E0EE;stroke-width:1}
+.cu-pt{font-family:'Baloo 2',cursive;font-weight:800;font-size:20px;fill:#2D2440;paint-order:stroke;stroke:#FFFEFA;stroke-width:4px}
+.cu-len{font-family:'Baloo 2',cursive;font-weight:800;font-size:17px;paint-order:stroke;stroke:#FFFEFA;stroke-width:5px}
+.cu-controls{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px}
+.cu-step{display:flex;align-items:center;gap:8px;background:#fff;border:3px solid var(--c);border-radius:999px;padding:5px 8px 5px 14px;font-weight:800}
+.cu-step span{color:var(--c);font-size:.9rem}
+.cu-step b{font-family:'Baloo 2',cursive;font-size:1.2rem;min-width:46px;text-align:center}
+.cu-step button{width:34px;height:34px;border-radius:50%;border:0;background:var(--c);color:#fff;font:800 1.3rem 'Nunito',sans-serif;cursor:pointer}
+.cu-step button:disabled{opacity:.25;cursor:default}
+.cu-step.locked{opacity:.85;border-style:dashed}
+.cu-step i{font-style:normal}
+.cu-info{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.cu-info > div{background:#fff;border:3px solid var(--c);border-radius:14px;padding:8px;text-align:center;display:grid}
+.cu-info span{font-size:.8rem;font-weight:800;color:var(--muted)}
+.cu-info b{font-family:'Baloo 2',cursive;font-size:1.5rem;color:var(--c)}
+.cu-type{text-align:center;font-weight:800;margin-top:10px;font-size:1.08rem}
+.cu-type b{color:var(--lilac-dark)}
+.cu-none{margin-top:14px;text-align:center;font-weight:700;background:#FDECEA;border-radius:14px;padding:12px;color:#B23A48}
+.g-options.cu-opts{grid-template-columns:repeat(3,1fr);margin-top:12px}
+.cu-table{margin-top:12px}
+@media (max-width:640px){.cu-info{grid-template-columns:1fr}.cu-len{font-size:22px}.cu-pt{font-size:24px}.g-options.cu-opts{grid-template-columns:1fr}}
