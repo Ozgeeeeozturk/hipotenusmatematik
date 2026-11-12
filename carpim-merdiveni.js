@@ -1,4 +1,4 @@
-/* Çarpım Merdiveni: 10 seviye zihinden çarpma. Her seviye 5 soru × 2 puan = 10 puan, toplam 100 puan. */
+/* Çarpım Tablosu Oyunu: 10 seviye zihinden çarpma. Her seviye 5 soru × 2 puan = 10 puan, toplam 100 puan. */
 (function () {
   initPage();
   const stage = document.getElementById('stage');
@@ -21,8 +21,8 @@
   const BEST = 'hip_carpim_best';
 
   const NOTE = `<div class="pg-def">
-    <span class="pg-def-ic" aria-hidden="true">🪜</span>
-    <p>Merdiveni basamak basamak çık! Her seviyede <b class="k2">5 çarpma</b> var, her doğru cevap <mark>2 puan</mark>. 10 seviyenin hepsini doğru yaparsan <b class="k3">100 puan</b>!</p>
+    <span class="pg-def-ic" aria-hidden="true">✖️</span>
+    <p>Seviye seviye ilerle! Her seviyede <b class="k2">5 çarpma</b> var, her doğru cevap <mark>2 puan</mark>. 10 seviyenin hepsini doğru yaparsan <b class="k3">100 puan</b>!</p>
   </div>`;
 
   let level = 0, q = 0, score = 0, levelScores = [], input = '', locked = false;
@@ -112,7 +112,7 @@
     stage.innerHTML = `${NOTE}
       <div class="g-result">
         <div class="g-stars" aria-label="${stars} yıldız">${[1, 2, 3].map(k => `<span class="${k <= stars ? 'on' : ''}">★</span>`).join('')}</div>
-        <h2>${score === 100 ? '🏆 Merdivenin zirvesindesin!' : 'Merdiveni tamamladın!'}</h2>
+        <h2>${score === 100 ? '🏆 Çarpım tablosu şampiyonusun!' : 'Oyunu tamamladın!'}</h2>
         <div class="g-score"><b>${score}</b><span>/ 100</span></div>
         <p class="g-time">En yüksek puanın: <b>${best}</b></p>
         <table class="pg-table cm-table"><thead><tr><th>Seviye</th><th>Puan</th></tr></thead>

@@ -276,7 +276,7 @@ const BUILTIN_GAMES = [
   { href: 'cekirge.html', icon: '🦗', type: 'Sayı Doğrusu', title: 'Zıpzıp Çekirge', text: 'Yolu ölç, sıçrayışı bul, noktaları yerleştir', grades: [7], unit: 'Sayılar ve Nicelikler (1)', color: 'm' },
   { href: 'termometre.html', icon: '🌡️', type: 'Görsel Soru', title: 'Termometre Okuma', text: 'Negatif sıcaklıkları oku, ayarla, karşılaştır', grades: [7], unit: 'Sayılar ve Nicelikler (1)', color: 'y' },
   { href: 'esit-aralik.html', icon: '💡', type: 'Keşif Oyunu', title: 'Eşit Aralık Ustası: Lamba, Fidan, Püskül', text: 'Aralığı dene, ortak böleni ve EBOB’u bul', grades: [6], unit: 'Sayılar ve Nicelikler (1)', color: 'm' },
-  { href: 'carpim-merdiveni.html', icon: '🪜', type: 'Hız Oyunu', title: 'Çarpım Merdiveni', text: '10 seviye zihinden çarpma, 100 puana ulaş', grades: [5, 6, 7, 8], color: 'y' },
+  { href: 'carpim-merdiveni.html', icon: '✖️', type: 'Hız Oyunu', title: 'Çarpım Tablosu Oyunu', text: '10 seviye zihinden çarpma, 100 puana ulaş', grades: [5, 6, 7, 8], color: 'y' },
 ];
 const gRange = gs => (gs.length > 1 ? `${gs[0]}–${gs[gs.length - 1]}` : `${gs[0]}`);
 function builtinCard(g) {
