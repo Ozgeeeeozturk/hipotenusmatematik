@@ -37,10 +37,10 @@
   // ---- Çizim ----
   const VW = 660;
   function lineSVG(R, x) {
-    const max = Math.max(...R.lens), k = 560 / max, rowH = 92;
+    const max = Math.max(...R.lens), k = 540 / max, rowH = 92;
     let g = '';
     R.lens.forEach((L, i) => {
-      const y = 40 + i * rowH, x0 = 60, x1 = x0 + L * k, ok = L % x === 0;
+      const y = 40 + i * rowH, x0 = 96, x1 = x0 + L * k, ok = L % x === 0;
       g += `<text x="10" y="${y + 5}" class="ea-lab">${R.labels[i]}</text>
         <line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" class="ea-road"/>
         <line x1="${x0}" y1="${y - 10}" x2="${x0}" y2="${y + 10}" class="ea-end"/><line x1="${x1}" y1="${y - 10}" x2="${x1}" y2="${y + 10}" class="ea-end"/>
