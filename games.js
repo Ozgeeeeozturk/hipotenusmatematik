@@ -275,6 +275,7 @@ const BUILTIN_GAMES = [
   { href: 'acinim.html', icon: '🧊', type: '3B Etkinlik', title: 'Küp ve Prizma Açınımı', text: 'Cismi aç, kapat ve her yönden döndür', grades: [7], unit: 'Geometrik Nicelikler (1)', color: 'l' },
   { href: 'cekirge.html', icon: '🦗', type: 'Sayı Doğrusu', title: 'Zıpzıp Çekirge', text: 'Yolu ölç, sıçrayışı bul, noktaları yerleştir', grades: [7], unit: 'Sayılar ve Nicelikler (1)', color: 'm' },
   { href: 'termometre.html', icon: '🌡️', type: 'Görsel Soru', title: 'Termometre Okuma', text: 'Negatif sıcaklıkları oku, ayarla, karşılaştır', grades: [7], unit: 'Sayılar ve Nicelikler (1)', color: 'y' },
+  { href: 'esit-aralik.html', icon: '💡', type: 'Keşif Oyunu', title: 'Eşit Aralık Ustası: Lamba, Fidan, Püskül', text: 'Aralığı dene, ortak böleni ve EBOB’u bul', grades: [6], unit: 'Sayılar ve Nicelikler (1)', color: 'm' },
 ];
 function builtinCard(g) {
   return `<a class="card act-card has-grade ${g.color}" href="${g.href}">
