@@ -1,4 +1,4 @@
-/* Eşit Aralık Ustası: eşit aralıklı yerleştirme problemleri (ortak bölen, EBOB, uçlarda var/yok, kapalı şekil) */
+/* Eşit Aralık Kâşifi: eşit aralıklı yerleştirme problemleri (ortak bölen, EBOB, uçlarda var/yok, kapalı şekil) */
 (function () {
   initPage();
   const stage = document.getElementById('stage');
@@ -188,7 +188,7 @@
     stage.innerHTML = `${NOTE}
       <div class="g-result">
         <div class="g-stars" aria-label="${stars} yıldız">${[1, 2, 3].map(k => `<span class="${k <= stars ? 'on' : ''}">★</span>`).join('')}</div>
-        <h2>Eşit aralık ustası!</h2>
+        <h2>Eşit aralık kâşifi!</h2>
         <div class="g-score"><b>${score}</b><span>/ ${ROUNDS.length}</span></div>
         <p class="g-time">Doğru cevap</p>
         <p class="pg-rule">1) Aralık = <b>ortak bölen</b> · 2) “En az” → <b>EBOB</b> · 3) Say: uçlarda var <b>+1</b>, uçlarda yok <b>−1</b>, kapalı şekil <b>aralık sayısı kadar</b></p>

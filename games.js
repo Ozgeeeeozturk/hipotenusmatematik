@@ -265,7 +265,7 @@ function confetti() {
 
 // ---- Hazır etkileşimli oyunlar ----
 const BUILTIN_GAMES = [
-  { href: 'aci-ustasi.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Açı Ustası: Verilmeyen Açıyı Bul', text: 'Doğru açı ve tam açıda renkli parçalarla', grades: [5], unit: 'Geometrik Şekiller', color: 'y' },
+  { href: 'aci-ustasi.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Açı Kâşifi: Verilmeyen Açıyı Bul', text: 'Doğru açı ve tam açıda renkli parçalarla', grades: [5], unit: 'Geometrik Şekiller', color: 'y' },
   { href: 'pergel.html', icon: '⭕', type: 'Sürükle-Bırak', title: 'Pergel ile Çember Çiz', text: 'Pergeli döndür, yarıçap ve çapı keşfet', grades: [5], unit: 'Geometrik Şekiller', color: 'm' },
   { href: 'yaricap-tasi.html', icon: '📏', type: 'Sürükle-Bırak', title: 'Yarıçapları Taşı: Dikdörtgenin Kenarları', text: 'Yarıçapları kenarlara taşı, çevreyi bul', grades: [5], unit: 'Geometrik Nicelikler', color: 'l' },
   { href: 'es-dogru.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Eş Doğru Parçaları: L’ye Bak', text: 'Kareli kâğıtta eş doğru parçalarını bul ve çiz', grades: [5], unit: 'Geometrik Şekiller', color: 'y' },
@@ -275,7 +275,7 @@ const BUILTIN_GAMES = [
   { href: 'acinim.html', icon: '🧊', type: '3B Etkinlik', title: 'Küp ve Prizma Açınımı', text: 'Cismi aç, kapat ve her yönden döndür', grades: [7], unit: 'Geometrik Nicelikler (1)', color: 'l' },
   { href: 'cekirge.html', icon: '🦗', type: 'Sayı Doğrusu', title: 'Zıpzıp Çekirge', text: 'Yolu ölç, sıçrayışı bul, noktaları yerleştir', grades: [7], unit: 'Sayılar ve Nicelikler (1)', color: 'm' },
   { href: 'termometre.html', icon: '🌡️', type: 'Görsel Soru', title: 'Termometre Okuma', text: 'Negatif sıcaklıkları oku, ayarla, karşılaştır', grades: [7], unit: 'Sayılar ve Nicelikler (1)', color: 'y' },
-  { href: 'esit-aralik.html', icon: '💡', type: 'Keşif Oyunu', title: 'Eşit Aralık Ustası: Lamba, Fidan, Püskül', text: 'Aralığı dene, ortak böleni ve EBOB’u bul', grades: [6], unit: 'Sayılar ve Nicelikler (1)', color: 'm' },
+  { href: 'esit-aralik.html', icon: '💡', type: 'Keşif Oyunu', title: 'Eşit Aralık Kâşifi: Lamba, Fidan, Püskül', text: 'Aralığı dene, ortak böleni ve EBOB’u bul', grades: [6], unit: 'Sayılar ve Nicelikler (1)', color: 'm' },
   { href: 'carpim-merdiveni.html', icon: '✖️', type: 'Hız Oyunu', title: 'Çarpım Tablosu Oyunu', text: '10 seviye zihinden çarpma, 100 puana ulaş', grades: [5, 6, 7, 8], color: 'y' },
 ];
 const gRange = gs => (gs.length > 1 ? `${gs[0]}–${gs[gs.length - 1]}` : `${gs[0]}`);

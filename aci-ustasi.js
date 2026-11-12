@@ -1,4 +1,4 @@
-/* Açı Ustası: renkli açı parçalarını sürükleyerek doğru açı / tam açıda verilmeyen açıyı bulma */
+/* Açı Kâşifi: renkli açı parçalarını sürükleyerek doğru açı / tam açıda verilmeyen açıyı bulma */
 (function () {
   initPage();
   const stage = document.getElementById('stage');
@@ -201,7 +201,7 @@
   function finish() {
     const pct = game.clean / ROUNDS;
     const stars = pct >= 0.9 ? 3 : pct >= 0.6 ? 2 : 1;
-    const msg = stars === 3 ? 'Gerçek bir açı ustasısın!' : stars === 2 ? 'Çok iyi gidiyorsun!' : 'Güzel başlangıç, bir daha dene!';
+    const msg = stars === 3 ? 'Gerçek bir açı kâşifisin!' : stars === 2 ? 'Çok iyi gidiyorsun!' : 'Güzel başlangıç, bir daha dene!';
     stage.innerHTML = `
       <div class="g-result">
         <div class="g-stars" aria-label="${stars} yıldız">${[1, 2, 3].map(n => `<span class="${n <= stars ? 'on' : ''}">★</span>`).join('')}</div>

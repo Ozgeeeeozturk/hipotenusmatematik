@@ -1,5 +1,5 @@
 /* Hipotenüs service worker: çevrimdışı çalışma ve hızlı açılış */
-const VERSION = 'hipotenus-v50';
+const VERSION = 'hipotenus-v51';
 const SHELL = [
   './', 'index.html', 'giris.html', 'sifre-yenile.html', 'gizlilik.html', 'oyunlar.html', 'oyun.html', 'olustur.html', 'aci-ustasi.html', 'aci-ustasi.js', 'pergel.html', 'pergel.js', 'yaricap-tasi.html', 'yaricap-tasi.js', 'es-dogru.html', 'es-dogru.js', 'saat-aci.html', 'saat-aci.js', 'acinim.html', 'acinim.js', 'cekirge.html', 'cekirge.js', 'termometre.html', 'termometre.js', 'ucgen-avcisi.html', 'ucgen-avcisi.js', 'cember-ucgen.html', 'cember-ucgen.js', 'esit-aralik.html', 'esit-aralik.js', 'carpim-merdiveni.html', 'carpim-merdiveni.js', 'kazanimlar.html', 'kazanimlar.js', 'kazanimlar-veri.js', 'calisma-kagitlari.html', 'style.css', 'games.css', 'app.js', 'games.js', 'config.js', 'vendor/supabase.js', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png', 'icons/favicon-32.png',
