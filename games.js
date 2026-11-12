@@ -276,10 +276,12 @@ const BUILTIN_GAMES = [
   { href: 'cekirge.html', icon: '🦗', type: 'Sayı Doğrusu', title: 'Zıpzıp Çekirge', text: 'Yolu ölç, sıçrayışı bul, noktaları yerleştir', grades: [7], unit: 'Sayılar ve Nicelikler (1)', color: 'm' },
   { href: 'termometre.html', icon: '🌡️', type: 'Görsel Soru', title: 'Termometre Okuma', text: 'Negatif sıcaklıkları oku, ayarla, karşılaştır', grades: [7], unit: 'Sayılar ve Nicelikler (1)', color: 'y' },
   { href: 'esit-aralik.html', icon: '💡', type: 'Keşif Oyunu', title: 'Eşit Aralık Ustası: Lamba, Fidan, Püskül', text: 'Aralığı dene, ortak böleni ve EBOB’u bul', grades: [6], unit: 'Sayılar ve Nicelikler (1)', color: 'm' },
+  { href: 'carpim-merdiveni.html', icon: '🪜', type: 'Hız Oyunu', title: 'Çarpım Merdiveni', text: '10 seviye zihinden çarpma, 100 puana ulaş', grades: [5, 6, 7, 8], color: 'y' },
 ];
+const gRange = gs => (gs.length > 1 ? `${gs[0]}–${gs[gs.length - 1]}` : `${gs[0]}`);
 function builtinCard(g) {
   return `<a class="card act-card has-grade ${g.color}" href="${g.href}">
-    <div class="act-top"><span class="act-ic" aria-hidden="true">${g.icon}</span><span class="act-type">${g.type}</span><span class="sinif-kose" aria-label="${g.grades.join('–')}. sınıf"><b>${g.grades.join('–')}.</b>Sınıf</span></div>
+    <div class="act-top"><span class="act-ic" aria-hidden="true">${g.icon}</span><span class="act-type">${g.type}</span><span class="sinif-kose" aria-label="${gRange(g.grades)}. sınıf"><b>${gRange(g.grades)}.</b>Sınıf</span></div>
     <h3>${g.title}</h3>
     <p>${g.text}</p>
     <div class="act-meta">${g.unit ? `<span class="tag">${esc(g.unit)}</span>` : ''}<span class="plays">✨ Yeni</span></div>
