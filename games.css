@@ -635,3 +635,22 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .cm-tip{font-weight:700;background:var(--yellow-light);border-radius:12px;padding:8px 12px;margin:8px auto;max-width:440px}
 .cm-table i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
 .sinif-kose b{white-space:nowrap}
+/* Açı Boyama */
+.ab-ask{text-align:center;font-weight:700;color:var(--muted);margin-bottom:8px}
+.ab-board{display:block;width:100%;max-width:640px;margin:0 auto;background:#FFFEFA;border-radius:16px;border:2px solid var(--lilac-light);user-select:none;-webkit-user-select:none}
+.ab-ln{stroke:#2D2440;stroke-width:3}
+.ab-pt{font-family:'Baloo 2',cursive;font-weight:800;font-size:19px;fill:#2D2440;paint-order:stroke;stroke:#FFFEFA;stroke-width:4px}
+.ab-sec{fill:#E9E4F2;stroke:#fff;stroke-width:2;cursor:pointer;transition:fill .2s}
+.ab-sec:hover{fill:#DCD3EC}
+.ab-sec.sel{fill:#FFE08A;stroke:#E0B820;stroke-width:3}
+.ab-sec.done{fill:var(--c);cursor:default}
+.ab-sec.bad{fill:#F28B95}
+.ab-val{font-family:'Baloo 2',cursive;font-weight:800;font-size:18px;paint-order:stroke;stroke:#FFFEFA;stroke-width:4px;pointer-events:none}
+.ab-val.q{fill:#A99FBD}
+.ab-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px;touch-action:none}
+.ab-chips[hidden]{display:none}
+.ab-chip{min-width:74px;height:52px;border-radius:14px;border:3px solid var(--lilac);background:#fff;font:800 1.35rem 'Baloo 2',cursive;color:var(--lilac-dark);cursor:grab;box-shadow:0 4px 0 var(--lilac-light);touch-action:none}
+.ab-ghost{position:fixed;z-index:999;transform:translate(-50%,-60%);pointer-events:none;background:var(--yellow);border-radius:12px;padding:6px 14px;font:800 1.3rem 'Baloo 2',cursive;box-shadow:0 6px 16px rgba(45,36,64,.25)}
+.ab-q{margin-top:14px;border-top:2px dashed var(--lilac-light);padding-top:10px}
+.ab-q small{color:var(--muted);font-weight:700}
+@media (max-width:640px){.ab-pt{font-size:24px}.ab-val{font-size:22px}}

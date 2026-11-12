@@ -266,6 +266,7 @@ function confetti() {
 // ---- Hazır etkileşimli oyunlar ----
 const BUILTIN_GAMES = [
   { href: 'aci-ustasi.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Açı Kâşifi: Verilmeyen Açıyı Bul', text: 'Doğru açı ve tam açıda renkli parçalarla', grades: [5], unit: 'Geometrik Şekiller', color: 'y' },
+  { href: 'aci-boyama.html', icon: '🎨', type: 'Sürükle-Bırak', title: 'Açı Boyama: Ters, Komşu, Eş Açılar', text: 'Paralel doğrularda açıları yerleştir, ters açılar aynı renkte', grades: [5], unit: 'Geometrik Şekiller', color: 'l' },
   { href: 'pergel.html', icon: '⭕', type: 'Sürükle-Bırak', title: 'Pergel ile Çember Çiz', text: 'Pergeli döndür, yarıçap ve çapı keşfet', grades: [5], unit: 'Geometrik Şekiller', color: 'm' },
   { href: 'yaricap-tasi.html', icon: '📏', type: 'Sürükle-Bırak', title: 'Yarıçapları Taşı: Dikdörtgenin Kenarları', text: 'Yarıçapları kenarlara taşı, çevreyi bul', grades: [5], unit: 'Geometrik Nicelikler', color: 'l' },
   { href: 'es-dogru.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Eş Doğru Parçaları: L’ye Bak', text: 'Kareli kâğıtta eş doğru parçalarını bul ve çiz', grades: [5], unit: 'Geometrik Şekiller', color: 'y' },
