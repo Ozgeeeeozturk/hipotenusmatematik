@@ -316,7 +316,9 @@ function gradePanel(panel, g) {
     <div class="gp-tabs" role="tablist">${TABS.map((t, i) => `<button role="tab" class="gp-tab${i ? '' : ' on'}" data-k="${t.k}" aria-selected="${!i}">${t.label}${t.n != null ? ` <i>${t.n}</i>` : ''}</button>`).join('')}</div>
     <div class="gp-body" id="gpBody"></div>`;
   const box = panel.querySelector('#gpBody');
+  let cur = '';
   const show = k => {
+    cur = k;
     panel.querySelectorAll('.gp-tab').forEach(b => { const on = b.dataset.k === k; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
     box.innerHTML = body[k]();
     if (k === 'etk') loadActs();
@@ -325,12 +327,13 @@ function gradePanel(panel, g) {
     if (typeof DB === 'undefined' || !DB.ok()) { box.innerHTML = empty('Etkinlikler şu an yüklenemiyor.'); return; }
     try {
       const rows = await DB.list({ grade: g, limit: 12 });
+      if (cur !== 'etk') return;
       const T = typeof TEMPLATES !== 'undefined' ? TEMPLATES : {};
       box.innerHTML = (rows.length
         ? rows.map(a => row(`oyun.html?id=${encodeURIComponent(a.id)}`, (T[a.template] || {}).icon || '🧩', a.title, `${(T[a.template] || {}).short || ''}${a.unit ? ' · ' + a.unit : ''}${a.owner_name ? ' · ' + shortName(a.owner_name) : ''}`)).join('')
         : empty('Öğretmenler bu sınıf için henüz etkinlik eklemedi.'))
         + `<a class="gp-more" href="oyunlar.html?sinif=${g}">Tümünü gör →</a>`;
-    } catch { box.innerHTML = empty('Etkinlikler yüklenemedi. İnternet bağlantını kontrol et.'); }
+    } catch { if (cur === 'etk') box.innerHTML = empty('Etkinlikler yüklenemedi. İnternet bağlantını kontrol et.'); }
   }
   panel.querySelector('.gp-tabs').addEventListener('click', e => { const b = e.target.closest('.gp-tab'); if (b) show(b.dataset.k); });
   show('oyun');
