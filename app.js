@@ -37,7 +37,7 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>'
 const UNIT_SUB = { 5: { 'Sayılar ve Nicelikler (1)': 'Doğal Sayılar ve İşlemler', 'Sayılar ve Nicelikler (2)': 'Kesirler' } };
 const unitLabel = (g, u) => (UNIT_SUB[g] && UNIT_SUB[g][u] ? `${u}: ${UNIT_SUB[g][u]}` : u);
 const unitListHTML = g => `<ol class="unit-list">${UNITS[g].map((u, i) =>
-  `<li><a href="oyunlar.html?sinif=${g}&amp;tema=${encodeURIComponent(u)}"${UNIT_NO[g] ? ` data-no="${UNIT_NO[g][i]}"` : ''} title="${esc(u)} oyunları">${esc(unitLabel(g, u))}</a></li>`).join('')}</ol>`;
+  `<li><a href="sinif.html?s=${g}&amp;tema=${encodeURIComponent(u)}"${UNIT_NO[g] ? ` data-no="${UNIT_NO[g][i]}"` : ''} title="${esc(u)}: oyunlar ve kâğıtlar">${esc(unitLabel(g, u))}</a></li>`).join('')}</ol>`;
 
 // ---- Güvenli depolama (gizli pencerede hata vermesin) ----
 const store = {
@@ -289,100 +289,31 @@ function showMemorial(force) {
   back.querySelector('#memClose').focus();
 }
 
-// ---- Sınıf paneli: oyunlar, öğretmen etkinlikleri, çalışma kâğıtları, temalar, kazanımlar ----
-function gradePanel(panel, g) {
-  const games = (typeof BUILTIN_GAMES !== 'undefined' ? BUILTIN_GAMES : []).filter(x => x.grades.includes(g));
-  const sheets = (typeof WORKSHEETS !== 'undefined' ? WORKSHEETS : []).filter(x => x.grade === g);
-  const TABS = [
-    { k: 'oyun', label: '🎲 Oyunlar', n: games.length },
-    { k: 'etk', label: '🧩 Etkinlikler', n: null },
-    { k: 'kagit', label: '📝 Çalışma Kâğıtları', n: sheets.length },
-    { k: 'tema', label: `📘 ${UNIT_TITLE(g)}`, n: unitCount(g) },
-    { k: 'kaz', label: '📋 Kazanımlar', n: null },
-  ];
-  const row = (href, icon, title, sub, ext) => `<a class="gp-row" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ''}><span class="gp-ic">${icon}</span><span class="gp-t"><b>${esc(title)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</span><span class="gp-go">›</span></a>`;
-  const empty = (txt, href, link) => `<div class="gp-empty">${txt}${href ? ` <a href="${href}">${link}</a>` : ''}</div>`;
-  const body = {
-    oyun: () => (games.length ? games.map(x => row(x.href, x.icon, x.title, x.unit || x.text)).join('') : empty('Bu sınıf için henüz hazır oyun yok.'))
-      + `<a class="gp-more" href="oyunlar.html?sinif=${g}">Tüm ${g}. sınıf oyunlarını gör →</a>`,
-    etk: () => '<div class="gp-empty">Yükleniyor…</div>',
-    kagit: () => (sheets.length ? sheets.map(x => row(x.pdf, '📄', x.title, `${x.unit} · ${x.info}`, true)).join('') : empty('Bu sınıf için henüz çalışma kâğıdı yok.'))
-      + `<a class="gp-more" href="calisma-kagitlari.html?sinif=${g}">Tüm çalışma kâğıtları →</a>`,
-    tema: () => unitListHTML(g),
-    kaz: () => `<div class="gp-kaz"><p>${g}. sınıf matematik kazanımlarını <b>hafta hafta</b> gör: öğrenme çıktıları, süreç bileşenleri ve ölçme-değerlendirme.</p>
-      <a class="btn btn-yellow" href="kazanimlar.html?sinif=${g}">📋 ${g}. Sınıf Kazanımlarını Aç</a></div>`,
-  };
-  panel.innerHTML = `<h4>${g}. Sınıf İçerikleri</h4>
-    <div class="gp-tabs" role="tablist">${TABS.map((t, i) => `<button role="tab" class="gp-tab${i ? '' : ' on'}" data-k="${t.k}" aria-selected="${!i}">${t.label}${t.n != null ? ` <i>${t.n}</i>` : ''}</button>`).join('')}</div>
-    <div class="gp-body" id="gpBody"></div>`;
-  const box = panel.querySelector('#gpBody');
-  let cur = '';
-  const show = k => {
-    cur = k;
-    panel.querySelectorAll('.gp-tab').forEach(b => { const on = b.dataset.k === k; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
-    box.innerHTML = body[k]();
-    if (k === 'etk') loadActs();
-  };
-  async function loadActs() {
-    if (typeof DB === 'undefined' || !DB.ok()) { box.innerHTML = empty('Etkinlikler şu an yüklenemiyor.'); return; }
-    try {
-      const rows = await DB.list({ grade: g, limit: 12 });
-      if (cur !== 'etk') return;
-      const T = typeof TEMPLATES !== 'undefined' ? TEMPLATES : {};
-      box.innerHTML = (rows.length
-        ? rows.map(a => row(`oyun.html?id=${encodeURIComponent(a.id)}`, (T[a.template] || {}).icon || '🧩', a.title, `${(T[a.template] || {}).short || ''}${a.unit ? ' · ' + a.unit : ''}${a.owner_name ? ' · ' + shortName(a.owner_name) : ''}`)).join('')
-        : empty('Öğretmenler bu sınıf için henüz etkinlik eklemedi.'))
-        + `<a class="gp-more" href="oyunlar.html?sinif=${g}">Tümünü gör →</a>`;
-    } catch { if (cur === 'etk') box.innerHTML = empty('Etkinlikler yüklenemedi. İnternet bağlantını kontrol et.'); }
-  }
-  panel.querySelector('.gp-tabs').addEventListener('click', e => { const b = e.target.closest('.gp-tab'); if (b) show(b.dataset.k); });
-  show('oyun');
-}
-
 // ---- Ana sayfa kurulumu ----
 function initHome() {
   // Menüdeki ünite listeleri
   document.querySelectorAll('.has-dd').forEach(li => {
     const g = li.dataset.grade;
     li.querySelector('.dropdown').innerHTML = `<div class="dd-links">
-        <a href="oyunlar.html?sinif=${g}">🎲 Oyunlar ve Etkinlikler</a>
-        <a href="calisma-kagitlari.html?sinif=${g}">📝 Çalışma Kâğıtları</a>
-        <a href="kazanimlar.html?sinif=${g}">📋 Kazanımlar</a>
+        <a href="sinif.html?s=${g}" class="dd-main">📚 ${g}. Sınıf sayfasını aç</a>
+        <a href="kazanimlar.html?sinif=${g}">📋 Kazanımlar (öğretmen)</a>
       </div><h4>${g}. Sınıf ${UNIT_TITLE(g)}</h4>${unitListHTML(g)}`;
+    li.querySelector(':scope > a').setAttribute('href', `sinif.html?s=${g}`);
   });
 
-  // Sınıflar: bir dörtgenin içinde 2×2 eş kare. Dokunulan karenin temaları,
-  // o karenin bulunduğu satırın hemen altında açılır (ok, dokunulan kareyi gösterir).
+  // Sınıflar: 2×2 kartlar; her kart o sınıfın sayfasını açar
   const grid = document.getElementById('gradeGrid');
   if (grid) {
     grid.className = 'grade-board';
     const GRADES = [5, 6, 7, 8];
-    const ORDER = { 5: 1, 6: 2, 7: 4, 8: 5 };           // 1. satır: 5-6, 2. satır: 7-8
     const COLORS = { 5: 'm', 6: 'l', 7: 'l', 8: 'm' };  // dama tahtası gibi
+    const nGames = g => (typeof BUILTIN_GAMES !== 'undefined' ? BUILTIN_GAMES.filter(x => x.grades.includes(g)).length : 0);
     grid.innerHTML = GRADES.map(g => `
-      <button class="grade-card ${COLORS[g]}" data-grade="${g}" style="order:${ORDER[g]}" aria-expanded="false" aria-controls="gradeUnits">
+      <a class="grade-card ${COLORS[g]}" href="sinif.html?s=${g}">
         <span class="num">${g}</span><h3>${g}. Sınıf</h3>
-        <span class="tag">${unitCount(g)} ${UNIT_WORD(g)}</span>
-        <span class="more">İçerikler ▾</span>
-      </button>`).join('') + '<div class="grade-units" id="gradeUnits" hidden></div>';
-    const panel = document.getElementById('gradeUnits');
-    grid.addEventListener('click', e => {
-      const card = e.target.closest('.grade-card'); if (!card) return;
-      const open = card.getAttribute('aria-expanded') === 'true';
-      grid.querySelectorAll('.grade-card').forEach(c => {
-        c.setAttribute('aria-expanded', 'false');
-        c.querySelector('.more').textContent = 'İçerikler ▾';
-      });
-      if (open) { panel.hidden = true; return; }
-      const g = Number(card.dataset.grade);
-      card.setAttribute('aria-expanded', 'true');
-      card.querySelector('.more').textContent = 'Gizle ▴';
-      panel.style.order = ORDER[g] <= 2 ? 3 : 6;
-      panel.style.setProperty('--arrow', ORDER[g] % 3 === 1 ? '25%' : '75%');
-      gradePanel(panel, g);
-      panel.hidden = false;
-      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    });
+        <span class="tag">${unitCount(g)} ${UNIT_WORD(g)}${nGames(g) ? ` · ${nGames(g)} oyun` : ''}</span>
+        <span class="more">Sınıfa git →</span>
+      </a>`).join('');
   }
 
   // Hamburger menü
