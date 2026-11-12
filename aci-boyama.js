@@ -56,7 +56,7 @@
       <p class="pg-step"><b>${idx + 1}. soru:</b> [${R.n.A}${R.n.B}] ile [${R.n.C}${R.n.D}] doğruları <b>paraleldir</b>, ${R.n.K}${R.n.L} doğrusu onları ${R.n.R} ve ${R.n.T} noktalarında kesiyor.
         m(${given[0].name}) = <b>${given[0].val}°</b>, m(${given[1].name}) = <b>${given[1].val}°</b>.</p>
       <p class="ab-ask">👉 Boş açılara dokun, sonra doğru ölçüyü seç (ya da ölçüyü sürükleyip açının üstüne bırak).</p>
-      <svg viewBox="0 0 ${W} ${H}" class="ab-board" id="abBoard" role="img" aria-label="Paralel iki doğru ve bir kesen"></svg>
+      <svg viewBox="90 40 460 360" class="ab-board" id="abBoard" role="img" aria-label="Paralel iki doğru ve bir kesen"></svg>
       <div class="ab-chips" id="abChips">${chips.map(v => `<button class="ab-chip" data-v="${v}">${v}°</button>`).join('')}</div>
       <p class="pg-fb" id="abFb" aria-live="polite"></p>
       <div id="abQuiz"></div>
@@ -69,7 +69,7 @@
       const K = pt(Rp, u, 110), L = pt(Tp, u + 180, 110);
       const kx1 = pt(Rp, u, far), kx2 = pt(Tp, u + 180, far);
       let g = `<defs><marker id="abAr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2D2440"/></marker>
-        <clipPath id="abClip"><rect x="0" y="0" width="${W}" height="${H}"/></clipPath></defs>`;
+        <clipPath id="abClip"><rect x="90" y="40" width="460" height="360"/></clipPath></defs>`;
       // açı dilimleri
       for (const s of G.sec) {
         const c = G.P[s.v], r = 52, a = pt(c, s.s, r), b = pt(c, s.e, r), large = s.e - s.s > 180 ? 1 : 0;
@@ -80,11 +80,11 @@
         g += `<text x="${m[0]}" y="${m[1] + 6}" text-anchor="middle" class="ab-val${done ? '' : ' q'}" ${done ? `fill="${s.color}"` : ''}>${done ? s.val + '°' : '?'}</text>`;
       }
       // doğrular
-      g += `<line x1="30" y1="${Y1}" x2="${W - 30}" y2="${Y1}" class="ab-ln" marker-start="url(#abAr)" marker-end="url(#abAr)"/>
-        <line x1="30" y1="${Y2}" x2="${W - 30}" y2="${Y2}" class="ab-ln" marker-start="url(#abAr)" marker-end="url(#abAr)"/>
+      g += `<line x1="100" y1="${Y1}" x2="${W - 100}" y2="${Y1}" class="ab-ln" marker-start="url(#abAr)" marker-end="url(#abAr)"/>
+        <line x1="100" y1="${Y2}" x2="${W - 100}" y2="${Y2}" class="ab-ln" marker-start="url(#abAr)" marker-end="url(#abAr)"/>
         <g clip-path="url(#abClip)"><line x1="${kx1[0]}" y1="${kx1[1]}" x2="${kx2[0]}" y2="${kx2[1]}" class="ab-ln"/></g>`;
       const dot = (p, t, dx, dy) => `<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="#2D2440"/><text x="${p[0] + dx}" y="${p[1] + dy}" class="ab-pt" text-anchor="middle">${t}</text>`;
-      g += dot([70, Y1], R.n.A, 0, -12) + dot([W - 70, Y1], R.n.B, 0, -12) + dot([70, Y2], R.n.C, 0, -12) + dot([W - 70, Y2], R.n.D, 0, -12)
+      g += dot([130, Y1], R.n.A, 0, -12) + dot([W - 130, Y1], R.n.B, 0, -12) + dot([130, Y2], R.n.C, 0, -12) + dot([W - 130, Y2], R.n.D, 0, -12)
         + dot(K, R.n.K, R.dir === 'down' ? -14 : 14, 0) + dot(L, R.n.L, R.dir === 'down' ? 14 : -14, 14);
       g += `<text x="${Rp[0] + (R.dir === 'down' ? -12 : 12)}" y="${Rp[1] + 22}" class="ab-pt" text-anchor="middle">${R.n.R}</text>
         <text x="${Tp[0] + (R.dir === 'down' ? -12 : 12)}" y="${Tp[1] - 10}" class="ab-pt" text-anchor="middle">${R.n.T}</text>`;
