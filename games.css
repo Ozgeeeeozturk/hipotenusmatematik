@@ -595,3 +595,4 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .ea-divs span.c{background:var(--mint);font-weight:800}
 .ea-com{border-top:2px dashed var(--mint);margin-top:6px;padding-top:6px}
 @media (max-width:640px){.ea-ic{font-size:26px}.ea-len{font-size:22px}.ea-lab{font-size:16px}}
+.ea-b:disabled{opacity:.3;cursor:default}

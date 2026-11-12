@@ -144,6 +144,8 @@
     function place(v) {
       v = Math.max(1, Math.min(Math.min(...R.lens), Math.round(+v || 0))); if (!v) return;
       x = v; inp.value = v; draw();
+      stage.querySelector('.ea-b[data-d="1"]').disabled = x >= best(R);
+      stage.querySelector('.ea-b[data-d="-1"]').disabled = x <= 1;
       stage.querySelector('#eaCheck').innerHTML = checkHTML(R, x);
       const all = (R.ends === 'kapali' ? R.lens : R.lens).every(L => L % x === 0);
       if (!tried.some(t => t.x === x)) tried.push({ x, ok: all, n: all ? count(R, x) : null });
@@ -154,7 +156,7 @@
     }
     stage.querySelector('#eaGo').addEventListener('click', () => place(inp.value));
     inp.addEventListener('keydown', e => { if (e.key === 'Enter') place(inp.value); });
-    stage.querySelectorAll('.ea-b').forEach(b => b.addEventListener('click', () => place((x || 0) + Number(b.dataset.d))));
+    stage.querySelectorAll('.ea-b').forEach(b => b.addEventListener('click', () => { const d = Number(b.dataset.d); if (d > 0 && x >= best(R)) return; place(d > 0 && x > best(R) ? best(R) : (x || 0) + d); }));
     stage.querySelector('#eaDiv').addEventListener('click', e => {
       const box = stage.querySelector('#eaDivs');
       if (box.innerHTML) { box.innerHTML = ''; e.currentTarget.textContent = '🔢 Bölenleri göster'; return; }
