@@ -72,11 +72,11 @@
         <clipPath id="abClip"><rect x="0" y="0" width="${W}" height="${H}"/></clipPath></defs>`;
       // açı dilimleri
       for (const s of G.sec) {
-        const c = G.P[s.v], r = 40, a = pt(c, s.s, r), b = pt(c, s.e, r), large = s.e - s.s > 180 ? 1 : 0;
+        const c = G.P[s.v], r = 52, a = pt(c, s.s, r), b = pt(c, s.e, r), large = s.e - s.s > 180 ? 1 : 0;
         const done = filled.has(s.id), isSel = sel === s.id;
         g += `<path d="M${c[0]} ${c[1]} L${a[0]} ${a[1]} A${r} ${r} 0 ${large} 0 ${b[0]} ${b[1]} Z" data-s="${s.id}"
           class="ab-sec${done ? ' done' : ''}${isSel ? ' sel' : ''}" style="--c:${s.color}"/>`;
-        const m = pt(c, (s.s + s.e) / 2, 62);
+        const m = pt(c, (s.s + s.e) / 2, 76);
         g += `<text x="${m[0]}" y="${m[1] + 6}" text-anchor="middle" class="ab-val${done ? '' : ' q'}" ${done ? `fill="${s.color}"` : ''}>${done ? s.val + '°' : '?'}</text>`;
       }
       // doğrular
