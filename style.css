@@ -343,7 +343,7 @@ section{padding-block:44px;scroll-margin-top:calc(var(--header-h) + var(--safe-t
   .user-chip{padding:4px}
   body{padding-bottom:calc(var(--bottom-h) + var(--safe-b))}
   .bottom-nav{
-    display:grid;grid-template-columns:repeat(5,1fr);
+    display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);
     position:fixed;left:0;right:0;bottom:0;z-index:60;
     background:var(--white);
     border-top:3px solid var(--yellow);
