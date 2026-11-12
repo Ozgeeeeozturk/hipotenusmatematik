@@ -561,3 +561,5 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
   body{background:#fff!important}.kz-card{box-shadow:none;padding:0}.kz-note textarea{border:1px solid #ccc}
   .kz-sec summary::after{display:none}
 }
+.kz-steps{list-style:none;padding-left:0}
+.kz-steps b{color:var(--lilac-dark)}

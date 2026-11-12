@@ -35,6 +35,15 @@
   const title = s => s.toLocaleLowerCase('tr').replace(/(^|[\s(])(\S)/g, (a, b, c) => b + c.toLocaleUpperCase('tr'));
   const nl = s => esc(s).replace(/\n/g, '<br>');
   const list = s => `<ul class="kz-ul">${s.split('\n').filter(Boolean).map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
+  // Süreç bileşenleri: "a) …" ile başlamayan satırlar bir önceki maddenin devamıdır
+  const steps = s => {
+    const out = [];
+    for (const line of s.split('\n').map(x => x.trim()).filter(Boolean)) {
+      if (!out.length || /^[a-zçğıöşü]\s?\)/i.test(line) || /^(MAT|M)\.\d/.test(line)) out.push(line); else out[out.length - 1] += ' ' + line;
+    }
+    return `<ul class="kz-ul kz-steps">${out.map(x => { const m = x.match(/^([a-zçğıöşü])\s?\)\s*(.*)$/i); return m ? `<li><b>${m[1]})</b> ${esc(m[2])}</li>` : `<li>${esc(x)}</li>`; }).join('')}</ul>`;
+  };
+  const temaName = (g, t) => siteUnit(g, t) || title(t).replace(/ Ve /g, ' ve ');
 
   // Hipotenüs içerikleriyle eşleştirme: tema adı → site temaları (5–7. sınıf, Maarif)
   function siteUnit(g, tema) {
@@ -60,7 +69,7 @@
 
     const temas = (w.tema || []).map(t => {
       const u = siteUnit(grade, t);
-      return `<span class="kz-tema">${esc(P.program === 'maarif' ? title(t) : t)}</span>${u ? `<a class="kz-link" href="oyunlar.html?sinif=${grade}&amp;tema=${encodeURIComponent(u)}">🎲 Bu temanın oyunları</a>` : ''}`;
+      return `<span class="kz-tema">${esc(P.program === 'maarif' ? temaName(grade, t) : t)}</span>${u ? `<a class="kz-link" href="oyunlar.html?sinif=${grade}&amp;tema=${encodeURIComponent(u)}">🎲 Bu temanın oyunları</a>` : ''}`;
     }).join('');
     const sheets = (typeof WORKSHEETS !== 'undefined' ? WORKSHEETS : []).filter(s => s.grade === grade && (w.tema || []).some(t => siteUnit(grade, t) === s.unit));
 
@@ -85,12 +94,12 @@
       <article class="kz-card" id="kzCard">
         <header class="kz-head">
           <div><span class="kz-wno">${w.no}. Hafta</span><h2>${esc(w.tarih || '')}</h2><p>${esc(title(w.ay || ''))}${w.saat ? ` · ${esc(w.saat)} ders saati` : ''}</p></div>
-          <button class="kz-done${d.has(w.no) ? ' on' : ''}" id="kzDone">${d.has(w.no) ? '✓ İşlendi' : '○ İşlendi olarak işaretle'}</button>
+          <button class="kz-done${d.has(w.no) ? ' on' : ''}" id="kzDone">${d.has(w.no) ? '✓ İşlendi' : '☐ İşlendi olarak işaretle'}</button>
         </header>
         ${sec('📘', P.program === 'maarif' ? 'Tema' : 'Ünite', `<div class="kz-temas">${temas}</div>`)}
         ${sec('🎯', 'Konu / İçerik Çerçevesi', w.konu ? `<p class="kz-konu">${nl(w.konu)}</p>` : '')}
         ${sec('✅', P.program === 'maarif' ? 'Öğrenme Çıktıları' : 'Kazanımlar', outs)}
-        ${sec('⏳', P.program === 'maarif' ? 'Süreç Bileşenleri' : 'Kazanım Açıklaması', w.surec ? list(w.surec) : '')}
+        ${sec('⏳', P.program === 'maarif' ? 'Süreç Bileşenleri' : 'Kazanım Açıklaması', w.surec ? steps(w.surec) : '')}
         ${sec('📝', 'Ölçme ve Değerlendirme', w.olcme ? list(w.olcme) : '', false)}
         ${sec('🤝', 'Sosyal-Duygusal Öğrenme Becerileri', w.sdb ? list(w.sdb) : '', false)}
         ${sec('💎', 'Değerler', w.degerler ? list(w.degerler) : '', false)}
