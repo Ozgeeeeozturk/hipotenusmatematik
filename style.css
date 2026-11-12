@@ -550,3 +550,26 @@ section{padding-block:44px;scroll-margin-top:calc(var(--header-h) + var(--safe-t
 /* Oyunlar: seçili tema şeridi */
 .tema-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--yellow-light);border:2px solid var(--yellow);border-radius:14px;padding:10px 14px;margin:0 0 16px;font-weight:700}
 .tema-bar[hidden]{display:none}
+/* Sınıf paneli: sekmeler */
+.gp-tabs{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 8px;margin:0 0 6px;scrollbar-width:thin}
+.gp-tab{flex:0 0 auto;border:2px solid transparent;background:var(--white);border-radius:999px;padding:7px 13px;font:800 .88rem 'Nunito',sans-serif;color:var(--ink);cursor:pointer;white-space:nowrap}
+.gp-tab i{font-style:normal;display:inline-block;min-width:20px;border-radius:999px;background:var(--lilac-light);color:var(--lilac-dark);font-size:.75rem;padding:0 6px;margin-left:2px}
+.gp-tab.on{background:var(--lilac);color:#fff}
+.gp-tab.on i{background:rgba(255,255,255,.3);color:#fff}
+.gp-body{background:var(--white);border-radius:12px;overflow:hidden}
+.gp-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid #F3EEDC;color:var(--ink)}
+.gp-row:hover{background:var(--yellow-light)}
+.gp-ic{width:34px;height:34px;flex-shrink:0;display:grid;place-items:center;border-radius:10px;background:var(--mint-light);font-size:1.1rem}
+.gp-t{display:grid;min-width:0;flex:1}
+.gp-t b{font-size:.95rem;line-height:1.25}
+.gp-t small{color:var(--muted);font-weight:700;font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gp-go{font-size:1.3rem;color:var(--lilac);font-weight:800}
+.gp-more{display:block;text-align:center;padding:10px;font-weight:800;color:var(--lilac-dark)}
+.gp-more:hover{background:#F6F3FA}
+.gp-empty{padding:14px;text-align:center;font-weight:700;color:var(--muted)}
+.gp-empty a{color:var(--lilac-dark);text-decoration:underline}
+.gp-kaz{padding:16px;text-align:center;display:grid;gap:12px;justify-items:center;font-weight:600}
+.grade-units .gp-body .unit-list{border-radius:0}
+.dd-links{display:grid;gap:4px;margin-bottom:10px}
+.dd-links a{display:block;padding:7px 10px;border-radius:10px;background:var(--yellow-light);font-weight:800;font-size:.9rem;color:var(--ink)}
+.dd-links a:hover{background:var(--yellow)}
