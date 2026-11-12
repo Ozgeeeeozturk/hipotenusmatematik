@@ -227,7 +227,8 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 /* ===== Pergel ile Çember ===== */
 .pg-def{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,var(--yellow-light),var(--lilac-light));border:3px solid var(--yellow);border-radius:20px;padding:16px 18px;margin-bottom:16px}
 .pg-def-ic{font-size:2.2rem;line-height:1;flex-shrink:0}
-.pg-def p{font-family:'Baloo 2',cursive;font-weight:700;font-size:clamp(1.15rem,3.4vw,1.5rem);line-height:1.3;color:var(--ink)}
+.pg-def p{font-family:'Baloo 2',cursive;font-weight:500;font-size:clamp(1.15rem,3.4vw,1.5rem);line-height:1.35;color:var(--ink)}
+.pg-def p b{font-weight:800}
 .pg-def .k1{color:var(--lilac-dark);font-weight:800;font-size:1.15em}
 .pg-def .k2{color:var(--mint-dark);font-weight:800}
 .pg-def .k3{color:#D6456B;font-weight:800}
