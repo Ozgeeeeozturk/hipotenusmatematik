@@ -92,7 +92,7 @@
     const M = MODES[q.kind];
     const vb = q.kind === 'dogru' ? '-195 -172 390 200' : '-195 -195 390 390';
     stage.innerHTML = `${progressBar(game.i, ROUNDS)}
-      <div class="aci-task"><b>${M.icon} ${M.name}</b> ${M.text} Verilmeyen <i>x</i> açısını renkli parçalarla tamamla.</div>
+      <div class="pg-step qbox"><span class="fy-qno">${game.i + 1}. Soru</span><b>${M.icon} ${M.name}:</b> ${M.text} Verilmeyen <i>x</i> açısını renkli parçalarla tamamla.</div>
       <div class="aci-board" id="aciBoard"><svg viewBox="${vb}" role="img" aria-label="${M.name} sorusu"></svg></div>
       <div class="aci-status" id="aciStatus" aria-live="polite"></div>
       <div class="aci-tray" id="aciTray">${PIECES.map(v => `<button class="aci-piece" data-v="${v}" aria-label="${v} derecelik parça">${miniPiece(v)}</button>`).join('')}</div>

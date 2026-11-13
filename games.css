@@ -684,3 +684,6 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .fy-qno{display:inline-block;background:#7B4FA8;color:#fff;font:800 1.05rem 'Baloo 2',cursive;border-radius:8px;padding:2px 12px;margin-bottom:8px}
 .fy-qbox p{font-weight:600}
 .fy-qask{margin-top:6px;font-weight:800!important}
+/* Tüm oyunlar: soru kutusu (siyah çerçeve, mor numara) */
+.pg-step.qbox,.fy-qbox{display:block;text-align:left;border:3px solid #1E1A2B;border-radius:14px;background:#fff;padding:14px 16px;margin:4px 0 14px;line-height:1.5;font-weight:600}
+.pg-step.qbox .fy-qno,.fy-qbox .fy-qno{display:table;background:#7B4FA8;color:#fff;font:800 1.05rem 'Baloo 2',cursive;border-radius:8px;padding:2px 12px;margin-bottom:8px}

@@ -75,7 +75,7 @@
     let answered = false;
     stage.innerHTML = `${NOTE}
       ${progressBar(idx, TIMES.length)}
-      <p class="pg-step"><b>${idx + 1}. saat:</b> Akrep ile yelkovan arasındaki <b>işaretli açı</b> hangi çeşit açıdır?</p>
+      <p class="pg-step qbox"><span class="fy-qno">${idx + 1}. Saat</span>Akrep ile yelkovan arasındaki <b>işaretli açı</b> hangi çeşit açıdır?</p>
       <div class="sa-box">${clockSVG(h, m, rim, false)}
         <div class="sa-legend"><span><i class="sa-h"></i>Akrep (kısa)</span><span><i class="sa-m"></i>Yelkovan (uzun)</span></div>
       </div>

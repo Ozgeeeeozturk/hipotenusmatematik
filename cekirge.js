@@ -33,7 +33,7 @@
 
     stage.innerHTML = `${NOTE}
       ${progressBar(idx, ROUNDS.length)}
-      <p class="pg-step"><b>${idx + 1}. soru:</b> Çekirge ${par(s)} noktasından başlayarak eşit uzunlukta <b>${n} sıçrayış</b> yapıyor ve ${par(e)} noktasına ulaşıyor.</p>
+      <p class="pg-step qbox"><span class="fy-qno">${idx + 1}. Soru</span>Çekirge ${par(s)} noktasından başlayarak eşit uzunlukta <b>${n} sıçrayış</b> yapıyor ve ${par(e)} noktasına ulaşıyor.</p>
       <ol class="ck-steps" id="ckSteps"><li class="on">1 · Yolu ölç</li><li>2 · Sıçrayışı bul</li><li>3 · Noktaları bul</li></ol>
       <svg viewBox="0 0 ${VW} 210" class="ck-board" id="ckBoard" role="img" aria-label="Sayı doğrusu"></svg>
       <div class="ck-panel" id="ckPanel"></div>

@@ -80,7 +80,7 @@
       ask = `${na} ile ${nb} arasındaki <b>sıcaklık farkı</b> kaç °C’dir?`;
     }
     stage.innerHTML = `${head}
-      <p class="pg-step"><b>${idx + 1}. soru:</b> ${ask}</p>
+      <p class="pg-step qbox"><span class="fy-qno">${idx + 1}. Soru</span>${ask}</p>
       <div class="tm-pair" id="tmPair">${thermo(na, va)}${thermo(nb, vb)}</div>
       ${R.t === 'oku'
         ? `<div class="tm-table"><div class="tm-th"><span></span><b style="background:${COLD}">${na} (°C)</b><b style="background:${HOT}">${nb} (°C)</b></div>
@@ -114,7 +114,7 @@
     const [name, target] = R.a;
     let v = 0, done = false;
     stage.innerHTML = `${head}
-      <p class="pg-step"><b>${idx + 1}. soru:</b> ${name} ilinde bugün hava sıcaklığı <b class="tm-target">${nm(target)} °C</b>. Termometrenin sıvısını sürükleyerek bu sıcaklığı göster.</p>
+      <p class="pg-step qbox"><span class="fy-qno">${idx + 1}. Soru</span>${name} ilinde bugün hava sıcaklığı <b class="tm-target">${nm(target)} °C</b>. Termometrenin sıvısını sürükleyerek bu sıcaklığı göster.</p>
       <div class="tm-pair" id="tmPair">${thermo(name, v, { drag: true, id: 'tmSet' })}</div>
       <div class="tm-nudge"><button class="btn-ghost-dark tm-step" data-d="-1" aria-label="1 derece azalt">▼ 1°</button><button class="btn-ghost-dark tm-step" data-d="1" aria-label="1 derece artır">▲ 1°</button></div>
       <div class="aci-actions"><button class="btn btn-yellow" id="tmCheck">✓ Kontrol Et</button></div>

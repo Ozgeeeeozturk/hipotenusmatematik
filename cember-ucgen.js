@@ -149,7 +149,7 @@
     let tries = 0, done = false;
     stage.innerHTML = `${NOTE}
       ${progressBar(idx, TASKS.length)}
-      <p class="pg-step"><b>${idx + 1}. görev:</b> ${T.text}</p>
+      <p class="pg-step qbox"><span class="fy-qno">${idx + 1}. Görev</span>${T.text}</p>
       <div class="cu-wrap"><svg viewBox="0 0 ${VW} ${VH}" class="cu-board" role="img" aria-label="İki çember ve oluşan üçgen"></svg></div>
       <div class="cu-controls"></div>
       <div id="cuInfo" aria-live="polite"></div>

@@ -149,7 +149,7 @@
     let guides = false, tries = 0, done = false, pick = null;
     stage.innerHTML = `${NOTE}
       ${progressBar(idx, ROUNDS.length)}
-      <p class="pg-step"><b>${idx + 1}. soru:</b> [${nA}${nB}] doğru parçasının uçlarını A, B, C, D noktalarından biriyle birleştirerek <b class="ua-goal" style="background:${T.bg};color:${T.c}">${T.name}</b> oluştur.</p>
+      <p class="pg-step qbox"><span class="fy-qno">${idx + 1}. Soru</span>[${nA}${nB}] doğru parçasının uçlarını A, B, C, D noktalarından biriyle birleştirerek <b class="ua-goal" style="background:${T.bg};color:${T.c}">${T.name}</b> oluştur.</p>
       <svg viewBox="0 0 ${COLS * U + 2 * PAD} ${ROWS * U + 2 * PAD}" class="ua-board" id="uaBoard" role="img" aria-label="Kareli kâğıtta taban ve aday noktalar"></svg>
       ${legend}
       <p class="pg-fb" id="uaFb" aria-live="polite">👆 Bir noktaya dokun.</p>

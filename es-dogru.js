@@ -78,7 +78,7 @@
     let answered = false;
     stage.innerHTML = `${DEF}
       ${progressBar(idx, TOTAL)}
-      <p class="pg-step"><b>${idx + 1}. soru:</b> Doğru parçalarına dokun, <b>L</b>’lerine bak. Hangileri eş?</p>
+      <p class="pg-step qbox"><span class="fy-qno">${idx + 1}. Soru</span>Doğru parçalarına dokun, <b>L</b>’lerine bak. Hangileri eş?</p>
       <svg viewBox="0 0 ${cols * U + 2 * PAD} ${rows * U + 2 * PAD + 14}" class="ed-board" id="edBoard" role="img" aria-label="Birim kareli zeminde 5 doğru parçası"></svg>
       <div class="ed-chips" id="edChips" aria-live="polite"><span class="ed-empty">👆 Bir doğru parçasına dokun</span></div>
       <div class="pg-quiz">
@@ -125,7 +125,7 @@
     let showG = false, start = null, hover = null, end = null, dragging = false, tries = 0, solved = false;
     stage.innerHTML = `${DEF}
       ${progressBar(idx, TOTAL)}
-      <p class="pg-step"><b>${idx + 1}. soru:</b> Verilen doğru parçasına <b>eş</b> bir doğru parçasını <b class="ed-zone-t">sarı bölgeye</b> çiz.</p>
+      <p class="pg-step qbox"><span class="fy-qno">${idx + 1}. Soru</span>Verilen doğru parçasına <b>eş</b> bir doğru parçasını <b class="ed-zone-t">sarı bölgeye</b> çiz.</p>
       <svg viewBox="0 0 ${cols * U + 2 * PAD} ${rows * U + 2 * PAD + 14}" class="ed-board" id="edBoard" role="img" aria-label="Birim kareli zemin: solda verilen doğru parçası, sağda çizim bölgesi"></svg>
       <div class="pg-hint" id="edHint" aria-live="polite">👆 Verilen doğru parçasına dokunup L’sini gör. Sonra sarı bölgede bir noktadan başlayıp sürükle (ya da iki noktaya sırayla dokun).</div>
       <div class="ed-chips" id="edChips"></div>

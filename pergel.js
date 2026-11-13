@@ -65,7 +65,7 @@
 
     stage.innerHTML = `${DEF}
       ${progressBar(idx, EXAMPLES.length)}
-      <p class="pg-step"><b>${idx + 1}. örnek:</b> Pergelin sivri ucu cetvelde <b>${loc(a)}</b>, kalem ucu <b>${loc(b)}</b>.</p>
+      <p class="pg-step qbox"><span class="fy-qno">${idx + 1}. Örnek</span>Pergelin sivri ucu cetvelde <b>${loc(a)}</b>, kalem ucu <b>${loc(b)}</b>.</p>
       <div class="pg-ruler-box" id="pgRuler">${rulerSVG(a, b, color, false)}</div>
       <div class="pg-quiz" id="pgQuiz">
         <p class="pg-q">❓ Bu pergel sivri ucu etrafında bir tam tur döndürülürse çizilen çemberin <b>çapı</b> kaç cm olur?</p>

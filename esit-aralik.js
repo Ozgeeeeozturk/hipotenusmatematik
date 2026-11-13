@@ -119,7 +119,7 @@
     stage.innerHTML = `${NOTE}
       ${progressBar(idx, ROUNDS.length)}
       ${R.ends === 'kapali' ? '<div class="ea-formula" aria-label="Nesne sayısı eşittir çevre bölü aralık">Nesne sayısı = <span class="frac"><span>Çevre</span><span>Aralık</span></span></div>' : ''}
-      <p class="pg-step"><b>${idx + 1}. soru:</b> ${R.story}</p>
+      <p class="pg-step qbox"><span class="fy-qno">${idx + 1}. Soru</span>${R.story}</p>
       <div class="ea-rule">📏 ${RULE[R.ends]}</div>
       <div id="eaBoard"></div>
       <div class="ea-try">

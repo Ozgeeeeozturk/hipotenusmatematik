@@ -53,7 +53,7 @@
 
     stage.innerHTML = `${NOTE}
       ${progressBar(idx, ROUNDS.length)}
-      <p class="pg-step"><b>${idx + 1}. soru:</b> [${R.n.A}${R.n.B}] ile [${R.n.C}${R.n.D}] doğruları <b>paraleldir</b>, ${R.n.K}${R.n.L} doğrusu onları ${R.n.R} ve ${R.n.T} noktalarında kesiyor.
+      <p class="pg-step qbox"><span class="fy-qno">${idx + 1}. Soru</span>[${R.n.A}${R.n.B}] ile [${R.n.C}${R.n.D}] doğruları <b>paraleldir</b>, ${R.n.K}${R.n.L} doğrusu onları ${R.n.R} ve ${R.n.T} noktalarında kesiyor.
         m(${given[0].name}) = <b>${given[0].val}°</b>, m(${given[1].name}) = <b>${given[1].val}°</b>.</p>
       <p class="ab-ask">👉 Boş açılara dokun, sonra doğru ölçüyü seç (ya da ölçüyü sürükleyip açının üstüne bırak).</p>
       <svg viewBox="90 40 460 360" class="ab-board" id="abBoard" role="img" aria-label="Paralel iki doğru ve bir kesen"></svg>

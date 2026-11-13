@@ -50,7 +50,7 @@
 
     stage.innerHTML = `${DEF}
       ${progressBar(idx, ROUNDS.length)}
-      <p class="pg-step"><b>${idx + 1}. örnek:</b> ${who}, içinde ${n === 1 ? "bulunduğu" : "bulundukları"} ${I.gen} kenarlarına temas ediyor. Yarıçap <b>${r} cm</b>.</p>
+      <p class="pg-step qbox"><span class="fy-qno">${idx + 1}. Örnek</span>${who}, içinde ${n === 1 ? "bulunduğu" : "bulundukları"} ${I.gen} kenarlarına temas ediyor. Yarıçap <b>${r} cm</b>.</p>
       <div class="pg-paper-box">
         <svg viewBox="0 0 ${VW} ${VH}" class="yt-board" id="ytBoard" role="img" aria-label="${I.shape} içinde ${n} eş çember ve taşınabilir yarıçaplar"></svg>
         <div class="pg-hint" id="ytHint" aria-live="polite">✋ Renkli yarıçapları sürükle: <b>alttaki</b> ve <b>sağdaki</b> kesikli çizgilere yerleştir. (Dokunarak da yerleştirebilirsin.)</div>
