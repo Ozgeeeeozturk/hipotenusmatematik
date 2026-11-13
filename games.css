@@ -655,3 +655,28 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .ab-q{margin-top:14px;border-top:2px dashed var(--lilac-light);padding-top:10px}
 .ab-q small{color:var(--muted);font-weight:700}
 @media (max-width:640px){.ab-pt{font-size:24px}.ab-val{font-size:22px}}
+/* Fayans Döşeme */
+.fy-type{width:fit-content;margin:0 auto 10px;border-radius:12px;padding:6px 14px;font-weight:700}
+.fy-type.ebob{background:var(--mint-light)}
+.fy-type.ekok{background:var(--lilac-light)}
+.fy-ctrl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin-bottom:10px;font-weight:800}
+.fy-ctrl input{width:84px;height:44px;text-align:center;font:800 1.3rem 'Baloo 2',cursive;border:3px solid var(--lilac-light);border-radius:12px;color:var(--ink)}
+.fy-ctrl > b{min-width:28px;text-align:center;font:800 1.4rem 'Baloo 2',cursive}
+.fy-sep{width:12px}
+.fy-board{display:block;width:100%;max-width:600px;margin:0 auto;background:#FFFEFA;border-radius:16px;border:2px solid var(--lilac-light);cursor:pointer;user-select:none;-webkit-user-select:none}
+.fy-floor{fill:#EDEAE3;stroke:#8A8F99;stroke-width:3}
+.fy-floor.ghost{fill:#F6F3FA;stroke:#D9D2E6;stroke-dasharray:6 6;stroke-width:2}
+.fy-tile{fill:#5FB8D9;stroke:#2F7FA6;stroke-width:1.5;animation:piecePop .25s ease-out;transform-box:fill-box;transform-origin:center}
+.fy-tile.alt{fill:#7FCBE4}
+.fy-gap{fill:#F28B95;opacity:.55}
+.fy-gapt{font-family:'Baloo 2',cursive;font-weight:800;font-size:14px;fill:#B23A48}
+.fy-dim{font-family:'Baloo 2',cursive;font-weight:800;font-size:16px;fill:#2D2440}
+.fy-outline{fill:none;stroke:#E8701E;stroke-width:3;stroke-dasharray:8 5}
+.fy-outline.sq{stroke:#2E9E78;stroke-width:5;stroke-dasharray:none}
+.fy-acts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin-top:10px}
+.fy-acts[hidden]{display:none}
+.fy-hint{width:100%;text-align:center;font-weight:700;color:var(--muted)}
+.fy-msg{text-align:center;font-weight:700;margin-top:10px}
+.fy-msg.ok{color:#1F7A5C}
+.fy-count{text-align:center;font-weight:700;margin-top:6px}
+@media (max-width:640px){.fy-dim{font-size:22px}.fy-gapt{font-size:18px}}
