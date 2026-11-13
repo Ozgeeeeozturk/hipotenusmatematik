@@ -110,8 +110,8 @@
     try {
       const rows = await DB.list({ grade: f.grade ? Number(f.grade) : null, unit: f.unit || null, template: f.template === 'dragdrop' ? '__yok__' : (f.template || null), mine: f.mine ? me.id : null });
       if (my !== reqNo) return;
-      const built = f.mine || (f.template && f.template !== 'dragdrop') ? [] : BUILTIN_GAMES.filter(g => (!f.grade || g.grades.includes(Number(f.grade))) && (!f.unit || g.unit === f.unit));
-      if (rows.length || built.length) { list.innerHTML = built.map(builtinCard).join('') + rows.map(activityCard).join(''); return; }
+      const built = f.mine || (f.template && f.template !== 'dragdrop') ? [] : BUILTIN_GAMES.filter(g => (!f.grade || g.grades.includes(Number(f.grade))) && (!f.unit || gameUnit(g, Number(f.grade)) === f.unit));
+      if (rows.length || built.length) { list.innerHTML = built.map(x => builtinCard(x, Number(f.grade) || null)).join('') + rows.map(activityCard).join(''); return; }
       list.innerHTML = f.mine
         ? '<div class="empty"><b>Henüz etkinlik hazırlamadın</b><p>Bir şablon seç, sorularını yaz; birkaç dakikada öğrencilerin oynamaya başlasın.</p><a class="btn btn-yellow" href="olustur.html">＋ İlk Etkinliğini Oluştur</a></div>'
         : `<div class="empty"><b>${f.unit ? 'Bu temada henüz oyun yok' : 'Bu seçimde henüz oyun yok'}</b><p>${teacher ? 'İlk oyunu sen hazırlayabilirsin!' : 'Öğretmenler yeni oyunlar ekledikçe burada görünecek. Başka bir sınıf ya da tür seçmeyi dene.'}</p>${teacher ? '<a class="btn btn-yellow" href="olustur.html">＋ Yeni Etkinlik</a>' : ''}</div>`;

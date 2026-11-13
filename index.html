@@ -169,11 +169,11 @@ initHome();
 (async function () {
   const box = document.getElementById('homeGames');
   const empty = '<div class="empty"><b>Oyunlar çok yakında!</b><p>Öğretmenler test, eşleştirme ve doğru-yanlış oyunları hazırlıyor.</p><a class="btn btn-yellow" href="oyunlar.html">Oyunlar sayfasına git</a></div>';
-  if (!DB.ok()) { box.innerHTML = BUILTIN_GAMES.map(builtinCard).join(''); return; }
+  if (!DB.ok()) { box.innerHTML = BUILTIN_GAMES.map(x => builtinCard(x)).join(''); return; }
   try {
     const room = 4 - BUILTIN_GAMES.length, rows = room > 0 ? await DB.list({ limit: room }) : [];
-    box.innerHTML = BUILTIN_GAMES.map(builtinCard).join('') + rows.map(activityCard).join('');
-  } catch { box.innerHTML = BUILTIN_GAMES.map(builtinCard).join(''); }
+    box.innerHTML = BUILTIN_GAMES.map(x => builtinCard(x)).join('') + rows.map(activityCard).join('');
+  } catch { box.innerHTML = BUILTIN_GAMES.map(x => builtinCard(x)).join(''); }
 })();
 </script>
 </body>

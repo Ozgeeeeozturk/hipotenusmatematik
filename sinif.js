@@ -43,16 +43,16 @@
     return (UNITS[g] || []).filter(u => hay.includes(up(u)));
   }
 
-  const games = () => BUILTIN_GAMES.filter(x => x.grades.includes(g) && (!tema || x.unit === tema));
-  const sheets = () => (typeof WORKSHEETS !== 'undefined' ? WORKSHEETS : []).filter(x => x.grade === g && (!tema || x.unit === tema));
-  const countFor = u => BUILTIN_GAMES.filter(x => x.grades.includes(g) && x.unit === u).length
+  const games = () => BUILTIN_GAMES.filter(x => x.grades.includes(g) && (!tema || gameUnit(x, g) === tema));
+  const sheets = () => (typeof WORKSHEETS !== 'undefined' ? WORKSHEETS : []).filter(x => x.grade === g && (!tema || gameUnit(x, g) === tema));
+  const countFor = u => BUILTIN_GAMES.filter(x => x.grades.includes(g) && gameUnit(x, g) === u).length
     + (typeof WORKSHEETS !== 'undefined' ? WORKSHEETS : []).filter(x => x.grade === g && x.unit === u).length
     + (acts ? acts.filter(a => a.unit === u).length : 0);
 
   function weekBox() {
     const T = thisWeek(); if (!T) return '';
     const w = T.w, us = weekUnits(w);
-    const recG = BUILTIN_GAMES.filter(x => x.grades.includes(g) && us.includes(x.unit));
+    const recG = BUILTIN_GAMES.filter(x => x.grades.includes(g) && us.includes(gameUnit(x, g)));
     const recS = (typeof WORKSHEETS !== 'undefined' ? WORKSHEETS : []).filter(x => x.grade === g && us.includes(x.unit));
     const out = (w.ciktilar || [])[0];
     const rec = [...recG.map(x => `<a class="sp-rec" href="${x.href}"><span>${x.icon}</span>${esc(x.title.split(':')[0])}</a>`),
@@ -95,7 +95,7 @@
 
         <section class="sp-sec">
           <div class="sp-sec-h"><h2>🎲 Oyunlar</h2><a href="oyunlar.html?sinif=${g}${tema ? `&tema=${encodeURIComponent(tema)}` : ''}">Tümü →</a></div>
-          ${gs.length ? `<div class="grid">${gs.map(builtinCard).join('')}</div>` : '<div class="empty sp-empty">Bu temada henüz hazır oyun yok. Yakında eklenecek! 🚀</div>'}
+          ${gs.length ? `<div class="grid">${gs.map(x => builtinCard(x, g)).join('')}</div>` : '<div class="empty sp-empty">Bu temada henüz hazır oyun yok. Yakında eklenecek! 🚀</div>'}
         </section>
 
         <section class="sp-sec">
