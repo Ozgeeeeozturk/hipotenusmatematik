@@ -4,6 +4,8 @@
   const stage = document.getElementById('stage');
   const gcd = (a, b) => (b ? gcd(b, a % b) : a);
   const lcm = (a, b) => a / gcd(a, b) * b;
+  // Türkçe tamlayan eki: 30’un, 16’nın, 20’nin …
+  const gen = n => { const d = n % 10, t = n % 100; const e = d ? ['', 'in', 'nin', 'ün', 'ün', 'in', 'nın', 'nin', 'in', 'un'][d] : { 0: 'ın', 10: 'un', 20: 'nin', 30: 'un', 40: 'ın', 50: 'nin', 60: 'ın', 70: 'in', 80: 'in', 90: 'ın' }[t]; return `${n}’${e}`; };
 
   // t: 'ebob' → dikdörtgen zemin, kare fayans seç · 'ekok' → dikdörtgen fayans, kare zemin oluştur
   // ask: 'kenar' | 'alan' | 'adet'
@@ -191,7 +193,7 @@
         : `<p class="fy-msg">Genişlik ${c} × ${R.a} = <b>${w} cm</b>, yükseklik ${r} × ${R.b} = <b>${h} cm</b> → ${w > h ? 'alt alta ekle' : 'yan yana ekle'} 🔄</p>`;
       if (sq && !found.some(f => f.w === w)) { found.push({ w, n: c * r }); found.sort((x, y) => x.w - y.w); }
       box.querySelector('#fyTried').innerHTML = found.length ? `<table class="pg-table ea-table"><thead><tr><th>Bulduğun kare</th><th>Fayans sayısı</th><th>Alan</th></tr></thead><tbody>${found.map(f => `<tr class="ok"><td>${f.w} cm × ${f.w} cm</td><td>${f.n}</td><td>${f.w * f.w} cm²</td></tr>`).join('')}</tbody></table>
-        <p class="ea-hint">Kenar uzunlukları: ${found.map(f => f.w).join(', ')} → hepsi ${R.a} ve ${R.b}’nin ortak katı!</p>` : '';
+        <p class="ea-hint">Kenar uzunlukları: ${found.map(f => f.w).join(', ')} → hepsi ${R.a} ve ${gen(R.b)} ortak katı!</p>` : '';
     }
     box.querySelectorAll('.ea-b').forEach(b => b.addEventListener('click', () => {
       const d = +b.dataset.d;
