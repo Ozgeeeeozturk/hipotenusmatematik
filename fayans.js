@@ -51,10 +51,10 @@
     const R = ROUNDS[idx];
     stage.innerHTML = `${NOTE}
       ${progressBar(idx, ROUNDS.length)}
-      <p class="pg-step"><b>${idx + 1}. soru:</b> ${R.story}</p>
+      <div class="fy-qbox"><span class="fy-qno">${idx + 1}. Soru</span><p>${R.story}</p><p class="fy-qask">${R.q}</p></div>
       <div class="fy-type ${R.t}">${R.t === 'ebob' ? '🔍 Fayans kenarı zemini tam bölmeli → <b>EBOB</b> sorusu' : '🔍 Zemin kenarı fayans kenarlarının ortak katı → <b>EKOK</b> sorusu'}</div>
       <div id="fyLab"></div>
-      <div class="pg-quiz"><p class="pg-q">❓ ${R.q}</p>
+      <div class="pg-quiz"><p class="pg-q">❓ Cevabını seç</p>
         <div class="g-options pg-opts">${options(R).map((v, i) => `<button class="g-opt c${i}" data-v="${v}"><b>${'ABCD'[i]}</b>${v}${R.ask === 'alan' ? ' cm²' : R.ask === 'kenar' ? ' cm' : ''}</button>`).join('')}</div>
         <p class="pg-fb" id="fyFb" aria-live="polite"></p></div>
       <div class="aci-actions" id="fyActions"></div>`;
