@@ -278,6 +278,7 @@ const BUILTIN_GAMES = [
   { href: 'termometre.html', icon: '🌡️', type: 'Görsel Soru', title: 'Termometre Okuma', text: 'Negatif sıcaklıkları oku, ayarla, karşılaştır', grades: [7], unit: 'Sayılar ve Nicelikler (1)', color: 'y' },
   { href: 'esit-aralik.html', icon: '💡', type: 'Keşif Oyunu', title: 'Eşit Aralık Kâşifi: Lamba, Fidan, Püskül', text: 'Aralığı dene, ortak böleni ve EBOB’u bul', grades: [6, 8], unit: 'Sayılar ve Nicelikler (1)', units: { 8: 'Çarpanlar ve Katlar' }, color: 'm' },
   { href: 'fayans.html', icon: '🧱', type: 'Keşif Oyunu', title: 'Fayans Döşeme: EBOB mu, EKOK mu?', text: 'Fayansları kendin yerleştir, en büyük fayansı ve en küçük kare zemini bul', grades: [6, 8], unit: 'Sayılar ve Nicelikler (1)', units: { 8: 'Çarpanlar ve Katlar' }, color: 'm' },
+  { href: 'serit-modeli.html', icon: '🍫', type: 'Keşif Oyunu', title: 'Şerit Modeli Ustası: Kesir Problemleri', text: 'Bütünü böl, bir parçayı bul, pay kadar boya; kalanın kesrini modelle', grades: [5, 6], unit: 'Sayılar ve Nicelikler (2)', color: 'y' },
   { href: 'carpim-merdiveni.html', icon: '✖️', type: 'Hız Oyunu', title: 'Çarpım Tablosu Oyunu', text: '10 seviye zihinden çarpma, 100 puana ulaş', grades: [5, 6, 7, 8], color: 'y' },
 ];
 const gRange = gs => (gs.length < 2 ? `${gs[0]}` : gs.every((x, i) => !i || x === gs[i - 1] + 1) ? `${gs[0]}–${gs[gs.length - 1]}` : gs.join(', '));
@@ -312,6 +313,35 @@ function initPage() {
   renderUserArea();
   Auth.refresh().then(renderUserArea).catch(() => {});
   Auth.onChange(() => renderUserArea());
+  trackPlays();
+}
+
+// ---- Oyun kaydı (öğretmen takibi için): açılışı ve her bitiş ekranını puanıyla kaydeder ----
+// Tüm oyunlar bitişte .g-result içinde ".g-score <b>puan</b><span>/ toplam</span>" gösterir; puan oradan okunur.
+function trackPlays() {
+  const stage = document.getElementById('stage');
+  if (!stage || !document.querySelector('.play-head')) return;
+  const page = location.pathname.split('/').pop().replace(/\.html$/, '') || 'index';
+  const aid = new URLSearchParams(location.search).get('id');
+  const game = page === 'oyun' ? (aid ? `oyun:${aid}` : null) : page;
+  if (!game) return;
+  const title = () => (document.querySelector('.play-head h1') || {}).textContent || document.title.split('|')[0];
+  let opened = false;
+  const open = () => { if (!opened && Auth.current()) { opened = true; Classes.track(game, title(), 'acti'); } };
+  // Öğretmen etkinliklerinde başlık sunucudan gelince yazılır; kısa bir gecikmeyle kaydet
+  setTimeout(open, 1500);
+  const seen = new WeakSet();
+  new MutationObserver(() => {
+    stage.querySelectorAll('.g-result').forEach(r => {
+      if (seen.has(r)) return;
+      seen.add(r);
+      const b = r.querySelector('.g-score b'), s = r.querySelector('.g-score span');
+      const score = b ? Number(b.textContent.replace(/\D/g, '')) : NaN;
+      const total = s ? Number((s.textContent.match(/\d+/) || [])[0]) : NaN;
+      open();
+      Classes.track(game, title(), 'bitirdi', score, total);
+    });
+  }).observe(stage, { childList: true, subtree: true });
 }
 
 // ---- Çalışma kâğıtları (PDF) ----

@@ -51,16 +51,23 @@
     let sel = null, mistakes = 0;
     const chips = [...new Set([R.a, 180 - R.a, 90 - R.a, Math.min(170, 180 - R.a + 10)])].sort((x, y) => x - y);
 
-    stage.innerHTML = `${NOTE}
-      ${progressBar(idx, ROUNDS.length)}
-      <p class="pg-step qbox"><span class="fy-qno">${idx + 1}. Soru</span>[${R.n.A}${R.n.B}] ile [${R.n.C}${R.n.D}] doğruları <b>paraleldir</b>, ${R.n.K}${R.n.L} doğrusu onları ${R.n.R} ve ${R.n.T} noktalarında kesiyor.
-        m(${given[0].name}) = <b>${given[0].val}°</b>, m(${given[1].name}) = <b>${given[1].val}°</b>.</p>
-      <p class="ab-ask">👉 Boş açılara dokun, sonra doğru ölçüyü seç (ya da ölçüyü sürükleyip açının üstüne bırak).</p>
-      <svg viewBox="90 40 460 360" class="ab-board" id="abBoard" role="img" aria-label="Paralel iki doğru ve bir kesen"></svg>
-      <div class="ab-chips" id="abChips">${chips.map(v => `<button class="ab-chip" data-v="${v}">${v}°</button>`).join('')}</div>
-      <p class="pg-fb" id="abFb" aria-live="polite"></p>
-      <div id="abQuiz"></div>
-      <div class="aci-actions" id="abActions"></div>`;
+    // Geniş ekranda iki sütun: solda şekil (sabit kalır), sağda soru metni ve sorular; telefonda alt alta
+    stage.innerHTML = `${progressBar(idx, ROUNDS.length)}
+      <div class="ab-layout">
+        <div class="ab-note">${NOTE}</div>
+        <p class="pg-step qbox ab-qbox"><span class="fy-qno">${idx + 1}. Soru</span>[${R.n.A}${R.n.B}] ile [${R.n.C}${R.n.D}] doğruları <b>paraleldir</b>, ${R.n.K}${R.n.L} doğrusu onları ${R.n.R} ve ${R.n.T} noktalarında kesiyor.
+          m(${given[0].name}) = <b>${given[0].val}°</b>, m(${given[1].name}) = <b>${given[1].val}°</b>.</p>
+        <div class="ab-fig">
+          <p class="ab-ask">👉 Boş açılara dokun, sonra doğru ölçüyü seç (ya da ölçüyü sürükleyip açının üstüne bırak).</p>
+          <svg viewBox="90 40 460 360" class="ab-board" id="abBoard" role="img" aria-label="Paralel iki doğru ve bir kesen"></svg>
+          <div class="ab-chips" id="abChips">${chips.map(v => `<button class="ab-chip" data-v="${v}">${v}°</button>`).join('')}</div>
+        </div>
+        <div class="ab-rest">
+          <p class="pg-fb" id="abFb" aria-live="polite"></p>
+          <div id="abQuiz"></div>
+          <div class="aci-actions" id="abActions"></div>
+        </div>
+      </div>`;
     const svg = stage.querySelector('#abBoard'), fb = stage.querySelector('#abFb');
 
     function draw() {

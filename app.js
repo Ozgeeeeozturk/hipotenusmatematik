@@ -141,6 +141,99 @@ const Auth = {
   },
 };
 
+// ---- Sınıflar ve oyun kayıtları (öğretmenin öğrenci takibi; kurallar: supabase/siniflar.sql) ----
+const Classes = {
+  async _q(p) { Auth._need(); const { data, error } = await p; if (error) throw error; return data; },
+  // Öğretmen
+  mine() { return this._q(sb.from('classes').select('id,name,grade,code,created_at').eq('teacher_id', Auth.current().id).order('created_at')); },
+  create(name, grade) { return this._q(sb.rpc('create_class', { p_name: name, p_grade: grade || null })); },
+  remove(id) { return this._q(sb.from('classes').delete().eq('id', id)); },
+  members(classId) { return this._q(sb.from('class_members').select('student_id,student_name,joined_at').eq('class_id', classId).order('student_name')); },
+  kick(classId, studentId) { return this._q(sb.from('class_members').delete().eq('class_id', classId).eq('student_id', studentId)); },
+  // Kurallar gereği yalnızca öğrencinin sınıfa katıldıktan sonraki kayıtları döner
+  plays(userIds) {
+    if (!userIds.length) return Promise.resolve([]);
+    return this._q(sb.from('plays').select('user_id,game,title,event,score,total,created_at').in('user_id', userIds).order('created_at', { ascending: false }).limit(5000));
+  },
+  // Öğrenci
+  async join(code) {
+    Auth._need();
+    const { data, error } = await sb.rpc('join_class', { p_code: code });
+    if (!error) return data;
+    const m = error.message || '';
+    if (/KOD_YOK/.test(m)) throw new Error('Bu kodla bir sınıf bulunamadı. Kodu öğretmenine sorup tekrar dene.');
+    if (/KENDI_SINIFI/.test(m)) throw new Error('Bu senin kendi sınıfın.');
+    throw new Error(trError(error));
+  },
+  joined() { return this._q(sb.from('class_members').select('class_id,joined_at,classes(name,grade)').eq('student_id', Auth.current().id)); },
+  leave(classId) { return this._q(sb.from('class_members').delete().eq('class_id', classId).eq('student_id', Auth.current().id)); },
+  // Oyun kaydı: hata olursa oyunu bölmeden sessizce geçer
+  track(game, title, event, score, total) {
+    if (!sb || !Auth.current()) return;
+    const row = { game: String(game).slice(0, 80), title: String(title || '').trim().slice(0, 120), event };
+    if (event === 'bitirdi' && Number.isFinite(score) && Number.isFinite(total) && total > 0) Object.assign(row, { score: Math.max(0, Math.round(score)), total: Math.round(total) });
+    sb.from('plays').insert(row).then(() => {}, () => {});
+  },
+};
+
+// ---- Öğrenci: sınıfa katılma penceresi ----
+function openJoinClass() {
+  const back = document.createElement('div');
+  back.className = 'modal-back';
+  back.innerHTML = `
+    <div class="modal modal-mint" role="dialog" aria-modal="true" aria-labelledby="joinTitle">
+      <div class="modal-body">
+        <h3 id="joinTitle">🏫 Sınıfa Katıl</h3>
+        <p>Öğretmeninin verdiği <b>6 karakterlik kodu</b> yaz. Katıldıktan sonra öğretmenin, bu sınıfta hangi oyunları oynadığını ve puanlarını görebilir.</p>
+        <div class="field">
+          <label for="joinCode">Sınıf kodu</label>
+          <input class="input join-code" id="joinCode" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ÖR: K7M2QX">
+        </div>
+        <div class="form-error" id="joinErr" role="alert" hidden></div>
+        <div class="modal-actions">
+          <button class="btn btn-plain" id="joinCancel">Kapat</button>
+          <button class="btn btn-yellow" id="joinOk" style="justify-content:center">Katıl</button>
+        </div>
+        <div id="joinedList"></div>
+      </div>
+    </div>`;
+  document.body.appendChild(back);
+  const $ = s => back.querySelector(s), inp = $('#joinCode'), err = $('#joinErr');
+  const close = () => { back.remove(); document.removeEventListener('keydown', onKey); };
+  const onKey = e => { if (e.key === 'Escape') close(); };
+  document.addEventListener('keydown', onKey);
+  $('#joinCancel').addEventListener('click', close);
+  back.addEventListener('click', e => { if (e.target === back) close(); });
+  inp.addEventListener('input', () => { inp.value = inp.value.toLocaleUpperCase('en').replace(/[^A-Z0-9]/g, ''); err.hidden = true; });
+
+  async function list() {
+    try {
+      const rows = await Classes.joined();
+      $('#joinedList').innerHTML = rows.length ? `<p class="joined-h">Katıldığın sınıflar</p>${rows.map(r => `
+        <div class="joined-row"><span>🏫 <b>${esc(r.classes ? r.classes.name : 'Sınıf')}</b>${r.classes && r.classes.grade ? ` · ${r.classes.grade}. sınıf` : ''}</span>
+        <button class="link-btn" data-leave="${r.class_id}">Ayrıl</button></div>`).join('')}` : '';
+      back.querySelectorAll('[data-leave]').forEach(b => b.addEventListener('click', async () => {
+        if (!confirm('Bu sınıftan ayrılmak istiyor musun? Öğretmenin artık oyunlarını göremez.')) return;
+        try { await Classes.leave(b.dataset.leave); toast('Sınıftan ayrıldın.'); list(); } catch { toast('Ayrılamadın, internet bağlantını kontrol et.'); }
+      }));
+    } catch { $('#joinedList').innerHTML = ''; }
+  }
+  async function join() {
+    const code = inp.value.trim();
+    if (code.length !== 6) { err.textContent = 'Kod 6 karakter olmalı.'; err.hidden = false; inp.focus(); return; }
+    const ok = $('#joinOk'); ok.disabled = true; ok.textContent = 'Katılınıyor…';
+    try {
+      const c = await Classes.join(code);
+      inp.value = ''; toast(`<b>${esc(c.name)}</b> sınıfına katıldın! 🎉`); list();
+    } catch (e) { err.textContent = e.message; err.hidden = false; }
+    ok.disabled = false; ok.textContent = 'Katıl';
+  }
+  $('#joinOk').addEventListener('click', join);
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') join(); });
+  inp.focus();
+  list();
+}
+
 // ---- Bildirim ----
 function toast(html, ms = 3200) {
   let t = document.querySelector('.toast');
@@ -168,6 +261,9 @@ function renderUserArea() {
       </button>
       <div class="user-pop" id="userPop" hidden>
         <p>${esc(u.name)}</p><small>${roleTxt}</small>
+        ${u.role === 'ogretmen'
+          ? '<a class="pop-link" href="takip.html">📊 Öğrenci Takibi</a>'
+          : '<button class="pop-join" id="joinBtn">🏫 Sınıfa Katıl</button>'}
         <button id="logoutBtn">↩ Çıkış Yap</button>
         <a class="pop-link" href="gizlilik.html">🔒 Gizlilik Politikası</a>
         <button class="danger" id="deleteBtn">🗑 Hesabımı Sil</button>
@@ -183,6 +279,8 @@ function renderUserArea() {
     await Auth.logout(); renderUserArea(); renderPersonal(); toast('Çıkış yapıldı. Görüşmek üzere!');
   });
   document.getElementById('deleteBtn').addEventListener('click', () => { pop.hidden = true; confirmDelete(u); });
+  const joinBtn = document.getElementById('joinBtn');
+  if (joinBtn) joinBtn.addEventListener('click', () => { pop.hidden = true; openJoinClass(); });
 }
 
 // ---- Hesap silme onayı (uygulama mağazalarının zorunlu tuttuğu özellik) ----
