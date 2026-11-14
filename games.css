@@ -788,3 +788,10 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
   .ab-qbox{margin-bottom:10px}
   .ab-rest .aci-actions{justify-content:flex-start}
 }
+/* Çarpım Tablosu Oyunu: müzik ve efekt düğmeleri (sağ alt köşede sabit) */
+.cm-sound{position:fixed;right:max(14px,var(--safe-r));bottom:max(14px,var(--safe-b));z-index:60;display:flex;gap:8px;background:rgba(255,255,255,.92);border-radius:999px;padding:6px;box-shadow:var(--shadow)}
+.cm-sound button{width:46px;height:46px;border-radius:50%;border:0;background:var(--mint-light);font-size:1.35rem;line-height:1;cursor:pointer;position:relative}
+.cm-sound button:hover{background:var(--yellow-light)}
+.cm-sound button.off{background:#EDE8F5;filter:grayscale(1);opacity:.65}
+.cm-sound button.off::after{content:'';position:absolute;left:10px;right:10px;top:50%;height:3px;background:var(--danger);border-radius:2px;transform:rotate(-40deg)}
+@media (max-width:640px){.cm-sound-page .play-head{flex-wrap:wrap}.cm-sound-page .play-head > div:not(.cm-sound){flex:1;min-width:0}.cm-sound{position:static;order:5;flex-basis:100%;justify-content:flex-end;background:none;box-shadow:none;padding:0;margin-top:-4px}.cm-sound button{width:42px;height:42px;font-size:1.2rem}}
