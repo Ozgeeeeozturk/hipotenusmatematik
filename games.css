@@ -832,3 +832,63 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 @media (min-width:900px){.kg-secenekler{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .kg-secenek{display:grid;gap:6px}
 .kg-secenek .g-opt{justify-content:center}
+/* Basamak Değeri ve Çözümleme (basamak-degeri.js) */
+.bd-toplar{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 6px}
+.bd-top-kutu{display:grid;justify-items:center;gap:4px;border-radius:14px;padding:4px;transition:background .2s}
+.bd-top-kutu.vurgu{background:var(--yellow-light);box-shadow:0 0 0 3px var(--yellow)}
+.bd-top{width:52px;height:52px;border-radius:50%;border:0;display:grid;place-items:center;color:#fff;font:800 1.9rem/1 'Baloo 2',cursive;
+  background:var(--c);
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.55) 0 18%,transparent 19%),radial-gradient(circle at 50% 50%,var(--c) 60%,color-mix(in srgb,var(--c) 75%,#000) 100%);
+  box-shadow:0 4px 0 rgba(0,0,0,.18);text-shadow:0 2px 0 rgba(0,0,0,.25);padding-top:3px}
+button.bd-top{cursor:pointer}
+.bd-top.kucuk{width:36px;height:36px;font-size:1.3rem}
+.bd-top-kutu small{display:grid;text-align:center;font-weight:700;color:var(--muted);font-size:.72rem;line-height:1.15}
+.bd-top-kutu small b{color:var(--ink);font-size:.8rem}
+.bd-sayi-baslik{display:grid;gap:6px;justify-items:center;margin-bottom:12px}
+.bd-okunus{font:800 1.5rem 'Baloo 2',cursive;letter-spacing:1px}
+.bd-tablo-kap{overflow-x:auto}
+.bd-tablo{width:100%;border-collapse:separate;border-spacing:0 6px;min-width:520px}
+.bd-tablo th{font:800 .95rem 'Nunito',sans-serif;color:#fff;padding:8px 6px;border-radius:10px 10px 0 0}
+.bd-tablo th:first-child{background:var(--muted)}
+.bd-tablo th.ad{background:#27A9D9}.bd-tablo th.sayi{background:#3F5A6E}.bd-tablo th.deger{background:#E5683C}
+.bd-tablo td{background:#F6F3FA;padding:6px;text-align:center;font-weight:800}
+.bd-tablo tr.sec td{background:var(--yellow-light)}
+.bd-tablo td:first-child{border-radius:10px 0 0 10px}.bd-tablo td:last-child{border-radius:0 10px 10px 0}
+.bd-tablo td.bd-verilen{color:var(--lilac-dark)}
+.bd-giris{width:100%;height:40px;border:2px solid #DDD5EA;border-radius:10px;font:800 1rem 'Nunito',sans-serif;text-align:center;background:#fff;color:var(--ink)}
+.bd-giris.ok{border-color:#2E9E78;background:#E3F8EF}
+.bd-giris.no{border-color:var(--danger);background:#FDECEF;animation:shake .4s}
+.bd-buyuk{text-align:center;font:800 clamp(1.6rem,5vw,2.4rem) 'Baloo 2',cursive;margin:6px 0}
+.bd-cozumlu{font:800 clamp(1.05rem,3.4vw,1.5rem) 'Nunito',sans-serif;line-height:1.5}
+.bd-denklem{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;min-height:58px;padding:10px;border:3px dashed var(--lilac);border-radius:16px;background:#FAF8FD}
+.bd-bos{color:var(--muted);font-weight:700}
+.bd-terim,.bd-kart{border:0;border-radius:12px;padding:10px 14px;font:800 1.15rem 'Baloo 2',cursive;cursor:pointer}
+.bd-terim{background:var(--mint);box-shadow:0 4px 0 #6CC7A3}
+.bd-arti{font:800 1.4rem 'Baloo 2',cursive;color:var(--lilac-dark)}
+.bd-toplam{text-align:center;font-weight:700;color:var(--muted);margin:8px 0;min-height:1.3em}
+.bd-toplam b{color:var(--ink)}
+.bd-kartlar{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:6px}
+.bd-kart{background:var(--yellow-light);box-shadow:0 4px 0 var(--yellow-dark)}
+.bd-kart.kullanildi{opacity:.35}
+.bd-sayi-giris{width:min(320px,80vw)!important;font-size:1.5rem!important}
+.bd-cozum{margin:14px 0;padding:14px;border-radius:18px;background:#FFFDF2;border:2px solid var(--yellow-light);display:grid;gap:8px}
+.bd-satir{text-align:center;font:800 clamp(.95rem,2.8vw,1.2rem) 'Nunito',sans-serif;line-height:1.5}
+.bd-av-ust{display:flex;justify-content:space-between;font-weight:700;margin-bottom:8px}
+.bd-seri.sicak{color:#E8590C}
+.bd-av-soru{font-size:clamp(1.1rem,3.4vw,1.45rem)}
+.bd-renkli{font:800 1.3em 'Baloo 2',cursive;letter-spacing:1px}
+.bd-renkli b{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:4px}
+@media (max-width:640px){
+  .bd-toplar{gap:4px 1px;flex-wrap:nowrap}
+  .bd-sayi-baslik .bd-top,.bd-cozum .bd-top{width:26px;height:26px;font-size:1rem;padding-top:2px}
+  .bd-top-kutu{padding:1px;gap:2px}
+  .bd-top-kutu small{font-size:.5rem}.bd-top-kutu small b{font-size:.52rem}
+  .bd-tablo{min-width:0}
+  .bd-tablo th{font-size:.7rem;padding:6px 2px}
+  .bd-tablo td{padding:4px 2px}
+  .bd-top.kucuk{width:28px;height:28px;font-size:1rem}
+  .bd-giris{height:36px;font-size:.82rem;padding:0 2px;border-radius:8px}
+  select.bd-giris{font-size:.72rem}
+  .bd-tablo th:first-child,.bd-tablo td:first-child{width:34px}
+  .bd-tablo th.sayi,.bd-tablo td:nth-child(3){width:52px}
+}

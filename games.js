@@ -265,6 +265,7 @@ function confetti() {
 
 // ---- Hazır etkileşimli oyunlar ----
 const BUILTIN_GAMES = [
+  { href: 'basamak-degeri.html', icon: '🔢', type: 'Etkinlik + Oyun', title: 'Basamak Değeri ve Çözümleme', text: 'Basamak tablosu, kartlarla çözümleme ve süreli Basamak Avı', grades: [5], unit: 'Sayılar ve Nicelikler (1)', color: 'y' },
   { href: 'aci-ustasi.html', icon: '📐', type: 'Sürükle-Bırak', title: 'Açı Kâşifi: Verilmeyen Açıyı Bul', text: 'Doğru açı ve tam açıda renkli parçalarla', grades: [5], unit: 'Geometrik Şekiller', color: 'y' },
   { href: 'aci-boyama.html', icon: '🎨', type: 'Sürükle-Bırak', title: 'Açı Boyama: Ters, Komşu, Eş Açılar', text: 'Paralel doğrularda açıları yerleştir, ters açılar aynı renkte', grades: [5], unit: 'Geometrik Şekiller', color: 'l' },
   { href: 'pergel.html', icon: '⭕', type: 'Sürükle-Bırak', title: 'Pergel ile Çember Çiz', text: 'Pergeli döndür, yarıçap ve çapı keşfet', grades: [5], unit: 'Geometrik Şekiller', color: 'm' },
@@ -348,4 +349,5 @@ function trackPlays() {
 // ---- Çalışma kâğıtları (PDF) ----
 const WORKSHEETS = [
   { pdf: 'materyal/nokta-dogru-isin.pdf', thumb: 'materyal/nokta-dogru-isin.png', title: 'Nokta, Doğru, Işın ve Doğru Parçası', text: 'Sembol gösterimleri, modeller, doğru parçası sayma, çizim ve doğru-yanlış soruları.', grade: 5, unit: 'Geometrik Şekiller', info: '12 soru · 2 sayfa', color: 'l' },
+  { pdf: 'materyal/basamak-degeri-paketi.pdf', thumb: 'materyal/basamak-degeri-paketi.png', title: 'Basamak Değeri ve Çözümleme · Öğretmen Paketi', text: 'Öğretmen rehberi, rakam ve basamak kartları, oyun parası ile banka görevleri, Sayı Dedektifi, Hata Avcısı, boş basamak tablosu, çıkış kartları ve cevap anahtarı.', grade: 5, unit: 'Sayılar ve Nicelikler (1)', info: '11 sayfa · kartlar + çalışma kâğıdı', color: 'y' },
 ];
