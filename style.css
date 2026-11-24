@@ -624,3 +624,20 @@ section{padding-block:44px;scroll-margin-top:calc(var(--header-h) + var(--safe-t
 .sp-filter{position:static;background:none}
 a.grade-card{color:inherit;text-decoration:none}
 .dd-links a.dd-main{background:var(--lilac);color:#fff}
+
+/* ---------- GERİ BUTONU (app.js ekler) ---------- */
+.bar.has-geri{justify-content:flex-start}
+.bar.has-geri .logo{margin-right:auto}
+.geri-btn{
+  width:42px;height:42px;flex-shrink:0;display:grid;place-items:center;
+  border:0;border-radius:50%;cursor:pointer;color:var(--white);
+  background:rgba(255,255,255,.2);box-shadow:inset 0 0 0 2px rgba(255,255,255,.35);
+  transition:background .15s,transform .15s;
+}
+.geri-btn svg{width:22px;height:22px}
+.geri-btn:hover{background:rgba(255,255,255,.32)}
+.geri-btn:active{transform:scale(.92)}
+.geri-btn:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+@media (max-width:760px){.geri-btn{width:38px;height:38px}.geri-btn svg{width:20px;height:20px}.bar.has-geri{gap:8px}}
+@media (max-width:420px){.bar.has-geri{padding-left:max(12px,var(--safe-l));padding-right:max(12px,var(--safe-r))}.bar.has-geri .logo{gap:7px}.bar.has-geri .logo svg{width:30px;height:30px}.bar.has-geri .logo span{font-size:1.15rem}}
+@media (max-width:340px){.bar.has-geri .logo span{display:none}}

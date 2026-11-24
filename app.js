@@ -485,3 +485,27 @@ document.addEventListener('click', async e => {
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 }
+
+// ---- Geri butonu: ana sayfa dışındaki tüm sayfaların üst çubuğunda ----
+// Site içinden gelindiyse önceki sayfaya döner; doğrudan açıldıysa (bağlantı, yer imi, uygulama) mantıklı bir üst sayfaya gider.
+(function geriButonu() {
+  const bar = document.querySelector('.site-header .bar');
+  const sayfa = location.pathname.split('/').pop() || 'index.html';
+  if (!bar || sayfa === 'index.html' || bar.querySelector('.geri-btn')) return;
+  const oyunSayfasi = !!document.querySelector('.play-head');
+  const ust = oyunSayfasi ? 'oyunlar.html' : 'index.html';
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'geri-btn';
+  b.setAttribute('aria-label', 'Geri dön');
+  b.title = 'Geri';
+  b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  b.addEventListener('click', () => {
+    let siteIci = false;
+    try { siteIci = !!document.referrer && new URL(document.referrer).origin === location.origin; } catch {}
+    if (siteIci && history.length > 1) history.back();
+    else location.href = ust;
+  });
+  bar.classList.add('has-geri');
+  bar.prepend(b);
+})();
