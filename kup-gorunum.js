@@ -33,10 +33,6 @@
   const KISA = { onden: 'Ön', usten: 'Üst', soldan: 'Sol', sagdan: 'Sağ' }; // küçük düğmeler için
   const YUZ_RENK = { on: '#4BC5CF', ust: '#E8334A', sag: '#7B6FC6', sol: '#8CC63F', arka: '#B9BFCB', alt: '#9AA1AE' };
 
-  const NOT = `<div class="pg-def">
-    <span class="pg-def-ic" aria-hidden="true">🧊</span>
-    <p>Bir yapıya <b class="k1">önden, üstten, soldan ve sağdan</b> bakınca yalnızca <mark>o yöne bakan yüzleri</mark> görürüz. Arkada kalan küpler <b class="k3">görünmez</b> ama öndekilerle aynı kareye düşer!</p>
-  </div>`;
 
   // ---- Görünüm hesapları (kare kümesi: "sütun,yükseklik-satırı") ----
   const boyut = H => ({ R: H.length, C: H[0].length, Y: Math.max(...H.flat()) });
@@ -141,7 +137,7 @@
 
   // ================= Giriş =================
   function giris() {
-    stage.innerHTML = `${NOT}
+    stage.innerHTML = `
       <div class="g-intro">
         <div class="big-ic" aria-hidden="true">🧊</div>
         <p>Küplerden oluşan yapıları <b>döndür</b>, <b>👁 düğmeleriyle</b> tam önden, üstten, soldan ve sağdan bak. Sonra görünümleri sen çiz ya da görünümlerden yapıyı bul!</p>
@@ -161,7 +157,7 @@
     const boya = Object.fromEntries(Object.keys(YON).map(y => [y, new Set()]));
     let ilkKontrol = true, bitti = false;
 
-    stage.innerHTML = `${NOT}
+    stage.innerHTML = `
       ${progressBar(i, CIZ.length)}
       <p class="pg-step qbox"><span class="fy-qno">${i + 1}. Yapı</span>Eş küplerle oluşturulmuş yapının <b>önden, üstten, soldan ve sağdan</b> görünümlerini karelere dokunarak çiz. Emin olamazsan <b>👁</b> düğmesiyle o yönden bak!</p>
       <div class="kg-duzen">
@@ -266,7 +262,7 @@
 
   function hangi(i, puan) {
     const H = HANGI[i], sec = secenekler(H);
-    stage.innerHTML = `${NOT}
+    stage.innerHTML = `
       ${progressBar(i, HANGI.length)}
       <p class="pg-step qbox"><span class="fy-qno">${i + 1}. Soru</span>Üç farklı yönden görünümü verilen yapı aşağıdakilerden hangisidir? Her seçeneği <b>👁</b> düğmeleriyle çevirip görünümleri karşılaştırabilirsin.</p>
       <div class="kg-verilen">${VERILEN.map(y => `<figure>${gorunumResmi(gorunum(H, y), YON[y].renk)}<figcaption>${YON[y].ad}</figcaption></figure>`).join('')}</div>
@@ -303,7 +299,7 @@
   // ================= Özet =================
   function ozet(mod, puan, en) {
     const pct = puan / en, yildiz = pct >= 0.9 ? 3 : pct >= 0.6 ? 2 : pct > 0 ? 1 : 0;
-    stage.innerHTML = `${NOT}
+    stage.innerHTML = `
       <div class="g-result">
         <div class="g-stars" aria-label="${yildiz} yıldız">${[1, 2, 3].map(k => `<span class="${k <= yildiz ? 'on' : ''}">★</span>`).join('')}</div>
         <h2>${mod === 'ciz' ? 'Görünüm ustası!' : 'Yapı dedektifi!'}</h2>
