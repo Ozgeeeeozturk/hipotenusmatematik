@@ -135,7 +135,8 @@
       }
     }
 
-    function go(next) { phase = next; $('#smFb').textContent = ''; render(); }
+    // Bir adım doğru tamamlandı: sonraki adıma geç (ara adımlarda geri bildirim satırı boş kaldığı için doğru sesini burada çal)
+    function go(next) { phase = next; $('#smFb').textContent = ''; if (typeof Ses !== 'undefined') Ses.cal('dogru'); render(); }
 
     function checkNumber(raw) {
       const v = Number(String(raw).replace(',', '.'));
