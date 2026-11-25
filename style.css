@@ -685,3 +685,7 @@ a.grade-card{color:inherit;text-decoration:none}
 .kare-oyun:hover{transform:translateY(-4px) rotate(-1deg)}
 .kare-oyun .kare-ic{transition:transform .2s}
 .kare-oyun:hover .kare-ic{transform:scale(1.08)}
+
+/* ---------- YAKINLAŞTIRMA KAPALI ----------
+   Çift dokunmada yakınlaşma olmasın (iOS/Android); sürükleme alanlarındaki touch-action:none kuralları geçerli kalır. */
+:where(html,body,a,button,input,select,textarea,label,summary){touch-action:manipulation}
