@@ -641,3 +641,13 @@ a.grade-card{color:inherit;text-decoration:none}
 @media (max-width:760px){.geri-btn{width:38px;height:38px}.geri-btn svg{width:20px;height:20px}.bar.has-geri{gap:8px}}
 @media (max-width:420px){.bar.has-geri{padding-left:max(12px,var(--safe-l));padding-right:max(12px,var(--safe-r))}.bar.has-geri .logo{gap:7px}.bar.has-geri .logo svg{width:30px;height:30px}.bar.has-geri .logo span{font-size:1.15rem}}
 @media (max-width:340px){.bar.has-geri .logo span{display:none}}
+
+/* ---------- ANA SAYFA: 4 OYUN ---------- */
+.home-games{grid-template-columns:repeat(4,minmax(0,1fr))}
+.home-more{text-align:center;margin-top:20px}
+@media (max-width:1000px){.home-games{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){
+  .home-games{grid-template-columns:1fr;gap:12px}
+  .home-games .act-card p{display:none}
+  .home-more .btn{width:100%;justify-content:center}
+}

@@ -113,10 +113,10 @@
     <div class="icon" style="background:var(--mint)">🎲</div>
     <div><h2>Oyunlar</h2><p>Öğrenirken eğlen, eğlenirken öğren.</p></div>
   </div>
-  <div class="grid" id="homeGames">
-    <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+  <div class="grid home-games" id="homeGames">
+    <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
   </div>
-  <a class="more-link" href="oyunlar.html">Tüm oyunları gör →</a>
+  <div class="home-more"><a class="btn btn-lilac" href="oyunlar.html">🎲 Tüm oyunları gör (<span id="oyunSayisi">17</span> oyun) →</a></div>
 </section>
 
 <!-- MATERYALLER -->
@@ -169,15 +169,21 @@
 <script src="games.js"></script>
 <script>
 initHome();
-// Ana sayfada en yeni oyunlar
-(async function () {
+// Ana sayfada yalnızca 4 oyun: her sınıftan (5, 6, 7, 8) bir tane. Seçim her gün değişir; tamamı oyunlar.html'de.
+(function () {
   const box = document.getElementById('homeGames');
-  const empty = '<div class="empty"><b>Oyunlar çok yakında!</b><p>Öğretmenler test, eşleştirme ve doğru-yanlış oyunları hazırlıyor.</p><a class="btn btn-yellow" href="oyunlar.html">Oyunlar sayfasına git</a></div>';
-  if (!DB.ok()) { box.innerHTML = BUILTIN_GAMES.map(x => builtinCard(x)).join(''); return; }
-  try {
-    const room = 4 - BUILTIN_GAMES.length, rows = room > 0 ? await DB.list({ limit: room }) : [];
-    box.innerHTML = BUILTIN_GAMES.map(x => builtinCard(x)).join('') + rows.map(activityCard).join('');
-  } catch { box.innerHTML = BUILTIN_GAMES.map(x => builtinCard(x)).join(''); }
+  const gun = Math.floor(Date.now() / 864e5);
+  const secilen = [];
+  [5, 6, 7, 8].forEach(gr => {
+    let aday = BUILTIN_GAMES.filter(g => g.grades.includes(gr) && !secilen.some(s => s.g === g));
+    // Önce yalnızca o sınıfa ait oyunlar (yoksa paylaşılanlar), böylece her kart farklı bir sınıfı temsil eder
+    const ozel = aday.filter(g => g.grades.length === 1);
+    if (ozel.length) aday = ozel;
+    if (aday.length) secilen.push({ g: aday[(gun + gr) % aday.length], gr });
+  });
+  box.innerHTML = secilen.map(s => builtinCard(s.g, s.gr)).join('');
+  const sayi = document.getElementById('oyunSayisi');
+  if (sayi) sayi.textContent = BUILTIN_GAMES.length;
 })();
 </script>
 </body>
