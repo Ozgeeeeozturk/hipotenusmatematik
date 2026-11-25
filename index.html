@@ -116,7 +116,7 @@
   <div class="grid home-games" id="homeGames">
     <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
   </div>
-  <div class="home-more"><a class="btn btn-lilac" href="oyunlar.html">🎲 Tüm oyunları gör (<span id="oyunSayisi">17</span> oyun) →</a></div>
+  <div class="home-more"><a class="btn btn-lilac" href="oyunlar.html"><span>🎲</span><span id="oyunSayisi">Tüm oyunları gör (17 oyun) →</span></a></div>
 </section>
 
 <!-- MATERYALLER -->
@@ -181,9 +181,14 @@ initHome();
     if (ozel.length) aday = ozel;
     if (aday.length) secilen.push({ g: aday[(gun + gr) % aday.length], gr });
   });
-  box.innerHTML = secilen.map(s => builtinCard(s.g, s.gr)).join('');
+  box.innerHTML = secilen.map(({ g }) => `<a class="card kare-oyun ${g.color}" href="${g.href}">
+      <span class="sinif-kose" aria-label="${gRange(g.grades)}. sınıf"><b>${gRange(g.grades)}.</b>Sınıf</span>
+      <span class="kare-ic" aria-hidden="true">${g.icon}</span>
+      <h3>${esc(g.title)}</h3>
+      <span class="tag">${esc(g.type)}</span>
+    </a>`).join('');
   const sayi = document.getElementById('oyunSayisi');
-  if (sayi) sayi.textContent = BUILTIN_GAMES.length;
+  if (sayi) sayi.textContent = `Tüm oyunları gör (${BUILTIN_GAMES.length} oyun) →`;
 })();
 </script>
 </body>
