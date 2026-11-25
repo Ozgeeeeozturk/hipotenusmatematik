@@ -892,3 +892,67 @@ button.bd-top{cursor:pointer}
   .bd-tablo th:first-child,.bd-tablo td:first-child{width:34px}
   .bd-tablo th.sayi,.bd-tablo td:nth-child(3){width:52px}
 }
+
+/* ---------- Dudak Payı: çay bardağı (cb-) ---------- */
+.cb-masa,.cb-giris{display:flex;justify-content:center;align-items:flex-end;gap:clamp(14px,5vw,48px);flex-wrap:nowrap;margin:8px 0 6px}
+.cb-kup{position:relative;display:grid;justify-items:center;gap:6px;background:none;border:0;padding:20px 8px 8px;border-radius:18px;font:inherit;color:var(--ink);cursor:default;--w:clamp(70px,20vw,100px)}
+.cb-masa.n4 .cb-kup{--w:clamp(54px,15vw,96px);padding-inline:2px}
+.cb-kup.sec:not(:disabled){cursor:pointer;transition:transform .15s,background .15s}
+.cb-kup.sec:not(:disabled):hover{transform:translateY(-4px);background:var(--yellow-light)}
+.cb-kup.sirali{background:var(--mint-light)}
+.cb-kup.kazanan{background:var(--mint-light);box-shadow:0 0 0 3px var(--mint-dark) inset}
+.cb-kup.titre{animation:shake .4s}
+.cb-kesir em{font:800 .8rem Nunito;font-style:normal;color:#fff;background:var(--lilac-dark);border-radius:6px;padding:1px 6px;margin-right:4px;vertical-align:middle}
+.cb-sira{position:absolute;top:-6px;right:-2px;width:30px;height:30px;border-radius:50%;background:var(--mint-dark);color:#fff;display:grid;place-items:center;font:800 1rem 'Baloo 2',cursive;z-index:3;box-shadow:0 3px 8px rgba(0,0,0,.2)}
+/* Bardak: hafif camsı dikdörtgen; en üstte boş dudak payı, altında çay */
+.cb-bardak{position:relative;width:var(--w);height:calc(var(--w) * 1.6);display:flex;flex-direction:column;
+  border:3px solid #9FB4C7;border-top-width:2px;border-radius:4px 4px 12px 12px;background:rgba(220,235,245,.45);
+  box-shadow:inset 6px 0 0 rgba(255,255,255,.6),0 6px 14px rgba(45,36,64,.12);overflow:visible}
+.cb-bos{display:block;flex-shrink:0;position:relative;
+  background:repeating-linear-gradient(-45deg,rgba(194,65,91,.18) 0 4px,rgba(255,255,255,.7) 4px 8px);
+  outline:2px dashed #D6456B;outline-offset:-2px}
+.cb-bardak.cok .cb-bos{outline-width:1px;outline-offset:0;background:#D6456B}
+.cb-cay{flex:1;display:flex;flex-direction:column;justify-content:flex-end;border-radius:0 0 9px 9px;
+  background:linear-gradient(180deg,#D2691E 0%,#A0400B 100%);transform-origin:bottom;animation:cbDol .9s ease-out both}
+.cb-cay i{flex:1;border-bottom:1px solid rgba(255,230,200,.45)}
+.cb-cay i:last-child{border-bottom:0}
+@keyframes cbDol{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.cb-buhar{position:absolute;left:0;right:0;top:-22px;height:20px;display:flex;justify-content:center;gap:8px;pointer-events:none}
+.cb-buhar i{width:5px;height:18px;border-radius:5px;background:rgba(160,170,190,.45);animation:cbBuhar 2.4s ease-in-out infinite}
+.cb-buhar i:nth-child(2){animation-delay:.6s}.cb-buhar i:nth-child(3){animation-delay:1.2s}
+@keyframes cbBuhar{0%{opacity:0;transform:translateY(6px) scaleY(.6)}50%{opacity:1}100%{opacity:0;transform:translateY(-8px) scaleY(1.1)}}
+.cb-tabak{width:calc(var(--w) * 1.35);height:9px;border-radius:50%;background:#C8D4DF;margin-top:-4px;box-shadow:0 3px 0 #A9B8C6}
+.cb-kesir{font:800 clamp(1.25rem,4vw,1.6rem) 'Baloo 2',cursive;line-height:1}
+.cb-dp{font-size:.8rem;font-weight:800;color:#C2415B;display:grid;justify-items:center;line-height:1.15;text-align:center}
+.cb-dp small{font-size:.7rem;color:var(--muted)}
+.cb-soru{text-align:center;font-weight:800;margin:10px 0 8px;font-size:1.05rem}
+.cb-opts{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))!important;max-width:620px;margin:0 auto}
+.cb-opts .g-opt{font-size:1.2rem}
+.cb-dizi{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px}
+.cb-dizi > b{font-size:1.4rem;color:var(--lilac-dark)}
+.cb-yer{min-width:54px;min-height:48px;display:inline-grid;place-items:center;border:2px dashed #C9B6F2;border-radius:12px;font-size:1.2rem;color:var(--muted);padding:2px 6px}
+.cb-yer.dolu{border-style:solid;border-color:var(--mint-dark);background:var(--mint-light);color:var(--ink)}
+.g-intro .cb-giris .cb-kup{padding-top:20px}
+@media (max-width:560px){
+  .cb-dp{font-size:.72rem}
+  .cb-masa.n4 .cb-dp small{display:none}
+  .cb-opts .g-opt{font-size:1.05rem}
+}
+/* Çok dilimli bardakta dudak payını büyüteçle göster (6 kat büyütülmüş üst kısım) */
+.cb-lupe{position:absolute;top:-14px;right:-26px;width:52px;height:52px;border-radius:50%;z-index:2;overflow:hidden;
+  border:4px solid var(--lilac-dark);background:linear-gradient(180deg,#D2691E,#A0400B);box-shadow:0 4px 10px rgba(45,36,64,.25);
+  display:flex;flex-direction:column}
+.cb-lupe::after{content:'';position:absolute;right:-9px;bottom:-9px;width:16px;height:6px;background:var(--lilac-dark);transform:rotate(45deg)}
+.cb-lupe span{display:block;flex-shrink:0;margin-top:14px;background:repeating-linear-gradient(-45deg,#D6456B 0 3px,#fff 3px 6px);border-block:1px solid #D6456B}
+.cb-lupe{background:linear-gradient(180deg,rgba(220,235,245,.95) 0 14px,#D2691E 14px,#A0400B)}
+@media (max-width:560px){.cb-lupe{width:44px;height:44px;right:-18px}}
+.cb-masa{align-items:flex-start}
+.cb-kesir{white-space:nowrap}
+.cb-masa.n4{gap:clamp(6px,2.5vw,36px)}
+@media (max-width:560px){
+  .cb-masa.n4 .cb-kup{--w:clamp(46px,13vw,80px)}
+  .cb-masa.n4 .cb-kesir{font-size:1rem}
+  .cb-masa.n4 .cb-kesir em{display:block;width:max-content;margin:0 auto 3px}
+  .cb-masa.n4 .cb-lupe{width:34px;height:34px;right:-10px;top:-12px;border-width:3px}
+}
+.cb-masa.durgun .cb-cay{animation:none}

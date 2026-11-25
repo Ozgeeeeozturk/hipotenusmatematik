@@ -280,6 +280,7 @@ const BUILTIN_GAMES = [
   { href: 'termometre.html', icon: '🌡️', type: 'Görsel Soru', title: 'Termometre Okuma', text: 'Negatif sıcaklıkları oku, ayarla, karşılaştır', grades: [7], unit: 'Sayılar ve Nicelikler (1)', color: 'y' },
   { href: 'esit-aralik.html', icon: '💡', type: 'Keşif Oyunu', title: 'Eşit Aralık Kâşifi: Lamba, Fidan, Püskül', text: 'Aralığı dene, ortak böleni ve EBOB’u bul', grades: [6, 8], unit: 'Sayılar ve Nicelikler (1)', units: { 8: 'Çarpanlar ve Katlar' }, color: 'm' },
   { href: 'fayans.html', icon: '🧱', type: 'Keşif Oyunu', title: 'Fayans Döşeme: EBOB mu, EKOK mu?', text: 'Fayansları kendin yerleştir, en büyük fayansı ve en küçük kare zemini bul', grades: [6, 8], unit: 'Sayılar ve Nicelikler (1)', units: { 8: 'Çarpanlar ve Katlar' }, color: 'm' },
+  { href: 'cay-bardagi.html', icon: '🍵', type: 'Keşif Oyunu', title: 'Dudak Payı: Çay Bardağı Kesirleri', text: '5/6 mı büyük 10/11 mi? Boş kalan dudak payına bakarak bütüne bir dilim kalan kesirleri karşılaştır ve sırala', grades: [5, 6], unit: 'Sayılar ve Nicelikler (2)', color: 'm' },
   { href: 'serit-modeli.html', icon: '🍫', type: 'Keşif Oyunu', title: 'Şerit Modeli Ustası: Kesir Problemleri', text: 'Bütünü böl, bir parçayı bul, pay kadar boya; kalanın kesrini modelle', grades: [5, 6], unit: 'Sayılar ve Nicelikler (2)', color: 'y' },
   { href: 'carpim-merdiveni.html', icon: '✖️', type: 'Hız Oyunu', title: 'Çarpım Tablosu Oyunu', text: '10 seviye zihinden çarpma, 100 puana ulaş', grades: [5, 6, 7, 8], color: 'y' },
 ];
