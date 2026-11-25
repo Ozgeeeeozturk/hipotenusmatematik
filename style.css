@@ -672,3 +672,16 @@ a.grade-card{color:inherit;text-decoration:none}
   .kare-oyun h3{font-size:.98rem}
   .home-more .btn{width:100%;justify-content:center}
 }
+/* Kare oyun kutuları: her biri sitenin bir rengiyle (sıraya göre nane, lila, sarı, nane→lila) */
+.kare-oyun{--k1:var(--mint-light);--k2:var(--mint);--kd:var(--mint-dark);
+  background:linear-gradient(150deg,var(--k1) 0%,var(--k2) 100%);
+  border-bottom:5px solid var(--kd);box-shadow:0 10px 26px rgba(45,36,64,.14);color:var(--ink)}
+.home-games .kare-oyun:nth-child(4n+2){--k1:var(--lilac-light);--k2:var(--lilac);--kd:var(--lilac-dark)}
+.home-games .kare-oyun:nth-child(4n+3){--k1:var(--yellow-light);--k2:var(--yellow);--kd:var(--yellow-dark)}
+.home-games .kare-oyun:nth-child(4n+4){--k1:var(--mint);--k2:var(--lilac);--kd:var(--lilac-dark);background:linear-gradient(150deg,var(--mint) 0%,var(--lilac) 100%)}
+.kare-oyun::after{background:#fff!important;opacity:.55}
+.kare-oyun .kare-ic,.kare-oyun.l .kare-ic,.kare-oyun.y .kare-ic{background:#fff;box-shadow:0 6px 16px rgba(45,36,64,.12)}
+.kare-oyun .tag{background:rgba(255,255,255,.75);color:var(--ink)}
+.kare-oyun:hover{transform:translateY(-4px) rotate(-1deg)}
+.kare-oyun .kare-ic{transition:transform .2s}
+.kare-oyun:hover .kare-ic{transform:scale(1.08)}
