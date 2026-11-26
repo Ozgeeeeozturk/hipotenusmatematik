@@ -68,7 +68,7 @@
   const card = w => `<article class="card ws-card ${w.color}">
       <a class="ws-thumb" href="${w.pdf}" target="_blank" rel="noopener"><img src="${w.thumb}" alt="${esc(w.title)} setinden bir sayfa" loading="lazy" width="397" height="562"></a>
       <div class="ws-body">
-        <div class="act-top"><span class="act-type">✂️ Etkinlik Seti</span><span class="sinif-kose"><b>${w.grade}.</b>Sınıf</span></div>
+        <div class="act-top"><span class="act-type">✂️ Etkinlik Seti</span><span class="sinif-kose"><b>${w.grades ? gRange(w.grades) : w.grade}.</b>Sınıf</span></div>
         <h3>${esc(w.title)}</h3>
         <p>${esc(w.text)}</p>
         <div class="act-meta"><span class="tag">${esc(w.unit)}</span><span class="tag">${w.info}</span></div>
@@ -81,7 +81,7 @@
   function render() {
     document.querySelectorAll('[data-grade]').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.grade === grade)));
     try { history.replaceState(null, '', grade ? `?sinif=${grade}` : location.pathname); } catch {}
-    const list = WORKSHEETS.filter(w => w.tur === 'set' && (!grade || w.grade === Number(grade)));
+    const list = WORKSHEETS.filter(w => w.tur === 'set' && (!grade || (w.grades || [w.grade]).includes(Number(grade))));
     document.getElementById('list').innerHTML = list.length ? list.map(card).join('')
       : '<div class="empty"><b>Bu sınıf için henüz etkinlik seti yok</b><p>Yeni setler eklendikçe burada görünecek.</p></div>';
   }
