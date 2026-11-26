@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Matematik Zümre Tutanakları | Hipotenüs</title>
+<link rel="canonical" href="https://hipotenusmatematik.com/zumre-tutanaklari.html">
+<meta name="description" content="Matematik zümre öğretmenler kurulu toplantı tutanağı oluşturucu: sene başı, 1. dönem sonu, 2. dönem başı ve sene sonu tutanakları. Düzenle, yazdır, Word olarak indir.">
+<meta name="theme-color" content="#2E9E78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="games.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <a href="index.html" class="logo" aria-label="Hipotenüs ana sayfa">
+      <svg viewBox="0 0 745 745" aria-hidden="true">
+        <rect width="745" height="745" rx="168" fill="#6E58BD"/>
+        <rect x="176" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <rect x="461" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <polygon points="461,346 461,485 322,485" fill="#8FDDC6"/>
+        <rect x="404" y="435" width="57" height="50" fill="#6E58BD"/>
+        <rect x="422" y="453" width="39" height="32" fill="#8FDDC6"/>
+        <line x1="489" y1="277" x2="260" y2="503" stroke="#FFD453" stroke-width="74" stroke-linecap="round"/>
+      </svg>
+      <span>Hipoten<b>ü</b>s</span>
+    </a>
+    <div class="bar-actions">
+      <a class="btn-login btn-ghost" href="index.html"><span aria-hidden="true">🏠</span><span class="lbl">Ana Sayfa</span></a>
+      <div id="userArea"></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap zt" style="padding-bottom:48px">
+  <div class="page-head">
+    <div><h1>📄 Zümre Tutanakları</h1><p>Matematik zümre toplantı tutanağını birkaç bilgiyle oluştur, düzenle, yazdır.</p></div>
+  </div>
+
+  <div class="zt-turler" id="ztTur" role="group" aria-label="Toplantı türü">
+    <button class="chip" data-t="seneBasi" aria-pressed="true">🍂 Sene Başı<small>Eylül</small></button>
+    <button class="chip" data-t="donem1Sonu" aria-pressed="false">❄️ 1. Dönem Sonu<small>Ocak</small></button>
+    <button class="chip" data-t="donem2Basi" aria-pressed="false">🌱 2. Dönem Başı<small>Şubat</small></button>
+    <button class="chip" data-t="seneSonu" aria-pressed="false">☀️ Sene Sonu<small>Haziran</small></button>
+  </div>
+
+  <div class="zt-duzen">
+    <form class="zt-form" id="ztForm" autocomplete="off" onsubmit="return false">
+      <h2>1 · Okul ve toplantı</h2>
+      <label>Okul adı<input name="okul" placeholder="Örn. Atatürk Ortaokulu"></label>
+      <div class="zt-iki">
+        <label>İl<input name="il" placeholder="Örn. İzmir"></label>
+        <label>İlçe<input name="ilce" placeholder="Örn. Karşıyaka"></label>
+      </div>
+      <div class="zt-iki">
+        <label>Eğitim-öğretim yılı<input name="yil"></label>
+        <label>Yer<input name="yer" value="Öğretmenler Odası"></label>
+      </div>
+      <div class="zt-iki">
+        <label>Tarih<input name="tarih" type="date"></label>
+        <label>Saat<input name="saat" type="time" value="15:00"></label>
+      </div>
+
+      <h2>2 · Katılımcılar</h2>
+      <label>Zümre başkanı<input name="baskan" placeholder="Ad Soyad"></label>
+      <label>Diğer zümre öğretmenleri <small>(her satıra bir isim)</small><textarea name="uyeler" rows="3" placeholder="Ad Soyad&#10;Ad Soyad"></textarea></label>
+      <label>Okul müdürü<input name="mudur" placeholder="Ad Soyad"></label>
+
+      <h2>3 · Sınıf düzeyleri</h2>
+      <div class="zt-siniflar" id="ztSinif">
+        <label><input type="checkbox" value="5" checked> 5</label>
+        <label><input type="checkbox" value="6" checked> 6</label>
+        <label><input type="checkbox" value="7" checked> 7</label>
+        <label><input type="checkbox" value="8" checked> 8</label>
+      </div>
+
+      <h2>4 · Gündem maddeleri</h2>
+      <p class="zt-ipucu">İstemediğin maddenin işaretini kaldır.</p>
+      <div class="zt-gundem" id="ztGundem"></div>
+
+      <p class="zt-ipucu">🔒 Bilgilerin yalnızca bu cihazda saklanır, hiçbir yere gönderilmez.</p>
+      <button type="button" class="kz-mini" id="ztTemizle">↺ Formu temizle</button>
+    </form>
+
+    <section class="zt-onizleme">
+      <div class="zt-arac">
+        <button class="kz-mini" id="ztYazdir">🖨️ Yazdır / PDF</button>
+        <button class="kz-mini" id="ztWord">📝 Word olarak indir</button>
+        <button class="kz-mini" id="ztKopya">📋 Metni kopyala</button>
+      </div>
+      <p class="zt-ipucu">✏️ Tutanağın üzerine tıklayıp istediğin yeri değiştirebilirsin. <span class="zt-bos">Sarı alanları</span> kendi bilgilerinle doldur. Formu değiştirince belge yeniden oluşur, bu yüzden elle düzeltmeleri en son yap.</p>
+      <article class="zt-belge" id="ztBelge" contenteditable="true" spellcheck="false"></article>
+      <p class="zt-ipucu">ℹ️ Metinler örnek niteliğindedir. Okulunun kullandığı formata ve güncel mevzuata göre düzenleyebilirsin.</p>
+    </section>
+  </div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="games.js"></script>
+<script>
+initPage();
+(function () {
+  const $ = id => document.getElementById(id);
+  const form = $('ztForm'), belge = $('ztBelge');
+  const KEY = 'hp-zumre-v1';
+  const h = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const B = t => `<span class="zt-bos">${t}</span>`;
+  const BUYUK = s => s.toLocaleUpperCase('tr-TR');
+
+  const TUR = {
+    seneBasi: { ad: 'Sene Başı', no: 1 },
+    donem1Sonu: { ad: '1. Dönem Sonu', no: 2 },
+    donem2Basi: { ad: '2. Dönem Başı', no: 3 },
+    seneSonu: { ad: 'Sene Sonu', no: 4 }
+  };
+
+  // Her madde: başlık, görüşme metni ve (varsa) karar. c = bağlam (sınıflar, program, başkan)
+  const acilis = { id: 'acilis', b: 'Açılış ve yoklama', g: c => `Zümre başkanı ${c.baskan} tarafından toplantı açıldı. Yapılan yoklamada zümre öğretmenlerinin toplantıda hazır bulunduğu görüldü. Gündem maddeleri okunarak üyelerin onayına sunuldu ve kabul edildi.` };
+  const dilek = son => ({ id: 'dilek', b: 'Dilek ve temenniler', g: c => `Üyeler dilek ve temennilerini dile getirdi. Zümre başkanı ${c.baskan}, katılımları için üyelere teşekkür ederek ${son} dileğiyle toplantıyı kapattı.` });
+  const destek = { id: 'destek', b: 'Başarıyı artırma ve destekleme çalışmaları', g: c => `Matematik dersinde zorlanan öğrenciler için destekleme ve yetiştirme kursları açılmasının, matematiğe ilgisi ve yeteneği olan öğrenciler için ise matematik kulübü, proje ve yarışma çalışmalarının yararlı olacağı konuşuldu. Ödevlerin öğrencinin seviyesine uygun, kısa ve düzenli verilmesinin, düzenli tekrarın kalıcı öğrenmeyi desteklediği vurgulandı.`, k: c => `Destekleme ve yetiştirme kursları için ihtiyaç tespiti yapılarak okul idaresine bildirilecektir. Ödevler öğrencinin seviyesine uygun, kısa ve düzenli olacak şekilde verilecektir.` };
+  const pi = { id: 'gunler', b: 'Belirli gün ve haftalar', g: c => `Belirli gün ve haftaların matematik dersleriyle ilişkilendirilmesi konuşuldu. 14 Mart Dünya Matematik Günü (Pi Günü) kapsamında okulda matematik etkinlikleri, oyunlar ve pano çalışmaları yapılabileceği önerildi.`, k: c => `14 Mart Dünya Matematik Günü (Pi Günü) kapsamında okulda matematik etkinlikleri düzenlenecektir. Görev dağılımı zümre öğretmenlerince yapılacaktır.` };
+
+  const GUNDEM = {
+    seneBasi: [
+      acilis,
+      { id: 'onceki', b: 'Bir önceki eğitim-öğretim yılının sene sonu zümre kararlarının gözden geçirilmesi', g: c => `Geçen yılın sene sonu zümre toplantısında alınan kararlar okundu. Öğrencilerin özellikle ${B('zorlanılan konular')} konularında zorlandığına dair tespitin bu yılın planlamasında dikkate alınması gerektiği ifade edildi.`, k: c => `Geçen yılın sene sonu zümre kararları bu yılın planlamasında dikkate alınacaktır.` },
+      { id: 'program', b: 'Öğretim programının ve yıllık planların incelenmesi', g: c => `${c.prog} incelendi. Bakanlıkça yayımlanan çerçeve yıllık planlar üzerinden tema/ünite süreleri, haftalık ders saatleri ve ${c.cikti} gözden geçirildi. Yıllık planların okulun çalışma takvimi ve öğrencilerin seviyesi dikkate alınarak hazırlanması gerektiği belirtildi.`, k: c => `Yıllık planlar çerçeve planlar esas alınarak zümre öğretmenlerince ortak hazırlanacak ve okul idaresine teslim edilecektir.` },
+      { id: 'yontem', b: 'Öğretim yöntem ve teknikleri', g: c => `Matematik derslerinde somut materyallerden başlayıp model ve şekillerle ilerleyerek sembolik gösterime geçmenin önemi vurgulandı. Öğrencilerin akıl yürütme, problem çözme ve matematiksel iletişim becerilerini geliştirmek için tartışma, keşfetme, oyun ve modelleme etkinliklerine yer verilmesi gerektiği konuşuldu. Konuların günlük hayattan problemlerle ilişkilendirilmesinin öğrencilerin ilgisini artırdığı ifade edildi.`, k: c => `Derslerde somut materyaller, dijital araçlar ve oyun temelli etkinliklerden yararlanılacak; her tema/ünitede günlük hayatla ilişkili problemlere yer verilecektir.` },
+      { id: 'hazir', b: 'Öğrencilerin hazırbulunuşluk düzeylerinin belirlenmesi', g: c => `Yılın ilk haftalarında öğrencilerin önceki sınıflardan getirdikleri bilgi ve becerileri belirlemek için tanılayıcı değerlendirme yapılmasının yararlı olacağı belirtildi. Özellikle doğal sayılarla işlemler, kesirler ve temel geometri kavramlarındaki eksiklerin erkenden tespit edilmesi gerektiği vurgulandı.`, k: c => `Eylül ayı içinde tüm sınıflarda hazırbulunuşluk değerlendirmesi yapılacak, sonuçlara göre eksik konular için telafi çalışmaları planlanacaktır.` },
+      { id: 'olcme', b: 'Ölçme ve değerlendirme çalışmaları', g: c => `Yazılı sınavların sayısının ve tarihlerinin mevzuata ve okulun çalışma takvimine uygun olarak planlanması gerektiği belirtildi. Okul ya da ilçe genelinde ortak sınav yapılması durumunda soruların zümre öğretmenlerince birlikte hazırlanması önerildi. Performans görevi ve proje konularının sınıf düzeyine uygun seçilmesi, değerlendirmede dereceli puanlama anahtarı kullanılması üzerinde duruldu. Sınav sonuçlarının ${c.cikti} bazında analiz edilmesinin eksiklerin belirlenmesinde yararlı olacağı ifade edildi.`, k: c => `Sınav tarihleri zümrece belirlenerek öğrencilere ve velilere önceden duyurulacaktır. Ortak sınav soruları zümre öğretmenlerince birlikte hazırlanacak, performans görevleri dereceli puanlama anahtarıyla değerlendirilecek ve sınav sonuçları ${c.cikti} bazında analiz edilecektir.` },
+      { id: 'kaynak', b: 'Ders kitapları, araç-gereç ve eğitim materyalleri', g: c => `Ders kitaplarının dağıtımı ve kullanımı konuşuldu. Okulda bulunan geometri tahtası, cetvel-gönye-iletki takımı, birim küpler ve kesir takımları gibi materyallerin durumu gözden geçirildi; eksiklerin belirlenmesi gerektiği ifade edildi. Bakanlığın dijital eğitim platformlarının derslerde ve ödevlerde kullanılabileceği belirtildi.`, k: c => `Eksik materyallerin listesi hazırlanarak okul idaresine iletilecektir. Öğrencilere yardımcı kaynak alma zorunluluğu getirilmeyecektir.` },
+      destek,
+      { id: 'ozel', b: 'Özel eğitim ihtiyacı olan ve özel yetenekli öğrenciler', g: c => `Kaynaştırma/bütünleştirme yoluyla eğitim alan öğrenciler için Bireyselleştirilmiş Eğitim Programı (BEP) hazırlanması gerektiği hatırlatıldı. BEP'in öğrencinin mevcut performansına göre hazırlanması ve ölçme-değerlendirmenin bu programa uygun yapılması gerektiği ifade edildi. Özel yetenekli öğrencilerin zenginleştirilmiş etkinlik ve problemlerle desteklenmesi önerildi.`, k: c => `BEP'e ihtiyaç duyan öğrenciler için okul BEP geliştirme birimiyle iş birliği yapılacaktır. Özel yetenekli öğrencilere zenginleştirilmiş etkinlik ve problemler verilecektir.` },
+      { id: 'rehber', b: 'Rehberlik servisi ve velilerle iş birliği', g: c => `Matematik kaygısı yaşayan öğrencilerin rehberlik servisine yönlendirilmesi ve velilere öğrencinin gelişimi hakkında düzenli bilgi verilmesi gerektiği konuşuldu. Veli toplantılarında evde matematik çalışmasına yönelik önerilerin paylaşılması önerildi.`, k: c => `Matematik kaygısı gözlenen öğrenciler rehberlik servisine bildirilecek; veli toplantılarında velilere çalışma önerileri sunulacaktır.` },
+      pi,
+      { id: 'isg', b: 'İş sağlığı ve güvenliği', g: c => `Derslerde pergel, makas gibi kesici ve delici araçlar kullanılırken öğrencilerin güvenlik kuralları konusunda bilgilendirilmesi gerektiği belirtildi.`, k: c => `Kesici ve delici araçlarla yapılan etkinliklerde öğretmen gözetimi sağlanacak ve güvenlik kuralları öğrencilere hatırlatılacaktır.` },
+      dilek('yeni eğitim-öğretim yılının başarılı geçmesi')
+    ],
+    donem1Sonu: [
+      acilis,
+      { id: 'takip', b: 'Sene başı zümre kararlarının uygulanma durumu', g: c => `Sene başı zümre toplantısında alınan kararlar okunarak uygulanma durumları değerlendirildi. Kararların büyük ölçüde uygulandığı görüldü. Uygulamada aksayan konular: ${B('varsa yazınız')}.`, k: c => `Uygulamada aksayan kararlar için 2. dönemde gerekli önlemler alınacaktır.` },
+      { id: 'basari', b: '1. dönem başarı durumunun değerlendirilmesi', g: c => `Yapılan yazılı sınavların ve performans görevlerinin sonuçları sınıf düzeylerine göre değerlendirildi. ${c.sinif} matematik dersi genel başarı durumu: ${B('sınıf düzeylerine göre ortalamalar')}. Öğrencilerin en çok zorlandığı konuların ${B('örn. kesirlerle işlemler, problem çözme')} olduğu tespit edildi.`, k: c => `Başarının düşük kaldığı ${c.cikti} için 2. dönemin başında tekrar ve pekiştirme çalışmaları yapılacaktır.` },
+      { id: 'plan', b: 'Yıllık planların uygulanma durumu', g: c => `Yıllık plana göre 1. dönemde işlenmesi gereken konuların ${B('tamamlandığı / büyük ölçüde tamamlandığı')} belirtildi. Tatil ve etkinlikler nedeniyle geride kalan konuların 2. dönem planına eklenmesi gerektiği konuşuldu.`, k: c => `Planda geride kalan konular 2. dönemin ilk haftalarında tamamlanacaktır.` },
+      { id: 'olcme', b: 'Ölçme ve değerlendirme uygulamalarının değerlendirilmesi', g: c => `1. dönemde yapılan sınavlar ve performans görevleri değerlendirildi. Soruların zorluk düzeyinin ve ${c.cikti} dağılımının genel olarak uygun olduğu ifade edildi. Geliştirilmesi gereken yönler: ${B('varsa yazınız')}.`, k: c => `2. dönem sınavlarında soruların ${c.cikti} dağılımı ve zorluk düzeyi zümrece birlikte belirlenecektir.` },
+      { id: 'onlem', b: 'Başarısı düşük öğrenciler için alınacak önlemler', g: c => `Başarısı düşük öğrencilerin belirlenerek velileriyle görüşülmesi, destekleme ve yetiştirme kurslarına yönlendirilmesi ve rehberlik servisiyle iş birliği yapılması önerildi. Bu öğrencilere kısa, seviyesine uygun ve düzenli ödevler verilmesinin yararlı olacağı belirtildi.`, k: c => `Başarısı düşük öğrencilerin listesi rehberlik servisine iletilecek, velileriyle görüşülecek ve destekleme kurslarına yönlendirilecektir.` },
+      { id: 'tatil', b: 'Yarıyıl tatili için öneriler', g: c => `Öğrencilere yarıyıl tatilinde onları yormayacak, kısa tekrar çalışmaları ve eğlenceli matematik oyunları önerilmesinin uygun olacağı konuşuldu.`, k: c => `Öğrencilere yarıyıl tatili için kısa tekrar çalışmaları ve matematik oyunları önerilecektir.` },
+      dilek('2. dönemin başarılı geçmesi')
+    ],
+    donem2Basi: [
+      acilis,
+      { id: 'donem1', b: '1. dönemin genel değerlendirmesi', g: c => `1. dönem sonu zümre toplantısında alınan kararlar hatırlatıldı. Öğrencilerin 1. dönemde zorlandığı ${B('konular')} konularında tekrar çalışmalarına başlandığı belirtildi.`, k: c => `1. dönemde zorlanılan ${c.cikti} için tekrar çalışmaları sürdürülecektir.` },
+      { id: 'plan', b: '2. dönem yıllık planlarının gözden geçirilmesi', g: c => `2. dönemde işlenecek tema/üniteler ve süreleri gözden geçirildi. Planların 1. dönemden kalan konular dikkate alınarak güncellenmesi gerektiği konuşuldu.`, k: c => `2. dönem planları güncellenerek uygulanacaktır.` },
+      { id: 'olcme', b: '2. dönem ölçme ve değerlendirme çalışmaları', g: c => `2. dönem yazılı sınav tarihleri, performans görevleri ve proje çalışmaları planlandı. Ortak sınav yapılması durumunda soruların zümrece birlikte hazırlanması gerektiği hatırlatıldı. Sınav tarihleri: ${B('tarihleri yazınız')}.`, k: c => `Sınav tarihleri öğrencilere ve velilere önceden duyurulacak, performans görevleri dereceli puanlama anahtarıyla değerlendirilecektir.` },
+      { id: 'lgs', b: '8. sınıfların merkezî sınava hazırlığı', sadece8: true, g: c => `8. sınıf öğrencilerinin merkezî sınava hazırlığı için konu tekrarlarının, beceri temelli soru çözümünün ve deneme sınavlarının planlanması konuşuldu. Deneme sonuçlarının konu bazında analiz edilerek öğrencilere ve velilere geri bildirim verilmesi gerektiği belirtildi.`, k: c => `8. sınıflarda düzenli olarak beceri temelli soru çözümü yapılacak; deneme sınavı sonuçları analiz edilerek öğrencilere ve velilere geri bildirim verilecektir.` },
+      destek,
+      pi,
+      dilek('2. dönemin başarılı geçmesi')
+    ],
+    seneSonu: [
+      acilis,
+      { id: 'kararlar', b: 'Yıl içinde alınan zümre kararlarının değerlendirilmesi', g: c => `Yıl içinde yapılan zümre toplantılarında alınan kararlar okunarak uygulanma durumları değerlendirildi. Kararların büyük ölçüde uygulandığı görüldü. Uygulanamayan kararlar ve nedenleri: ${B('varsa yazınız')}.`, k: c => `Uygulanamayan kararlar gerekçeleriyle birlikte gelecek yılın sene başı zümre toplantısında yeniden ele alınacaktır.` },
+      { id: 'basari', b: 'Yıl sonu başarı durumunun değerlendirilmesi', g: c => `${c.sinif} matematik dersi yıl sonu başarı durumu değerlendirildi. Genel başarı durumu: ${B('sınıf düzeylerine göre ortalamalar')}. Öğrencilerin en başarılı olduğu konular ${B('konular')}, en çok zorlandığı konular ise ${B('konular')} olarak tespit edildi.`, k: c => `Öğrencilerin zorlandığı konular gelecek yılın planlamasında ve hazırbulunuşluk çalışmalarında dikkate alınacaktır.` },
+      { id: 'program', b: 'Öğretim programının uygulanmasında karşılaşılan sorunlar ve öneriler', g: c => `${c.prog} uygulamasında karşılaşılan sorunlar konuşuldu. ${B('Örn. bazı temalarda sürenin yetersiz kalması, materyal eksikliği')} gibi konular dile getirildi ve çözüm önerileri paylaşıldı.`, k: c => `Tespit edilen sorunlar ve öneriler gelecek yılın sene başı zümre toplantısında dikkate alınacaktır.` },
+      { id: 'materyal', b: 'Gelecek yıl için ders kitabı, materyal ve araç-gereç ihtiyacı', g: c => `Gelecek eğitim-öğretim yılında ihtiyaç duyulacak materyaller ve araç-gereçler belirlendi: ${B('ihtiyaç listesi')}.`, k: c => `Materyal ihtiyaç listesi okul idaresine iletilecektir.` },
+      { id: 'tatil', b: 'Yaz tatili için öneriler', g: c => `Öğrencilere yaz tatilinde bir üst sınıfa hazırlık amacıyla kısa tekrar çalışmaları, matematik oyunları ve matematikle ilgili kitaplar önerilmesinin yararlı olacağı konuşuldu.`, k: c => `Öğrencilere yaz tatili için kısa tekrar çalışmaları, matematik oyunları ve kitap önerileri sunulacaktır.` },
+      dilek('herkese iyi tatiller')
+    ]
+  };
+
+  // --- Durum ---
+  const simdi = new Date();
+  const yilVars = simdi.getMonth() >= 7 ? `${simdi.getFullYear()}-${simdi.getFullYear() + 1}` : `${simdi.getFullYear() - 1}-${simdi.getFullYear()}`;
+  let D = { tur: 'seneBasi', kapali: {}, siniflar: ['5', '6', '7', '8'], f: { yil: yilVars, yer: 'Öğretmenler Odası', saat: '15:00', tarih: [simdi.getFullYear(), String(simdi.getMonth() + 1).padStart(2, '0'), String(simdi.getDate()).padStart(2, '0')].join('-') } };
+  try { const k = JSON.parse(localStorage.getItem(KEY) || 'null'); if (k) D = Object.assign(D, k); } catch (e) {}
+  const kaydet = () => { try { localStorage.setItem(KEY, JSON.stringify(D)); } catch (e) {} };
+
+  for (const el of form.elements) if (el.name && D.f[el.name] != null) el.value = D.f[el.name];
+  document.querySelectorAll('#ztSinif input').forEach(x => x.checked = D.siniflar.includes(x.value));
+
+  function liste(a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' ve ' + a[a.length - 1]; }
+  function baglam() {
+    const s = D.siniflar.map(Number).sort();
+    const m = s.filter(x => x <= 7), e = s.filter(x => x === 8);
+    const sinif = s.length ? liste(s.map(String)) + '. sınıflarda' : B('sınıf düzeyleri');
+    let prog, cikti;
+    if (m.length && e.length) { prog = `${liste(m.map(String))}. sınıflarda Türkiye Yüzyılı Maarif Modeli Matematik Dersi Öğretim Programı, 8. sınıfta ise Matematik Dersi Öğretim Programı (2018)`; cikti = 'öğrenme çıktıları ve kazanımlar'; }
+    else if (e.length) { prog = 'Matematik Dersi Öğretim Programı (2018)'; cikti = 'kazanımlar'; }
+    else { prog = `Türkiye Yüzyılı Maarif Modeli Matematik Dersi Öğretim Programı`; cikti = 'öğrenme çıktıları'; }
+    return { sinif: sinif.charAt(0).toLocaleUpperCase('tr-TR') + sinif.slice(1), prog, cikti, baskan: D.f.baskan ? h(D.f.baskan) : B('Zümre Başkanı'), var8: e.length > 0 };
+  }
+  const maddeler = () => GUNDEM[D.tur].filter(m => !m.sadece8 || baglam().var8);
+
+  function gundemCiz() {
+    const kap = D.kapali[D.tur] || [];
+    $('ztGundem').innerHTML = maddeler().map(m => `<label><input type="checkbox" data-id="${m.id}" ${kap.includes(m.id) ? '' : 'checked'}> ${h(m.b)}</label>`).join('');
+  }
+  const tarihYaz = t => { if (!t) return B('../../....'); const [y, a, g] = t.split('-'); return `${g}.${a}.${y}`; };
+
+  function belgeCiz() {
+    const f = D.f, c = baglam(), t = TUR[D.tur];
+    const kap = D.kapali[D.tur] || [];
+    const sec = maddeler().filter(m => !kap.includes(m.id));
+    const uyeler = (f.uyeler || '').split('\n').map(x => x.trim()).filter(Boolean);
+    const baskan = (f.baskan || '').trim();
+    const herkes = [baskan || null, ...uyeler.filter(u => u !== baskan)];
+    const kat = herkes.map((x, i) => x ? h(x) : B('Zümre Başkanı')).join(', ') || B('katılımcılar');
+    const ust = [
+      'T.C.',
+      f.ilce ? h(BUYUK(f.ilce)) + ' KAYMAKAMLIĞI' : (f.il ? h(BUYUK(f.il)) + ' VALİLİĞİ' : B('İLÇE') + ' KAYMAKAMLIĞI'),
+      (f.okul ? h(BUYUK(f.okul)) : B('OKUL ADI')) + ' MÜDÜRLÜĞÜ'
+    ];
+    const kararli = sec.filter(m => m.k);
+    const imzalar = herkes.length > 1 || baskan ? herkes : [null, '', ''];
+    belge.innerHTML = `
+      <div class="zt-ust">${ust.join('<br>')}</div>
+      <h3 class="zt-baslik">${h(f.yil || yilVars)} EĞİTİM-ÖĞRETİM YILI<br>MATEMATİK DERSİ ${BUYUK(t.ad)} ZÜMRE ÖĞRETMENLER KURULU<br>TOPLANTI TUTANAĞI</h3>
+      <table class="zt-bilgi">
+        <tr><th>Toplantı No</th><td>${t.no}</td><th>Tarih</th><td>${tarihYaz(f.tarih)}</td></tr>
+        <tr><th>Saat</th><td>${f.saat ? h(f.saat) : B('..:..')}</td><th>Yer</th><td>${f.yer ? h(f.yer) : B('toplantı yeri')}</td></tr>
+        <tr><th>Katılanlar</th><td colspan="3">${kat}</td></tr>
+      </table>
+      <h4>I. GÜNDEM MADDELERİ</h4>
+      <ol>${sec.map(m => `<li>${h(m.b)}</li>`).join('')}</ol>
+      <h4>II. GÜNDEM MADDELERİNİN GÖRÜŞÜLMESİ</h4>
+      ${sec.map((m, i) => `<p><b>${i + 1}. ${h(m.b)}:</b> ${m.g(c)}</p>`).join('')}
+      <h4>III. ALINAN KARARLAR</h4>
+      <ol>${kararli.map(m => `<li>${m.k(c)}</li>`).join('')}</ol>
+      <div class="zt-imzalar">${imzalar.map((x, i) => `<div>${x ? h(x) : B('Ad Soyad')}<br>${i === 0 ? 'Zümre Başkanı' : 'Matematik Öğretmeni'}<br><span class="zt-imza">İmza</span></div>`).join('')}</div>
+      <div class="zt-onay">UYGUNDUR<br>${tarihYaz(f.tarih)}<br><br>${f.mudur ? h(f.mudur) : B('Ad Soyad')}<br>Okul Müdürü</div>`;
+  }
+  function hepsi() { gundemCiz(); belgeCiz(); }
+
+  $('ztTur').addEventListener('click', e => {
+    const b = e.target.closest('[data-t]'); if (!b) return;
+    D.tur = b.dataset.t; kaydet();
+    document.querySelectorAll('#ztTur [data-t]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    hepsi();
+  });
+  document.querySelectorAll('#ztTur [data-t]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.t === D.tur)));
+  form.addEventListener('input', e => {
+    const el = e.target;
+    if (el.name) D.f[el.name] = el.value;
+    else if (el.closest('#ztSinif')) { D.siniflar = [...document.querySelectorAll('#ztSinif input:checked')].map(x => x.value); gundemCiz(); }
+    else if (el.dataset.id) { D.kapali[D.tur] = [...document.querySelectorAll('#ztGundem input:not(:checked)')].map(x => x.dataset.id); }
+    kaydet(); belgeCiz();
+  });
+  $('ztTemizle').onclick = () => {
+    if (!confirm('Formdaki bilgiler silinsin mi?')) return;
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    location.reload();
+  };
+
+  // --- Çıktılar ---
+  const dosyaAdi = () => `Matematik-Zumre-${TUR[D.tur].ad.replace(/[. ]+/g, '-')}-${D.f.yil || yilVars}`.replace(/-+/g, '-');
+  $('ztYazdir').onclick = () => { try { window.print(); } catch (e) { toast('Yazdırma bu cihazda desteklenmiyor. Word olarak indirmeyi dene.'); } };
+  $('ztWord').onclick = async () => {
+    const icerik = belge.cloneNode(true);
+    icerik.querySelectorAll('.zt-bos').forEach(s => s.replaceWith(document.createTextNode(s.textContent)));
+    const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>Zümre Tutanağı</title>
+<style>@page{size:A4;margin:2cm}body{font-family:'Times New Roman',serif;font-size:12pt;line-height:1.4}h3,.zt-ust{text-align:center;font-weight:bold}h3{font-size:12pt}h4{font-size:12pt;margin:12pt 0 4pt}p{text-align:justify;margin:0 0 6pt}table{border-collapse:collapse;width:100%}th,td{border:1px solid #000;padding:4pt 6pt;text-align:left;font-size:11pt}.zt-imzalar{margin-top:24pt}.zt-imzalar div{display:inline-block;width:32%;text-align:center;vertical-align:top;margin-bottom:18pt}.zt-imza{color:#888}.zt-onay{text-align:center;margin-top:18pt}</style></head><body>${icerik.innerHTML}</body></html>`;
+    const blob = new Blob(['﻿', html], { type: 'application/msword' });
+    const ad = dosyaAdi() + '.doc';
+    try {
+      const file = new File([blob], ad, { type: 'application/msword' });
+      if (navigator.canShare && navigator.canShare({ files: [file] }) && /iPhone|iPad|Macintosh/.test(navigator.userAgent) && 'ontouchend' in document) { await navigator.share({ files: [file], title: ad }); return; }
+    } catch (e) { if (e && e.name === 'AbortError') return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = ad;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    toast('Word dosyası indirildi 📝');
+  };
+  $('ztKopya').onclick = async () => {
+    try { await navigator.clipboard.writeText(belge.innerText); toast('Tutanak metni kopyalandı 📋'); }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(belge); const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy'); toast('Tutanak metni kopyalandı 📋'); }
+  };
+
+  hepsi();
+})();
+</script>
+</body>
+</html>

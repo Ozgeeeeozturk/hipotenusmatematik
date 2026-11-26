@@ -1263,3 +1263,46 @@ button.bd-top{cursor:pointer}
 .gy-neden-liste{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
 .gy-neden-liste>div{background:var(--yellow-light);border-radius:14px;padding:10px 12px}
 .gy-neden-liste p{font-size:.92rem;line-height:1.5;margin-top:4px}
+
+/* Zümre Tutanakları */
+.zt-turler{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.zt-turler .chip{display:grid;text-align:center;line-height:1.2}
+.zt-turler .chip small{font-size:.72rem;font-weight:700;opacity:.75}
+.zt-duzen{display:grid;grid-template-columns:330px 1fr;gap:16px;align-items:start}
+.zt-form{background:var(--lilac-light);border-radius:18px;padding:14px;display:grid;gap:10px;position:sticky;top:calc(var(--header-h) + 10px)}
+.zt-form h2{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--lilac-dark);margin-top:4px}
+.zt-form label{display:grid;gap:4px;font-weight:800;font-size:.86rem}
+.zt-form label small{font-weight:700;color:var(--muted)}
+.zt-form input:not([type=checkbox]),.zt-form textarea{font:700 .95rem 'Nunito',sans-serif;border:2px solid var(--lilac);border-radius:10px;padding:7px 9px;color:var(--ink);background:#fff;width:100%;resize:vertical}
+.zt-iki{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.zt-siniflar{display:flex;gap:8px}
+.zt-siniflar label{display:flex;align-items:center;gap:6px;background:#fff;border-radius:10px;padding:6px 12px;font-size:1rem}
+.zt-gundem{display:grid;gap:4px;background:#fff;border-radius:12px;padding:8px 10px}
+.zt-gundem label{display:flex;gap:8px;align-items:flex-start;font-weight:700;font-size:.84rem;line-height:1.35}
+.zt-gundem input,.zt-siniflar input{accent-color:var(--lilac-dark);width:17px;height:17px;flex-shrink:0;margin-top:1px}
+.zt-ipucu{font-size:.84rem;color:var(--muted);font-weight:700;line-height:1.45}
+.zt-arac{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.zt-bos{background:var(--yellow-light);border-bottom:2px dashed var(--yellow-dark);border-radius:4px;padding:0 3px}
+.zt-belge{background:#fff;border-radius:6px;box-shadow:var(--shadow);padding:44px 48px;margin:10px 0;font:12pt/1.5 'Times New Roman',Times,serif;color:#111;outline:none}
+.zt-belge:focus{box-shadow:0 0 0 3px var(--lilac),var(--shadow)}
+.zt-ust{text-align:center;font-weight:700}
+.zt-baslik{text-align:center;font:700 12pt/1.5 'Times New Roman',Times,serif;margin:14px 0}
+.zt-belge h4{font:700 12pt 'Times New Roman',Times,serif;margin:16px 0 6px}
+.zt-belge p{text-align:justify;margin-bottom:8px}
+.zt-belge ol{padding-left:24px}
+.zt-belge li{margin-bottom:3px}
+.zt-bilgi{width:100%;border-collapse:collapse;font-size:11pt}
+.zt-bilgi th,.zt-bilgi td{border:1px solid #333;padding:5px 8px;text-align:left;vertical-align:top}
+.zt-bilgi th{background:#f4f1f8;width:16%}
+.zt-imzalar{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 12px;margin-top:34px;text-align:center}
+.zt-imza{color:#999;font-size:10pt}
+.zt-onay{text-align:center;margin-top:30px}
+@media (max-width:860px){.zt-duzen{grid-template-columns:1fr}.zt-form{position:static}.zt-belge{padding:22px 18px;font-size:11pt}.zt-imzalar{grid-template-columns:repeat(2,1fr)}}
+@media print{
+  @page{size:A4;margin:18mm}
+  body{background:#fff!important}
+  body *{visibility:hidden}
+  .zt-belge,.zt-belge *{visibility:visible}
+  .zt-belge{position:absolute;left:0;top:0;width:100%;margin:0;padding:0;box-shadow:none;border-radius:0}
+  .zt-bos{background:none;border:0;padding:0}
+}
