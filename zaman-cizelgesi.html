@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Matematik Tarihi Zaman Çizelgesi | Hipotenüs</title>
 <link rel="canonical" href="https://hipotenusmatematik.com/zaman-cizelgesi.html">
-<meta name="description" content="Antik Çağ’dan bugüne 44 matematikçinin etkileşimli zaman çizelgesi: Tales, Pisagor, Harezmi, Uluğ Bey, Ali Kuşçu, Descartes, Euler, Cahit Arf ve daha fazlası. Hayat hikâyeleri ve matematik tarihi videoları.">
+<meta name="description" content="Antik Çağ’dan bugüne 44 matematikçinin etkileşimli zaman çizelgesi: Tales, Pisagor, Harezmi, Uluğ Bey, Ali Kuşçu, Descartes, Euler, Cahit Arf ve daha fazlası. Kısa hayat hikâyeleri ve matematik tarihi videoları.">
 <meta name="theme-color" content="#2E9E78">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -21,35 +21,53 @@
 <style>
   .zc-ust{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
   .zc-chip{display:inline-flex;align-items:center;gap:7px;border:2px solid var(--c);background:var(--white);color:var(--ink);border-radius:999px;padding:6px 12px;font:800 .85rem 'Nunito';cursor:pointer}
-  .zc-chip i{width:12px;height:12px;border-radius:50%;background:var(--c)}
+  .zc-chip i{width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 0 1px rgba(45,36,64,.15)}
   .zc-chip[aria-pressed="false"]{opacity:.45;border-style:dashed}
-  .zc-kutu{position:relative;background:linear-gradient(180deg,#2D2440 0%,#3B2D63 100%);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
-  .zc-kaydir{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;cursor:grab;scrollbar-color:#9EE6C9 transparent}
+  .zc-kutu{position:relative;background:linear-gradient(135deg,var(--mint-light) 0%,#FFFFFF 45%,var(--lilac-light) 100%);border:2px solid #E5DCF3;border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
+  .zc-kaydir{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;cursor:grab;scrollbar-color:var(--lilac) transparent}
   .zc-kaydir.surukle{cursor:grabbing;user-select:none}
   .zc-alan{position:relative}
-  .zc-cag{position:absolute;top:0;bottom:0;border-left:1px dashed rgba(255,255,255,.14)}
-  .zc-cag b{position:absolute;bottom:34px;left:10px;font:800 1.05rem 'Baloo 2',cursive;color:rgba(255,255,255,.28);white-space:nowrap;letter-spacing:.5px}
-  .zc-eksen{position:absolute;left:0;right:0;bottom:0;height:28px;border-top:2px solid rgba(255,255,255,.18)}
-  .zc-eksen span{position:absolute;top:5px;transform:translateX(-50%);font:700 .72rem 'Nunito';color:rgba(255,255,255,.65);white-space:nowrap}
-  .zc-eksen span::before{content:'';position:absolute;left:50%;top:-7px;height:6px;border-left:2px solid rgba(255,255,255,.3)}
-  .zc-kisi{position:absolute;height:38px;display:flex;align-items:center;gap:8px;border-radius:999px;padding:0 14px 0 3px;background:var(--c);color:#fff;font:800 .92rem 'Nunito';white-space:nowrap;cursor:pointer;border:0;box-shadow:0 4px 0 rgba(0,0,0,.22);transition:transform .12s,filter .12s,opacity .2s}
-  .zc-kisi:hover,.zc-kisi:focus-visible{transform:translateY(-2px);filter:brightness(1.08);outline:none}
-  .zc-kisi.yasiyor{background:linear-gradient(90deg,var(--c) 70%,rgba(255,255,255,.25))}
-  .zc-kisi .av{flex-shrink:0;min-width:32px;height:32px;padding:0 6px;border-radius:999px;background:#fff;color:var(--c);display:grid;place-items:center;font:800 .78rem 'Baloo 2',cursive;line-height:1}
-  .zc-kisi .vid{font-size:.8rem;margin-left:2px}
+  .zc-cag{position:absolute;top:0;bottom:0;border-left:2px dashed rgba(123,79,168,.18)}
+  .zc-cag:nth-child(even){background:rgba(255,216,77,.08)}
+  .zc-cag b{position:absolute;bottom:34px;left:10px;font:800 1.05rem 'Baloo 2',cursive;color:rgba(123,79,168,.38);white-space:nowrap;letter-spacing:.5px}
+  .zc-eksen{position:absolute;left:0;right:0;bottom:0;height:28px;border-top:2px solid rgba(123,79,168,.25);background:rgba(255,255,255,.6)}
+  .zc-eksen span{position:absolute;top:5px;transform:translateX(-50%);font:800 .72rem 'Nunito';color:var(--muted);white-space:nowrap}
+  .zc-eksen span::before{content:'';position:absolute;left:50%;top:-7px;height:6px;border-left:2px solid rgba(123,79,168,.35)}
+  .zc-kisi{position:absolute;height:38px;display:flex;align-items:center;gap:8px;border-radius:999px;padding:0 14px 0 3px;background:var(--c);color:var(--t);font:800 .92rem 'Nunito';white-space:nowrap;cursor:pointer;border:0;box-shadow:0 4px 0 rgba(45,36,64,.18);transition:transform .12s,filter .12s,opacity .2s}
+  .zc-kisi:hover,.zc-kisi:focus-visible{transform:translateY(-2px);filter:brightness(1.05);outline:none}
+  .zc-kisi.secili{box-shadow:0 0 0 3px var(--white),0 0 0 6px var(--lilac-dark)}
+  .zc-kisi.yasiyor{background:linear-gradient(90deg,var(--c) 72%,rgba(255,255,255,.4))}
+  .zc-kisi .av{flex-shrink:0;min-width:32px;height:32px;padding:0 6px;border-radius:999px;background:#fff;color:var(--ink);display:grid;place-items:center;font:800 .78rem 'Baloo 2',cursive;line-height:1}
+  .zc-kisi img.av{width:32px;min-width:32px;padding:0;object-fit:cover;border:2px solid #fff;box-sizing:border-box}
   .zc-kisi.soluk{opacity:.18;pointer-events:none}
+  /* İsmin altında açılan kısa bilgi kartı */
+  .zc-kart{position:absolute;z-index:5;width:290px;background:var(--white);border-radius:18px;padding:12px 14px 12px;box-shadow:0 14px 34px rgba(45,36,64,.22);border-top:5px solid var(--c);display:grid;gap:7px;animation:zcAc .16s ease-out}
+  .zc-kart::before{content:'';position:absolute;top:-12px;left:var(--ok,30px);border:7px solid transparent;border-bottom-color:var(--c)}
+  .zc-kart.yukari{border-top:0;border-bottom:5px solid var(--c)}
+  .zc-kart.yukari::before{top:auto;bottom:-12px;border-bottom-color:transparent;border-top-color:var(--c)}
+  @keyframes zcAc{from{transform:translateY(-4px)}to{transform:none}}
+  .zc-kart .bas{display:flex;align-items:center;gap:10px}
+  .zc-kart .bas img,.zc-kart .bas .sim{width:42px;height:42px;border-radius:50%;object-fit:cover;flex-shrink:0;background:var(--c);color:var(--t);display:grid;place-items:center;font:800 .8rem 'Baloo 2',cursive}
+  .zc-kart .bas b{display:block;font:800 1.08rem 'Baloo 2',cursive;line-height:1.1}
+  .zc-kart .bas small{color:var(--muted);font-weight:800;font-size:.78rem}
+  .zc-kart p{font-size:.88rem;line-height:1.45;color:var(--ink);font-weight:600}
+  .zc-kart .alt{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .zc-kart .alt span{font-size:.76rem;font-weight:800;color:var(--muted)}
+  .zc-kart .devam{border:0;background:var(--lilac-light);color:#5B3F8E;border-radius:999px;padding:6px 12px;font:800 .82rem 'Nunito';cursor:pointer}
+  .zc-kart .kapat{position:absolute;top:6px;right:8px;border:0;background:none;font-size:1rem;color:var(--muted);cursor:pointer}
   .zc-ipucu{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-weight:700;font-size:.85rem;margin-top:10px}
-  /* Bilgi paneli */
+  /* Ayrıntı paneli */
   .zc-perde{position:fixed;inset:0;z-index:190;background:rgba(45,36,64,.45);opacity:0;pointer-events:none;transition:opacity .2s}
   .zc-perde.acik{opacity:1;pointer-events:auto}
   .zc-panel{position:fixed;z-index:200;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--white);box-shadow:-10px 0 40px rgba(45,36,64,.25);transform:translateX(105%);transition:transform .25s ease;display:flex;flex-direction:column;padding-top:var(--safe-t);padding-bottom:var(--safe-b)}
   .zc-panel.acik{transform:none}
-  .zc-panel .ust{position:relative;background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 60%,#2D2440));color:#fff;padding:22px 22px 18px}
-  .zc-panel .kapat{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.22);color:#fff;font-size:1.2rem;cursor:pointer}
-  .zc-panel .rozet{width:68px;height:68px;border-radius:20px;background:#fff;color:var(--c);display:grid;place-items:center;font:800 1.15rem 'Baloo 2',cursive;box-shadow:0 6px 0 rgba(0,0,0,.18);padding:4px;text-align:center;line-height:1.05}
+  .zc-panel .ust{position:relative;background:var(--c);color:var(--t);padding:22px 22px 18px}
+  .zc-panel .kapat{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.55);color:var(--ink);font-size:1.2rem;cursor:pointer}
+  .zc-panel .rozet{width:76px;height:76px;border-radius:22px;background:#fff;color:var(--ink);display:grid;place-items:center;font:800 1.15rem 'Baloo 2',cursive;box-shadow:0 6px 0 rgba(45,36,64,.15);padding:4px;text-align:center;line-height:1.05;overflow:hidden}
+  .zc-panel .rozet img{width:100%;height:100%;object-fit:cover;border-radius:18px}
   .zc-panel h2{font:800 1.7rem 'Baloo 2',cursive;line-height:1.05;margin-top:12px}
   .zc-panel .yil{font-weight:800;opacity:.92;margin-top:2px}
-  .zc-panel .yer{font-weight:700;opacity:.8;font-size:.9rem}
+  .zc-panel .yer{font-weight:700;opacity:.85;font-size:.9rem}
   .zc-panel .icerik{overflow:auto;padding:18px 22px 22px;display:grid;gap:14px;align-content:start}
   .zc-panel .bio{line-height:1.6;color:var(--ink)}
   .zc-panel .katki{display:flex;flex-wrap:wrap;gap:6px}
@@ -62,7 +80,12 @@
   .zc-video .btn:disabled{opacity:.55;cursor:not-allowed}
   .zc-gez{display:flex;justify-content:space-between;gap:10px;margin-top:4px}
   .zc-gez button{flex:1;justify-content:center}
-  @media (max-width:560px){ .zc-kisi{height:34px;font-size:.84rem} .zc-kisi .av{min-width:28px;height:28px} }
+  .zc-kaynak{margin-top:26px;background:var(--white);border-radius:18px;padding:12px 16px;box-shadow:0 4px 14px rgba(45,36,64,.06)}
+  .zc-kaynak summary{cursor:pointer;font-weight:800;color:var(--lilac-dark)}
+  .zc-kaynak ul{margin:10px 0 0 18px;columns:2;column-gap:28px;font-size:.8rem;color:var(--muted);line-height:1.5}
+  .zc-kaynak li{break-inside:avoid;margin-bottom:4px}
+  .zc-kaynak a{color:var(--lilac-dark);font-weight:700}
+  @media (max-width:560px){ .zc-kisi{height:34px;font-size:.84rem} .zc-kisi .av,.zc-kisi img.av{min-width:28px;width:auto;height:28px} .zc-kisi img.av{width:28px} .zc-kart{width:260px} .zc-kaynak ul{columns:1} }
 </style>
 </head>
 <body>
@@ -90,11 +113,12 @@
 
 <main class="wrap" style="padding-bottom:48px">
   <div class="page-head">
-    <div><h1>Matematik Tarihi Zaman Çizelgesi</h1><p>Antik Çağ’dan bugüne matematiğe yön veren insanlar. Bir isme dokun, hikâyesini oku ve varsa tarih videosunu izle.</p></div>
+    <div><h1>Matematik Tarihi Zaman Çizelgesi</h1><p>Antik Çağ’dan bugüne matematiğe yön veren insanlar. Bir isme dokun, kısa hikâyesini oku; “Devamını oku” ile ayrıntılara ve tarih videosuna ulaş.</p></div>
   </div>
   <div class="zc-ust" id="lejant" role="group" aria-label="Bölgeye göre süz"></div>
   <div class="zc-kutu"><div class="zc-kaydir" id="kaydir"><div class="zc-alan" id="alan"></div></div></div>
   <div class="zc-ipucu"><span>↔ Yana kaydırarak yüzyıllar arasında gezin.</span><span>🎬 işareti olanların tarih videosu var.</span></div>
+  <details class="zc-kaynak"><summary>🖼 Görsel kaynakları</summary><ul id="kaynaklar"></ul></details>
 </main>
 
 <div class="zc-perde" id="perde"></div>
@@ -108,32 +132,39 @@
 <script>
 (function () {
   initPage();
-  const K = TARIH_KISILER.slice().sort((a, b) => a.d - b.d), B = TARIH_BOLGE;
+  const K = TARIH_KISILER.slice().sort((a, b) => a.d - b.d), B = TARIH_BOLGE, RS = typeof TARIH_RESIM !== 'undefined' ? TARIH_RESIM : {};
   const BUGUN = new Date().getFullYear();
-  // Yıl → piksel: eski çağlar sıkışık, yakın çağlar geniş
+  const resim = k => RS[k.id] ? 'tarih-resim/' + k.id + '.jpg' : null;
   const KIRIK = [[-650, 0, .75], [0, 1000, .42], [1000, 1500, .95], [1500, 1800, 2.6], [1800, 2035, 3.3]];
   const x = y => { let p = 40; for (const [a, b, k] of KIRIK) { if (y <= a) break; p += (Math.min(y, b) - a) * k; } return p; };
   const GENIS = x(2035) + 40, SATIR = 48, UST = 18;
   const yilYaz = (y, yak) => (yak ? 'yak. ' : '') + (y < 0 ? 'MÖ ' + (-y) : (y < 1000 ? 'MS ' + y : String(y)));
-  const etiket = k => k.ad + (k.video ? ' 🎬' : '');
-  // satır yerleşimi: çubuklar çakışmasın
+  const yillar = k => yilYaz(k.d, k.yak) + ' – ' + (k.o == null ? 'günümüz' : yilYaz(k.o, k.yak));
   const olc = document.createElement('canvas').getContext('2d'); olc.font = "800 15px Nunito";
   const satirSon = [];
   K.forEach(k => {
     k.x1 = x(k.d); const x2 = x(k.o == null ? BUGUN : k.o);
-    k.w = Math.max(x2 - k.x1, olc.measureText(etiket(k)).width + 64);
+    const avG = resim(k) ? 32 : Math.max(32, olc.measureText(k.sembol).width * .85 + 12);
+    k.w = Math.max(x2 - k.x1, olc.measureText(k.ad + (k.video ? ' 🎬' : '')).width + avG + 30);
     let r = satirSon.findIndex(s => s + 10 < k.x1); if (r < 0) { r = satirSon.length; satirSon.push(0); }
     satirSon[r] = k.x1 + k.w; k.satir = r;
   });
-  const YUKS = UST + satirSon.length * SATIR + 70;
+  const SATIRLAR = satirSon.length, YUKS = UST + SATIRLAR * SATIR + 70 + 150; // alt boşluk: bilgi kartı sığsın
   const CAGLAR = [[-650, 'İlk Çağ'], [476, 'Orta Çağ'], [1453, 'Yeni Çağ'], [1789, 'Yakın Çağ'], [1945, 'Günümüz']];
   const TIK = [-600, -400, -200, 1, 200, 400, 600, 800, 1000, 1100, 1200, 1300, 1400, 1500, 1550, 1600, 1650, 1700, 1750, 1800, 1850, 1900, 1950, 2000];
   const alan = document.getElementById('alan'), kaydir = document.getElementById('kaydir');
   alan.style.width = GENIS + 'px'; alan.style.height = YUKS + 'px';
+  const renk = k => `--c:${B[k.bolge].renk};--t:${B[k.bolge].yazi || '#fff'}`;
+  const avatar = k => resim(k) ? `<img class="av" src="${resim(k)}" alt="" loading="lazy" width="32" height="32">` : `<span class="av">${esc(k.sembol)}</span>`;
   alan.innerHTML =
     CAGLAR.map(([y, ad], i) => `<div class="zc-cag" style="left:${x(y)}px;width:${x(CAGLAR[i + 1] ? CAGLAR[i + 1][0] : 2035) - x(y)}px"><b>${ad}</b></div>`).join('') +
     '<div class="zc-eksen">' + TIK.map(y => `<span style="left:${x(y)}px">${y === 1 ? 'MS 1' : y < 0 ? 'MÖ ' + (-y) : y}</span>`).join('') + '</div>' +
-    K.map(k => `<button class="zc-kisi${k.o == null ? ' yasiyor' : ''}" data-id="${k.id}" style="--c:${B[k.bolge].renk};left:${k.x1}px;top:${UST + k.satir * SATIR}px;width:${k.w}px" title="${esc(k.ad)} · ${yilYaz(k.d, k.yak)} – ${k.o == null ? 'günümüz' : yilYaz(k.o, k.yak)}"><span class="av">${esc(k.sembol)}</span>${esc(k.ad)}${k.video ? '<span class="vid" aria-label="video var">🎬</span>' : ''}</button>`).join('');
+    K.map(k => `<button class="zc-kisi${k.o == null ? ' yasiyor' : ''}" data-id="${k.id}" style="${renk(k)};left:${k.x1}px;top:${UST + k.satir * SATIR}px;width:${k.w}px" aria-label="${esc(k.ad)}, ${yillar(k)}">${avatar(k)}${esc(k.ad)}${k.video ? ' 🎬' : ''}</button>`).join('');
+
+  // Görsel kaynakları
+  document.getElementById('kaynaklar').innerHTML = K.filter(k => RS[k.id] && RS[k.id].sayfa).map(k =>
+    `<li><b>${esc(k.ad)}:</b> ${esc(RS[k.id].yazar)} · ${esc(RS[k.id].lisans)} · <a href="${RS[k.id].sayfa}" target="_blank" rel="noopener">Wikimedia Commons</a></li>`).join('') +
+    '<li><b>Descartes:</b> Hipotenüs özgün görseli</li><li>Diğer kişiler için portre yerine konularını anlatan bir simge kullanılmıştır.</li>';
 
   // Bölge süzgeci
   const secili = new Set(Object.keys(B));
@@ -142,33 +173,68 @@
   lejant.addEventListener('click', e => {
     const c = e.target.closest('[data-b]'); if (!c) return;
     const id = c.dataset.b;
-    if (secili.size === Object.keys(B).length) { secili.clear(); secili.add(id); } // ilk tıkta yalnız o bölge
+    if (secili.size === Object.keys(B).length) { secili.clear(); secili.add(id); }
     else if (secili.has(id)) { secili.delete(id); if (!secili.size) Object.keys(B).forEach(b => secili.add(b)); }
     else secili.add(id);
     lejant.querySelectorAll('[data-b]').forEach(x => x.setAttribute('aria-pressed', String(secili.has(x.dataset.b))));
     alan.querySelectorAll('.zc-kisi').forEach(el => el.classList.toggle('soluk', !secili.has(K.find(k => k.id === el.dataset.id).bolge)));
+    kartKapat();
   });
 
-  // Fareyle sürükleyerek kaydırma (dokunmatikte doğal kaydırma çalışır)
+  // Fareyle sürükleyerek kaydırma
   let sur = null;
-  kaydir.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse' || e.target.closest('.zc-kisi')) return; sur = { x: e.clientX, s: kaydir.scrollLeft }; kaydir.classList.add('surukle'); });
+  kaydir.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse' || e.target.closest('.zc-kisi,.zc-kart')) return; sur = { x: e.clientX, s: kaydir.scrollLeft }; kaydir.classList.add('surukle'); });
   addEventListener('pointermove', e => { if (sur) kaydir.scrollLeft = sur.s - (e.clientX - sur.x); });
   addEventListener('pointerup', () => { sur = null; kaydir.classList.remove('surukle'); });
   kaydir.addEventListener('wheel', e => { if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { kaydir.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive: false });
 
-  // Bilgi paneli
+  // İsmin altında küçük bilgi kartı
+  let kart = null;
+  function kartKapat() { if (kart) { kart.remove(); kart = null; } alan.querySelectorAll('.zc-kisi.secili').forEach(b => b.classList.remove('secili')); }
+  function kartAc(id, anlik) {
+    const k = K.find(k => k.id === id); if (!k) return;
+    kartKapat();
+    const btn = alan.querySelector(`[data-id="${id}"]`); btn.classList.add('secili');
+    kart = document.createElement('div');
+    kart.className = 'zc-kart'; kart.setAttribute('role', 'dialog'); kart.setAttribute('aria-label', k.ad);
+    kart.style.cssText = renk(k);
+    kart.innerHTML = `<button class="kapat" aria-label="Kapat">✕</button>
+      <div class="bas">${resim(k) ? `<img src="${resim(k)}" alt="">` : `<span class="sim">${esc(k.sembol)}</span>`}<div><b>${esc(k.ad)}</b><small>${yillar(k)}</small></div></div>
+      <p>${esc(k.kisa)}</p>
+      <div class="alt"><span>${k.video ? '🎬 ' + esc(k.video.baslik) : '🎬 Video hazırlanıyor'}</span><button class="devam">Devamını oku →</button></div>`;
+    alan.appendChild(kart);
+    const W = kart.offsetWidth, top = UST + k.satir * SATIR;
+    const sol = Math.min(Math.max(10, k.x1), GENIS - W - 10);
+    kart.style.left = sol + 'px';
+    kart.style.setProperty('--ok', Math.min(Math.max(16, k.x1 + 18 - sol), W - 30) + 'px');
+    kart.style.top = (top + 46) + 'px';
+    kart.querySelector('.kapat').onclick = kartKapat;
+    kart.querySelector('.devam').onclick = () => ac(id);
+    // görünür alana kaydır
+    const sag = sol + W + 20;
+    if (sag > kaydir.scrollLeft + kaydir.clientWidth) kaydir.scrollTo({ left: sag - kaydir.clientWidth, behavior: anlik ? 'auto' : 'smooth' });
+    else if (sol < kaydir.scrollLeft) kaydir.scrollTo({ left: Math.max(0, sol - 20), behavior: anlik ? 'auto' : 'smooth' });
+    try { history.replaceState(null, '', '?kisi=' + id); } catch {}
+  }
+  alan.addEventListener('click', e => {
+    const b = e.target.closest('.zc-kisi');
+    if (b) { if (kart && b.classList.contains('secili')) kartKapat(); else kartAc(b.dataset.id); return; }
+    if (!e.target.closest('.zc-kart')) kartKapat();
+  });
+
+  // Ayrıntı paneli
   const panel = document.getElementById('panel'), perde = document.getElementById('perde');
   let acikId = null;
   function ac(id, izle) {
     const i = K.findIndex(k => k.id === id); if (i < 0) return;
     const k = K[i], b = B[k.bolge]; acikId = id;
     const once = K[i - 1], sonra = K[i + 1];
-    panel.style.setProperty('--c', b.renk);
+    panel.style.cssText = renk(k);
     panel.innerHTML = `<div class="ust">
         <button class="kapat" id="pKapat" aria-label="Kapat">✕</button>
-        <div class="rozet">${esc(k.sembol)}</div>
+        <div class="rozet">${resim(k) ? `<img src="${resim(k)}" alt="${esc(k.ad)} portresi">` : esc(k.sembol)}</div>
         <h2 id="pAd">${esc(k.ad)}</h2>
-        <div class="yil">${yilYaz(k.d, k.yak)} – ${k.o == null ? 'günümüz' : yilYaz(k.o, k.yak)}</div>
+        <div class="yil">${yillar(k)}</div>
         <div class="yer">📍 ${esc(k.yer)} · ${b.ad}</div>
       </div>
       <div class="icerik">
@@ -176,7 +242,7 @@
         <div class="katki">${k.katki.map(t => `<span>${esc(t)}</span>`).join('')}</div>
         <div class="bil"><b>💡 Biliyor muydun?</b>${esc(k.bil)}</div>
         <div class="zc-video" id="pVideo">${k.video
-          ? `<b>🎬 ${esc(k.video.baslik)}</b><span class="yok">Matematik tarihi videosu · ${k.video.sure}</span><button class="btn btn-yellow" id="pIzle" style="justify-content:center">▶ Tarih videosunu izle</button>`
+          ? `<b>🎬 ${esc(k.video.baslik)}</b><span class="yok">Matematik tarihi videosu · ${k.video.sure}</span><button class="btn btn-yellow" id="pIzle" style="justify-content:center">▶ ${esc(k.video.baslik)} videosunu izle</button>`
           : `<b>🎬 ${esc(k.videoAd || k.ad)} videosu</b><span class="yok">Bu kişinin tarih videosu hazırlanıyor. Eklendiğinde buradan izleyebileceksin.</span><button class="btn btn-plain" disabled style="justify-content:center">⏳ Video hazırlanıyor</button>`}</div>
         <div class="zc-gez">
           <button class="btn btn-plain" id="pOnce" ${once ? '' : 'disabled'}>← ${once ? esc(once.ad) : ''}</button>
@@ -185,34 +251,29 @@
       </div>`;
     panel.classList.add('acik'); perde.classList.add('acik'); panel.setAttribute('aria-hidden', 'false');
     panel.querySelector('#pKapat').onclick = kapat;
-    if (once) panel.querySelector('#pOnce').onclick = () => { ac(once.id); odak(once.id); };
-    if (sonra) panel.querySelector('#pSonra').onclick = () => { ac(sonra.id); odak(sonra.id); };
+    if (once) panel.querySelector('#pOnce').onclick = () => { ac(once.id); kartAc(once.id); };
+    if (sonra) panel.querySelector('#pSonra').onclick = () => { ac(sonra.id); kartAc(sonra.id); };
     const izleBtn = panel.querySelector('#pIzle');
     if (izleBtn) { izleBtn.onclick = () => oynat(k); if (izle) oynat(k); }
-    try { history.replaceState(null, '', '?kisi=' + id); } catch {}
     panel.querySelector('#pKapat').focus({ preventScroll: true });
   }
   function oynat(k) {
     const kutu = panel.querySelector('#pVideo');
-    kutu.innerHTML = `<b>🎬 ${esc(k.video.baslik)}</b><video src="${k.video.src}" poster="${k.video.poster}" controls playsinline preload="metadata"></video>`;
-    const v = kutu.querySelector('video'); v.play().catch(() => {});
+    kutu.innerHTML = `<b>🎬 ${esc(k.video.baslik)}</b><video src="${k.video.src}" poster="${k.video.poster || ''}" controls playsinline preload="metadata"></video>`;
+    kutu.querySelector('video').play().catch(() => {});
   }
   function kapat() {
     const v = panel.querySelector('video'); if (v) v.pause();
     panel.classList.remove('acik'); perde.classList.remove('acik'); panel.setAttribute('aria-hidden', 'true');
     const eski = acikId; acikId = null;
-    try { history.replaceState(null, '', location.pathname); } catch {}
     const btn = eski && alan.querySelector(`[data-id="${eski}"]`); if (btn) btn.focus({ preventScroll: true });
   }
-  function odak(id) { const el = alan.querySelector(`[data-id="${id}"]`); if (el) kaydir.scrollTo({ left: Math.max(0, el.offsetLeft - kaydir.clientWidth / 3), behavior: 'smooth' }); }
-  alan.addEventListener('click', e => { const b = e.target.closest('.zc-kisi'); if (b) ac(b.dataset.id); });
   perde.addEventListener('click', kapat);
-  addEventListener('keydown', e => { if (e.key === 'Escape' && acikId) kapat(); });
+  addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (acikId) kapat(); else kartKapat(); });
 
-  // Bağlantıdan gelindiyse: ?kisi=descartes&izle=1
+  // Bağlantıdan gelindiyse: ?kisi=pisagor (kart açılır), &izle=1 (panel ve video)
   const q = new URLSearchParams(location.search), ilk = q.get('kisi');
-  if (ilk && K.some(k => k.id === ilk)) { requestAnimationFrame(() => { odak(ilk); ac(ilk, q.get('izle') === '1'); }); }
-  else kaydir.scrollLeft = 0;
+  if (ilk && K.some(k => k.id === ilk)) setTimeout(() => { kartAc(ilk, true); if (q.get('izle') === '1') ac(ilk, true); }, 60);
 })();
 </script>
 </body>
