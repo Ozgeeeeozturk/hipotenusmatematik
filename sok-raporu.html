@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>ŞÖK Raporu – Matematik | Hipotenüs</title>
+<link rel="canonical" href="https://hipotenusmatematik.com/sok-raporu.html">
+<meta name="description" content="Şube Öğretmenler Kurulu (ŞÖK) matematik dersi raporu ve toplantı tutanağı oluşturucu: 1. dönem, 2. dönem, yıl sonu. Düzenle, yazdır, Word olarak indir.">
+<meta name="theme-color" content="#2E9E78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="games.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <a href="index.html" class="logo" aria-label="Hipotenüs ana sayfa">
+      <svg viewBox="0 0 745 745" aria-hidden="true">
+        <rect width="745" height="745" rx="168" fill="#6E58BD"/>
+        <rect x="176" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <rect x="461" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <polygon points="461,346 461,485 322,485" fill="#8FDDC6"/>
+        <rect x="404" y="435" width="57" height="50" fill="#6E58BD"/>
+        <rect x="422" y="453" width="39" height="32" fill="#8FDDC6"/>
+        <line x1="489" y1="277" x2="260" y2="503" stroke="#FFD453" stroke-width="74" stroke-linecap="round"/>
+      </svg>
+      <span>Hipoten<b>ü</b>s</span>
+    </a>
+    <div class="bar-actions">
+      <a class="btn-login btn-ghost" href="index.html"><span aria-hidden="true">🏠</span><span class="lbl">Ana Sayfa</span></a>
+      <div id="userArea"></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap zt" style="padding-bottom:48px">
+  <div class="page-head">
+    <div><h1>📊 ŞÖK Raporu</h1><p>Şube Öğretmenler Kurulu için matematik dersi raporunu ya da toplantı tutanağını oluştur, düzenle, yazdır.</p></div>
+    <a class="kz-mini" href="zumre-tutanaklari.html">📄 Zümre Tutanakları</a>
+  </div>
+
+  <div class="zt-turler" id="skMod" role="group" aria-label="Belge türü">
+    <button class="chip" data-m="rapor" aria-pressed="true">📊 Matematik Dersi Raporu<small>Ders öğretmeni hazırlar</small></button>
+    <button class="chip" data-m="tutanak" aria-pressed="false">📋 Toplantı Tutanağı<small>Sınıf rehber öğretmeni hazırlar</small></button>
+  </div>
+  <div class="zt-turler" id="skDonem" role="group" aria-label="Dönem">
+    <button class="chip" data-d="1" aria-pressed="true">🍂 1. Dönem</button>
+    <button class="chip" data-d="2" aria-pressed="false">🌱 2. Dönem</button>
+    <button class="chip" data-d="3" aria-pressed="false">☀️ Yıl Sonu</button>
+  </div>
+
+  <div class="zt-duzen">
+    <form class="zt-form" id="skForm" autocomplete="off" onsubmit="return false">
+      <h2>1 · Okul ve sınıf</h2>
+      <label>Okul adı<input name="okul" placeholder="Örn. Atatürk Ortaokulu"></label>
+      <div class="zt-iki">
+        <label>İl<input name="il" placeholder="Örn. İzmir"></label>
+        <label>İlçe<input name="ilce" placeholder="Örn. Karşıyaka"></label>
+      </div>
+      <div class="zt-iki">
+        <label>Sınıf<select name="sinif"><option>5</option><option>6</option><option selected>7</option><option>8</option></select></label>
+        <label>Şube<input name="sube" value="A" maxlength="3"></label>
+      </div>
+      <div class="zt-iki">
+        <label>Öğrenci sayısı<input name="ogrSay" type="number" min="1" max="60" placeholder="Örn. 28"></label>
+        <label>Eğitim-öğretim yılı<input name="yil"></label>
+      </div>
+      <div class="zt-iki">
+        <label>Tarih<input name="tarih" type="date"></label>
+        <label data-mod="tutanak">Saat<input name="saat" type="time" value="15:00"></label>
+      </div>
+      <label data-mod="tutanak">Yer<input name="yer" value="Öğretmenler Odası"></label>
+
+      <h2>2 · Öğretmenler</h2>
+      <label>Matematik öğretmeni<input name="ogretmen" placeholder="Ad Soyad"></label>
+      <div data-mod="tutanak" class="zt-grup">
+        <div class="zt-iki">
+          <label>Kurul başkanı<input name="baskan" placeholder="Ad Soyad"></label>
+          <label>Unvanı<select name="unvan"><option>Müdür Yardımcısı</option><option>Okul Müdürü</option></select></label>
+        </div>
+        <label>Sınıf rehber öğretmeni<input name="rehberOgr" placeholder="Ad Soyad"></label>
+        <label>Rehber öğretmen (psikolojik danışman)<input name="psk" placeholder="Ad Soyad"></label>
+        <label>Diğer ders öğretmenleri <small>(her satıra “Ad Soyad - Ders”)</small><textarea name="dersler" rows="4" placeholder="Ad Soyad - Türkçe&#10;Ad Soyad - Fen Bilimleri&#10;Ad Soyad - İngilizce"></textarea></label>
+      </div>
+
+      <h2>3 · Matematik dersinde sınıfın durumu</h2>
+      <label>Sınıfın matematik ortalaması <small>(isteğe bağlı)</small><input name="ortalama" type="number" min="0" max="100" step="0.01" placeholder="Örn. 64,5"></label>
+      <label>En çok zorlanılan konular<input name="zor" id="skZor"></label>
+      <p class="zt-ipucu">Sınıfta gözlediklerini işaretle; rapora durum tespiti ve öneri olarak eklenir.</p>
+      <div class="zt-gundem" id="skProfil"></div>
+      <label>Desteğe ihtiyaç duyan öğrenciler <small>(isteğe bağlı)</small><textarea name="destek" rows="2" placeholder="Öğrenci adları"></textarea></label>
+      <label>Başarılı / ilgili öğrenciler <small>(isteğe bağlı)</small><textarea name="basarili" rows="2" placeholder="Öğrenci adları"></textarea></label>
+
+      <div data-mod="tutanak" class="zt-grup">
+        <h2>4 · Gündem maddeleri</h2>
+        <div class="zt-gundem" id="skGundem"></div>
+      </div>
+
+      <p class="zt-ipucu">🔒 Öğrenci ve öğretmen adları yalnızca bu cihazda saklanır, hiçbir yere gönderilmez.</p>
+      <button type="button" class="kz-mini" id="skTemizle">↺ Formu temizle</button>
+    </form>
+
+    <section class="zt-onizleme">
+      <div class="zt-arac">
+        <button class="kz-mini" id="skYazdir">🖨️ Yazdır / PDF</button>
+        <button class="kz-mini" id="skWord">📝 Word olarak indir</button>
+        <button class="kz-mini" id="skKopya">📋 Metni kopyala</button>
+      </div>
+      <p class="zt-ipucu">✏️ Belgenin üzerine tıklayıp istediğin yeri değiştirebilirsin. <span class="zt-bos">Sarı alanları</span> kendi bilgilerinle doldur. Formu değiştirince belge yeniden oluşur, bu yüzden elle düzeltmeleri en son yap.</p>
+      <article class="zt-belge" id="skBelge" contenteditable="true" spellcheck="false"></article>
+      <p class="zt-ipucu">ℹ️ Metinler örnek niteliğindedir. Okulunun kullandığı formata ve güncel mevzuata göre düzenleyebilirsin.</p>
+    </section>
+  </div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="games.js"></script>
+<script>
+initPage();
+(function () {
+  const $ = id => document.getElementById(id);
+  const form = $('skForm'), belge = $('skBelge');
+  const KEY = 'hp-sok-v1';
+  const h = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const B = t => `<span class="zt-bos">${t}</span>`;
+  const BUYUK = s => s.toLocaleUpperCase('tr-TR');
+  const DONEM = { 1: '1. Dönem', 2: '2. Dönem', 3: 'Yıl Sonu' };
+  const ZOR = { 5: 'örn. kesirler, problem çözme', 6: 'örn. kesirlerle işlemler, oran', 7: 'örn. rasyonel sayılarla işlemler, cebirsel ifadeler', 8: 'örn. üslü ifadeler, kareköklü ifadeler' };
+
+  // Gözlemler: d = durum cümlesi, o = öneri/karar
+  const PROFIL = [
+    { id: 'katilim', b: 'Derse katılım yüksek', d: 'Öğrencilerin büyük çoğunluğu derse istekli katılmakta, soru sormakta ve tartışmalara katkı vermektedir.', o: 'Derse katılımın sürmesi için öğrencilere tahtada çözüm sunma ve arkadaşına anlatma fırsatları verilecektir.' },
+    { id: 'akran', b: 'Akran iş birliği iyi', d: 'Öğrenciler grup çalışmalarında birbirine yardımcı olmaktadır.', o: 'Akran öğretimi ve grup çalışmalarına daha sık yer verilecektir.' },
+    { id: 'temel', b: 'Temel işlem eksikleri var', d: 'Öğrencilerin bir kısmında dört işlem, çarpım tablosu ve kesirler gibi temel konularda eksikler bulunmaktadır.', o: 'Temel işlem eksikleri için kısa ve düzenli tekrar çalışmaları ile oyun temelli pekiştirme etkinlikleri yapılacaktır.' },
+    { id: 'okuma', b: 'Problemi okuyup anlamada güçlük', d: 'Öğrencilerin bir kısmı problemi okuyup ne istendiğini anlamakta zorlanmaktadır.', o: 'Problem çözmede “anla, planla, çöz, kontrol et” adımları uygulanacak; okuduğunu anlama konusunda Türkçe öğretmeniyle iş birliği yapılacaktır.' },
+    { id: 'odev', b: 'Ödev alışkanlığı zayıf', d: 'Öğrencilerin bir kısmının ödevlerini düzenli yapmadığı gözlenmektedir.', o: 'Ödevler kısa ve düzenli verilecek, ödev takibi yapılacak; ödevlerini düzenli yapmayan öğrencilerin velileriyle görüşülecektir.' },
+    { id: 'dikkat', b: 'Dikkat dağınıklığı', d: 'Bazı öğrencilerin ders süresince dikkatlerinin dağıldığı ve uzun çalışmalarda odaklanmakta zorlandıkları gözlenmektedir.', o: 'Ders etkinlikleri kısa bölümlere ayrılacak; somut materyaller ve oyun temelli etkinliklerle öğrencilerin etkin katılımı sağlanacaktır.' },
+    { id: 'disiplin', b: 'Sınıf içi gürültü / disiplin', d: 'Ders sırasında zaman zaman gürültü ve konuşma nedeniyle dersin akışı aksamaktadır.', o: 'Sınıf kuralları öğrencilerle birlikte yeniden belirlenecek ve tüm öğretmenlerce tutarlı biçimde uygulanacaktır.' },
+    { id: 'kaygi', b: 'Matematik kaygısı', d: 'Bazı öğrencilerde matematik dersine karşı kaygı ve özgüven eksikliği gözlenmektedir.', o: 'Kaygı yaşayan öğrencilere başarabilecekleri görevlerle başlanacak, olumlu geri bildirim verilecek ve rehberlik servisiyle iş birliği yapılacaktır.' },
+    { id: 'devam', b: 'Devamsızlık sorunu', d: 'Bazı öğrencilerin devamsızlıkları nedeniyle konu eksikleri oluşmaktadır.', o: 'Devamsızlığı olan öğrencilerin velileriyle görüşülecek, eksik konular için telafi çalışması yapılacaktır.' },
+    { id: 'bep', b: 'Özel eğitim ihtiyacı olan öğrenci var', d: 'Sınıfta kaynaştırma/bütünleştirme yoluyla eğitim alan öğrenci bulunmaktadır.', o: 'Bu öğrenciler için hazırlanan BEP doğrultusunda ders içi uyarlamalar yapılacak, ölçme ve değerlendirme BEP’e göre yapılacaktır.' }
+  ];
+
+  const simdi = new Date();
+  const yilVars = simdi.getMonth() >= 7 ? `${simdi.getFullYear()}-${simdi.getFullYear() + 1}` : `${simdi.getFullYear() - 1}-${simdi.getFullYear()}`;
+  const bugun = [simdi.getFullYear(), String(simdi.getMonth() + 1).padStart(2, '0'), String(simdi.getDate()).padStart(2, '0')].join('-');
+  let D = { mod: 'rapor', donem: '1', profil: ['katilim', 'temel', 'okuma'], kapali: [], f: { yil: yilVars, tarih: bugun, saat: '15:00', yer: 'Öğretmenler Odası', sinif: '7', sube: 'A', unvan: 'Müdür Yardımcısı' } };
+  try { const k = JSON.parse(localStorage.getItem(KEY) || 'null'); if (k) D = Object.assign(D, k); } catch (e) {}
+  const kaydet = () => { try { localStorage.setItem(KEY, JSON.stringify(D)); } catch (e) {} };
+  for (const el of form.elements) if (el.name && D.f[el.name] != null) el.value = D.f[el.name];
+
+  const tarihYaz = t => { if (!t) return B('../../....'); const [y, a, g] = t.split('-'); return `${g}.${a}.${y}`; };
+  const satirlar = s => (s || '').split('\n').map(x => x.trim()).filter(Boolean);
+  const sinifAd = () => `${D.f.sinif || '..'}/${h(BUYUK(D.f.sube || '..'))}`;
+  const ust = () => {
+    const f = D.f;
+    return `<div class="zt-ust">T.C.<br>${f.ilce ? h(BUYUK(f.ilce)) + ' KAYMAKAMLIĞI' : (f.il ? h(BUYUK(f.il)) + ' VALİLİĞİ' : B('İLÇE') + ' KAYMAKAMLIĞI')}<br>${f.okul ? h(BUYUK(f.okul)) : B('OKUL ADI')} MÜDÜRLÜĞÜ</div>`;
+  };
+  const secili = () => PROFIL.filter(p => D.profil.includes(p.id));
+  const ortCumle = () => D.f.ortalama ? `Sınıfın matematik dersi ortalaması ${h(String(D.f.ortalama).replace('.', ','))} olarak hesaplanmıştır.` : `Sınıfın matematik dersi ortalaması ${B('ortalama')} olarak hesaplanmıştır.`;
+  const zorCumle = () => `Öğrencilerin en çok zorlandığı konular ${D.f.zor ? h(D.f.zor) : B(ZOR[D.f.sinif] || 'konular')} olarak belirlenmiştir.`;
+  const donemIfade = () => D.donem === '3' ? 'eğitim-öğretim yılı boyunca' : `${DONEM[D.donem].toLocaleLowerCase('tr-TR')} boyunca`;
+  const adlar = (s, yok) => { const a = satirlar(s); return a.length ? a.map(h).join(', ') : B(yok); };
+
+  function rapor() {
+    const f = D.f, p = secili();
+    const olumlu = p.filter(x => ['katilim', 'akran'].includes(x.id)), sorun = p.filter(x => !['katilim', 'akran'].includes(x.id));
+    const genel = (olumlu.length ? olumlu.map(x => x.d).join(' ') : '') + (sorun.length ? ' ' + sorun.filter(x => x.id !== 'bep').map(x => x.d).join(' ') : '');
+    const oneriler = p.map(x => x.o);
+    if (D.donem === '3') oneriler.push('Öğrencilere yaz tatili için kısa tekrar çalışmaları ve matematik oyunları önerilecektir.');
+    else oneriler.push(`${D.donem === '1' ? 'Zorlanılan konular için 2. dönemin başında tekrar ve pekiştirme çalışmaları yapılacaktır.' : 'Zorlanılan konular yıl sonuna kadar düzenli tekrar çalışmalarıyla pekiştirilecektir.'}`);
+    return `${ust()}
+      <h3 class="zt-baslik">${h(f.yil || yilVars)} EĞİTİM-ÖĞRETİM YILI<br>${BUYUK(DONEM[D.donem])} ${sinifAd()} SINIFI<br>ŞUBE ÖĞRETMENLER KURULU MATEMATİK DERSİ RAPORU</h3>
+      <table class="zt-bilgi">
+        <tr><th>Sınıf/Şube</th><td>${sinifAd()}</td><th>Öğrenci Sayısı</th><td>${f.ogrSay ? h(f.ogrSay) : B('..')}</td></tr>
+        <tr><th>Ders</th><td>Matematik</td><th>Tarih</th><td>${tarihYaz(f.tarih)}</td></tr>
+        <tr><th>Ders Öğretmeni</th><td colspan="3">${f.ogretmen ? h(f.ogretmen) : B('Ad Soyad')}</td></tr>
+      </table>
+      <h4>1. Sınıfın Genel Durumu</h4>
+      <p>${genel.trim() || B('Sınıfın derse karşı tutumu ve genel durumu')}</p>
+      <h4>2. Akademik Başarı Durumu</h4>
+      <p>${donemIfade().charAt(0).toLocaleUpperCase('tr-TR') + donemIfade().slice(1)} yapılan sınavlar, performans görevleri ve ders içi gözlemler değerlendirilmiştir. ${ortCumle()} ${zorCumle()}</p>
+      <h4>3. Desteğe İhtiyaç Duyan Öğrenciler</h4>
+      <p>Matematik dersinde desteğe ihtiyaç duyan öğrenciler: ${adlar(f.destek, 'öğrenci adları')}. Bu öğrencilerin eksik konuları için seviyelerine uygun ek çalışmalar yapılması, velileriyle görüşülmesi ve destekleme ve yetiştirme kurslarına yönlendirilmeleri uygun görülmüştür.${D.profil.includes('bep') ? ' ' + PROFIL.find(x => x.id === 'bep').d : ''}</p>
+      <h4>4. Başarılı ve İlgili Öğrenciler</h4>
+      <p>Matematik dersinde başarılı ve derse ilgili öğrenciler: ${adlar(f.basarili, 'öğrenci adları')}. Bu öğrencilerin zenginleştirilmiş problem ve etkinliklerle, matematik kulübü ve yarışma çalışmalarıyla desteklenmesi önerilmektedir.</p>
+      <h4>5. Öneriler ve Alınacak Önlemler</h4>
+      <ol>${oneriler.map(x => `<li>${x}</li>`).join('')}</ol>
+      <div class="zt-onay zt-sag">${f.ogretmen ? h(f.ogretmen) : B('Ad Soyad')}<br>Matematik Öğretmeni<br><span class="zt-imza">İmza</span></div>`;
+  }
+
+  const GUNDEM = [
+    { id: 'acilis', b: 'Açılış ve yoklama' },
+    { id: 'onceki', b: 'Bir önceki şube öğretmenler kurulu kararlarının değerlendirilmesi', d: ['2', '3'] },
+    { id: 'genel', b: 'Şubenin genel durumu (devam-devamsızlık, sınıf ortamı)' },
+    { id: 'dersler', b: 'Derslere göre başarı durumunun değerlendirilmesi' },
+    { id: 'davranis', b: 'Öğrencilerin davranış ve uyum durumu' },
+    { id: 'destek', b: 'Desteğe ihtiyaç duyan öğrenciler ve alınacak önlemler' },
+    { id: 'rehber', b: 'Rehberlik servisi ve velilerle iş birliği' },
+    { id: 'ortak', b: 'Öğretmenler arasında ortak tutum ve davranış birliği' },
+    { id: 'dilek', b: 'Dilek ve temenniler' }
+  ];
+  const gundem = () => GUNDEM.filter(g => !g.d || g.d.includes(D.donem));
+
+  function tutanak() {
+    const f = D.f, p = secili();
+    const baskan = f.baskan ? h(f.baskan) : B('Ad Soyad');
+    const dersler = satirlar(f.dersler).map(x => { const [a, ...d] = x.split('-'); return { ad: a.trim(), ders: d.join('-').trim() || 'Ders' }; });
+    const ogretmenler = [{ ad: f.ogretmen, ders: 'Matematik' }, ...dersler];
+    const katilan = [f.baskan && `${h(f.baskan)} (${h(f.unvan)})`, f.rehberOgr && `${h(f.rehberOgr)} (Sınıf Rehber Öğretmeni)`, f.psk && `${h(f.psk)} (Rehber Öğretmen)`, ...ogretmenler.filter(o => o.ad).map(o => `${h(o.ad)} (${h(o.ders)})`)].filter(Boolean);
+    const matDurum = `${ortCumle()} ${zorCumle()}${p.length ? ' ' + p.filter(x => x.id !== 'bep').map(x => x.d).join(' ') : ''}`;
+    const G = {
+      acilis: { g: `Toplantı, kurul başkanı ${h(f.unvan)} ${baskan} tarafından açıldı. Yapılan yoklamada şube öğretmenlerinin toplantıda hazır bulunduğu görüldü. Gündem maddeleri okunarak kabul edildi.` },
+      onceki: { g: `Bir önceki şube öğretmenler kurulunda alınan kararlar okunarak uygulanma durumları değerlendirildi. Kararların büyük ölçüde uygulandığı görüldü. Aksayan konular: ${B('varsa yazınız')}.`, k: 'Uygulamada aksayan kararlar için gerekli önlemler alınacaktır.' },
+      genel: { g: `Sınıf rehber öğretmeni ${f.rehberOgr ? h(f.rehberOgr) : B('Ad Soyad')}, ${sinifAd()} sınıfında ${f.ogrSay ? h(f.ogrSay) : B('..')} öğrenci bulunduğunu belirterek şubenin genel durumu hakkında bilgi verdi. Devam-devamsızlık durumu: ${B('bilgi yazınız')}. Sınıf ortamı ve öğrenciler arası ilişkiler: ${B('bilgi yazınız')}.` },
+      dersler: { g: `Ders öğretmenleri derslerindeki başarı durumunu değerlendirdi.<br>${ogretmenler.map(o => `<b>${h(o.ders)}</b> (${o.ad ? h(o.ad) : B('Ad Soyad')}): ${o.ders === 'Matematik' ? matDurum : B('değerlendirme')}`).join('<br>')}`, k: p.filter(x => x.id !== 'bep').map(x => x.o).concat([`Matematik dersinde zorlanılan konular için tekrar ve pekiştirme çalışmaları yapılacaktır.`]) },
+      davranis: { g: `Öğrencilerin okul kurallarına uyumu ve sınıf içi davranışları değerlendirildi. ${D.profil.includes('disiplin') ? PROFIL.find(x => x.id === 'disiplin').d + ' ' : ''}Gözlenen durumlar: ${B('varsa yazınız')}.`, k: ['Sınıf kuralları tüm öğretmenlerce tutarlı biçimde uygulanacak, olumlu davranışlar takdir edilecektir.'] },
+      destek: { g: `Akademik, sosyal veya duygusal açıdan desteğe ihtiyaç duyan öğrenciler görüşüldü. Matematik dersinde desteğe ihtiyaç duyan öğrenciler: ${adlar(f.destek, 'öğrenci adları')}.${D.profil.includes('bep') ? ' ' + PROFIL.find(x => x.id === 'bep').d : ''}`, k: ['Desteğe ihtiyaç duyan öğrencilerin velileriyle görüşülecek ve bu öğrenciler destekleme ve yetiştirme kurslarına yönlendirilecektir.'].concat(D.profil.includes('bep') ? [PROFIL.find(x => x.id === 'bep').o] : []) },
+      rehber: { g: `Rehber öğretmen ${f.psk ? h(f.psk) : B('Ad Soyad')}, rehberlik servisinin şubeyle ilgili çalışmaları hakkında bilgi verdi. Rehberlik servisine yönlendirilmesi gereken öğrencilerin belirlenmesi ve velilerle düzenli iletişim kurulması gerektiği vurgulandı.`, k: ['Rehberlik servisine yönlendirilmesi gereken öğrenciler sınıf rehber öğretmeni aracılığıyla bildirilecek; velilerle düzenli iletişim kurulacaktır.'] },
+      ortak: { g: 'Öğretmenlerin sınıf kuralları, ödev ve sınav uygulamalarında ortak tutum sergilemesinin önemi vurgulandı. Öğrencilerin ödev yükünün dengelenmesi için ödevlerin aynı günlerde yoğunlaşmamasına dikkat edilmesi gerektiği belirtildi.', k: ['Ödev ve sınav tarihleri öğretmenler arasında paylaşılarak öğrencinin iş yükü dengelenecektir.'] },
+      dilek: { g: `Kurul başkanı ${baskan}, katılımları için öğretmenlere teşekkür ederek toplantıyı kapattı.` }
+    };
+    const sec = gundem().filter(g => !D.kapali.includes(g.id));
+    const kararlar = sec.flatMap(g => [].concat(G[g.id].k || []));
+    const imzalar = [{ ad: f.rehberOgr, u: 'Sınıf Rehber Öğretmeni' }, { ad: f.psk, u: 'Rehber Öğretmen' }, ...ogretmenler.map(o => ({ ad: o.ad, u: o.ders + ' Öğretmeni' }))];
+    return `${ust()}
+      <h3 class="zt-baslik">${h(f.yil || yilVars)} EĞİTİM-ÖĞRETİM YILI<br>${BUYUK(DONEM[D.donem])} ${sinifAd()} SINIFI<br>ŞUBE ÖĞRETMENLER KURULU TOPLANTI TUTANAĞI</h3>
+      <table class="zt-bilgi">
+        <tr><th>Tarih</th><td>${tarihYaz(f.tarih)}</td><th>Saat</th><td>${f.saat ? h(f.saat) : B('..:..')}</td></tr>
+        <tr><th>Yer</th><td>${f.yer ? h(f.yer) : B('toplantı yeri')}</td><th>Öğrenci Sayısı</th><td>${f.ogrSay ? h(f.ogrSay) : B('..')}</td></tr>
+        <tr><th>Katılanlar</th><td colspan="3">${katilan.join(', ') || B('katılımcılar')}</td></tr>
+      </table>
+      <h4>I. GÜNDEM MADDELERİ</h4>
+      <ol>${sec.map(g => `<li>${h(g.b)}</li>`).join('')}</ol>
+      <h4>II. GÜNDEM MADDELERİNİN GÖRÜŞÜLMESİ</h4>
+      ${sec.map((g, i) => `<p><b>${i + 1}. ${h(g.b)}:</b> ${G[g.id].g}</p>`).join('')}
+      <h4>III. ALINAN KARARLAR</h4>
+      <ol>${kararlar.map(x => `<li>${x}</li>`).join('')}</ol>
+      <div class="zt-imzalar">${imzalar.map(o => `<div>${o.ad ? h(o.ad) : B('Ad Soyad')}<br>${h(o.u)}<br><span class="zt-imza">İmza</span></div>`).join('')}</div>
+      <div class="zt-onay">${tarihYaz(f.tarih)}<br><br>${baskan}<br>${h(f.unvan)}<br>Kurul Başkanı</div>`;
+  }
+
+  function formCiz() {
+    document.querySelectorAll('[data-mod]').forEach(x => x.hidden = x.dataset.mod !== D.mod);
+    document.querySelectorAll('#skMod [data-m]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.m === D.mod)));
+    document.querySelectorAll('#skDonem [data-d]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.d === D.donem)));
+    $('skProfil').innerHTML = PROFIL.map(p => `<label><input type="checkbox" data-p="${p.id}" ${D.profil.includes(p.id) ? 'checked' : ''}> ${h(p.b)}</label>`).join('');
+    $('skGundem').innerHTML = gundem().map(g => `<label><input type="checkbox" data-g="${g.id}" ${D.kapali.includes(g.id) ? '' : 'checked'}> ${h(g.b)}</label>`).join('');
+    $('skZor').placeholder = ZOR[D.f.sinif] ? ZOR[D.f.sinif].replace('örn.', 'Örn.') : '';
+  }
+  const belgeCiz = () => { belge.innerHTML = D.mod === 'rapor' ? rapor() : tutanak(); };
+  const hepsi = () => { formCiz(); belgeCiz(); };
+
+  $('skMod').addEventListener('click', e => { const b = e.target.closest('[data-m]'); if (!b) return; D.mod = b.dataset.m; kaydet(); hepsi(); });
+  $('skDonem').addEventListener('click', e => { const b = e.target.closest('[data-d]'); if (!b) return; D.donem = b.dataset.d; kaydet(); hepsi(); });
+  const degisti = e => {
+    const el = e.target;
+    if (el.name) { D.f[el.name] = el.value; if (el.name === 'sinif') $('skZor').placeholder = ZOR[el.value].replace('örn.', 'Örn.'); }
+    else if (el.dataset.p) D.profil = [...document.querySelectorAll('#skProfil input:checked')].map(x => x.dataset.p);
+    else if (el.dataset.g) D.kapali = [...document.querySelectorAll('#skGundem input:not(:checked)')].map(x => x.dataset.g);
+    kaydet(); belgeCiz();
+  };
+  form.addEventListener('input', degisti);
+  form.addEventListener('change', e => { if (e.target.tagName === 'SELECT') degisti(e); });
+  $('skTemizle').onclick = () => { if (!confirm('Formdaki bilgiler silinsin mi?')) return; try { localStorage.removeItem(KEY); } catch (e) {} location.reload(); };
+
+  // --- Çıktılar ---
+  const dosyaAdi = () => `SOK-${D.mod === 'rapor' ? 'Matematik-Raporu' : 'Tutanagi'}-${(D.f.sinif || '')}${(D.f.sube || '')}-${DONEM[D.donem].replace(/[. ]+/g, '-')}`.replace(/-+/g, '-');
+  $('skYazdir').onclick = () => { try { window.print(); } catch (e) { toast('Yazdırma bu cihazda desteklenmiyor. Word olarak indirmeyi dene.'); } };
+  $('skWord').onclick = async () => {
+    const icerik = belge.cloneNode(true);
+    icerik.querySelectorAll('.zt-bos').forEach(s => s.replaceWith(document.createTextNode(s.textContent)));
+    const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>ŞÖK</title>
+<style>@page{size:A4;margin:2cm}body{font-family:'Times New Roman',serif;font-size:12pt;line-height:1.4}h3,.zt-ust{text-align:center;font-weight:bold}h3{font-size:12pt}h4{font-size:12pt;margin:12pt 0 4pt}p{text-align:justify;margin:0 0 6pt}table{border-collapse:collapse;width:100%}th,td{border:1px solid #000;padding:4pt 6pt;text-align:left;font-size:11pt}.zt-imzalar{margin-top:24pt}.zt-imzalar div{display:inline-block;width:32%;text-align:center;vertical-align:top;margin-bottom:18pt}.zt-imza{color:#888}.zt-onay{text-align:center;margin-top:18pt}.zt-sag{text-align:right}</style></head><body>${icerik.innerHTML}</body></html>`;
+    const blob = new Blob(['﻿', html], { type: 'application/msword' });
+    const ad = dosyaAdi() + '.doc';
+    try {
+      const file = new File([blob], ad, { type: 'application/msword' });
+      if (navigator.canShare && navigator.canShare({ files: [file] }) && /iPhone|iPad|Macintosh/.test(navigator.userAgent) && 'ontouchend' in document) { await navigator.share({ files: [file], title: ad }); return; }
+    } catch (e) { if (e && e.name === 'AbortError') return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = ad;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    toast('Word dosyası indirildi 📝');
+  };
+  $('skKopya').onclick = async () => {
+    try { await navigator.clipboard.writeText(belge.innerText); toast('Metin kopyalandı 📋'); }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(belge); const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy'); toast('Metin kopyalandı 📋'); }
+  };
+
+  hepsi();
+})();
+</script>
+</body>
+</html>

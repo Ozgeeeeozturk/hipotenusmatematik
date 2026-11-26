@@ -1306,3 +1306,7 @@ button.bd-top{cursor:pointer}
   .zt-belge{position:absolute;left:0;top:0;width:100%;margin:0;padding:0;box-shadow:none;border-radius:0}
   .zt-bos{background:none;border:0;padding:0}
 }
+.zt-sag{text-align:right}
+.zt-grup{display:grid;gap:10px}
+.zt-form select{font:700 .95rem 'Nunito',sans-serif;border:2px solid var(--lilac);border-radius:10px;padding:7px 9px;color:var(--ink);background:#fff;width:100%}
+.kz-evrak{display:flex;flex-wrap:wrap;gap:8px}
