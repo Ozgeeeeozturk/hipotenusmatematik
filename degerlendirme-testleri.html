@@ -18,6 +18,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="games.css">
+<style>
+  .cevap-back .modal{max-height:calc(100dvh - 32px);overflow:auto}
+  .cevap-izgara{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+  .cevap-izgara section{border:2px solid var(--c);border-radius:14px;padding:10px 12px;display:grid;gap:4px}
+  .cevap-izgara section b{font-family:'Baloo 2',cursive;color:var(--c);font-size:1.05rem}
+  .cevap-izgara span{display:flex;justify-content:space-between;font-weight:800;border-bottom:1px dashed #E5DFF0;padding:2px 0}
+  .cevap-izgara span i{font-style:normal;color:var(--muted)}
+  .cevap-cozum summary{cursor:pointer;font-weight:800;color:var(--lilac-dark)}
+  .cevap-cozum p{font-size:.9rem;margin-top:6px;color:var(--ink)}
+  @media print{
+    body > *:not(.cevap-back){display:none !important}
+    .cevap-back{position:static;background:none;padding:0}
+    .cevap-back .modal{max-width:none !important;max-height:none;box-shadow:none;border:0}
+    .cevap-back .modal-actions{display:none}
+  }
+</style>
 </head>
 <body>
 
@@ -44,7 +60,7 @@
 
 <main class="wrap" style="padding-bottom:48px">
   <div class="page-head">
-    <div><h1>Değerlendirme Testleri</h1><p>Dört aşamalı testler: Keşif → Kavrayış → Meydan Okuma → Zirve. Cevap anahtarları ayrı PDF’tedir.</p></div>
+    <div><h1>Değerlendirme Testleri</h1><p>Dört aşamalı testler: Keşif → Kavrayış → Meydan Okuma → Zirve. Cevap anahtarları yalnızca öğretmen hesabıyla görünür.</p></div>
   </div>
   <div class="filters" role="group" aria-label="Sınıf">
     <button class="chip" data-grade="" aria-pressed="true">Tüm sınıflar</button>
@@ -74,7 +90,7 @@
         <div class="act-meta"><span class="tag">${esc(w.unit)}</span><span class="tag">${w.info}</span></div>
         <div class="ws-btns">
           <a class="btn btn-yellow" href="${w.pdf}" target="_blank" rel="noopener">📄 Aç ve Yazdır</a>
-          <a class="btn btn-ghost-dark" href="${w.pdf}" download>⬇ İndir</a>${w.cevap ? `<a class="btn btn-ghost-dark" href="${w.cevap}" target="_blank" rel="noopener">🔑 Cevap Anahtarı</a>` : ''}
+          <a class="btn btn-ghost-dark" href="${w.pdf}" download>⬇ İndir</a>${w.cevapId ? `<button class="btn btn-ghost-dark" type="button" data-cevap="${w.cevapId}">${ogretmen() ? '🔑' : '🔒'} Cevap Anahtarı</button>` : ''}
         </div>
       </div>
     </article>`;
@@ -86,7 +102,46 @@
       : '<div class="empty"><b>Bu sınıf için henüz test yok</b><p>Yeni testler eklendikçe burada görünecek.</p></div>';
   }
   document.querySelectorAll('[data-grade]').forEach(c => c.addEventListener('click', () => { grade = c.dataset.grade; render(); }));
+  document.getElementById('list').addEventListener('click', e => { const b = e.target.closest('[data-cevap]'); if (b) cevapAc(b.dataset.cevap, b); });
   render();
+  // Oturum arkada doğrulanınca (ör. süresi dolmuşsa) kilit simgesi güncellensin
+  if (Auth.ready) Auth.refresh().then(render).catch(() => {});
+
+  // ---- Cevap anahtarı: yalnızca öğretmen hesapları (Supabase RLS: supabase/cevap-anahtarlari.sql) ----
+  function ogretmen() { const u = Auth.current(); return !!(u && u.role === 'ogretmen'); }
+  function pencere(ic, genis) {
+    const back = document.createElement('div');
+    back.className = 'modal-back cevap-back';
+    back.innerHTML = `<div class="modal modal-mint" role="dialog" aria-modal="true" style="max-width:${genis ? 720 : 400}px;border-top-color:var(--lilac-dark)"><div class="modal-body">${ic}</div></div>`;
+    document.body.appendChild(back);
+    const close = () => { back.remove(); document.removeEventListener('keydown', onKey); };
+    const onKey = e => { if (e.key === 'Escape') close(); };
+    document.addEventListener('keydown', onKey);
+    back.addEventListener('click', e => { if (e.target === back || e.target.closest('[data-kapat]')) close(); });
+    return back;
+  }
+  async function cevapAc(id, btn) {
+    if (!ogretmen()) {
+      const girisli = !!Auth.current();
+      pencere(`<h3>🔒 Öğretmenlere özel</h3>
+        <p>${girisli ? 'Cevap anahtarları yalnızca <b>öğretmen hesaplarında</b> görünür. Şu an öğrenci hesabıyla giriş yapmışsın.' : 'Cevap anahtarını görmek için <b>öğretmen hesabınızla</b> giriş yapın.'}</p>
+        <div class="modal-actions"><button class="btn btn-plain" data-kapat>Kapat</button>${girisli ? '' : '<a class="btn btn-yellow" href="giris.html" style="justify-content:center">Giriş Yap</a>'}</div>`);
+      return;
+    }
+    btn.disabled = true;
+    try {
+      const { data, error } = await sb.from('cevap_anahtarlari').select('baslik,cevaplar').eq('test', id).maybeSingle();
+      if (error) throw error;
+      if (!data) throw new Error('bulunamadi');
+      const A = data.cevaplar.asamalar;
+      pencere(`<h3>🔑 ${esc(data.baslik)}</h3>
+        <div class="cevap-izgara">${A.map(a => `<section style="--c:${a.renk}"><b>${esc(a.ad)}</b>${a.sorular.map(s => `<span><i>${s.no}.</i>${s.c}</span>`).join('')}</section>`).join('')}</div>
+        <details class="cevap-cozum"><summary>Kısa çözümleri göster</summary>${A.flatMap(a => a.sorular).map(s => `<p><b>${s.no}. (${s.c})</b> ${esc(s.cz)}</p>`).join('')}</details>
+        <div class="modal-actions"><button class="btn btn-plain" data-kapat>Kapat</button><button class="btn btn-yellow" style="justify-content:center" onclick="this.closest('.cevap-back').querySelector('details').open=true;window.print()">🖨 Yazdır</button></div>`, true);
+    } catch (e) {
+      toast(e && e.message === 'bulunamadi' ? 'Bu testin cevap anahtarı henüz eklenmemiş.' : 'Cevap anahtarı açılamadı, internet bağlantını kontrol et.');
+    } finally { btn.disabled = false; }
+  }
 })();
 </script>
 </body>
