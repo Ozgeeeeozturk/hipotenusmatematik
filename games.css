@@ -490,80 +490,93 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .g-options.cu-opts{grid-template-columns:repeat(3,1fr);margin-top:12px}
 .cu-table{margin-top:12px}
 @media (max-width:640px){.cu-info{grid-template-columns:1fr}.cu-len{font-size:22px}.cu-pt{font-size:24px}.g-options.cu-opts{grid-template-columns:1fr}}
-/* Öğretmen Masası · Kazanımlar */
-.kz-main{padding-bottom:64px}
-.kz-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
-.kz-grades{display:flex;flex-wrap:wrap;gap:8px}
-.kz-search{flex:1 1 240px;max-width:380px}
-.kz-search input{width:100%;padding:11px 16px;border-radius:999px;border:2px solid var(--lilac-light);font:700 .95rem 'Nunito',sans-serif;background:#fff;color:var(--ink)}
-.kz-search input:focus{outline:none;border-color:var(--lilac)}
-.kz-prog-txt{font-size:.92rem;color:var(--muted);margin-bottom:6px}
-.kz-prog-txt b{color:var(--ink)}
-.kz-prog-txt span{font-weight:800;color:#2E9E78}
-.kz-prog{height:10px;border-radius:999px;background:#EDE8F5;overflow:hidden;margin-bottom:12px}
-.kz-prog i{display:block;height:100%;background:linear-gradient(90deg,var(--mint-dark),var(--mint));border-radius:999px;transition:width .3s}
-.kz-results{background:#fff;border:2px solid var(--lilac-light);border-radius:16px;padding:10px;margin-bottom:12px;display:grid;gap:6px}
+/* Öğretmen Masası · Kazanımlar (sade görünüm) */
+.kz-main{padding-bottom:72px}
+.kz-panel{background:linear-gradient(135deg,#8E6CC9 0%,#7B4FA8 55%,#4F9C8A 100%);border-radius:24px;padding:16px;color:#fff;box-shadow:var(--shadow);margin:6px 0 14px}
+.kz-grades{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.kz-grades .chip{flex:0 0 auto;background:rgba(255,255,255,.16);border-color:transparent;color:#fff;box-shadow:none}
+.kz-grades .chip[aria-pressed="true"]{background:var(--yellow);color:var(--ink);border-color:var(--yellow-dark);box-shadow:0 3px 0 var(--yellow-dark)}
+.kz-weeknav{display:flex;align-items:center;gap:10px;margin-top:14px}
+.kz-nav{flex-shrink:0;width:46px;height:46px;border-radius:50%;border:0;background:#fff;font:800 1.7rem 'Nunito',sans-serif;color:var(--lilac-dark);cursor:pointer;line-height:1;box-shadow:0 3px 0 rgba(0,0,0,.15)}
+.kz-nav:disabled{opacity:.35;cursor:default}
+.kz-wk-now{flex:1;text-align:center;min-width:0}
+.kz-wno{display:inline-block;background:var(--yellow);color:var(--ink);font-weight:800;font-size:.82rem;border-radius:999px;padding:2px 12px}
+.kz-wk-now h2{font-family:'Baloo 2',cursive;font-size:1.9rem;line-height:1.1;margin:6px 0 4px;color:#fff}
+.kz-pick{position:relative;display:inline-flex;align-items:center;gap:4px;font-size:.85rem;font-weight:700;color:rgba(255,255,255,.92);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.kz-pick::after{content:"\25BE"}
+.kz-pick select{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;font-size:16px}
+.kz-jump{text-align:center;margin-top:10px}
+.kz-progrow{display:flex;align-items:center;gap:10px;margin-top:14px}
+.kz-progrow small{font-weight:800;font-size:.8rem;white-space:nowrap}
+.kz-prog{flex:1;height:8px;border-radius:999px;background:rgba(255,255,255,.25);overflow:hidden}
+.kz-prog i{display:block;height:100%;background:var(--mint);border-radius:999px;transition:width .3s}
+.kz-mini{border:2px solid var(--lilac);background:#fff;color:var(--lilac-dark);font:800 .88rem 'Nunito',sans-serif;border-radius:999px;padding:7px 14px;cursor:pointer}
+.kz-mini:hover{background:var(--lilac-light)}
+.kz-panel .kz-mini{border-color:transparent}
+.kz-banner{border-radius:14px;padding:10px 14px;font-weight:700;margin:0 0 12px;background:#fff;color:var(--lilac-dark)}
+.kz-banner.tatil{background:var(--yellow-light);color:#8A6A00}
+.kz-card{display:grid;gap:12px}
+.kz-print-title{display:none}
+.kz-block{border-radius:20px;padding:14px 16px;box-shadow:0 4px 14px rgba(123,79,168,.08)}
+.kz-block.y{background:var(--yellow-light);border:2px solid #FFE58A}
+.kz-block.m{background:var(--mint-light);border:2px solid var(--mint)}
+.kz-block.l{background:var(--lilac-light);border:2px solid var(--lilac)}
+.kz-block.w{background:#fff;border:2px solid var(--lilac-light)}
+.kz-bh{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.kz-bh h3{font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--ink);line-height:1.1}
+.kz-ic{display:grid;place-items:center;width:34px;height:34px;border-radius:11px;background:#fff;font-size:1.05rem;flex-shrink:0}
+.kz-saat{margin-left:auto;font-weight:800;font-size:.8rem;background:#fff;border-radius:999px;padding:3px 10px;color:var(--muted);white-space:nowrap}
+.kz-temas{display:flex;flex-wrap:wrap;gap:4px 14px}
+.kz-tema{font-family:'Baloo 2',cursive;font-size:1.2rem;font-weight:800;color:#6A5200;line-height:1.2}
+.kz-konu{margin-top:6px;font-weight:700;line-height:1.45}
+.kz-konu b{color:#8A6A00}
+.kz-day{display:inline-block;margin-top:8px;background:#fff;border-radius:999px;padding:4px 12px;font-weight:800;font-size:.85rem;color:var(--danger)}
+.kz-outs{list-style:none;display:grid;gap:8px}
+.kz-outs li{background:#fff;border-radius:14px;padding:10px 12px;font-weight:700;line-height:1.45}
+.kz-outs code,.kz-results code{display:inline-block;background:var(--mint-dark);color:#fff;border-radius:8px;padding:1px 8px;margin:0 6px 4px 0;font:800 .75rem 'Nunito',sans-serif;vertical-align:middle}
+.kz-steps{list-style:none;display:grid;gap:8px}
+.kz-steps li{display:flex;gap:10px;align-items:flex-start;line-height:1.45;font-weight:600}
+.kz-steps b{flex-shrink:0;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--lilac-dark);color:#fff;font-size:.85rem}
+.kz-fold .kz-more{display:none}
+.kz-block.l .kz-mini{margin-top:10px}
+.kz-tools{display:flex;flex-wrap:wrap;gap:8px}
+.kz-tool{display:inline-flex;align-items:center;gap:6px;background:var(--lilac-light);border-radius:14px;padding:8px 14px;font-weight:800;font-size:.9rem;color:var(--lilac-dark)}
+.kz-tool:hover{background:var(--yellow-light)}
+.kz-extra{background:#fff;border-radius:18px;border:2px solid var(--lilac-light)}
+.kz-extra summary{list-style:none;cursor:pointer;padding:12px 16px;font-weight:800;color:var(--lilac-dark);display:flex;align-items:center;gap:8px}
+.kz-extra summary small{font-weight:700;color:var(--muted)}
+.kz-extra summary::-webkit-details-marker{display:none}
+.kz-extra summary::after{content:"\25BE";margin-left:auto;color:var(--muted);transition:transform .2s}
+.kz-extra[open] summary::after{transform:rotate(180deg)}
+.kz-extra > div{padding:0 16px 14px}
+.kz-extra h4{font-size:.9rem;margin:10px 0 6px;color:var(--ink)}
+.kz-chips{display:flex;flex-wrap:wrap;gap:6px}
+.kz-chips span{background:#F6F3FA;border-radius:999px;padding:3px 10px;font-size:.82rem;font-weight:700;color:var(--muted)}
+.kz-note label{display:block;font-weight:800;margin-bottom:6px}
+.kz-note small{font-weight:700;color:var(--muted)}
+.kz-note textarea{width:100%;border:2px dashed var(--lilac);border-radius:14px;padding:10px 12px;font:600 .95rem 'Nunito',sans-serif;resize:vertical;background:#fff;color:var(--ink)}
+.kz-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.kz-done{border:0;background:var(--mint-dark);color:#fff;font:800 .95rem 'Nunito',sans-serif;border-radius:999px;padding:10px 18px;cursor:pointer;box-shadow:0 3px 0 #1F7558}
+.kz-done.on{background:#fff;color:var(--mint-dark);box-shadow:inset 0 0 0 2px var(--mint-dark)}
+.kz-searchbox{margin-top:16px;background:#fff;border-radius:18px;border:2px solid var(--lilac-light)}
+.kz-searchbox summary{list-style:none;cursor:pointer;padding:12px 16px;font-weight:800;color:var(--lilac-dark)}
+.kz-searchbox summary::-webkit-details-marker{display:none}
+.kz-searchbox input{display:block;width:calc(100% - 32px);margin:0 16px 12px;padding:10px 14px;border-radius:999px;border:2px solid var(--lilac-light);font:700 16px 'Nunito',sans-serif;color:var(--ink)}
+.kz-searchbox input:focus{outline:none;border-color:var(--lilac)}
+.kz-results{display:grid;gap:6px;padding:0 12px 12px}
 .kz-results > b{font-size:.85rem;color:var(--muted);padding:0 6px}
 .kz-results button{text-align:left;border:0;background:#F6F3FA;border-radius:12px;padding:8px 12px;font:700 .9rem 'Nunito',sans-serif;color:var(--ink);cursor:pointer;line-height:1.4}
 .kz-results button:hover{background:var(--yellow-light)}
-.kz-results button span{display:inline-block;background:var(--lilac);color:#fff;border-radius:999px;padding:0 8px;margin-right:6px;font-size:.78rem}
-.kz-results code,.kz-out code{display:inline-block;background:#2E9E78;color:#fff;border-radius:8px;padding:1px 8px;font:800 .8rem 'Nunito',sans-serif}
-.kz-strip-wrap{display:flex;align-items:center;gap:6px}
-.kz-strip{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;padding:8px 2px 14px;flex:1;scrollbar-width:thin}
-.kz-nav{flex-shrink:0;width:38px;height:38px;border-radius:50%;border:2px solid var(--lilac-light);background:#fff;font:800 1.4rem 'Nunito',sans-serif;color:var(--lilac-dark);cursor:pointer;line-height:1}
-.kz-nav:disabled{opacity:.35;cursor:default}
-.kz-wk{position:relative;flex:0 0 auto;scroll-snap-align:center;min-width:104px;border:2px solid var(--lilac-light);background:#fff;border-radius:16px;padding:9px 10px;cursor:pointer;display:grid;gap:2px;text-align:center;font-family:'Nunito',sans-serif;color:var(--ink)}
-.kz-wk b{font-family:'Baloo 2',cursive;font-size:1rem;line-height:1.1}
-.kz-wk small{font-size:.74rem;font-weight:700;color:var(--muted);white-space:nowrap}
-.kz-wk.on{border-color:var(--mint-dark);background:var(--mint-light);box-shadow:0 3px 0 var(--mint-dark)}
-.kz-wk.ok::after{content:"\2713";position:absolute;top:-7px;right:-5px;width:20px;height:20px;border-radius:50%;background:#2E9E78;color:#fff;font-size:.75rem;font-weight:800;display:grid;place-items:center}
-.kz-wk.now{border-color:var(--yellow)}
-.kz-now{position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);background:var(--yellow);color:var(--ink);font-style:normal;font-size:.62rem;font-weight:800;border-radius:999px;padding:1px 7px;white-space:nowrap}
-.kz-sp{flex:0 0 auto;display:grid;place-items:center;min-width:48px;border-radius:14px;background:#F6F3FA;color:var(--muted);font-size:1.1rem;padding:6px}
-.kz-sp small{font-size:.65rem;font-weight:800}
-.kz-sp.tatil{background:#FFF6D6}
-.kz-jump{text-align:center;margin:4px 0 8px}
-.kz-banner{border-radius:14px;padding:10px 14px;font-weight:700;margin:6px 0 10px;background:#F6F3FA;color:var(--lilac-dark)}
-.kz-banner.tatil{background:#FFF6D6;color:#8A6A00}
-.kz-card{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:18px;margin-top:6px}
-.kz-head{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;justify-content:space-between;border-bottom:2px dashed var(--mint);padding-bottom:12px;margin-bottom:6px}
-.kz-wno{display:inline-block;background:var(--lilac);color:#fff;font-weight:800;font-size:.8rem;border-radius:999px;padding:2px 10px}
-.kz-head h2{font-family:'Baloo 2',cursive;font-size:1.6rem;line-height:1.1;margin:4px 0 2px;color:var(--ink)}
-.kz-head p{color:var(--muted);font-weight:700;font-size:.9rem}
-.kz-done{border:2px solid var(--mint-dark);background:#fff;color:#2E9E78;font:800 .92rem 'Nunito',sans-serif;border-radius:999px;padding:9px 16px;cursor:pointer}
-.kz-done.on{background:#2E9E78;color:#fff}
-.kz-sec{border-bottom:1px solid #F0ECF6}
-.kz-sec summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:12px 4px;font-family:'Baloo 2',cursive;font-weight:800;font-size:1.08rem;color:var(--lilac-dark)}
-.kz-sec summary::-webkit-details-marker{display:none}
-.kz-sec summary::after{content:"\25BE";margin-left:auto;color:var(--muted);transition:transform .2s}
-.kz-sec[open] summary::after{transform:rotate(180deg)}
-.kz-ic{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--mint-light);font-size:1.05rem;flex-shrink:0}
-.kz-body{padding:0 4px 14px 48px}
-.kz-temas{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.kz-tema{background:var(--yellow-light);border-radius:10px;padding:5px 12px;font-weight:800}
-.kz-link{display:inline-block;font-weight:800;font-size:.88rem;color:var(--lilac-dark);background:#F6F3FA;border-radius:999px;padding:4px 12px;margin:2px 0}
-.kz-link:hover{background:var(--yellow-light)}
-.kz-konu{font-weight:700}
-.kz-out{background:#F7FBF9;border:2px solid var(--mint-light);border-radius:14px;padding:10px 12px;margin-bottom:8px}
-.kz-out code{margin-bottom:4px}
-.kz-out p{font-weight:700;line-height:1.45}
-.kz-ul{margin:0;padding-left:18px;display:grid;gap:4px;line-height:1.45}
-.kz-days .kz-ul{padding-left:0;list-style:none}
-.kz-note{margin-top:14px}
-.kz-note label{display:block;font-weight:800;margin-bottom:6px}
-.kz-note small{font-weight:700;color:var(--muted)}
-.kz-note textarea{width:100%;border:2px dashed var(--lilac);border-radius:14px;padding:10px 12px;font:600 .95rem 'Nunito',sans-serif;resize:vertical;background:#FCFBFE;color:var(--ink)}
-.kz-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.kz-results button span{display:inline-block;background:var(--lilac-dark);color:#fff;border-radius:999px;padding:0 8px;margin-right:6px;font-size:.78rem}
 .kz-src{font-size:.8rem;color:var(--muted);margin-top:14px;text-align:center}
 .kz-src a{text-decoration:underline}
-@media (max-width:640px){.kz-body{padding-left:4px}.kz-head h2{font-size:1.35rem}.kz-card{padding:14px}.kz-search{max-width:none}}
+@media (max-width:640px){.kz-panel{padding:14px 12px}.kz-wk-now h2{font-size:1.5rem}.kz-nav{width:40px;height:40px}.kz-block{padding:12px}}
 @media print{
-  .site-header,.bottom-nav,.kz-top,.kz-prog,.kz-prog-txt,.kz-strip-wrap,.kz-jump,.kz-actions,.kz-done,#kzResults,.page-head p,.kz-link,.toast{display:none!important}
-  body{background:#fff!important}.kz-card{box-shadow:none;padding:0}.kz-note textarea{border:1px solid #ccc}
-  .kz-sec summary::after{display:none}
+  .site-header,.bottom-nav,.kz-panel,.kz-actions,.kz-searchbox,.kz-banner,.kz-mini,.page-head p,.kz-block.w,.toast{display:none!important}
+  body{background:#fff!important}.kz-print-title{display:block;font-weight:800;font-size:1.1rem}
+  .kz-fold .kz-more{display:flex}.kz-block{box-shadow:none}.kz-note textarea{border:1px solid #ccc}
+  .kz-extra summary::after{display:none}
 }
-.kz-steps{list-style:none;padding-left:0}
-.kz-steps b{color:var(--lilac-dark)}
 /* Eşit Aralık Ustası */
 .ea-rule{display:inline-block;background:var(--yellow-light);border-radius:12px;padding:6px 14px;font-weight:800;margin:0 auto 10px}
 #stage .ea-rule{display:block;width:fit-content}

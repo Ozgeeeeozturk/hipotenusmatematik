@@ -33,16 +33,6 @@
 
   const done = () => new Set(store.get(K.done(grade), []));
   const title = s => s.toLocaleLowerCase('tr').replace(/(^|[\s(])(\S)/g, (a, b, c) => b + c.toLocaleUpperCase('tr'));
-  const nl = s => esc(s).replace(/\n/g, '<br>');
-  const list = s => `<ul class="kz-ul">${s.split('\n').filter(Boolean).map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
-  // Süreç bileşenleri: "a) …" ile başlamayan satırlar bir önceki maddenin devamıdır
-  const steps = s => {
-    const out = [];
-    for (const line of s.split('\n').map(x => x.trim()).filter(Boolean)) {
-      if (!out.length || /^[a-zçğıöşü]\s?\)/i.test(line) || /^(MAT|M)\.\d/.test(line)) out.push(line); else out[out.length - 1] += ' ' + line;
-    }
-    return `<ul class="kz-ul kz-steps">${out.map(x => { const m = x.match(/^([a-zçğıöşü])\s?\)\s*(.*)$/i); return m ? `<li><b>${m[1]})</b> ${esc(m[2])}</li>` : `<li>${esc(x)}</li>`; }).join('')}</ul>`;
-  };
   const temaName = (g, t) => siteUnit(g, t) || title(t).replace(/ Ve /g, ' ve ');
 
   // Hipotenüs içerikleriyle eşleştirme: tema adı → site temaları (5–7. sınıf, Maarif)
@@ -57,69 +47,95 @@
     const w = ws.find(x => x.no === week);
     const now = currentWeek(grade);
     const pct = Math.round(d.size / ws.length * 100);
+    const maarif = P.program === 'maarif';
+    const i = ws.indexOf(w);
 
-    const strip = P.items.map(it => it.no
-      ? `<button class="kz-wk${it.no === week ? ' on' : ''}${d.has(it.no) ? ' ok' : ''}${it.no === now ? ' now' : ''}" data-w="${it.no}" aria-label="${it.no}. hafta, ${esc(it.tarih || '')}${d.has(it.no) ? ', işlendi' : ''}">
-          <b>${it.no}. Hafta</b><small>${esc(it.tarih || '')}</small>${it.no === now ? '<i class="kz-now">Bu hafta</i>' : ''}</button>`
-      : `<span class="kz-sp ${it.ozel}" title="${esc(it.metin)}">${it.ozel === 'tatil' ? '🏖️' : '🏫'}<small>${it.ozel === 'tatil' ? 'Tatil' : 'OTP'}</small></span>`).join('');
-
-    // Bu haftadan önceki özel satırlar (tatil / okul temelli planlama) bilgi olarak
+    // Bu haftadan önceki özel satır (tatil / okul temelli planlama)
     const idx = P.items.indexOf(w), before = P.items[idx - 1];
     const special = before && before.ozel ? `<div class="kz-banner ${before.ozel}">${before.ozel === 'tatil' ? '🏖️' : '🏫'} ${esc(before.ozel === 'tatil' ? before.metin : 'Bu haftadan önce: Okul Temelli Planlama haftası')}</div>` : '';
 
-    const temas = (w.tema || []).map(t => {
-      const u = siteUnit(grade, t);
-      return `<span class="kz-tema">${esc(P.program === 'maarif' ? temaName(grade, t) : t)}</span>${u ? `<a class="kz-link" href="oyunlar.html?sinif=${grade}&amp;tema=${encodeURIComponent(u)}">🎲 Bu temanın oyunları</a>` : ''}`;
-    }).join('');
-    const sheets = (typeof WORKSHEETS !== 'undefined' ? WORKSHEETS : []).filter(s => s.grade === grade && (w.tema || []).some(t => siteUnit(grade, t) === s.unit));
+    const temas = (w.tema || []).map(t => `<span class="kz-tema">${esc(maarif ? temaName(grade, t) : t)}</span>`).join('');
+    const units = [...new Set((w.tema || []).map(t => siteUnit(grade, t)).filter(Boolean))];
+    const sheets = (typeof WORKSHEETS !== 'undefined' ? WORKSHEETS : []).filter(s => s.grade === grade && units.includes(s.unit));
+    const tools = [
+      ...units.map(u => `<a class="kz-tool" href="oyunlar.html?sinif=${grade}&amp;tema=${encodeURIComponent(u)}">🎲 <span>Bu temanın oyunları</span></a>`),
+      ...sheets.map(s => `<a class="kz-tool" href="${s.pdf}" target="_blank" rel="noopener">📄 <span>${esc(s.title)}</span></a>`)
+    ].join('');
 
-    const sec = (icon, label, body, open = true, cls = '') => body ? `<details class="kz-sec ${cls}"${open ? ' open' : ''}><summary><span class="kz-ic">${icon}</span>${label}</summary><div class="kz-body">${body}</div></details>` : '';
-    const outs = (w.ciktilar || []).map(c => `<div class="kz-out">${c.kod ? `<code>${esc(c.kod)}</code>` : ''}<p>${esc(c.metin)}</p></div>`).join('');
+    const outs = (w.ciktilar || []).map(c => `<li>${c.kod ? `<code>${esc(c.kod)}</code>` : ''}<span>${esc(c.metin)}</span></li>`).join('');
+
+    // Süreç bileşenleri: "a) …" ile başlamayan satırlar öncekinin devamı; ilk 3 adım görünür
+    const stepList = [];
+    for (const line of String(w.surec || '').split('\n').map(x => x.trim()).filter(Boolean)) {
+      if (!stepList.length || /^[a-zçğıöşü]\s?\)/i.test(line) || /^(MAT|M)\.\d/.test(line)) stepList.push(line); else stepList[stepList.length - 1] += ' ' + line;
+    }
+    const stepsHtml = stepList.map((x, k) => {
+      const m = x.match(/^([a-zçğıöşü])\s?\)\s*(.*)$/i);
+      return `<li${k >= 3 ? ' class="kz-more"' : ''}>${m ? `<b>${m[1]}</b><span>${esc(m[2])}</span>` : `<span>${esc(x)}</span>`}</li>`;
+    }).join('');
+
+    const chips = s => s ? `<div class="kz-chips">${s.split('\n').map(x => x.trim()).filter(Boolean).map(x => `<span>${esc(x)}</span>`).join('')}</div>` : '';
+    const extra = [['📝', 'Ölçme ve değerlendirme', w.olcme], ['🤝', 'Sosyal-duygusal beceriler', w.sdb], ['💎', 'Değerler', w.degerler], ['📖', 'Okuryazarlık becerileri', w.okuryazarlik]]
+      .filter(e => e[2]).map(e => `<h4>${e[0]} ${e[1]}</h4>${chips(e[2])}`).join('');
+
+    const opts = ws.map(x => `<option value="${x.no}"${x.no === week ? ' selected' : ''}>${x.no}. Hafta · ${esc(x.tarih || '')}${d.has(x.no) ? ' ✓' : ''}${x.no === now ? ' (bu hafta)' : ''}</option>`).join('');
 
     root.innerHTML = `
-      <div class="kz-top">
+      <section class="kz-panel">
         <div class="kz-grades" role="tablist" aria-label="Sınıf">${GRADES.map(g => `<button class="chip" role="tab" data-g="${g}" aria-pressed="${g === grade}">${g}. Sınıf</button>`).join('')}</div>
-        <div class="kz-search"><input type="search" id="kzQ" placeholder="🔍 Kazanım ara (ör. kesir, MAT.6.1)" value="${esc(query)}" aria-label="Kazanım ara"></div>
-      </div>
-      <p class="kz-prog-txt"><b>${grade}. Sınıf Matematik</b> · ${P.program === 'maarif' ? 'Türkiye Yüzyılı Maarif Modeli' : '2018 Öğretim Programı'} · <span>${d.size}/${ws.length} hafta işlendi</span></p>
-      <div class="kz-prog"><i style="width:${pct}%"></i></div>
-      <div id="kzResults"></div>
-      <div class="kz-strip-wrap">
-        <button class="kz-nav" id="kzPrev" aria-label="Önceki hafta">‹</button>
-        <div class="kz-strip" id="kzStrip">${strip}</div>
-        <button class="kz-nav" id="kzNext" aria-label="Sonraki hafta">›</button>
-      </div>
-      ${week !== now ? `<div class="kz-jump"><button class="btn btn-ghost-dark" id="kzNow">📍 Bu haftaya git (${now}. hafta)</button></div>` : ''}
+        <div class="kz-weeknav">
+          <button class="kz-nav" id="kzPrev" aria-label="Önceki hafta"${i <= 0 ? ' disabled' : ''}>‹</button>
+          <div class="kz-wk-now">
+            <span class="kz-wno">${w.no}. Hafta${w.no === now ? ' · Bu hafta' : ''}${d.has(w.no) ? ' · ✓ İşlendi' : ''}</span>
+            <h2>${esc(w.tarih || '')}</h2>
+            <label class="kz-pick"><span>Başka haftaya git</span><select id="kzSel" aria-label="Hafta seç">${opts}</select></label>
+          </div>
+          <button class="kz-nav" id="kzNext" aria-label="Sonraki hafta"${i >= ws.length - 1 ? ' disabled' : ''}>›</button>
+        </div>
+        ${week !== now ? `<div class="kz-jump"><button class="kz-mini" id="kzNow">📍 Bu haftaya dön (${now}. hafta)</button></div>` : ''}
+        <div class="kz-progrow"><div class="kz-prog"><i style="width:${pct}%"></i></div><small>${d.size}/${ws.length} hafta işlendi</small></div>
+      </section>
       ${special}
       <article class="kz-card" id="kzCard">
-        <header class="kz-head">
-          <div><span class="kz-wno">${w.no}. Hafta</span><h2>${esc(w.tarih || '')}</h2><p>${esc(title(w.ay || ''))}${w.saat ? ` · ${esc(w.saat)} ders saati` : ''}</p></div>
-          <button class="kz-done${d.has(w.no) ? ' on' : ''}" id="kzDone">${d.has(w.no) ? '✓ İşlendi' : '☐ İşlendi olarak işaretle'}</button>
-        </header>
-        ${sec('📘', P.program === 'maarif' ? 'Tema' : 'Ünite', `<div class="kz-temas">${temas}</div>`)}
-        ${sec('🎯', 'Konu / İçerik Çerçevesi', w.konu ? `<p class="kz-konu">${nl(w.konu)}</p>` : '')}
-        ${sec('✅', P.program === 'maarif' ? 'Öğrenme Çıktıları' : 'Kazanımlar', outs)}
-        ${sec('⏳', P.program === 'maarif' ? 'Süreç Bileşenleri' : 'Kazanım Açıklaması', w.surec ? steps(w.surec) : '')}
-        ${sec('📝', 'Ölçme ve Değerlendirme', w.olcme ? list(w.olcme) : '', false)}
-        ${sec('🤝', 'Sosyal-Duygusal Öğrenme Becerileri', w.sdb ? list(w.sdb) : '', false)}
-        ${sec('💎', 'Değerler', w.degerler ? list(w.degerler) : '', false)}
-        ${sec('📖', 'Okuryazarlık Becerileri', w.okuryazarlik ? list(w.okuryazarlik) : '', false)}
-        ${sec('📅', 'Belirli Gün ve Haftalar', w.gunler ? list(w.gunler) : '', true, 'kz-days')}
-        ${sheets.length ? sec('📄', 'Hipotenüs Çalışma Kâğıtları', sheets.map(s => `<a class="kz-link" href="${s.pdf}" target="_blank" rel="noopener">📄 ${esc(s.title)}</a>`).join(' ')) : ''}
+        <p class="kz-print-title">${grade}. Sınıf Matematik · ${w.no}. Hafta (${esc(w.tarih || '')})</p>
+        <div class="kz-block y">
+          <div class="kz-bh"><span class="kz-ic">📘</span><h3>${maarif ? 'Tema' : 'Ünite'}</h3>${w.saat ? `<small class="kz-saat">⏱ ${esc(w.saat)} ders saati</small>` : ''}</div>
+          <div class="kz-temas">${temas}</div>
+          ${w.konu ? `<p class="kz-konu"><b>Konu:</b> ${esc(w.konu).replace(/\n/g, ', ')}</p>` : ''}
+          ${w.gunler ? `<p class="kz-day">📅 ${esc(w.gunler).replace(/\n/g, ' · ')}</p>` : ''}
+        </div>
+        ${outs ? `<div class="kz-block m">
+          <div class="kz-bh"><span class="kz-ic">🎯</span><h3>Bu hafta öğrenciler…</h3></div>
+          <ul class="kz-outs">${outs}</ul>
+        </div>` : ''}
+        ${stepsHtml ? `<div class="kz-block l${stepList.length > 3 ? ' kz-fold' : ''}" id="kzSteps">
+          <div class="kz-bh"><span class="kz-ic">🪜</span><h3>${maarif ? 'Derste adım adım' : 'Kazanım açıklaması'}</h3></div>
+          <ol class="kz-steps">${stepsHtml}</ol>
+          ${stepList.length > 3 ? `<button class="kz-mini" id="kzAll">Tüm adımları göster (${stepList.length})</button>` : ''}
+        </div>` : ''}
+        ${tools ? `<div class="kz-block w">
+          <div class="kz-bh"><span class="kz-ic">🧰</span><h3>Hipotenüs’te bu hafta</h3></div>
+          <div class="kz-tools">${tools}</div>
+        </div>` : ''}
+        ${extra ? `<details class="kz-extra"><summary>📎 Diğer bilgiler <small>ölçme, beceriler, değerler</small></summary><div>${extra}</div></details>` : ''}
         <div class="kz-note">
-          <label for="kzNote">✏️ Bu hafta için notlarım <small>(yalnızca bu cihazda saklanır)</small></label>
-          <textarea id="kzNote" rows="3" placeholder="Örn. 5-B sınıfında çember etkinliğini yaptık, ödev: sayfa 42…">${esc(store.get(K.note(grade, w.no), ''))}</textarea>
+          <label for="kzNote">✏️ Notlarım <small>(yalnızca bu cihazda)</small></label>
+          <textarea id="kzNote" rows="2" placeholder="Örn. 6-B’de kesir kartlarıyla çalıştık…">${esc(store.get(K.note(grade, w.no), ''))}</textarea>
         </div>
         <div class="kz-actions">
-          <button class="btn btn-ghost-dark" id="kzCopy">📋 Kopyala</button>
-          <button class="btn btn-ghost-dark" id="kzPrint">🖨️ Yazdır</button>
+          <button class="kz-done${d.has(w.no) ? ' on' : ''}" id="kzDone">${d.has(w.no) ? '✓ İşlendi' : '☐ İşlendi olarak işaretle'}</button>
+          <button class="kz-mini" id="kzCopy">📋 Kopyala</button>
+          <button class="kz-mini" id="kzPrint">🖨️ Yazdır</button>
         </div>
       </article>
-      <p class="kz-src">Kaynak: MEB, 2026-2027 Eğitim Öğretim Yılı ${grade}. Sınıf Matematik Dersi Taslak Çerçeve Yıllık Planı (<a href="https://tymm.meb.gov.tr/taslak-cerceve-planlari/temel-egitim" target="_blank" rel="noopener">tymm.meb.gov.tr</a>). Zümre kararıyla haftalar değişebilir.</p>`;
+      <details class="kz-searchbox"${query ? ' open' : ''}>
+        <summary>🔍 Bir kazanımı ara</summary>
+        <input type="search" id="kzQ" placeholder="ör. kesir, MAT.6.1" value="${esc(query)}" aria-label="Kazanım ara">
+        <div id="kzResults"></div>
+      </details>
+      <p class="kz-src">Kaynak: MEB, 2026-2027 ${grade}. Sınıf Matematik Taslak Çerçeve Yıllık Planı (<a href="https://tymm.meb.gov.tr/taslak-cerceve-planlari/temel-egitim" target="_blank" rel="noopener">tymm.meb.gov.tr</a>) · ${maarif ? 'Türkiye Yüzyılı Maarif Modeli' : '2018 Öğretim Programı'}. Zümre kararıyla haftalar değişebilir.</p>`;
 
     bind();
-    const on = root.querySelector('.kz-wk.on');
-    if (on) on.scrollIntoView({ block: 'nearest', inline: 'center' });
     if (query) search(query);
     try { history.replaceState(null, '', `?sinif=${grade}&hafta=${week}`); } catch {}
   }
@@ -148,17 +164,21 @@
   }
 
   function bind() {
+    const go = n => { week = n; render(); };
     root.querySelectorAll('[data-g]').forEach(b => b.addEventListener('click', () => {
       grade = +b.dataset.g; store.set(K.grade, grade); week = currentWeek(grade); render();
     }));
-    root.querySelector('#kzStrip').addEventListener('click', e => { const b = e.target.closest('[data-w]'); if (b) { week = +b.dataset.w; render(); } });
     const ws = weeks(grade).map(w => w.no), i = ws.indexOf(week);
-    root.querySelector('#kzPrev').disabled = i <= 0;
-    root.querySelector('#kzNext').disabled = i >= ws.length - 1;
-    root.querySelector('#kzPrev').addEventListener('click', () => { if (i > 0) { week = ws[i - 1]; render(); } });
-    root.querySelector('#kzNext').addEventListener('click', () => { if (i < ws.length - 1) { week = ws[i + 1]; render(); } });
+    root.querySelector('#kzPrev').addEventListener('click', () => { if (i > 0) go(ws[i - 1]); });
+    root.querySelector('#kzNext').addEventListener('click', () => { if (i < ws.length - 1) go(ws[i + 1]); });
+    root.querySelector('#kzSel').addEventListener('change', e => go(+e.target.value));
     const nowBtn = root.querySelector('#kzNow');
-    if (nowBtn) nowBtn.addEventListener('click', () => { week = currentWeek(grade); render(); });
+    if (nowBtn) nowBtn.addEventListener('click', () => go(currentWeek(grade)));
+    const all = root.querySelector('#kzAll');
+    if (all) all.addEventListener('click', () => {
+      const s = root.querySelector('#kzSteps'), f = s.classList.toggle('kz-fold');
+      all.textContent = f ? `Tüm adımları göster (${s.querySelectorAll('li').length})` : 'Daha az göster';
+    });
     root.querySelector('#kzDone').addEventListener('click', () => {
       const d = done(); d.has(week) ? d.delete(week) : d.add(week);
       store.set(K.done(grade), [...d]); render();
@@ -167,13 +187,16 @@
     let tm; note.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(() => { note.value.trim() ? store.set(K.note(grade, week), note.value) : store.del(K.note(grade, week)); }, 300); });
     const q = root.querySelector('#kzQ');
     q.addEventListener('input', () => { query = q.value; search(query); });
-    root.querySelector('#kzResults').addEventListener('click', e => { const b = e.target.closest('[data-w]'); if (b) { week = +b.dataset.w; query = ''; render(); root.querySelector('#kzCard').scrollIntoView({ behavior: 'smooth', block: 'start' }); } });
+    root.querySelector('#kzResults').addEventListener('click', e => {
+      const b = e.target.closest('[data-w]');
+      if (b) { query = ''; go(+b.dataset.w); root.querySelector('.kz-panel').scrollIntoView({ block: 'start' }); }
+    });
     root.querySelector('#kzCopy').addEventListener('click', async () => {
       try { await navigator.clipboard.writeText(weekText()); toast('Haftanın planı kopyalandı 📋'); }
       catch { toast('Kopyalanamadı; metni seçip kopyalayabilirsin.'); }
     });
     root.querySelector('#kzPrint').addEventListener('click', () => {
-      root.querySelectorAll('.kz-sec').forEach(s => s.setAttribute('open', ''));
+      root.querySelector('.kz-extra')?.setAttribute('open', '');
       window.print();
     });
   }
