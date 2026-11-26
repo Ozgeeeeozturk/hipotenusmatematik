@@ -59,6 +59,7 @@
   if (!DB.ok()) return block('⚠️', 'Şu an açılamıyor', 'Bağlantı ayarlarında bir sorun var.');
   const me = await Auth.refresh().catch(() => Auth.current());
   if (!me) return block('🔐', 'Önce giriş yap', 'Etkinlik oluşturmak için öğretmen hesabınla giriş yapmalısın.', '<a class="btn btn-yellow" href="giris.html">Giriş Yap</a>');
+  if (me.role === 'ogretmen' && !isTeacher(me)) return block('⏳', 'Hesabın onay bekliyor', 'Öğretmen hesapları yönetici onayından geçiyor. Onaylandığında buradan etkinlik oluşturabileceksin. Bu sırada hazır oyunları kullanabilirsin.', '<a class="btn btn-yellow" href="oyunlar.html">Oyunlara Git</a>');
   if (me.role !== 'ogretmen') return block('🍎', 'Bu bölüm öğretmenler için', 'Etkinlikleri öğretmenler hazırlıyor. Sen hazır oyunları oynayabilirsin!', '<a class="btn btn-yellow" href="oyunlar.html">Oyunlara Git</a>');
 
   const blank = {

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Öğretmen Onayları | Hipotenüs</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2E9E78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="games.css">
+<style>
+  .onay-grup{margin-top:22px}
+  .onay-grup h2{font-family:'Baloo 2',cursive;font-size:1.3rem;display:flex;align-items:center;gap:8px}
+  .onay-grup h2 small{font:800 .8rem 'Nunito';background:var(--lilac-light);border-radius:99px;padding:2px 10px}
+  .onay-satir{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--white);border-radius:16px;padding:12px 16px;margin-top:10px;box-shadow:0 4px 14px rgba(45,36,64,.08)}
+  .onay-satir .kim{flex:1;min-width:200px}
+  .onay-satir .kim b{display:block;font-size:1.02rem}
+  .onay-satir .kim span{color:var(--muted);font-size:.88rem;word-break:break-all}
+  .onay-satir .btns{display:flex;gap:8px}
+  .onay-satir .btn{padding:8px 14px;font-size:.9rem}
+  .onay-bos{color:var(--muted);margin-top:8px}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <a href="index.html" class="logo" aria-label="Hipotenüs ana sayfa">
+      <svg viewBox="0 0 745 745" aria-hidden="true">
+        <rect width="745" height="745" rx="168" fill="#6E58BD"/>
+        <rect x="176" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <rect x="461" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <polygon points="461,346 461,485 322,485" fill="#8FDDC6"/>
+        <rect x="404" y="435" width="57" height="50" fill="#6E58BD"/>
+        <rect x="422" y="453" width="39" height="32" fill="#8FDDC6"/>
+        <line x1="489" y1="277" x2="260" y2="503" stroke="#FFD453" stroke-width="74" stroke-linecap="round"/>
+      </svg>
+      <span>Hipoten<b>ü</b>s</span>
+    </a>
+    <div class="bar-actions">
+      <a class="btn-login btn-ghost" href="index.html"><span aria-hidden="true">🏠</span><span class="lbl">Ana Sayfa</span></a>
+      <div id="userArea"></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" style="padding-bottom:48px">
+  <div class="page-head">
+    <div><h1>Öğretmen Onayları</h1><p>Öğretmen olarak kayıt olanlar burada görünür. Onayladığın hesaplar sınıf açabilir, etkinlik oluşturabilir ve cevap anahtarlarını görebilir.</p></div>
+  </div>
+  <div id="app" aria-live="polite"><div class="onay-bos">Yükleniyor…</div></div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="games.js"></script>
+<script>
+(async function () {
+  initPage();
+  const app = document.getElementById('app');
+  const bos = (b, p, btn = '') => `<div class="empty"><b>${b}</b><p>${p}</p>${btn}</div>`;
+  const me = await Auth.refresh().catch(() => Auth.current());
+  if (!me) { app.innerHTML = bos('Önce giriş yap', 'Bu sayfa yalnızca site yöneticisi içindir.', '<a class="btn btn-yellow" href="giris.html">Giriş Yap</a>'); return; }
+  if (!me.yonetici) { app.innerHTML = bos('Bu sayfa yöneticiler için', 'Öğretmen başvurularını yalnızca site yöneticisi görebilir.'); return; }
+  const tarih = d => new Date(d).toLocaleString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  let liste = [];
+  async function yukle() {
+    const { data, error } = await sb.from('ogretmenler').select('user_id,ad,eposta,durum,basvuru,karar').order('basvuru', { ascending: false });
+    if (error) { app.innerHTML = bos('Liste yüklenemedi', 'İnternet bağlantını kontrol et. Sorun sürerse Supabase’de <b>ogretmen-onay.sql</b> dosyasının çalıştırıldığından emin ol.'); return; }
+    liste = data; ciz();
+  }
+  const GRUP = [
+    { d: 'bekliyor', ad: '⏳ Onay bekleyenler', btn: r => `<button class="btn btn-yellow" data-k="onayli" data-id="${r.user_id}">✔ Onayla</button><button class="btn btn-plain" data-k="reddedildi" data-id="${r.user_id}">Reddet</button>` },
+    { d: 'onayli', ad: '✅ Onaylı öğretmenler', btn: r => r.user_id === me.id ? '<span class="tag">Sen</span>' : `<button class="btn btn-plain" data-k="bekliyor" data-id="${r.user_id}">Onayı kaldır</button>` },
+    { d: 'reddedildi', ad: '✖ Reddedilenler', btn: r => `<button class="btn btn-plain" data-k="onayli" data-id="${r.user_id}">Yine de onayla</button>` },
+  ];
+  function ciz() {
+    app.innerHTML = GRUP.map(g => { const r = liste.filter(x => x.durum === g.d);
+      return `<section class="onay-grup"><h2>${g.ad} <small>${r.length}</small></h2>${r.length ? r.map(x => `<div class="onay-satir">
+        <div class="kim"><b>${esc(x.ad || '(adsız)')}</b><span>${esc(x.eposta)} · başvuru: ${tarih(x.basvuru)}</span></div>
+        <div class="btns">${g.btn(x)}</div></div>`).join('') : '<p class="onay-bos">Şu an kimse yok.</p>'}</section>`; }).join('');
+  }
+  app.addEventListener('click', async e => {
+    const b = e.target.closest('[data-k]'); if (!b) return;
+    const kisi = liste.find(x => x.user_id === b.dataset.id);
+    if (b.dataset.k === 'reddedildi' && !confirm(`${kisi.ad || kisi.eposta} adlı başvuru reddedilsin mi?`)) return;
+    b.disabled = true;
+    const { error } = await sb.from('ogretmenler').update({ durum: b.dataset.k, karar: new Date().toISOString() }).eq('user_id', b.dataset.id);
+    if (error) { b.disabled = false; toast('Kaydedilemedi, tekrar dene.'); return; }
+    toast(b.dataset.k === 'onayli' ? 'Öğretmen hesabı onaylandı.' : b.dataset.k === 'reddedildi' ? 'Başvuru reddedildi.' : 'Onay kaldırıldı.');
+    yukle();
+  });
+  yukle();
+})();
+</script>
+</body>
+</html>

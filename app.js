@@ -79,16 +79,40 @@ const toProfile = user => user ? {
   grade: (user.user_metadata && user.user_metadata.grade) || null,
 } : null;
 
+// Onaylı öğretmen mi? (Sunucu tarafı kurallar da aynı onaya bakar; bu yalnızca ekranı ayarlar)
+const isTeacher = u => !!(u && u.role === 'ogretmen' && u.onay === 'onayli');
+
 const Auth = {
   ready: !!sb,
   // Sayfa hızlı açılsın diye son bilinen profil cihazda tutulur; Supabase oturumu arkada doğrular
   current() { return store.get('hip_profile', null); },
-  _save(user) { const p = toProfile(user); p ? store.set('hip_profile', p) : store.del('hip_profile'); return p; },
+  _save(user) {
+    const p = toProfile(user), eski = store.get('hip_profile', null);
+    // Onay durumu ayrı sorguyla gelir; aynı kullanıcıysa son bilineni koru
+    if (p && eski && eski.id === p.id) { p.onay = eski.onay; p.yonetici = eski.yonetici; }
+    p ? store.set('hip_profile', p) : store.del('hip_profile');
+    return p;
+  },
+  // Öğretmen onayı ve yöneticilik veritabanından okunur (supabase/ogretmen-onay.sql)
+  async _durum(p) {
+    if (!p || !sb) return p;
+    try {
+      const [o, y] = await Promise.all([
+        p.role === 'ogretmen' ? sb.from('ogretmenler').select('durum').eq('user_id', p.id).maybeSingle() : Promise.resolve({ data: null }),
+        sb.rpc('is_admin'),
+      ]);
+      if (!o.error) p.onay = o.data ? o.data.durum : (p.role === 'ogretmen' ? 'bekliyor' : null);
+      if (!y.error) p.yonetici = y.data === true;
+      const simdi = store.get('hip_profile', null);
+      if (simdi && simdi.id === p.id) store.set('hip_profile', p);
+    } catch {}
+    return p;
+  },
   _need() { if (!sb) throw new Error('Üyelik sistemi henüz ayarlanmadı.'); },
   async refresh() {
     if (!sb) { store.del('hip_profile'); return null; }
     const { data } = await sb.auth.getSession();
-    return this._save(data.session ? data.session.user : null);
+    return this._durum(this._save(data.session ? data.session.user : null));
   },
   async register({ name, email, password, role, grade }) {
     this._need();
@@ -104,13 +128,13 @@ const Auth = {
     if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0)
       throw new Error('Bu e-posta ile zaten bir hesap var. Giriş yapmayı dene.');
     if (!data.session) return { needsConfirm: true };
-    return { profile: this._save(data.user) };
+    return { profile: await this._durum(this._save(data.user)) };
   },
   async login(email, password) {
     this._need();
     const { data, error } = await sb.auth.signInWithPassword({ email: email.trim().toLowerCase(), password });
     if (error) throw new Error(trError(error));
-    return this._save(data.user);
+    return this._durum(this._save(data.user));
   },
   async resetPassword(email) {
     this._need();
@@ -137,7 +161,10 @@ const Auth = {
   },
   onChange(fn) {
     if (!sb) return;
-    sb.auth.onAuthStateChange((event, session) => { this._save(session ? session.user : null); fn(event); });
+    sb.auth.onAuthStateChange((event, session) => {
+      const p = this._save(session ? session.user : null); fn(event);
+      if (p && event === 'SIGNED_IN') setTimeout(() => this._durum(p).then(() => fn('DURUM')), 0);
+    });
   },
 };
 
@@ -253,7 +280,9 @@ function renderUserArea() {
     return;
   }
   const first = u.name.split(' ')[0];
-  const roleTxt = u.role === 'ogretmen' ? 'Öğretmen' : `${u.grade}. Sınıf Öğrencisi`;
+  const roleTxt = u.role === 'ogretmen'
+    ? (u.onay === 'onayli' ? 'Öğretmen' : u.onay === 'reddedildi' ? 'Öğretmen · başvuru onaylanmadı' : 'Öğretmen · onay bekliyor')
+    : `${u.grade}. Sınıf Öğrencisi`;
   box.innerHTML = `
     <div class="user-menu">
       <button class="user-chip" id="userChip" aria-haspopup="true" aria-expanded="false">
@@ -261,9 +290,12 @@ function renderUserArea() {
       </button>
       <div class="user-pop" id="userPop" hidden>
         <p>${esc(u.name)}</p><small>${roleTxt}</small>
-        ${u.role === 'ogretmen'
+        ${isTeacher(u)
           ? '<a class="pop-link" href="takip.html">📊 Öğrenci Takibi</a>'
-          : '<button class="pop-join" id="joinBtn">🏫 Sınıfa Katıl</button>'}
+          : u.role === 'ogretmen'
+            ? '<p class="pop-not">⏳ Öğretmen hesabın onaylandığında sınıf açma ve öğretmen araçları burada görünecek.</p>'
+            : '<button class="pop-join" id="joinBtn">🏫 Sınıfa Katıl</button>'}
+        ${u.yonetici ? '<a class="pop-link" href="ogretmen-onaylari.html">🛡 Öğretmen Onayları</a>' : ''}
         <button id="logoutBtn">↩ Çıkış Yap</button>
         <a class="pop-link" href="gizlilik.html">🔒 Gizlilik Politikası</a>
         <button class="danger" id="deleteBtn">🗑 Hesabımı Sil</button>

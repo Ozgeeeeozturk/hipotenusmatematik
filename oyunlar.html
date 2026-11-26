@@ -82,7 +82,7 @@
   const f = { grade: params.get('sinif') || '', template: params.get('tur') || '', unit: params.get('tema') || '', mine: params.get('benim') === '1' };
 
   const me = await Auth.refresh().catch(() => Auth.current());
-  const teacher = me && me.role === 'ogretmen';
+  const teacher = isTeacher(me);
   if (teacher) { $('newBtn').hidden = false; $('mineChip').hidden = false; }
   else f.mine = false;
   if (!f.grade && me && me.grade && !params.has('sinif')) f.grade = String(me.grade); // öğrenci kendi sınıfıyla başlar

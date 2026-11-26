@@ -199,7 +199,8 @@
   }
   function welcome(profile, isNew) {
     const first = profile.name.split(' ')[0];
-    try { sessionStorage.setItem('hip_flash', isNew ? `Aramıza hoş geldin, <b>${esc(first)}</b>! 🎉` : `Hoş geldin, <b>${esc(first)}</b>!`); } catch {}
+    const onayNotu = profile.role === 'ogretmen' && profile.onay !== 'onayli' ? ' Öğretmen hesabın onaylandığında öğretmen araçların açılacak.' : '';
+    try { sessionStorage.setItem('hip_flash', (isNew ? `Aramıza hoş geldin, <b>${esc(first)}</b>! 🎉` : `Hoş geldin, <b>${esc(first)}</b>!`) + onayNotu); } catch {}
     location.href = 'index.html';
   }
 
@@ -228,7 +229,7 @@
     busy(e.target, 'Hesap açılıyor…', async () => {
       try {
         const r = await Auth.register({ name: nm.value, email: em.value, password: pw.value, role, grade: gradeEl ? gradeEl.value : null });
-        if (r.needsConfirm) sent(`Hesabın oluşturuldu! <b>${esc(em.value.trim())}</b> adresine bir onay bağlantısı gönderdik. Bağlantıya tıkladıktan sonra giriş yapabilirsin.`);
+        if (r.needsConfirm) sent(`Hesabın oluşturuldu! <b>${esc(em.value.trim())}</b> adresine bir onay bağlantısı gönderdik. Bağlantıya tıkladıktan sonra giriş yapabilirsin.${role === 'ogretmen' ? '<br><br>🍎 Öğretmen hesapları ayrıca <b>yönetici onayından</b> geçer. Onaylandığında sınıf açma, etkinlik oluşturma ve cevap anahtarları açılır.' : ''}`);
         else welcome(r.profile, true);
       } catch (err) { fail(box, err.message, em); }
     });

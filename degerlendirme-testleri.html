@@ -108,7 +108,7 @@
   if (Auth.ready) Auth.refresh().then(render).catch(() => {});
 
   // ---- Cevap anahtarı: yalnızca öğretmen hesapları (Supabase RLS: supabase/cevap-anahtarlari.sql) ----
-  function ogretmen() { const u = Auth.current(); return !!(u && u.role === 'ogretmen'); }
+  function ogretmen() { return isTeacher(Auth.current()); }
   function pencere(ic, genis) {
     const back = document.createElement('div');
     back.className = 'modal-back cevap-back';
@@ -124,7 +124,9 @@
     if (!ogretmen()) {
       const girisli = !!Auth.current();
       pencere(`<h3>🔒 Öğretmenlere özel</h3>
-        <p>${girisli ? 'Cevap anahtarları yalnızca <b>öğretmen hesaplarında</b> görünür. Şu an öğrenci hesabıyla giriş yapmışsın.' : 'Cevap anahtarını görmek için <b>öğretmen hesabınızla</b> giriş yapın.'}</p>
+        <p>${!girisli ? 'Cevap anahtarını görmek için <b>öğretmen hesabınızla</b> giriş yapın.'
+          : Auth.current().role === 'ogretmen' ? 'Öğretmen hesabınız henüz <b>onaylanmadı</b>. Onaylandığında cevap anahtarları burada açılacak.'
+          : 'Cevap anahtarları yalnızca <b>öğretmen hesaplarında</b> görünür. Şu an öğrenci hesabıyla giriş yapmışsın.'}</p>
         <div class="modal-actions"><button class="btn btn-plain" data-kapat>Kapat</button>${girisli ? '' : '<a class="btn btn-yellow" href="giris.html" style="justify-content:center">Giriş Yap</a>'}</div>`);
       return;
     }

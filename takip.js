@@ -15,8 +15,9 @@
   const empty = (title, text, btn = '') => `<div class="empty"><b>${title}</b><p>${text}</p>${btn}</div>`;
 
   async function start() {
-    const u = Auth.current();
+    const u = await Auth.refresh().catch(() => Auth.current());
     if (!u) { app.innerHTML = empty('Önce giriş yap', 'Öğrenci takibi için öğretmen hesabınla giriş yapmalısın.', '<a class="btn btn-yellow" href="giris.html">Giriş Yap</a>'); return; }
+    if (u.role === 'ogretmen' && !isTeacher(u)) { app.innerHTML = empty('Hesabın onay bekliyor', 'Öğretmen hesapları yönetici onayından geçiyor. Onaylandığında buradan sınıf oluşturup öğrencilerini takip edebileceksin.'); return; }
     if (u.role !== 'ogretmen') { app.innerHTML = empty('Bu sayfa öğretmenler için', 'Öğrenciysen sağ üstteki adına dokunup <b>Sınıfa Katıl</b>’ı seçerek öğretmeninin kodunu yazabilirsin.', '<a class="btn btn-yellow" href="oyunlar.html">Oyunlara Git</a>'); return; }
     try {
       classes = await Classes.mine();
