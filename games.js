@@ -291,6 +291,11 @@ const BUILTIN_GAMES = [
   { href: 'donusum.html', icon: '🪞', type: 'Dokun-İşaretle', title: 'Yansıt-Ötele: Görüntüyü Bul', text: 'Kareli zeminde yansıma, koordinat düzleminde öteleme ve eksenlere göre yansıma', grades: [7,8], unit: 'Dönüşüm', units: {'8':'Dönüşüm Geometrisi'}, color: 'l' },
   { href: 'ucgen-elemanlari.html', icon: '🔺', type: 'Görsel Soru', title: 'Üçgenin Elemanları ve Pisagor', text: 'Kenarortay, açıortay, yükseklik; üçgen eşitsizliği ve Pisagor bağıntısı', grades: [7,8], unit: 'Geometrik Şekiller', units: {'8':'Üçgenler'}, color: 'm' },
   { href: 'limonata-orani.html', icon: '🍋', type: 'Tarif Oyunu', title: 'Limonata Oranı: Doğru Orantı', text: 'Tarifi büyüt, birim fiyatı bul, doğru orantılı tabloyu seç', grades: [7], unit: 'Sayılar ve Nicelikler (2)', color: 'y' },
+  { href: 'us-kulesi.html', icon: '🗼', type: 'Kule Oyunu', title: 'Üs Kulesi: Kuvvetleri Keşfet', text: 'Kuvvet kulesi kur; negatif üs, üslü ifade kuralları, bilimsel gösterim', grades: [8], unit: 'Üslü İfadeler', color: 'y' },
+  { href: 'kare-bahce.html', icon: '🌳', type: 'Kur-Keşfet', title: 'Kare Bahçe: Karekökü Bul', text: 'Karolarla kare kur; tam kare, karekök tahmini, a√b ve kareköklü işlemler', grades: [8], unit: 'Kareköklü İfadeler', color: 'm' },
+  { href: 'cebir-karolari.html', icon: '🟪', type: 'Model Oyunu', title: 'Cebir Karoları: Özdeşlikleri Gör', text: 'Karolarla ifade kur, alan modeliyle çarp; tam kare ve iki kare farkı', grades: [8], unit: 'Cebirsel İfadeler ve Özdeşlikler', color: 'l' },
+  { href: 'esitsizlik.html', icon: '↔️', type: 'Dokun-Göster', title: 'Eşitsizlik Doğrusu', text: 'Eşitsizliği sayı doğrusunda göster, oku ve çöz; negatife bölünce yön değişir', grades: [8], unit: 'Eşitsizlikler', color: 'm' },
+  { href: 'benzerlik.html', icon: '🔍', type: 'Büyüteç Oyunu', title: 'Benzerlik Büyüteci', text: 'Şekli oranla büyüt; eş mi benzer mi, benzerlik oranı ve eksik kenar', grades: [8], unit: 'Eşlik ve Benzerlik', color: 'y' },
   { href: 'carpim-merdiveni.html', icon: '✖️', type: 'Hız Oyunu', title: 'Çarpım Tablosu Oyunu', text: '10 seviye zihinden çarpma, 100 puana ulaş', grades: [5, 6, 7, 8], color: 'y' },
 ];
 const gRange = gs => (gs.length < 2 ? `${gs[0]}` : gs.every((x, i) => !i || x === gs[i - 1] + 1) ? `${gs[0]}–${gs[gs.length - 1]}` : gs.join(', '));

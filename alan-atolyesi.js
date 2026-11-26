@@ -80,7 +80,7 @@
   const S7 = [
     () => { const r = rnd(2, 9); return { tip: 'sayi', soru: `Yarıçapı <b>${r} cm</b> olan dairenin alanı kaç cm²’dir? (π = 3 al)`, gorsel: daire(r), cevap: 3 * r * r, birim: 'cm²', aciklama: `Daire alanı = π × r² = 3 × ${r} × ${r} = ${3 * r * r}` }; },
     () => { const r = sec([2, 4, 6]), aci = sec([90, 60, 120, 180, 30]); const A = 3 * r * r * aci / 360; if (!Number.isInteger(A)) return S7[1]();
-      return { tip: 'sayi', soru: `Yarıçapı <b>${r} cm</b>, merkez açısı <b>${aci}°</b> olan daire diliminin alanı kaç cm²’dir? (π = 3 al)`, gorsel: daire(r, aci), cevap: A, birim: 'cm²', aciklama: `Dilim, dairenin ${kes(aci, 360)}’ı: 3 × ${r}² × ${aci} ÷ 360 = ${3 * r * r} × ${kes(aci, 360)} = ${A}` }; },
+      return { tip: 'sayi', soru: `Yarıçapı <b>${r} cm</b>, merkez açısı <b>${aci}°</b> olan daire diliminin alanı kaç cm²’dir? (π = 3 al)`, gorsel: daire(r, aci), cevap: A, birim: 'cm²', aciklama: `Dilim, dairenin ${kes(aci, 360)} kadarıdır: 3 × ${r}² × ${aci} ÷ 360 = ${3 * r * r} × ${kes(aci, 360)} = ${A}` }; },
     () => { const e = rnd(2, 5) * 2, f = rnd(2, 4) * 2; return { tip: 'sayi', soru: 'Köşegen uzunlukları verilen eşkenar dörtgenin alanı kaç birim karedir?', gorsel: eskenar(e, f), cevap: e * f / 2, birim: 'birim kare', aciklama: `Eşkenar dörtgenin alanı = köşegenlerin çarpımı ÷ 2 = ${e} × ${f} ÷ 2 = ${e * f / 2}` }; },
     () => { const a = rnd(2, 5), c = a + rnd(2, 4), h = rnd(2, 5), k = rnd(1, c - a - 1); if ((a + c) * h % 2) return S7[3]();
       return { tip: 'sayi', soru: 'Kareli zemindeki yamuğun alanı kaç birim karedir?', gorsel: yamuk(a, c, h, k), cevap: (a + c) * h / 2, birim: 'birim kare', aciklama: `Yamuğun alanı = (üst taban + alt taban) × yükseklik ÷ 2 = (${a} + ${c}) × ${h} ÷ 2 = ${(a + c) * h / 2}` }; },

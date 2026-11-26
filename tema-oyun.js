@@ -9,6 +9,18 @@ const R_ = {
   kes: (p, q, c = '') => `<span class="f${c ? ' ' + c : ''}"><i>${p}</i><i>${q}</i></span>`,
   sayi: n => (Number.isInteger(n) ? String(n) : String(Math.round(n * 100) / 100).replace('.', ',')).replace(/^-/, '−'),
   ebob: (a, b) => (b ? R_.ebob(b, a % b) : Math.abs(a)),
+  // Sayıya Türkçe ek: tur 'e' (yönelme), 'de' (bulunma), 'den' (ayrılma). Örn. ek(12,'e') → 12’ye, ek(3,'den') → 3’ten
+  ek: (n, tur) => {
+    n = Math.abs(Math.round(n));
+    const B = ['', 'bir', 'iki', 'üç', 'dört', 'beş', 'altı', 'yedi', 'sekiz', 'dokuz'], O = ['', 'on', 'yirmi', 'otuz', 'kırk', 'elli', 'altmış', 'yetmiş', 'seksen', 'doksan'];
+    const s = n === 0 ? 'sıfır' : n % 10 ? B[n % 10] : n % 100 ? O[(n / 10) % 10] : n % 1000 ? 'yüz' : 'bin';
+    const sesli = s.match(/[aeıioöuü]/g), son = sesli[sesli.length - 1], ince = 'eiöü'.includes(son);
+    const sonHarf = s[s.length - 1], unluyle = 'aeıioöuü'.includes(sonHarf), sert = 'çfhkpsşt'.includes(sonHarf);
+    let e;
+    if (tur === 'e') e = (unluyle ? 'y' : '') + (ince ? 'e' : 'a');
+    else e = (sert ? 't' : 'd') + (ince ? 'e' : 'a') + (tur === 'den' ? 'n' : '');
+    return `${n}’${e}`;
+  },
 };
 
 function temaOyunu(cfg) {

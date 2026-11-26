@@ -95,7 +95,7 @@
 
         <section class="sp-sec">
           <div class="sp-sec-h"><h2>🎲 Oyunlar</h2><a href="oyunlar.html?sinif=${g}${tema ? `&tema=${encodeURIComponent(tema)}` : ''}">Tümü →</a></div>
-          ${gs.length ? `<div class="grid">${gs.map(x => builtinCard(x, g)).join('')}</div>` : '<div class="empty sp-empty">Bu temada henüz hazır oyun yok. Yakında eklenecek! 🚀</div>'}
+          ${gs.length ? `<div class="grid">${gs.map(x => builtinCard(x, g)).join('')}</div>` : '<div class="empty sp-empty">Bu seçimde hazır oyun yok. Diğer temalara göz at!</div>'}
         </section>
 
         <section class="sp-sec">

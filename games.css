@@ -1466,3 +1466,55 @@ button.bd-top{cursor:pointer}
 .dn-svg.mini{background:#fff;border-radius:10px;max-width:none}
 .to-opts:has(.dn-svg.mini){grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
 .to-opts .g-opt:has(.dn-svg.mini){padding:8px}
+/* Üs Kulesi */
+.uk-alan{display:flex;gap:18px;justify-content:center;align-items:flex-end;flex-wrap:wrap}
+.uk-kule{display:flex;flex-direction:column;align-items:center;gap:3px;min-height:60px}
+.uk-kat{min-width:calc(60px + var(--i) * 6px);padding:6px 10px;border-radius:8px;background:var(--lilac);color:#fff;font-weight:800;text-align:center;animation:uk-gel .25s}
+.uk-kat:first-child{background:var(--lilac-dark)}
+@keyframes uk-gel{from{transform:translateY(-12px);opacity:0}}
+.uk-panel{display:grid;gap:8px;justify-items:center;background:#fff;border-radius:14px;padding:12px 16px}
+.uk-hedef{font-weight:700}.uk-hedef b{font-size:1.3rem;color:var(--lilac-dark)}
+.uk-u{font:800 1.3rem 'Nunito',sans-serif}
+/* Kare Bahçe */
+.kb-zemin{display:flex;justify-content:center;margin:6px 0}
+.kb-svg{width:100%;height:auto}
+.kb-karo{fill:#7CC79A;stroke:#2E9E78;stroke-width:1}
+.kb-karo.fazla{fill:#F3A0A0;stroke:#C2415B}
+/* Cebir Karoları */
+.ck-svg{width:auto;max-width:100%;height:auto;max-height:110px}
+.ck-svg.alan{max-height:none;width:100%;max-width:260px}
+.ck-x2{fill:#7B4FA8;stroke:#fff;stroke-width:2}
+.ck-x{fill:#3BA7E0;stroke:#fff;stroke-width:2}
+.ck-1{fill:#FFD84D;stroke:#E0B820;stroke-width:1.5}
+.ck-t{font:800 15px 'Nunito',sans-serif;fill:#fff}
+.ck-t.k{font-size:11px}
+.ck-k{font:800 13px 'Nunito',sans-serif;fill:var(--ink)}
+.ck-tezgah{display:flex;justify-content:center;min-height:80px;align-items:center;background:#fff;border-radius:14px;padding:6px;overflow-x:auto}
+.ck-bos{color:var(--muted);font-weight:700}
+.ck-lejant{display:grid;justify-items:center;font-size:.85rem;font-weight:700;color:var(--muted)}
+/* Eşitsizlik */
+.es-svg{width:100%;max-width:560px;height:auto;background:#fff;border-radius:12px}
+.es-cizgi{stroke:var(--ink);stroke-width:2}
+.es-cent{stroke:var(--ink);stroke-width:1.5}
+.es-no{font:700 11px 'Nunito',sans-serif;fill:var(--muted)}
+.es-no.sifir{fill:var(--ink);font-weight:800}
+.es-isin{stroke:#E5333B;stroke-width:6;stroke-linecap:round;opacity:.85}
+.es-uc{fill:#E5333B}
+.es-dolu{fill:#E5333B;stroke:#fff;stroke-width:2}
+.es-bos{fill:#fff;stroke:#E5333B;stroke-width:3}
+.es-sahne{display:grid;justify-items:center;gap:6px;cursor:pointer}
+.es-dogrusu{opacity:.85}
+.es-dogrusu .es-isin,.es-dogrusu .es-uc{stroke:var(--mint-dark);fill:var(--mint-dark)}
+.es-dogrusu .es-dolu{fill:var(--mint-dark)}.es-dogrusu .es-bos{stroke:var(--mint-dark)}
+.es-ipucu{text-align:center;font-weight:700;color:var(--muted);margin:6px 0}
+.es-ayar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.es-ayar button{background:var(--lilac-light);border:2px solid var(--lilac);border-radius:12px;padding:8px 12px;font:700 .95rem 'Nunito',sans-serif;cursor:pointer;color:var(--ink)}
+.es-ayar button:hover:not(:disabled){background:var(--lilac);color:#fff}
+/* Benzerlik */
+.bz-svg{width:100%;max-width:460px;height:auto;background:#fff;border-radius:12px}
+.bz-alan{display:flex;justify-content:center}
+.bz-a{fill:rgba(200,162,232,.8);stroke:var(--lilac-dark);stroke-width:2}
+.bz-b{fill:rgba(229,115,59,.75);stroke:#B4501F;stroke-width:2}
+.bz-et{font:800 13px 'Nunito',sans-serif;fill:var(--ink)}
+.es-dogrusu{width:100%;display:flex;justify-content:center}
+.es-dogrusu svg{width:100%;max-width:560px}

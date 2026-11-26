@@ -108,7 +108,7 @@
       return { tip: 'sayi', soru: `<b>x = ${x}</b> iken <span class="tz-buyuk">${a}x + ${b}</span> ifadesinin değeri kaçtır?`, cevap: a * x + b, aciklama: `${a} × ${x} + ${b} = ${a * x} + ${b} = ${a * x + b}` }; },
     () => { const a = rnd(2, 5), b = rnd(-1, 4), t = [1, 2, 3, 4].map(n => a * n + b);
       const k = n => `${a}n ${b ? isa(b) : ''}`.trim();
-      return { tip: 'secim', soru: `Örüntünün kuralı hangisidir? (n: terimin sırası)<br><span class="tz-buyuk">${t.join(', ')}, ...</span>`, ...temaSecenek(k(), [`${a}n ${isa(b + 1)}`, `n ${isa(a)}`, `${a + 1}n ${b ? isa(b - 1) : ''}`.trim(), `${b || 1}n ${isa(a)}`]), aciklama: `Terimler ${a}’şer artıyor → ${a}n. 1. terim ${t[0]} = ${a} × 1 ${b ? isa(b) : ''} → kural <b>${k()}</b>` }; },
+      return { tip: 'secim', soru: `Örüntünün kuralı hangisidir? (n: terimin sırası)<br><span class="tz-buyuk">${t.join(', ')}, ...</span>`, ...temaSecenek(k(), [`${a}n ${isa(b + 1)}`, `n ${isa(a)}`, `${a + 1}n ${b ? isa(b - 1) : ''}`.trim(), `${b || 1}n ${isa(a)}`]), aciklama: `Terimler her adımda ${a} artıyor → ${a}n. 1. terim ${t[0]} = ${a} × 1 ${b ? isa(b) : ''} → kural <b>${k()}</b>` }; },
     () => { const a = rnd(2, 5), b = rnd(1, 6), n = sec([10, 15, 20]);
       return { tip: 'sayi', soru: `Kuralı <b>${a}n + ${b}</b> olan örüntünün <b>${n}. terimi</b> kaçtır?`, cevap: a * n + b, aciklama: `n = ${n}: ${a} × ${n} + ${b} = ${a * n + b}` }; },
     () => { const a = rnd(2, 4), b = rnd(1, 9); const ifs = `${Array(a).fill('x').join(' + ')} + ${b}`;
@@ -120,15 +120,15 @@
     () => { const [a, b, c, d] = denklemUret(false); return { tip: 'ozel', soru: `Denklemi teraziyle çöz: <b>${ifade(a, b)} = ${c ? ifade(c, d) : d}</b>`, kur: cozucu(a, b, c, d) }; },
     () => { const [a, b, c, d] = denklemUret(false); return { tip: 'ozel', soru: `Denklemi teraziyle çöz: <b>${ifade(a, b)} = ${c ? ifade(c, d) : d}</b>`, kur: cozucu(a, b, c, d) }; },
     () => { const x = rnd(2, 9), a = rnd(2, 5), b = rnd(1, 9);
-      return { tip: 'sayi', soru: `Denklemi çöz: <span class="tz-buyuk">${a}x − ${b} = ${a * x - b}</span> &nbsp; x = ?`, cevap: x, aciklama: `İki tarafa ${b} ekle: ${a}x = ${a * x}. İki tarafı ${a}’e böl: x = ${x}` }; },
+      return { tip: 'sayi', soru: `Denklemi çöz: <span class="tz-buyuk">${a}x − ${b} = ${a * x - b}</span> &nbsp; x = ?`, cevap: x, aciklama: `İki tarafa ${b} ekle: ${a}x = ${a * x}. İki tarafı ${R_.ek(a, 'e')} böl: x = ${x}` }; },
     () => { const x = rnd(8, 14), a = sec([2, 3]), b = rnd(2, 9);
-      return { tip: 'secim', soru: `“Ali’nin yaşının <b>${a} katının ${b} fazlası ${a * x + b}</b>’dir.” Ali’nin yaşına x dersek hangi denklem kurulur?`, ...temaSecenek(`${a}x + ${b} = ${a * x + b}`, [`${a}(x + ${b}) = ${a * x + b}`, `x + ${a} + ${b} = ${a * x + b}`, `${b}x + ${a} = ${a * x + b}`]), aciklama: `Yaşın ${a} katı: ${a}x; ${b} fazlası: ${a}x + ${b}. Bu ${a * x + b}’e eşit. (Ali ${x} yaşında.)` }; },
+      return { tip: 'secim', soru: `“Ali’nin yaşının <b>${a} katının ${b} fazlası ${a * x + b}</b>’dir.” Ali’nin yaşına x dersek hangi denklem kurulur?`, ...temaSecenek(`${a}x + ${b} = ${a * x + b}`, [`${a}(x + ${b}) = ${a * x + b}`, `x + ${a} + ${b} = ${a * x + b}`, `${b}x + ${a} = ${a * x + b}`]), aciklama: `Yaşın ${a} katı: ${a}x; ${b} fazlası: ${a}x + ${b}. Bu ${R_.ek(a * x + b, 'e')} eşit. (Ali ${x} yaşında.)` }; },
     () => { const a = rnd(2, 6), b = rnd(1, 9), c = rnd(1, 5), d = rnd(1, 9);
       return { tip: 'secim', soru: `<span class="tz-buyuk">(${a}x + ${b}) + (${c}x − ${d})</span> işleminin sonucu hangisidir?`, ...temaSecenek(ifade(a + c, b - d) || '0', [ifade(a + c, b + d), ifade(a - c, b - d), ifade(a * c, b - d), `${a + c + b - d}x`]), aciklama: `Benzer terimler toplanır: ${a}x + ${c}x = ${a + c}x, ${b} − ${d} = ${b - d}` }; },
     () => { const a = rnd(2, 5), b = rnd(2, 9);
       return { tip: 'secim', soru: `<span class="tz-buyuk">${a}(x + ${b})</span> ifadesi aşağıdakilerden hangisine eşittir?`, ...temaSecenek(`${a}x + ${a * b}`, [`${a}x + ${b}`, `x + ${a * b}`, `${a + b}x`, `${a}x + ${a + b}`]), aciklama: `Dağılma özelliği: ${a} · x + ${a} · ${b} = ${a}x + ${a * b}` }; },
     () => { const k = rnd(3, 9), b = rnd(2, 6), ops = shuffle([k + 1, k, k - 1, k - 2]), dogru = k + 1;
-      return { tip: 'secim', soru: `<span class="tz-buyuk">x + ${b} > ${k + b}</span> eşitsizliğini sağlayan sayı hangisidir?`, secenekler: ops.map(String), dogru: ops.indexOf(dogru), aciklama: `İki taraftan ${b} çıkar: x > ${k}. Seçeneklerde ${k}’dan büyük olan: ${dogru}` }; },
+      return { tip: 'secim', soru: `<span class="tz-buyuk">x + ${b} > ${k + b}</span> eşitsizliğini sağlayan sayı hangisidir?`, secenekler: ops.map(String), dogru: ops.indexOf(dogru), aciklama: `İki taraftan ${b} çıkar: x > ${k}. Seçeneklerde ${R_.ek(k, 'den')} büyük olan: ${dogru}` }; },
   ];
 
   // ---- 8. sınıf ----
