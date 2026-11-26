@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Kavram Yanılgıları | Hipotenüs</title>
+<link rel="canonical" href="https://hipotenusmatematik.com/kavram-yanilgilari.html">
+<meta name="description" content="5, 6, 7 ve 8. sınıf matematikte sık görülen kavram yanılgıları: öğrencinin düşüncesi, doğrusu, nedeni ve sınıfta nasıl düzeltileceği.">
+<meta name="theme-color" content="#2E9E78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="games.css">
+<style>
+  .ky-liste{display:grid;gap:16px;margin-top:6px}
+  .ky{position:relative;overflow:hidden;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;display:grid;gap:12px;border-top:6px solid var(--c)}
+  .ky-ust{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .ky-ust h3{font-family:'Baloo 2',cursive;font-size:1.25rem;line-height:1.15}
+  .ky-ust .konu{display:block;font:800 .8rem 'Nunito';color:var(--muted);margin-bottom:2px}
+  .ky-ikili{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .ky-kutu{border-radius:14px;padding:11px 13px;line-height:1.45;font-weight:700}
+  .ky-kutu b{display:block;font:800 .82rem 'Nunito';margin-bottom:3px;letter-spacing:.2px}
+  .ky-yanlis{background:#FDECEF;color:#7A2335}
+  .ky-yanlis b{color:#C2415B}
+  .ky-dogru{background:var(--mint-light);color:#1E5E48}
+  .ky-dogru b{color:var(--mint-dark)}
+  .ky-kutu .ifade{font:800 1.05rem 'Baloo 2',cursive;display:block}
+  .ky-neden,.ky-ipucu{font-size:.93rem;line-height:1.5;color:var(--ink)}
+  .ky-neden b,.ky-ipucu b{color:var(--lilac-dark)}
+  .ky-ipucu{background:var(--yellow-light);border-radius:14px;padding:10px 13px}
+  .ky-alt{display:flex;justify-content:flex-end}
+  .ky-alt a{font-weight:800;color:var(--lilac-dark);background:var(--lilac-light);border-radius:999px;padding:6px 14px;font-size:.88rem}
+  @media (max-width:640px){.ky-ikili{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <a href="index.html" class="logo" aria-label="Hipotenüs ana sayfa">
+      <svg viewBox="0 0 745 745" aria-hidden="true">
+        <rect width="745" height="745" rx="168" fill="#6E58BD"/>
+        <rect x="176" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <rect x="461" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <polygon points="461,346 461,485 322,485" fill="#8FDDC6"/>
+        <rect x="404" y="435" width="57" height="50" fill="#6E58BD"/>
+        <rect x="422" y="453" width="39" height="32" fill="#8FDDC6"/>
+        <line x1="489" y1="277" x2="260" y2="503" stroke="#FFD453" stroke-width="74" stroke-linecap="round"/>
+      </svg>
+      <span>Hipoten<b>ü</b>s</span>
+    </a>
+    <div class="bar-actions">
+      <a class="btn-login btn-ghost" href="index.html"><span aria-hidden="true">🏠</span><span class="lbl">Ana Sayfa</span></a>
+      <div id="userArea"></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" style="padding-bottom:48px">
+  <div class="page-head">
+    <div><h1>Kavram Yanılgıları</h1><p>Öğrencilerin matematikte en sık düştüğü tuzaklar: nasıl düşünüyorlar, doğrusu ne, neden böyle oluyor ve sınıfta nasıl düzeltilir?</p></div>
+  </div>
+  <div class="filters" role="group" aria-label="Sınıf">
+    <button class="chip" data-grade="" aria-pressed="true">Tüm sınıflar</button>
+    <button class="chip" data-grade="5" aria-pressed="false">5. Sınıf</button>
+    <button class="chip" data-grade="6" aria-pressed="false">6. Sınıf</button>
+    <button class="chip" data-grade="7" aria-pressed="false">7. Sınıf</button>
+    <button class="chip" data-grade="8" aria-pressed="false">8. Sınıf</button>
+  </div>
+  <div class="ky-liste" id="list" aria-live="polite"></div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="games.js"></script>
+<script>
+// Kavram yanılgıları: y = öğrencinin düşüncesi, d = doğrusu, n = neden olur, i = sınıfta nasıl düzeltilir
+const YANILGILAR = [
+  { s: [5], konu: 'Ondalık gösterim', baslik: 'Uzun olan ondalık sayı daha büyüktür',
+    y: '0,25 > 0,7', yAc: 'çünkü 25, 7’den büyük.', d: '0,7 > 0,25', dAc: '0,7 = 0,70 ve 70 yüzde birlik, 25 yüzde birlikten fazladır.',
+    n: 'Doğal sayılarda “basamağı çok olan büyüktür” kuralı işe yarar; öğrenci bu kuralı ondalık kısma da uygular.',
+    i: 'Sonlarına sıfır ekleyerek basamak sayılarını eşitletin (0,70 ve 0,25). Para örneği güçlüdür: 70 kuruş mu, 25 kuruş mu?' },
+  { s: [5], konu: 'Kesirler', baslik: 'Paydası büyük olan kesir daha büyüktür',
+    y: '1/8 > 1/4', yAc: 'çünkü 8, 4’ten büyük.', d: '1/4 > 1/8', dAc: 'Bütün ne kadar çok parçaya bölünürse her parça o kadar küçülür.',
+    n: 'Öğrenci kesri iki ayrı doğal sayı gibi görür ve yalnızca paydaları karşılaştırır.',
+    i: 'Aynı uzunlukta iki şeridi 4’e ve 8’e bölüp parçaları yan yana koyun. “Bir pastayı 4 kişi mi, 8 kişi mi paylaşsın, hangisinde dilim büyük?” sorusu işe yarar.',
+    oyun: ['cay-bardagi.html', 'Dudak Payı oyunu'] },
+  { s: [5], konu: 'Basamak değeri', baslik: 'Sıfırın değeri yoktur, atılabilir',
+    y: 'dört bin beş → 45', yAc: 'çünkü sıfır “hiçbir şey” demek.', d: 'dört bin beş → 4005', dAc: 'Sıfır, boş kalan basamağın yerini tutar.',
+    n: 'Sayılar söylendiği gibi yazılır; söylenmeyen basamaklar için sıfır yazmak gerektiği gözden kaçar.',
+    i: 'Basamak tablosu kullanın: binler ve birler dolu, yüzler ve onlar boş kalınca o kutulara 0 yazılır.',
+    oyun: ['basamak-degeri.html', 'Basamak Değeri oyunu'] },
+  { s: [5], konu: 'Açılar', baslik: 'Kolları uzun olan açı daha büyüktür',
+    y: 'Uzun kollu açı > kısa kollu açı', yAc: 'çünkü daha büyük görünüyor.', d: 'Açının ölçüsü kolların uzunluğuna bağlı değildir', dAc: 'Ölçü, kollar arasındaki açıklığa bağlıdır.',
+    n: 'Öğrenci açıyı “şeklin büyüklüğü” olarak algılar.',
+    i: 'Aynı açıyı kısa ve uzun kollarla çizip açıölçerle ölçtürün. Makas ya da pergel açıp kapatarak açıklığı gösterin.',
+    oyun: ['aci-ustasi.html', 'Açı Ustası oyunu'] },
+  { s: [5], konu: 'Açıölçer', baslik: 'Açıölçerde her zaman dıştaki sayılar okunur',
+    y: '65° yerine 115° okumak', yAc: 'çünkü ilk görülen sayı okunur.', d: 'Sıfırın başladığı ölçek okunur', dAc: 'Kol hangi taraftaki 0’dan başlıyorsa o ölçek takip edilir.',
+    n: 'Açıölçerde iki ölçek vardır; öğrenci hangisini okuyacağına karar vermez.',
+    i: 'Ölçmeden önce “Bu açı dar mı, geniş mi?” diye tahmin ettirin. Dar bir açıya 115° yazılıyorsa yanlış ölçek okunmuştur.',
+    oyun: ['aci-ustasi.html', 'Açı Ustası oyunu'] },
+  { s: [5, 6], konu: 'Çarpma', baslik: 'Çarpma her zaman büyütür',
+    y: '8 × 0,5 > 8', yAc: 'çünkü çarpınca sayı büyür.', d: '8 × 0,5 = 4', dAc: '1’den küçük bir sayıyla çarpınca sonuç küçülür.',
+    n: 'Doğal sayılarla yapılan çarpmalarda sonuç hep büyür; bu deneyim genelleştirilir.',
+    i: '“8’in yarısı” ifadesini 8 × 0,5 ile eşleştirin. 8 × 2, 8 × 1, 8 × 0,5 sonuçlarını sıralatarak örüntüyü buldurun.' },
+  { s: [6], konu: 'Bölme', baslik: 'Bölme her zaman küçültür',
+    y: '6 ÷ 0,5 = 3', yAc: 'çünkü bölünce sayı küçülür.', d: '6 ÷ 0,5 = 12', dAc: '6’nın içinde 12 tane yarım vardır.',
+    n: 'Bölme yalnızca “paylaştırma” olarak öğrenilir; “içinde kaç tane var” anlamı atlanır.',
+    i: '“6 bardak suyu yarım bardaklık kaplara doldurursak kaç kap dolar?” gibi ölçme problemleri sorun.' },
+  { s: [6], konu: 'Üslü ifadeler', baslik: 'Üs, tabanla çarpılır',
+    y: '2³ = 6', yAc: 'çünkü 2 × 3 = 6.', d: '2³ = 2 · 2 · 2 = 8', dAc: 'Üs, tabanın kendisiyle kaç kez çarpılacağını gösterir.',
+    n: 'Üslü gösterim yeni bir sembol olduğu için tanıdık işlem olan çarpmayla karıştırılır.',
+    i: 'Her üslü ifadeyi önce açık çarpım hâlinde yazdırın. 2³ ile 3² sonuçlarını karşılaştırmak farkı gösterir.' },
+  { s: [6], konu: 'Asal sayılar', baslik: '1 asal sayıdır',
+    y: '1 asaldır', yAc: 'çünkü yalnızca 1’e ve kendisine bölünür.', d: '1 asal değildir', dAc: 'Asal sayıların tam iki farklı böleni vardır; 1’in yalnızca bir böleni vardır.',
+    n: '“1’e ve kendisine bölünen” tanımı ezberlenir; “tam iki bölen” vurgusu kaçar.',
+    i: 'Bölenleri listeletin: 2 → {1, 2}, 7 → {1, 7}, 1 → {1}. Çarpan Ağacı etkinliğinde 1 kartının hiçbir sepete girmediğini tartışın.',
+    oyun: ['etkinlik-setleri.html', 'Çarpan Ağacı seti'] },
+  { s: [6, 7], konu: 'Tam sayılar', baslik: 'Negatif sayılarda büyük rakam büyük sayıdır',
+    y: '−5 > −2', yAc: 'çünkü 5, 2’den büyük.', d: '−2 > −5', dAc: 'Sayı doğrusunda sağdaki sayı daha büyüktür; −2, sıfıra daha yakındır.',
+    n: 'Öğrenci işareti yok sayıp yalnızca rakamlara bakar.',
+    i: 'Termometre ya da borç örneği kullanın: −2 °C mi daha sıcak, −5 °C mi? 2 TL borç mu daha iyi, 5 TL borç mu?',
+    oyun: ['termometre.html', 'Termometre oyunu'] },
+  { s: [7, 8], konu: 'Üslü ifadeler', baslik: '−3² ile (−3)² aynıdır',
+    y: '−3² = 9', yAc: 'çünkü eksi çarpı eksi artı.', d: '−3² = −9, (−3)² = 9', dAc: 'Parantez yoksa yalnızca 3’ün karesi alınır, eksi işareti sonra gelir.',
+    n: 'Parantezin üssün neyi kapsadığını belirlediği gözden kaçar.',
+    i: 'İki ifadeyi açık yazdırın: −(3 · 3) ve (−3) · (−3). Hesap makinesinde ikisini de deneyip farkı tartışın.' },
+  { s: [7], konu: 'Denklemler', baslik: 'Karşıya atınca her şeyin işareti değişir',
+    y: '3x = 12 → x = 12 − 3', yAc: 'çünkü 3 karşıya geçince eksi olur.', d: '3x = 12 → x = 12 ÷ 3 = 4', dAc: 'Eşitliğin iki tarafına aynı işlem uygulanır: iki taraf 3’e bölünür.',
+    n: '“Karşıya atma” bir kısayol olarak ezberlenir; arkasındaki terazi mantığı unutulur.',
+    i: 'Terazi modeliyle çalışın: kefelerden aynı şeyi çıkarmak ya da ikisini aynı sayıya bölmek dengeyi bozmaz. Çözümü yerine koyarak kontrol ettirin.' },
+  { s: [7], konu: 'Yüzdeler', baslik: '%20 artıp %20 azalınca eski fiyata dönülür',
+    y: '100 → %20 artış → %20 indirim → 100', yAc: '', d: '100 → 120 → 96', dAc: 'İndirim 100’ün değil, 120’nin yüzde 20’sidir.',
+    n: 'Yüzde bir “sabit miktar” gibi düşünülür; neyin yüzdesi olduğu sorulmaz.',
+    i: 'Her adımda “Neyin yüzde 20’si?” diye sordurun. Şerit modeliyle artışı ve indirimi ayrı ayrı çizdirin.' },
+  { s: [8], konu: 'Kareköklü ifadeler', baslik: 'Toplamın karekökü, kareköklerin toplamıdır',
+    y: '√(9 + 16) = √9 + √16 = 7', yAc: '', d: '√(9 + 16) = √25 = 5', dAc: 'Karekök toplama işlemi üzerine dağılmaz.',
+    n: 'Çarpmanın dağılma özelliği (a(b + c) = ab + ac) her işleme genelleştirilir.',
+    i: 'Kenarları 3 ve 4 olan dik üçgende hipotenüsün 5 olduğunu göstererek √(3² + 4²) ≠ 3 + 4 olduğunu somutlaştırın.' },
+  { s: [8], konu: 'Olasılık', baslik: 'Olasılığı 1/2 olan olay 2 denemede kesin gerçekleşir',
+    y: 'Para 2 kez atılırsa 1 kez yazı gelir', yAc: 'çünkü olasılık 1/2.', d: 'Kesin değildir', dAc: 'İki atışta yazı hiç gelmeyebilir ya da iki kez gelebilir. 1/2, çok sayıda denemede yaklaşık oranı gösterir.',
+    n: 'Olasılık, kısa vadede kesin bir sonuç tahmini gibi yorumlanır.',
+    i: 'Sınıfça 10’ar atış yapıp sonuçları birleştirin; deneme sayısı arttıkça oranın 1/2’ye yaklaştığını grafikle gösterin.' },
+];
+(function () {
+  initPage();
+  const RENK = { 5: '#9EE6C9', 6: '#C8A2E8', 7: '#FFD84D', 8: '#7B4FA8' };
+  let grade = new URLSearchParams(location.search).get('sinif') || '';
+  const kart = k => `<article class="ky" style="--c:${RENK[k.s[0]]}">
+      <div class="ky-ust"><div><span class="konu">${k.konu}</span><h3>${k.baslik}</h3></div><span class="sinif-kose"><b>${gRange(k.s)}.</b>Sınıf</span></div>
+      <div class="ky-ikili">
+        <div class="ky-kutu ky-yanlis"><b>✗ ÖĞRENCİ NE DÜŞÜNÜYOR?</b><span class="ifade">${k.y}</span>${k.yAc}</div>
+        <div class="ky-kutu ky-dogru"><b>✓ DOĞRUSU</b><span class="ifade">${k.d}</span>${k.dAc}</div>
+      </div>
+      <p class="ky-neden"><b>Neden olur?</b> ${k.n}</p>
+      <p class="ky-ipucu"><b>💡 Sınıfta nasıl düzeltilir?</b> ${k.i}</p>
+      ${k.oyun ? `<div class="ky-alt"><a href="${k.oyun[0]}">🎲 ${k.oyun[1]} →</a></div>` : ''}
+    </article>`;
+  function render() {
+    document.querySelectorAll('[data-grade]').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.grade === grade)));
+    try { history.replaceState(null, '', grade ? `?sinif=${grade}` : location.pathname); } catch {}
+    const liste = YANILGILAR.filter(k => !grade || k.s.includes(Number(grade)));
+    document.getElementById('list').innerHTML = liste.map(kart).join('');
+  }
+  document.querySelectorAll('[data-grade]').forEach(c => c.addEventListener('click', () => { grade = c.dataset.grade; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>
