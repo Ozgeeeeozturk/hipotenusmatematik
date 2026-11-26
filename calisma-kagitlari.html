@@ -81,7 +81,7 @@
   function render() {
     document.querySelectorAll('[data-grade]').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.grade === grade)));
     try { history.replaceState(null, '', grade ? `?sinif=${grade}` : location.pathname); } catch {}
-    const list = WORKSHEETS.filter(w => w.tur !== 'set' && (!grade || w.grade === Number(grade)));
+    const list = WORKSHEETS.filter(w => !w.tur && (!grade || w.grade === Number(grade)));
     document.getElementById('list').innerHTML = list.length ? list.map(card).join('')
       : '<div class="empty"><b>Bu sınıf için henüz çalışma kâğıdı yok</b><p>Yeni kâğıtlar eklendikçe burada görünecek.</p></div>';
   }
