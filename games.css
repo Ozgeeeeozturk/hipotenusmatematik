@@ -535,8 +535,9 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 .kz-outs li{background:#fff;border-radius:14px;padding:10px 12px;font-weight:700;line-height:1.45}
 .kz-outs code,.kz-results code{display:inline-block;background:var(--mint-dark);color:#fff;border-radius:8px;padding:1px 8px;margin:0 6px 4px 0;font:800 .75rem 'Nunito',sans-serif;vertical-align:middle}
 .kz-steps{list-style:none;display:grid;gap:8px}
-.kz-steps li{display:flex;gap:10px;align-items:flex-start;line-height:1.45;font-weight:600}
-.kz-steps b{flex-shrink:0;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--lilac-dark);color:#fff;font-size:.85rem}
+.kz-steps li{position:relative;padding-left:20px;line-height:1.45;font-weight:600}
+.kz-steps li::before{content:"";position:absolute;left:4px;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--lilac-dark)}
+.kz-fold .kz-more{display:none}
 .kz-fold .kz-more{display:none}
 .kz-block.l .kz-mini{margin-top:10px}
 .kz-tools{display:flex;flex-wrap:wrap;gap:8px}
@@ -574,7 +575,7 @@ textarea.input{resize:vertical;min-height:64px;font-family:inherit}
 @media print{
   .site-header,.bottom-nav,.kz-panel,.kz-actions,.kz-searchbox,.kz-banner,.kz-mini,.page-head p,.kz-block.w,.toast{display:none!important}
   body{background:#fff!important}.kz-print-title{display:block;font-weight:800;font-size:1.1rem}
-  .kz-fold .kz-more{display:flex}.kz-block{box-shadow:none}.kz-note textarea{border:1px solid #ccc}
+  .kz-fold .kz-more{display:block}.kz-block{box-shadow:none}.kz-note textarea{border:1px solid #ccc}
   .kz-extra summary::after{display:none}
 }
 /* Eşit Aralık Ustası */

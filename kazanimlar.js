@@ -24,12 +24,11 @@
   }
 
   // Durum (bu cihazda saklanır)
-  const K = { grade: 'hip_kz_grade', done: g => `hip_kz_done_${g}`, note: (g, n) => `hip_kz_note_${g}_${n}` };
+  const K = { grade: 'hip_kz_grade', done: g => `hip_kz_done_${g}` };
   let grade = store.get(K.grade, 5);
   const params = new URLSearchParams(location.search);
   if (GRADES.includes(+params.get('sinif'))) grade = +params.get('sinif');
   let week = +params.get('hafta') || currentWeek(grade);
-  let query = '';
 
   const done = () => new Set(store.get(K.done(grade), []));
   const title = s => s.toLocaleLowerCase('tr').replace(/(^|[\s(])(\S)/g, (a, b, c) => b + c.toLocaleUpperCase('tr'));
@@ -71,12 +70,9 @@
     }
     const stepsHtml = stepList.map((x, k) => {
       const m = x.match(/^([a-zçğıöşü])\s?\)\s*(.*)$/i);
-      return `<li${k >= 3 ? ' class="kz-more"' : ''}>${m ? `<b>${m[1]}</b><span>${esc(m[2])}</span>` : `<span>${esc(x)}</span>`}</li>`;
+      return `<li${k >= 3 ? ' class="kz-more"' : ''}>${m ? `<span>${esc(m[2])}</span>` : `<span>${esc(x)}</span>`}</li>`;
     }).join('');
 
-    const chips = s => s ? `<div class="kz-chips">${s.split('\n').map(x => x.trim()).filter(Boolean).map(x => `<span>${esc(x)}</span>`).join('')}</div>` : '';
-    const extra = [['📝', 'Ölçme ve değerlendirme', w.olcme], ['🤝', 'Sosyal-duygusal beceriler', w.sdb], ['💎', 'Değerler', w.degerler], ['📖', 'Okuryazarlık becerileri', w.okuryazarlik]]
-      .filter(e => e[2]).map(e => `<h4>${e[0]} ${e[1]}</h4>${chips(e[2])}`).join('');
 
     const opts = ws.map(x => `<option value="${x.no}"${x.no === week ? ' selected' : ''}>${x.no}. Hafta · ${esc(x.tarih || '')}${d.has(x.no) ? ' ✓' : ''}${x.no === now ? ' (bu hafta)' : ''}</option>`).join('');
 
@@ -105,7 +101,7 @@
           ${w.gunler ? `<p class="kz-day">📅 ${esc(w.gunler).replace(/\n/g, ' · ')}</p>` : ''}
         </div>
         ${outs ? `<div class="kz-block m">
-          <div class="kz-bh"><span class="kz-ic">🎯</span><h3>Bu hafta öğrenciler…</h3></div>
+          <div class="kz-bh"><span class="kz-ic">🎯</span><h3>Bu haftanın kazanımı</h3></div>
           <ul class="kz-outs">${outs}</ul>
         </div>` : ''}
         ${stepsHtml ? `<div class="kz-block l${stepList.length > 3 ? ' kz-fold' : ''}" id="kzSteps">
@@ -117,40 +113,16 @@
           <div class="kz-bh"><span class="kz-ic">🧰</span><h3>Hipotenüs’te bu hafta</h3></div>
           <div class="kz-tools">${tools}</div>
         </div>` : ''}
-        ${extra ? `<details class="kz-extra"><summary>📎 Diğer bilgiler <small>ölçme, beceriler, değerler</small></summary><div>${extra}</div></details>` : ''}
-        <div class="kz-note">
-          <label for="kzNote">✏️ Notlarım <small>(yalnızca bu cihazda)</small></label>
-          <textarea id="kzNote" rows="2" placeholder="Örn. 6-B’de kesir kartlarıyla çalıştık…">${esc(store.get(K.note(grade, w.no), ''))}</textarea>
-        </div>
         <div class="kz-actions">
           <button class="kz-done${d.has(w.no) ? ' on' : ''}" id="kzDone">${d.has(w.no) ? '✓ İşlendi' : '☐ İşlendi olarak işaretle'}</button>
           <button class="kz-mini" id="kzCopy">📋 Kopyala</button>
           <button class="kz-mini" id="kzPrint">🖨️ Yazdır</button>
         </div>
       </article>
-      <details class="kz-searchbox"${query ? ' open' : ''}>
-        <summary>🔍 Bir kazanımı ara</summary>
-        <input type="search" id="kzQ" placeholder="ör. kesir, MAT.6.1" value="${esc(query)}" aria-label="Kazanım ara">
-        <div id="kzResults"></div>
-      </details>
       <p class="kz-src">Kaynak: MEB, 2026-2027 ${grade}. Sınıf Matematik Taslak Çerçeve Yıllık Planı (<a href="https://tymm.meb.gov.tr/taslak-cerceve-planlari/temel-egitim" target="_blank" rel="noopener">tymm.meb.gov.tr</a>) · ${maarif ? 'Türkiye Yüzyılı Maarif Modeli' : '2018 Öğretim Programı'}. Zümre kararıyla haftalar değişebilir.</p>`;
 
     bind();
-    if (query) search(query);
     try { history.replaceState(null, '', `?sinif=${grade}&hafta=${week}`); } catch {}
-  }
-
-  function search(q) {
-    const box = root.querySelector('#kzResults');
-    q = q.trim().toLocaleLowerCase('tr');
-    if (q.length < 2) { box.innerHTML = ''; return; }
-    const hits = [];
-    for (const w of weeks(grade)) for (const c of w.ciktilar || []) {
-      const hay = `${c.kod} ${c.metin} ${w.konu || ''}`.toLocaleLowerCase('tr');
-      if (hay.includes(q) && !hits.some(h => h.c.kod === c.kod && h.c.kod)) hits.push({ w, c });
-    }
-    box.innerHTML = `<div class="kz-results"><b>${hits.length ? `${hits.length} sonuç` : 'Sonuç bulunamadı'}</b>${hits.slice(0, 12).map(h =>
-      `<button data-w="${h.w.no}"><span>${h.w.no}. hafta</span>${h.c.kod ? `<code>${esc(h.c.kod)}</code>` : ''} ${esc(h.c.metin)}</button>`).join('')}</div>`;
   }
 
   function weekText() {
@@ -159,7 +131,7 @@
     if (w.tema) L.push(`${P.program === 'maarif' ? 'Tema' : 'Ünite'}: ${w.tema.join(', ')}`);
     if (w.konu) L.push(`Konu: ${w.konu.replace(/\n/g, ', ')}`);
     (w.ciktilar || []).forEach(c => L.push(`${c.kod} ${c.metin}`.trim()));
-    if (w.surec) L.push(w.surec);
+    if (w.surec) L.push(w.surec.replace(/^\s*[a-zçğıöşü]\s?\)\s*/gim, '• '));
     return L.join('\n');
   }
 
@@ -183,20 +155,11 @@
       const d = done(); d.has(week) ? d.delete(week) : d.add(week);
       store.set(K.done(grade), [...d]); render();
     });
-    const note = root.querySelector('#kzNote');
-    let tm; note.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(() => { note.value.trim() ? store.set(K.note(grade, week), note.value) : store.del(K.note(grade, week)); }, 300); });
-    const q = root.querySelector('#kzQ');
-    q.addEventListener('input', () => { query = q.value; search(query); });
-    root.querySelector('#kzResults').addEventListener('click', e => {
-      const b = e.target.closest('[data-w]');
-      if (b) { query = ''; go(+b.dataset.w); root.querySelector('.kz-panel').scrollIntoView({ block: 'start' }); }
-    });
     root.querySelector('#kzCopy').addEventListener('click', async () => {
       try { await navigator.clipboard.writeText(weekText()); toast('Haftanın planı kopyalandı 📋'); }
       catch { toast('Kopyalanamadı; metni seçip kopyalayabilirsin.'); }
     });
     root.querySelector('#kzPrint').addEventListener('click', () => {
-      root.querySelector('.kz-extra')?.setAttribute('open', '');
       window.print();
     });
   }
