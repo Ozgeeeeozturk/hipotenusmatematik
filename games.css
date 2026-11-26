@@ -1405,3 +1405,64 @@ button.bd-top{cursor:pointer}
 .tz-dugmeler button{background:var(--lilac-light);border:2px solid var(--lilac);border-radius:12px;padding:10px 12px;font:700 .95rem 'Nunito',sans-serif;color:var(--ink);cursor:pointer}
 .tz-dugmeler button:hover:not(:disabled){background:var(--lilac);color:#fff}
 .tz-dugmeler button:disabled{opacity:.5;cursor:default}
+/* Alan Atölyesi */
+.al-svg{width:100%;max-width:400px;height:auto;background:#fff;border-radius:12px}
+.al-svg.daire{max-width:220px}
+.al-izgara{stroke:#E4DDF0;stroke-width:1}
+.al-sekil{fill:rgba(158,230,201,.75);stroke:var(--mint-dark);stroke-width:2.5;stroke-linejoin:round}
+.al-sekil.parca{fill:rgba(255,216,77,.85);stroke:var(--yellow-dark)}
+.al-bos{fill:#fff;stroke:var(--mint-dark);stroke-width:2}
+.al-hayal{fill:none;stroke:var(--yellow-dark);stroke-width:2;stroke-dasharray:5 4}
+.al-parca{transition:transform .6s ease}
+.al-h{stroke:var(--lilac-dark);stroke-width:2;stroke-dasharray:5 3}
+.al-dik{fill:none;stroke:var(--lilac-dark);stroke-width:1.5}
+.al-uzanti{stroke:var(--mint-dark);stroke-width:1.5;stroke-dasharray:3 3}
+.al-et{font:800 12px 'Nunito',sans-serif;fill:var(--ink)}
+.al-kes{display:flex;justify-content:center}
+/* Yansıt-Ötele */
+.dn-svg{width:100%;max-width:420px;height:auto;background:#fff;border-radius:12px}
+.dn-svg.mini{max-width:200px;background:transparent}
+.dn-iz{stroke:#E4DDF0;stroke-width:1}
+.dn-eksen{stroke:var(--ink);stroke-width:1.8}
+.dn-no{font:700 9px 'Nunito',sans-serif;fill:var(--muted)}
+.dn-ad{font:800 12px 'Nunito',sans-serif;fill:var(--ink);font-style:italic}
+.dn-et{font:800 13px 'Nunito',sans-serif;fill:var(--ink)}
+.dn-et.ayna{fill:#C2415B}
+.dn-ayna{stroke:#C2415B;stroke-width:3;stroke-dasharray:8 5}
+.dn-s{fill:rgba(200,162,232,.8);stroke:var(--lilac-dark);stroke-width:2}
+.dn-g{fill:rgba(255,216,77,.85);stroke:var(--yellow-dark);stroke-width:2}
+.dn-n{fill:var(--lilac-dark)}
+.dn-sec{fill:var(--yellow);stroke:var(--yellow-dark);stroke-width:2}
+.dn-sec.ok{fill:var(--mint-dark);stroke:#fff}
+.dn-sec.yanlis{fill:#C2415B;stroke:#fff}
+.dn-dogru{fill:var(--mint-dark);stroke:#fff;stroke-width:2}
+.dn-tik{display:flex;justify-content:center;cursor:crosshair;touch-action:manipulation}
+.dn-ipucu{text-align:center;font-weight:700;color:var(--muted);margin:6px 0}
+.to-opts .g-opt .dn-svg.mini{width:100%}
+/* Üçgenin Elemanları */
+.ue-svg{width:100%;max-width:400px;height:auto;background:#fff;border-radius:12px}
+.ue-ucgen{fill:rgba(241,231,250,.9);stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
+.ue-el{stroke:#C2415B;stroke-width:3}
+.ue-cent{stroke:#C2415B;stroke-width:2.5}
+.ue-dik{fill:none;stroke:#C2415B;stroke-width:2}
+.ue-yay{fill:none;stroke:#C2415B;stroke-width:2.5}
+.ue-uzanti{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:5 4}
+.ue-ad{font:800 15px 'Nunito',sans-serif;fill:var(--ink)}
+.ue-aday{fill:var(--yellow);stroke:var(--ink);stroke-width:2}
+/* Limonata Oranı */
+.lo-tarif{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;background:#fff;border-radius:14px;padding:10px 14px}
+.lo-grup{display:grid;justify-items:center;gap:4px;font-weight:700}
+.lo-bardaklar{display:flex;flex-wrap:wrap;gap:3px;max-width:200px;justify-content:center}
+.lo-b{width:24px;height:32px}
+.lo-arti{font:800 1.6rem 'Baloo 2',cursive;color:var(--lilac-dark)}
+.lo-ayar{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:10px;font-weight:700}
+.lo-ayar>div{display:flex;align-items:center;gap:8px;background:#fff;border-radius:12px;padding:6px 10px}
+.lo-ayar button{width:36px;height:36px;border-radius:10px;border:2px solid var(--lilac);background:var(--lilac-light);font:800 1.2rem 'Nunito',sans-serif;cursor:pointer}
+.lo-ayar b[id]{min-width:24px;text-align:center;font-size:1.2rem}
+.lo-sonuc{min-height:60px}
+.lo-tab{font-size:.85rem}
+.lo-tab th,.lo-tab td{padding:3px 7px}
+.dn-g{fill:rgba(229,115,59,.85);stroke:#B4501F}
+.dn-svg.mini{background:#fff;border-radius:10px;max-width:none}
+.to-opts:has(.dn-svg.mini){grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.to-opts .g-opt:has(.dn-svg.mini){padding:8px}
