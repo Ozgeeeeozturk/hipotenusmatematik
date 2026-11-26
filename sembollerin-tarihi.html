@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Sembollerin Tarihi | Hipotenüs</title>
 <link rel="canonical" href="https://hipotenusmatematik.com/sembollerin-tarihi.html">
-<meta name="description" content="Matematik tarihi: sembollerin tarihi. +, −, =, π, √ ve diğer sembollerin nereden geldiği, kimin bulduğu.">
+<meta name="description" content="Matematik sembollerinin tarihi: karekök √ işaretinin 500 yıllık yolculuğu, +, −, =, ×, ÷, π, ∞ ve sıfırın doğuşu. Hangisi daha yaşlı oyunuyla.">
 <meta name="theme-color" content="#2E9E78">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -42,17 +42,150 @@
   </div>
 </header>
 
-<main class="wrap" style="padding-bottom:48px">
+<main class="wrap isp st" style="padding-bottom:48px">
   <div class="page-head">
     <div><h1>➗ Sembollerin Tarihi</h1><p>+, −, =, π, √ ve diğer sembollerin nereden geldiği, kimin bulduğu.</p></div>
   </div>
-  <div class="empty"><b>İçerik hazırlanıyor</b><p>Sembollerin Tarihi yakında burada olacak.</p></div>
+
+  <section class="isp-card isp-soru">
+    <span class="isp-etiket">Biliyor muydun?</span>
+    <p class="isp-buyuk st-ornek">“Üçün karesi dokuza eşittir.”</p>
+    <p>Matematikçiler yüzyıllarca her şeyi <b>kelimelerle</b> yazdı. Bugün aynı cümleyi birkaç sembolle yazıyoruz:</p>
+    <p class="isp-buyuk">3<sup>2</sup> = 9</p>
+    <p>Her sembolün arkasında bir kişi, bir kitap ve bir hikâye var. Gel, en tanıdık sembollerin doğum günlerine bakalım! 🎂</p>
+  </section>
+
+  <section class="isp-card isp-model" id="karekok">
+    <h2>√ Karekök sembolünün 500 yıllık yolculuğu</h2>
+    <div class="st-yol">
+      <div class="st-adim"><span class="st-sem">R</span><div><b>Orta Çağ · Latince “radix”</b><p>“Radix” Latincede <b>kök</b> demek. Avrupalı matematikçiler karekökü bu kelimenin baş harfiyle <b>R</b> diye yazıyordu.</p></div></div>
+      <div class="st-adim"><span class="st-sem st-ar">ج</span><div><b>15. yüzyıl · el-Kalasâdî</b><p>Endülüslü matematikçi el-Kalasâdî, Arapça “cizr” (kök) kelimesinin ilk harfi olan <b>ج</b>’yi sayının üstüne yazdı.</p></div></div>
+      <div class="st-adim"><span class="st-sem">√</span><div><b>1525 · Christoph Rudolff</b><p>Alman matematikçi Rudolff, <i>Coss</i> adlı cebir kitabında √ işaretini ilk kez kullandı. Büyük olasılıkla “radix”in küçük <b>r</b> harfinin hızlı yazılmış, uzatılmış hâli.</p></div></div>
+      <div class="st-adim son"><span class="st-sem">√<span class="st-cizgi">9</span></span><div><b>1637 · René Descartes</b><p>Descartes, <i>La Géométrie</i> kitabında işaretin üstüne bir çizgi ekledi. Böylece kökün hangi sayıları kapsadığı belli oldu. Bugün kullandığımız hâli bu!</p></div></div>
+    </div>
+    <div class="st-kare">
+      <svg viewBox="0 0 200 200" role="img" aria-label="Alanı 9 olan kare, bir kenarı 3 birim">
+        <g id="kareIzgara"></g>
+      </svg>
+      <div>
+        <h3>Neden “kare” kök?</h3>
+        <p>Alanı <b id="kAlan">9</b> birimkare olan bir karenin bir kenarı <b id="kKenar">3</b> birimdir. Yani √<span id="kAlan2">9</span> = <span id="kKenar2">3</span>. Karekök, “bu alandaki karenin kenarı kaç?” sorusunun cevabıdır.</p>
+        <div class="isp-tabanlar" id="kSec"></div>
+        <p class="st-not">🥕 <b>İlginç:</b> “Radix” kelimesi İngilizcedeki “radish” (turp) ve Türkçedeki “radikal” kelimeleriyle aynı kökten gelir. Hepsi “kök” demek!</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="isp-card">
+    <h2>🎂 Sembollerin doğum günleri</h2>
+    <p>Bir sembole dokun, hikâyesini oku. Sıralama en yaşlıdan en gence doğru.</p>
+    <div class="st-liste" id="liste"></div>
+  </section>
+
+  <section class="isp-card isp-dene" id="oyun">
+    <h2>🧓 Hangisi daha yaşlı?</h2>
+    <p>İki sembolden hangisi önce kullanılmaya başlandı? Tahmin et!</p>
+    <div class="st-oyun-ust"><span id="oTur">Tur 1 / 6</span><span id="oPuan">⭐ 0</span></div>
+    <div class="st-ikili" id="ikili"></div>
+    <p class="isp-geri" id="oGeri" hidden></p>
+    <div class="isp-dugmeler"><button class="btn btn-primary" id="oSonraki" hidden>Sonraki ▶</button></div>
+  </section>
+
+  <section class="isp-card isp-dikkat">
+    <h2>🇹🇷 Bizdeki farklar</h2>
+    <p><b>Bölme işareti:</b> Türkiye’de bölmeyi çoğunlukla <b>:</b> ile gösteririz. Bu işareti 1684’te Leibniz kullandı. ÷ işareti ise bazı ülkelerde, hesap makinelerinde ve klavyelerde yaygındır.</p>
+    <p><b>Ondalık virgül:</b> Biz 3,14 yazarız, İngilizce konuşulan ülkeler 3.14 yazar. İkisi de doğru, yalnızca gelenek farkı!</p>
+    <p><b>“Sıfır” kelimesi:</b> Arapça “sıfr” (boş) kelimesinden gelir. Avrupa’ya “zephirum” olarak geçti ve İngilizcede “zero” oldu. Yani “zero” ile “sıfır” kardeş kelimelerdir!</p>
+  </section>
 </main>
 
 <script src="vendor/supabase.js"></script>
 <script src="config.js"></script>
 <script src="app.js"></script>
 <script src="games.js"></script>
-<script>initPage();</script>
+<script>
+initPage();
+(function () {
+  const $ = id => document.getElementById(id);
+  // yil: sıralama ve oyun için; yazi: ekranda gösterilen tarih
+  const SEMBOLLER = [
+    { s: '0', ad: 'Sıfır', yil: 628, yazi: '628 · Brahmagupta (Hindistan)', h: 'Hintli matematikçi Brahmagupta, sıfırı bir sayı olarak kabul edip onunla işlem kurallarını yazdı. Sıfır, Harezmî’nin eserleriyle İslam dünyasına, oradan da Fibonacci’nin 1202’deki kitabıyla Avrupa’ya ulaştı.', ilginc: 'Romalıların sıfırı yoktu! Roma rakamlarında 0 için bir sembol bulamazsın.' },
+    { s: '+ −', ad: 'Artı ve eksi', yil: 1489, yazi: '1489 · Johannes Widmann (Almanya)', h: 'Widmann, tüccarlar için yazdığı bir aritmetik kitabında + ve − işaretlerini kullandı. Başlangıçta “fazla” ve “eksik” mallar için kullanılıyordu.', ilginc: '+ işaretinin Latince “et” (ve) kelimesinin hızlı yazılmasından doğduğu düşünülür.' },
+    { s: '√', ad: 'Karekök', yil: 1525, yazi: '1525 · Christoph Rudolff (Almanya)', h: 'Rudolff, Coss adlı cebir kitabında √ işaretini kullandı. Büyük olasılıkla “radix” (kök) kelimesinin küçük r harfinden doğdu. Üstündeki çizgiyi 1637’de Descartes ekledi.', ilginc: 'Yukarıdaki “500 yıllık yolculuk” bölümünde tüm hikâyesi var!' },
+    { s: '=', ad: 'Eşittir', yil: 1557, yazi: '1557 · Robert Recorde (Galler)', h: 'Recorde, The Whetstone of Witte adlı kitabında “eşittir” kelimesini tekrar tekrar yazmaktan sıkıldığını söyledi. Bunun yerine iki paralel çizgi kullandı, çünkü ona göre hiçbir şey iki paralel çizgiden daha eşit olamazdı.', ilginc: 'Recorde’un ilk eşittir işareti bugünkünden çok daha uzundu: ═══════' },
+    { s: '×', ad: 'Çarpı', yil: 1631, yazi: '1631 · William Oughtred (İngiltere)', h: 'Oughtred, Clavis Mathematicae adlı kitabında çarpmayı × ile gösterdi. Kitap çok okunduğu için işaret hızla yayıldı.', ilginc: 'Leibniz × işaretini sevmedi, çünkü x harfiyle karışıyordu. Onun yerine nokta (·) kullanmayı önerdi. Bugün ikisini de kullanıyoruz.' },
+    { s: '< >', ad: 'Küçüktür, büyüktür', yil: 1631, yazi: '1631 · Thomas Harriot (İngiltere)', h: 'Harriot’nun bu işaretleri, o öldükten sonra 1631’de yayımlanan kitabında yer aldı. Açık uç her zaman büyük sayıya bakar.', ilginc: 'Harriot aynı zamanda Ay’ı teleskopla çizen ilk kişilerden biridir!' },
+    { s: 'x', ad: 'Bilinmeyen: x', yil: 1637, yazi: '1637 · René Descartes (Fransa)', h: 'Descartes, La Géométrie kitabında bilinmeyenler için alfabenin son harflerini (x, y, z), bilinenler için ilk harflerini (a, b, c) kullandı. Bu alışkanlık bugün de sürüyor.', ilginc: 'Koordinat sistemini bulan da Descartes’tır. Bu yüzden ona “Kartezyen” koordinat sistemi denir.' },
+    { s: '∞', ad: 'Sonsuz', yil: 1655, yazi: '1655 · John Wallis (İngiltere)', h: 'Wallis, sonsuzluğu göstermek için yatık bir 8’e benzeyen ∞ işaretini kullandı. Neden bu şekli seçtiğini açıklamadı.', ilginc: 'Bu şeklin, Romalıların 1000 için kullandığı bir sembolden ya da Yunan harfi ω’dan (omega) geldiği tahmin ediliyor. Kesin olarak bilinmiyor!' },
+    { s: '÷', ad: 'Bölü (obelus)', yil: 1659, yazi: '1659 · Johann Rahn (İsviçre)', h: 'Rahn, Teutsche Algebra kitabında bölme için ÷ işaretini kullandı. Bu işaretin adı “obelus”tur.', ilginc: 'Obelus eskiden el yazmalarında “bu kısım şüpheli” demek için kullanılıyordu!' },
+    { s: ':', ad: 'Bölme (iki nokta)', yil: 1684, yazi: '1684 · Gottfried Leibniz (Almanya)', h: 'Leibniz bölmeyi iki noktayla gösterdi. Türkiye’de ve pek çok Avrupa ülkesinde bugün bölme için bu işaret kullanılır.', ilginc: 'Leibniz, türev ve integral sembollerini de bulan matematikçidir.' },
+    { s: 'π', ad: 'Pi', yil: 1706, yazi: '1706 · William Jones (Galler)', h: 'Jones, çemberin çevresinin çapına oranını Yunanca “çevre” anlamındaki “periphereia” kelimesinin ilk harfi π ile gösterdi. 1737’den itibaren Euler kullanınca dünyaya yayıldı.', ilginc: '14 Mart (3/14) her yıl Pi Günü olarak kutlanır!' }
+  ];
+
+  $('liste').innerHTML = SEMBOLLER.map((x, i) => `
+    <details class="st-kart">
+      <summary><span class="st-buyuk">${x.s}</span><span class="st-ad"><b>${x.ad}</b><small>${x.yazi}</small></span></summary>
+      <p>${x.h}</p>
+      <p class="st-not">💡 ${x.ilginc}</p>
+    </details>`).join('');
+
+  // Neden "kare" kök
+  const K = [4, 9, 16, 25];
+  let alan = 9;
+  function kareCiz() {
+    const n = Math.sqrt(alan), b = 180 / n;
+    let s = '';
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) s += `<rect x="${10 + c * b}" y="${10 + r * b}" width="${b}" height="${b}" fill="${(r + c) % 2 ? '#C8A2E8' : '#E9DBF7'}" stroke="#7B4FA8" stroke-width="2"/>`;
+    $('kareIzgara').innerHTML = s;
+    $('kAlan').textContent = $('kAlan2').textContent = alan;
+    $('kKenar').textContent = $('kKenar2').textContent = n;
+    $('kSec').innerHTML = K.map(v => `<button class="chip" data-a="${v}" aria-pressed="${v === alan}">Alan ${v}</button>`).join('');
+  }
+  $('kSec').addEventListener('click', e => { const b = e.target.closest('[data-a]'); if (b) { alan = +b.dataset.a; kareCiz(); } });
+  kareCiz();
+
+  // Hangisi daha yaşlı?
+  const karistir = a => a.map(x => [Math.random(), x]).sort((p, q) => p[0] - q[0]).map(x => x[1]);
+  let turlar = [], t = 0, puan = 0, cevaplandi = false;
+  function yeniOyun() {
+    turlar = [];
+    const havuz = karistir(SEMBOLLER.slice());
+    for (let i = 0; i < havuz.length && turlar.length < 6; i++) for (let j = i + 1; j < havuz.length; j++) {
+      const a = havuz[i], b = havuz[j];
+      if (Math.abs(a.yil - b.yil) >= 15 && !turlar.some(tt => tt.includes(a) || tt.includes(b))) { turlar.push(karistir([a, b])); break; }
+    }
+    while (turlar.length < 6) { const a = havuz[turlar.length], b = SEMBOLLER.find(x => Math.abs(x.yil - a.yil) >= 15); turlar.push(karistir([a, b])); }
+    t = 0; puan = 0; tur();
+  }
+  function tur() {
+    cevaplandi = false;
+    $('oTur').textContent = `Tur ${t + 1} / 6`; $('oPuan').textContent = `⭐ ${puan}`;
+    $('ikili').innerHTML = turlar[t].map((x, i) => `<button class="st-secim" data-i="${i}"><span>${x.s}</span><small>${x.ad}</small></button>`).join('<b class="st-vs">mı?</b>');
+    $('oGeri').hidden = true; $('oSonraki').hidden = true;
+  }
+  $('ikili').addEventListener('click', e => {
+    const b = e.target.closest('.st-secim'); if (!b || cevaplandi) return;
+    cevaplandi = true;
+    const [a, c] = turlar[t], yasli = a.yil < c.yil ? 0 : 1, sec = +b.dataset.i;
+    $('ikili').querySelectorAll('.st-secim').forEach((x, i) => { x.disabled = true; x.classList.add(i === yasli ? 'dogru' : 'genc'); x.querySelector('small').textContent = `${turlar[t][i].ad} · ${turlar[t][i].yil}`; });
+    if (sec === yasli) puan++;
+    const fark = Math.abs(a.yil - c.yil);
+    $('oGeri').hidden = false; $('oGeri').className = 'isp-geri' + (sec === yasli ? ' ok' : '');
+    $('oGeri').textContent = (sec === yasli ? 'Doğru! ' : 'Bu sefer olmadı. ') + `${turlar[t][yasli].ad} (${turlar[t][yasli].s}) ${fark} yıl daha yaşlı.`;
+    $('oPuan').textContent = `⭐ ${puan}`;
+    $('oSonraki').hidden = false; $('oSonraki').textContent = t === 5 ? 'Sonucu gör ▶' : 'Sonraki ▶';
+  });
+  $('oSonraki').onclick = () => {
+    if (t < 5) { t++; tur(); return; }
+    $('ikili').innerHTML = `<p class="isp-buyuk" style="font-size:1.4rem;text-align:center">6 turda ${puan} doğru ⭐</p>`;
+    $('oGeri').hidden = false; $('oGeri').className = 'isp-geri ok';
+    $('oGeri').textContent = puan >= 5 ? 'Sembol tarihçisi oldun! 🎓' : 'Yukarıdaki doğum günü kartlarına bakıp tekrar dene!';
+    $('oSonraki').hidden = false; $('oSonraki').textContent = '↺ Yeniden oyna'; t = 6;
+    $('oSonraki').onclick = () => { $('oSonraki').onclick = sonrakiFn; yeniOyun(); };
+  };
+  const sonrakiFn = $('oSonraki').onclick;
+  yeniOyun();
+})();
+</script>
 </body>
 </html>
