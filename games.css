@@ -1008,7 +1008,19 @@ button.bd-top{cursor:pointer}
 }
 
 /* ---------- KATLA, KES, AÇ ---------- */
-.kk-ust{display:flex;justify-content:space-between;font-weight:800;color:var(--muted);margin-bottom:8px}
+.kk-ust{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--muted);margin-bottom:10px}
+.kk-denemeler{display:flex;gap:6px}
+.kk-den{width:38px;height:38px;border-radius:50%;border:2px solid #E5DCF3;background:#fff;font:800 1rem 'Baloo 2',cursive;color:var(--ink);cursor:pointer}
+.kk-den.bitti{background:var(--mint-light);border-color:var(--mint-dark)}
+.kk-den.on{background:var(--lilac-dark);border-color:var(--lilac-dark);color:#fff}
+.kk-dusun{margin-top:12px;background:var(--lilac-light);border-radius:16px;padding:14px 16px;display:grid;gap:6px;text-align:center}
+.kk-dusun b{font:800 1.15rem 'Baloo 2',cursive;color:var(--lilac-dark)}
+.kk-dusun p{font-weight:800;font-size:1.05rem;line-height:1.45}
+.kk-dusun small{color:var(--muted);font-weight:700}
+.kk-ozet{display:grid;gap:10px}
+.kk-ozet h2{font:800 1.6rem 'Baloo 2',cursive;color:var(--lilac-dark);text-align:center}
+.kk-kural{background:#fff;border-left:5px solid var(--mint-dark);border-radius:12px;padding:10px 14px;line-height:1.5;box-shadow:0 3px 10px rgba(45,36,64,.06)}
+.kk-kural b{color:var(--lilac-dark)}
 .kk-sahne{position:relative;background:#FFFDF6 radial-gradient(circle,rgba(123,79,168,.13) 1.2px,transparent 1.3px) 0 0/18px 18px;border:2px solid #E5DCF3;border-radius:20px;overflow:hidden}
 .kk-sahne canvas{display:block;width:100%;height:360px}
 .kk-adim{position:absolute;left:12px;right:12px;top:10px;text-align:center;font:800 .95rem 'Nunito';color:var(--lilac-dark);background:rgba(255,255,255,.85);border-radius:12px;padding:6px 10px}
@@ -1018,5 +1030,5 @@ button.bd-top{cursor:pointer}
 .kk-soru-metin{font:800 1.15rem 'Nunito';text-align:center;margin:14px 0 10px}
 .kk-neden{margin-top:12px;background:var(--yellow-light);border-radius:14px;padding:11px 14px;line-height:1.5}
 .kk-neden b{color:var(--lilac-dark)}
-.kk-ileri{display:flex;justify-content:center;margin-top:12px}
+.kk-ileri{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px}
 @media (max-width:560px){.kk-sahne canvas{height:280px}.kk-adim{font-size:.82rem}}

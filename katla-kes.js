@@ -1,4 +1,4 @@
-/* Katla, Kes, Aç: dikdörtgen kâğıt iki kez katlanır, bir köşeden kesilir; açılınca oluşan şekil sorulur.
+/* Katla, Kes, Aç: dikdörtgen kâğıt iki kez katlanır, bir köşeden kesilir; öğrenci tahmin eder, sonra açıp görür (şıksız keşif etkinliği).
    Kâğıt 8×6 birim. 1. katlama: x = 4 doğrusundan sol yarı sağa. 2. katlama: y = 3 doğrusundan üst yarı aşağı.
    Katlı kâğıt: x ∈ [4, 8], y ∈ [0, 3]. (4, 3) iki katın buluştuğu köşe, (8, 0) kâğıdın asıl köşesidir. */
 (function () {
@@ -6,16 +6,26 @@
   const stage = document.getElementById('stage');
   const W = 8, H = 6, FX = 4, FY = 3;
   const SORULAR = [
-    { kes: [[8, 0], [6.7, 0], [8, 1.3]], soru: 'Kâğıt açılınca oluşan çokgen kaç kenarlıdır?', sec: ['4', '6', '8', '12'], dogru: '8',
-      neden: 'Kesik, kâğıdın dört asıl köşesinin üst üste geldiği köşede. Açılınca dört köşenin her biri üçgen biçiminde kesilir; her köşe 2 köşeye dönüşür: 4 × 2 = 8 kenar.' },
-    { kes: [[4, 3], [5.4, 3], [5.4, 2.2], [4, 2.2]], soru: 'Kâğıt açılınca ortada oluşan deliğin şekli nedir?', sec: ['Kare', 'Dikdörtgen', 'Üçgen', 'Eşkenar dörtgen'], dogru: 'Dikdörtgen',
-      neden: 'Kesik, iki katın buluştuğu köşede; bu nokta kâğıdın tam ortası. 1,4 × 0,8’lik parça her iki yöne katlanınca 2,8 × 1,6’lık bir dikdörtgen delik açılır.' },
-    { kes: [[4, 3], [5.6, 3], [4, 1.8]], soru: 'Kâğıt açılınca ortada oluşan deliğin şekli nedir?', sec: ['Kare', 'Dikdörtgen', 'Altıgen', 'Eşkenar dörtgen'], dogru: 'Eşkenar dörtgen',
-      neden: 'Ortadaki köşeden kesilen dik üçgen dört kez yansır. Dört eş üçgen bir araya gelince kenarları eşit, köşegenleri dik kesişen bir eşkenar dörtgen oluşur.' },
-    { kes: [[4, 0], [4.9, 0], [4.9, 0.9], [4, 0.9]], soru: 'Kâğıt açılınca oluşan çokgen kaç kenarlıdır?', sec: ['8', '10', '12', '16'], dogru: '12',
-      neden: 'Kesik, dikey katın kâğıdın kenarına değdiği yerde. Açılınca alt ve üst kenarın ortasında birer dikdörtgen girinti olur. Her girinti 4 kenar ekler: 4 + 4 + 4 = 12.' },
-    { kes: [[8, 3], [6.9, 3], [8, 1.9]], soru: 'Kâğıt açılınca oluşan çokgen kaç kenarlıdır?', sec: ['6', '8', '10', '12'], dogru: '10',
-      neden: 'Kesik, yatay katın kâğıdın kenarına değdiği yerde. Açılınca sağ ve sol kenarın ortasında birer V girintisi olur. Her V girintisi 3 kenar ekler: 4 + 3 + 3 = 10.' },
+    { kes: [[8, 0], [6.7, 0], [8, 1.3]], yer: 'Kâğıdın dış köşesi',
+      dusun: 'Kestiğin üçgen, açılınca kâğıdın nerelerinde görünecek? Kâğıdın şekli nasıl değişecek?',
+      sonuc: 'Dört köşesi kesilmiş, 8 kenarlı bir çokgen.',
+      neden: 'Bu köşede kâğıdın dört asıl köşesi üst üste duruyordu. Tek kesikle dört köşe birden kesildi; her köşe iki köşeye dönüştü.' },
+    { kes: [[4, 3], [5.4, 3], [5.4, 2.2], [4, 2.2]], yer: 'İki katın buluştuğu köşe',
+      dusun: 'Bu köşe, açılınca kâğıdın tam ortasına denk geliyor. Ortada nasıl bir boşluk oluşacak?',
+      sonuc: 'Kâğıdın ortasında dikdörtgen bir delik.',
+      neden: 'Kestiğin küçük dikdörtgen, iki kat sayesinde dört kez yansıdı. Dört parça birleşince eni ve boyu iki katına çıkan bir dikdörtgen oluştu; kâğıdın dış kenarları hiç değişmedi.' },
+    { kes: [[4, 3], [5.6, 3], [4, 1.8]], yer: 'İki katın buluştuğu köşe',
+      dusun: 'Bu kez ortadaki köşeden bir üçgen kestin. Ortadaki boşluk nasıl bir şekil olacak?',
+      sonuc: 'Kâğıdın ortasında eşkenar dörtgen biçiminde bir delik.',
+      neden: 'Dik üçgen dört kez yansıdı. Dört eş üçgen dik köşeleri ortada buluşacak biçimde birleşince kenarları eşit, köşegenleri dik kesişen bir eşkenar dörtgen oluştu.' },
+    { kes: [[4, 0], [4.9, 0], [4.9, 0.9], [4, 0.9]], yer: 'Dikey katın kenara değdiği yer',
+      dusun: 'Kesik, dikey katın kâğıdın kenarına değdiği yerde. Açınca kâğıdın hangi kenarlarında değişiklik göreceksin?',
+      sonuc: 'Alt ve üst kenarın ortasında birer dikdörtgen girinti; 12 kenarlı bir çokgen.',
+      neden: 'Kesik dikey kat üzerinde olduğu için açılınca iki katı genişliğinde bir girintiye dönüştü. Yatay kat da aynı girintiyi üst kenara taşıdı.' },
+    { kes: [[8, 3], [6.9, 3], [8, 1.9]], yer: 'Yatay katın kenara değdiği yer',
+      dusun: 'Üçgen kesik, yatay katın kâğıdın kenarına değdiği yerde. Açınca girintiler hangi kenarlarda olacak, nasıl görünecek?',
+      sonuc: 'Sağ ve sol kenarın ortasında birer V girintisi; 10 kenarlı bir çokgen.',
+      neden: 'Üçgen yatay katta açılınca simetriğiyle birleşip V biçimini aldı. Dikey kat da aynı girintiyi karşı kenara yansıttı.' },
   ];
   // katlı kâğıttaki bir nokta açılınca bu dört noktaya karşılık gelir
   const yansit = ([x, y]) => [[x, y], [2 * FX - x, y], [x, 2 * FY - y], [2 * FX - x, 2 * FY - y]];
@@ -23,13 +33,13 @@
   stage.innerHTML = `
     <div class="pg-def"><span class="pg-def-ic" aria-hidden="true">✂️</span>
       <p><b class="k1">Katla, kes, aç!</b> Kâğıt katlanınca katlar <mark>ayna gibi</mark> davranır: kestiğin parça, katların her birinde <b class="k3">simetriğiyle</b> birlikte düşer.</p></div>
-    <div class="kk-ust"><span id="kkNo"></span><span id="kkPuan"></span></div>
+    <div class="kk-ust"><span>Deneme:</span><div class="kk-denemeler" id="kkDen"></div></div>
     <div class="kk-sahne"><canvas id="kkCv" aria-label="Kâğıt"></canvas><span class="kk-adim" id="kkAdim"></span></div>
     <div class="kk-renk"><span><i style="background:#D9C2F2"></i>Kâğıdın ön yüzü</span><span><i style="background:#A8E8CF"></i>Kâğıdın arka yüzü</span></div>
     <div class="kk-butonlar" id="kkBtn"></div>
     <div id="kkSoru"></div>`;
   const cv = stage.querySelector('#kkCv'), btnKutu = stage.querySelector('#kkBtn'), soruKutu = stage.querySelector('#kkSoru');
-  let i = 0, puan = 0, durum, anim = null;
+  let i = 0, durum, anim = null; const gorulen = new Set();
 
   // ---- çizim ----
   // İki yüzlü origami kâğıdı: ön yüz lila, arka yüz nane (katlanınca katmanlar renkten izlenir)
@@ -112,53 +122,50 @@
   }
 
   // ---- akış ----
-  const ADIM_YAZI = ['Şekil 1: Kâğıdı kırmızı çizgiden, ok yönünde ikiye katla.', 'Şekil 2: Katlanmış kâğıdı yine tam ortadan, ok yönünde katla.', 'Şekil 3: Kesikli çizgi boyunca kes ve parçayı at.', 'Şimdi düşün: kâğıt açılınca ne olacak?', 'Kâğıdı açtık!'];
+  const ADIM_YAZI = ['Şekil 1: Kâğıdı kırmızı çizgiden, ok yönünde ikiye katla.', 'Şekil 2: Katlanmış kâğıdı yine tam ortadan, ok yönünde katla.', 'Şekil 3: Kesikli çizgi boyunca kes ve parçayı at.', 'Açmadan önce düşün: kâğıt nasıl görünecek?', 'Kâğıdı açtık! Tahminin tuttu mu?'];
   function butonlar() {
     const a = durum.adim;
     stage.querySelector('#kkAdim').textContent = ADIM_YAZI[a];
     btnKutu.innerHTML = a === 0 ? '<button class="btn btn-yellow" id="kkGo">📄 1. Katla</button>'
       : a === 1 ? '<button class="btn btn-yellow" id="kkGo">📄 2. Katla</button>'
-      : a === 2 ? '<button class="btn btn-yellow" id="kkGo">✂️ Kes</button>' : '';
+      : a === 2 ? '<button class="btn btn-yellow" id="kkGo">✂️ Kes</button>'
+      : a === 3 ? '<button class="btn btn-yellow" id="kkGo">👐 Kâğıdı aç</button>' : '';
     const go = btnKutu.querySelector('#kkGo'); if (!go) return;
     go.onclick = () => {
       go.disabled = true;
       if (a === 0) canlandir('f1', 1, 1100, () => { durum.adim = 1; butonlar(); ciz(); });
       if (a === 1) canlandir('f2', 1, 1100, () => { durum.adim = 2; butonlar(); ciz(); });
-      if (a === 2) { durum.ucus = 0; durum.kesildi = true; canlandir('ucus', 1, 700, () => { durum.ucus = null; durum.adim = 3; butonlar(); ciz(); soruGoster(); }); }
+      if (a === 2) { durum.ucus = 0; durum.kesildi = true; canlandir('ucus', 1, 700, () => { durum.ucus = null; durum.adim = 3; butonlar(); ciz(); dusunGoster(); }); }
+      if (a === 3) canlandir('f2', 0, 1000, () => canlandir('f1', 0, 1000, () => { durum.adim = 4; butonlar(); ciz(); sonucGoster(); }));
     };
   }
-  function soruGoster() {
+  function dusunGoster() {
     const s = SORULAR[i];
-    soruKutu.innerHTML = `<p class="kk-soru-metin">${s.soru}</p>
-      <div class="g-options">${s.sec.map((o, k) => `<button class="g-opt c${k}" data-o="${o}"><b>${'ABCD'[k]}</b>${o}</button>`).join('')}</div>
-      <p class="pg-fb" id="kkFb"></p>`;
-    soruKutu.querySelectorAll('.g-opt').forEach(b => b.onclick = () => {
-      const dogru = b.dataset.o === s.dogru;
-      soruKutu.querySelectorAll('.g-opt').forEach(x => { x.disabled = true; if (x.dataset.o === s.dogru) x.classList.add('right'); });
-      if (!dogru) b.classList.add('wrong'); else puan++;
-      const fb = soruKutu.querySelector('#kkFb'); fb.className = 'pg-fb ' + (dogru ? 'ok' : 'no');
-      fb.textContent = dogru ? 'Doğru! Şimdi kâğıdı açıp görelim…' : `Doğru cevap: ${s.dogru}. Kâğıdı açıp görelim…`;
-      ust();
-      setTimeout(() => {
-        canlandir('f2', 0, 1000, () => canlandir('f1', 0, 1000, () => {
-          durum.adim = 4; butonlar(); ciz();
-          soruKutu.insertAdjacentHTML('beforeend', `<div class="kk-neden"><b>Neden?</b> ${s.neden}</div>
-            <div class="kk-ileri"><button class="btn btn-yellow" id="kkSonraki">${i < SORULAR.length - 1 ? 'Sonraki soru →' : 'Sonucu gör 🏁'}</button></div>`);
-          soruKutu.querySelector('#kkSonraki').onclick = () => { i++; i < SORULAR.length ? baslat() : bitir(); };
-        }));
-      }, 900);
-    });
+    soruKutu.innerHTML = `<div class="kk-dusun"><b>🤔 Tahmin et</b><p>${s.dusun}</p><small>Önce tahminini söyle ya da bir kâğıda çiz; sonra kâğıdı aç ve karşılaştır.</small></div>`;
   }
-  function ust() { stage.querySelector('#kkNo').textContent = `Soru ${Math.min(i + 1, SORULAR.length)} / ${SORULAR.length}`; stage.querySelector('#kkPuan').textContent = `⭐ ${puan}`; }
-  function baslat() { durum = { adim: 0, f1: 0, f2: 0, kesildi: false, ucus: null }; soruKutu.innerHTML = ''; ust(); butonlar(); ciz(); }
-  function bitir() {
-    btnKutu.innerHTML = ''; stage.querySelector('.kk-sahne').hidden = true; stage.querySelector('.kk-ust').hidden = true;
-    soruKutu.innerHTML = `<div class="g-result"><h2>${puan === 5 ? '🏆 Katlama ustası!' : puan >= 3 ? '👏 Güzel iş!' : '💪 Tekrar deneyelim'}</h2>
-      <div class="g-score"><b>${puan}</b><span> / ${SORULAR.length}</span></div>
-      <p>İpucu: Kesiğin katlanmış kâğıdın <b>hangi köşesinde</b> olduğuna bak. Ortadaki köşe delik açar, dış köşe kâğıdın köşelerini keser, kat çizgisinin ucu kenarda girinti açar.</p>
-      <div class="g-result-btns"><button class="btn btn-yellow" id="kkTekrar">🔁 Baştan oyna</button></div></div>`;
-    if (puan >= 4 && window.confetti) try { confetti(); } catch {}
-    soruKutu.querySelector('#kkTekrar').onclick = () => { i = 0; puan = 0; stage.querySelector('.kk-sahne').hidden = false; stage.querySelector('.kk-ust').hidden = false; baslat(); };
+  function sonucGoster() {
+    const s = SORULAR[i]; gorulen.add(i); denemeler();
+    soruKutu.innerHTML = `<div class="kk-neden"><b>👀 Ne oldu?</b> ${s.sonuc}<br><b>Neden?</b> ${s.neden}</div>
+      <div class="kk-ileri"><button class="btn btn-plain" id="kkTekrar">🔁 Bu denemeyi tekrarla</button>
+      <button class="btn btn-yellow" id="kkSonraki">${i < SORULAR.length - 1 ? 'Sonraki deneme →' : 'Neler keşfettik? 💡'}</button></div>`;
+    soruKutu.querySelector('#kkTekrar').onclick = () => baslat();
+    soruKutu.querySelector('#kkSonraki').onclick = () => { if (i < SORULAR.length - 1) { i++; baslat(); } else ozet(); };
+  }
+  function goster(acik) { stage.querySelector('.kk-sahne').hidden = !acik; stage.querySelector('.kk-renk').hidden = !acik; }
+  function denemeler() {
+    stage.querySelector('#kkDen').innerHTML = SORULAR.map((s, k) => `<button class="kk-den${k === i ? ' on' : ''}${gorulen.has(k) ? ' bitti' : ''}" data-k="${k}" title="${s.yer}" aria-label="${k + 1}. deneme: ${s.yer}">${k + 1}</button>`).join('');
+    stage.querySelectorAll('.kk-den').forEach(b => b.onclick = () => { i = +b.dataset.k; goster(true); baslat(); });
+  }
+  function baslat() { cancelAnimationFrame(anim); durum = { adim: 0, f1: 0, f2: 0, kesildi: false, ucus: null }; soruKutu.innerHTML = ''; denemeler(); butonlar(); ciz(); }
+  function ozet() {
+    btnKutu.innerHTML = ''; goster(false);
+    soruKutu.innerHTML = `<div class="kk-ozet"><h2>💡 Neler keşfettik?</h2>
+      <div class="kk-kural"><b>Kâğıdın dış köşesinden kesersen</b> kâğıdın dört köşesi birden kesilir.</div>
+      <div class="kk-kural"><b>İki katın buluştuğu köşeden kesersen</b> kâğıdın ortasında bir delik açılır; dış kenarlar değişmez.</div>
+      <div class="kk-kural"><b>Kat çizgisinin kenara değdiği yerden kesersen</b> kenarlarda, kesiğin simetriğiyle birleşmiş girintiler oluşur.</div>
+      <div class="kk-kural"><b>Her kat bir ayna gibidir:</b> kestiğin parça, kat çizgisine göre simetriğiyle birlikte düşer.</div>
+      <div class="kk-ileri"><button class="btn btn-yellow" id="kkBas">🔁 Baştan başla</button></div></div>`;
+    soruKutu.querySelector('#kkBas').onclick = () => { i = 0; goster(true); baslat(); };
   }
   window.addEventListener('resize', () => durum && ciz());
   baslat();
