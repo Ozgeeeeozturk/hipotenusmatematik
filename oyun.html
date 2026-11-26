@@ -81,6 +81,17 @@
     <div><h1>${esc(act.title)}</h1>
     <p>${t.name}${act.unit ? ` · ${esc(act.unit)}` : ''}${act.owner_name ? ` · Hazırlayan: ${esc(shortName(act.owner_name))}` : ''}</p></div>${act.grade ? `<span class="sinif-rozet big">${act.grade}. Sınıf</span>` : ''}`;
 
+  // Uygunsuz içerik bildirimi: site yöneticisine e-posta taslağı açar (Apple kuralı 1.2)
+  function bildirAdresi(a) {
+    const konu = 'Hipotenüs – Uygunsuz içerik bildirimi';
+    const metin = `Bildirilen oyun: ${a.title}
+Bağlantı: ${SITE_URL}/oyun.html?id=${a.id}
+
+Sorun nedir? (kısaca yaz):
+`;
+    return `mailto:${CFG.contactEmail || ''}?subject=${encodeURIComponent(konu)}&body=${encodeURIComponent(metin)}`;
+  }
+
   const me = Auth.current();
   if (me && me.id === act.owner_id) {
     const bar = $('ownerBar'); bar.hidden = false;
@@ -89,7 +100,8 @@
       ${act.is_public ? '' : '<span class="tag priv" style="align-self:center">Bu oyun gizli; yalnızca sen görüyorsun</span>'}`;
   } else {
     $('ownerBar').hidden = false;
-    $('ownerBar').innerHTML = `<button class="btn btn-lilac" id="shareBtn">🔗 Bağlantıyı Kopyala</button>`;
+    $('ownerBar').innerHTML = `<button class="btn btn-lilac" id="shareBtn">🔗 Bağlantıyı Kopyala</button>
+      <a class="btn btn-plain bildir-btn" href="${bildirAdresi(act)}">⚑ Uygunsuz içeriği bildir</a>`;
   }
   $('shareBtn').addEventListener('click', async () => {
     try { await navigator.clipboard.writeText(`${SITE_URL}/oyun.html?id=${act.id}`); toast('Oyun bağlantısı kopyalandı. Öğrencilerinle paylaşabilirsin!'); }
