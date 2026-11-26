@@ -1310,3 +1310,15 @@ button.bd-top{cursor:pointer}
 .zt-grup{display:grid;gap:10px}
 .zt-form select{font:700 .95rem 'Nunito',sans-serif;border:2px solid var(--lilac);border-radius:10px;padding:7px 9px;color:var(--ink);background:#fff;width:100%}
 .kz-evrak{display:flex;flex-wrap:wrap;gap:8px}
+.zt-iki-imza{grid-template-columns:repeat(2,1fr)}
+.zt-tek{display:flex!important;gap:8px;align-items:center;background:#fff;border-radius:12px;padding:8px 10px;font-weight:700!important}
+.zt-tek input{accent-color:var(--lilac-dark);width:17px;height:17px}
+.zt-ek{margin-top:36px;padding-top:20px;border-top:2px dashed #ccc}
+.zt-liste td{height:26px}
+.zt-bilgi.zt-liste{table-layout:fixed}
+.zt-bilgi.zt-liste th{width:auto}
+.zt-bilgi.zt-liste th:first-child{width:48px}
+.zt-bilgi.zt-liste th:nth-child(4){width:16%}
+.zt-bilgi.zt-liste th:last-child{width:18%}
+.zt-liste td:first-child,.zt-liste th:first-child{text-align:center}
+@media print{.zt-ek{break-before:page;border:0;margin:0;padding:0}}

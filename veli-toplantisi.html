@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Veli Toplantısı Tutanağı | Hipotenüs</title>
+<link rel="canonical" href="https://hipotenusmatematik.com/veli-toplantisi.html">
+<meta name="description" content="Ortaokul veli toplantısı tutanağı oluşturucu: yıl başı, 1. dönem sonu, 2. dönem ve yıl sonu. Gündem maddeleri, kararlar, veli katılım listesi. Düzenle, yazdır, Word olarak indir.">
+<meta name="theme-color" content="#2E9E78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="games.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <a href="index.html" class="logo" aria-label="Hipotenüs ana sayfa">
+      <svg viewBox="0 0 745 745" aria-hidden="true">
+        <rect width="745" height="745" rx="168" fill="#6E58BD"/>
+        <rect x="176" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <rect x="461" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <polygon points="461,346 461,485 322,485" fill="#8FDDC6"/>
+        <rect x="404" y="435" width="57" height="50" fill="#6E58BD"/>
+        <rect x="422" y="453" width="39" height="32" fill="#8FDDC6"/>
+        <line x1="489" y1="277" x2="260" y2="503" stroke="#FFD453" stroke-width="74" stroke-linecap="round"/>
+      </svg>
+      <span>Hipoten<b>ü</b>s</span>
+    </a>
+    <div class="bar-actions">
+      <a class="btn-login btn-ghost" href="index.html"><span aria-hidden="true">🏠</span><span class="lbl">Ana Sayfa</span></a>
+      <div id="userArea"></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap zt" style="padding-bottom:48px">
+  <div class="page-head">
+    <div><h1>👨‍👩‍👧 Veli Toplantısı Tutanağı</h1><p>Sınıf veli toplantısı tutanağını oluştur, düzenle, yazdır. Matematik desteği için velilere öneriler de hazır.</p></div>
+    <div class="kz-evrak"><a class="kz-mini" href="zumre-tutanaklari.html">📄 Zümre</a><a class="kz-mini" href="sok-raporu.html">📊 ŞÖK</a></div>
+  </div>
+
+  <div class="zt-turler" id="vtTur" role="group" aria-label="Toplantı türü">
+    <button class="chip" data-t="yilBasi" aria-pressed="true">🍂 Yıl Başı<small>Eylül–Ekim</small></button>
+    <button class="chip" data-t="donem1Sonu" aria-pressed="false">❄️ 1. Dönem Sonu<small>Ocak</small></button>
+    <button class="chip" data-t="donem2" aria-pressed="false">🌱 2. Dönem<small>Mart–Nisan</small></button>
+    <button class="chip" data-t="yilSonu" aria-pressed="false">☀️ Yıl Sonu<small>Haziran</small></button>
+  </div>
+
+  <div class="zt-duzen">
+    <form class="zt-form" id="vtForm" autocomplete="off" onsubmit="return false">
+      <h2>1 · Okul ve sınıf</h2>
+      <label>Okul adı<input name="okul" placeholder="Örn. Atatürk Ortaokulu"></label>
+      <div class="zt-iki">
+        <label>İl<input name="il" placeholder="Örn. İzmir"></label>
+        <label>İlçe<input name="ilce" placeholder="Örn. Karşıyaka"></label>
+      </div>
+      <div class="zt-iki">
+        <label>Sınıf<select name="sinif"><option>5</option><option>6</option><option selected>7</option><option>8</option></select></label>
+        <label>Şube<input name="sube" value="A" maxlength="3"></label>
+      </div>
+      <div class="zt-iki">
+        <label>Öğrenci sayısı<input name="ogrSay" type="number" min="1" max="60" placeholder="Örn. 28"></label>
+        <label>Katılan veli sayısı<input name="veliSay" type="number" min="0" max="60" placeholder="Örn. 21"></label>
+      </div>
+      <div class="zt-iki">
+        <label>Tarih<input name="tarih" type="date"></label>
+        <label>Saat<input name="saat" type="time" value="14:00"></label>
+      </div>
+      <div class="zt-iki">
+        <label>Yer<input name="yer" placeholder="Örn. 7/A sınıfı"></label>
+        <label>Eğitim-öğretim yılı<input name="yil"></label>
+      </div>
+
+      <h2>2 · Kişiler</h2>
+      <label>Sınıf rehber öğretmeni<input name="ogretmen" placeholder="Ad Soyad"></label>
+      <label>Sınıf veli temsilcisi <small>(varsa)</small><input name="temsilci" placeholder="Ad Soyad"></label>
+      <label>Okul müdürü<input name="mudur" placeholder="Ad Soyad"></label>
+
+      <h2>3 · Gündem maddeleri</h2>
+      <p class="zt-ipucu">İstemediğin maddenin işaretini kaldır.</p>
+      <div class="zt-gundem" id="vtGundem"></div>
+      <label class="zt-tek"><input type="checkbox" id="vtEk"> Sona boş <b>veli katılım listesi</b> ekle</label>
+
+      <p class="zt-ipucu">🔒 Bilgilerin yalnızca bu cihazda saklanır, hiçbir yere gönderilmez.</p>
+      <button type="button" class="kz-mini" id="vtTemizle">↺ Formu temizle</button>
+    </form>
+
+    <section class="zt-onizleme">
+      <div class="zt-arac">
+        <button class="kz-mini" id="vtYazdir">🖨️ Yazdır / PDF</button>
+        <button class="kz-mini" id="vtWord">📝 Word olarak indir</button>
+        <button class="kz-mini" id="vtKopya">📋 Metni kopyala</button>
+      </div>
+      <p class="zt-ipucu">✏️ Tutanağın üzerine tıklayıp istediğin yeri değiştirebilirsin. <span class="zt-bos">Sarı alanları</span> kendi bilgilerinle doldur. Formu değiştirince belge yeniden oluşur, bu yüzden elle düzeltmeleri en son yap.</p>
+      <article class="zt-belge" id="vtBelge" contenteditable="true" spellcheck="false"></article>
+      <p class="zt-ipucu">ℹ️ Metinler örnek niteliğindedir. Okulunun kullandığı formata ve güncel mevzuata göre düzenleyebilirsin.</p>
+    </section>
+  </div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="games.js"></script>
+<script>
+initPage();
+(function () {
+  const $ = id => document.getElementById(id);
+  const form = $('vtForm'), belge = $('vtBelge');
+  const KEY = 'hp-veli-v1';
+  const h = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const B = t => `<span class="zt-bos">${t}</span>`;
+  const BUYUK = s => s.toLocaleUpperCase('tr-TR');
+  const TUR = { yilBasi: 'Yıl Başı', donem1Sonu: '1. Dönem Sonu', donem2: '2. Dönem', yilSonu: 'Yıl Sonu' };
+
+  // Ortak maddeler
+  const gorus = { id: 'gorus', b: 'Velilerin görüş ve önerileri', g: c => `Velilerin soruları yanıtlandı ve görüşleri alındı. Velilerin dile getirdiği konular: ${B('varsa yazınız')}.`, k: c => `Velilerin dile getirdiği görüş ve öneriler okul idaresine iletilecektir.` };
+  const dilek = { id: 'dilek', b: 'Dilek ve temenniler', g: c => `Sınıf rehber öğretmeni ${c.ogretmen}, katılımları için velilere teşekkür ederek toplantıyı kapattı.` };
+  const iletisim = { id: 'iletisim', b: 'Okul-veli iletişimi', g: c => `Velilerin öğretmenlerle haftalık veli görüşme saatlerinde ya da önceden randevu alarak görüşebileceği belirtildi. Öğrencinin devam durumu, sınav sonuçları ve notlarının e-Okul Veli Bilgilendirme Sistemi üzerinden takip edilebileceği hatırlatıldı. Öğrencinin sağlık durumu, aile içi önemli değişiklikler gibi okulun bilmesi gereken durumların sınıf rehber öğretmenine bildirilmesinin önemi vurgulandı.`, k: c => `Veliler öğrencinin durumunu e-Okul Veli Bilgilendirme Sistemi üzerinden düzenli takip edecek, gerektiğinde veli görüşme saatlerinde öğretmenlerle görüşecektir.` };
+  const karne = { id: 'karne', b: 'Karnelerin değerlendirilmesi', g: c => `Karnenin, öğrencinin öğrenme sürecinin yalnızca bir göstergesi olduğu belirtildi. Notlar nedeniyle çocukların başkalarıyla kıyaslanmamasının ve cezalandırılmamasının, bunun yerine çabalarının takdir edilip eksikleri için birlikte plan yapılmasının daha yararlı olduğu vurgulandı.`, k: c => `Veliler karneyi çocuklarıyla birlikte değerlendirecek, çabayı takdir ederek eksikler için çalışma planı yapacaktır.` };
+  const mat = ek => ({ id: 'matematik', b: 'Matematik dersinde velilerin desteği', g: c => `Matematiğin uzun ve seyrek çalışmalarla değil, kısa ve düzenli tekrarlarla daha iyi öğrenildiği; günde 15-20 dakikalık çalışmanın yeterli ve etkili olduğu belirtildi. Alışverişte para üstünü hesaplamak, yemek tarifinde ölçüleri ayarlamak, yolculukta süre ve mesafe tahmini yapmak gibi günlük durumların matematik için iyi birer fırsat olduğu ifade edildi. Çocuğun yanında “Ben de matematiği hiç sevmezdim” gibi ifadeler kullanılmasının matematik kaygısını artırabileceği; bunun yerine sonuçtan çok çabanın övülmesinin özgüveni desteklediği vurgulandı.${ek ? ' ' + ek : ''}`, k: c => `Veliler çocuklarının günde kısa süreli ve düzenli matematik çalışmasını destekleyecek, günlük hayattaki matematik fırsatlarını değerlendirecek ve çocuklarının çabasını takdir edecektir.` });
+
+  const GUNDEM = {
+    yilBasi: [
+      { id: 'acilis', b: 'Açılış ve tanışma', g: c => `Toplantı, sınıf rehber öğretmeni ${c.ogretmen} tarafından açıldı. Öğretmen kendini tanıtarak velilerle tanıştı ve yeni eğitim-öğretim yılının başarılı geçmesi dileğinde bulundu. ${c.katilim}` },
+      { id: 'kurallar', b: 'Okul kuralları, devam-devamsızlık ve okul takvimi', g: c => `Velilere okulun giriş-çıkış saatleri, kılık-kıyafet ve okul kuralları hakkında bilgi verildi. Devam-devamsızlık kuralları ve devamsızlığın öğrencinin başarısına etkisi açıklandı. Öğrencinin okula gelemediği durumlarda okula zamanında bilgi verilmesi gerektiği hatırlatıldı.`, k: c => `Veliler öğrencinin okula düzenli ve zamanında gelmesini sağlayacak, devamsızlık durumunda okula bilgi verecektir.` },
+      { id: 'olcme', b: 'Ölçme ve değerlendirme', g: c => `Yazılı sınavlar, performans görevleri ve projeler hakkında bilgi verildi. Sınav tarihlerinin önceden duyurulacağı, sonuçların e-Okul üzerinden görülebileceği belirtildi.` },
+      { id: 'calisma', b: 'Evde ders çalışma ve ödev alışkanlığı', g: c => `Öğrencinin her gün aynı saatte, sessiz ve düzenli bir ortamda ders çalışmasının alışkanlık kazanmasını kolaylaştırdığı belirtildi. Ödevlerin öğrenci tarafından yapılmasının, velinin ise yol gösterici ve destekleyici olmasının önemi vurgulandı.`, k: c => `Veliler evde düzenli bir çalışma saati ve ortamı oluşturacak, ödevlerin öğrenci tarafından yapılmasını destekleyecektir.` },
+      mat(''),
+      { id: 'teknoloji', b: 'Teknoloji kullanımı ve dijital güvenlik', g: c => `Telefon, tablet ve bilgisayar kullanımına makul süre sınırları konulmasının, özellikle yatmadan önce ekran kullanımının azaltılmasının uyku ve dikkat açısından önemli olduğu belirtildi. Çocukların sosyal medya ve oyun platformlarındaki güvenliği konusunda velilerin dikkatli olması gerektiği vurgulandı.`, k: c => `Veliler çocuklarının ekran süresini sınırlandıracak ve internet kullanımını takip edecektir.` },
+      { id: 'saglik', b: 'Uyku düzeni ve sağlıklı beslenme', g: c => `Düzenli uyku ve kahvaltının derse dikkat ve öğrenme üzerinde doğrudan etkili olduğu belirtildi. Öğrencinin okula kahvaltı yapmış ve dinlenmiş olarak gelmesinin önemi vurgulandı.` },
+      { id: 'rehber', b: 'Rehberlik servisi çalışmaları', g: c => `Okul rehberlik servisinin çalışmaları hakkında bilgi verildi. Çocuklarında davranış, uyum veya duygusal açıdan değişiklik gözlemleyen velilerin rehberlik servisiyle iletişime geçebileceği belirtildi.${c.s8 ? ' 8. sınıf velilerine merkezî sınav ve ortaöğretime geçiş süreci hakkında yıl içinde ayrıca bilgilendirme yapılacağı ifade edildi.' : ''}` },
+      iletisim,
+      { id: 'temsilci', b: 'Sınıf veli temsilcisinin seçimi', g: c => `Sınıf veli temsilcisi seçimi yapıldı. Yapılan seçim sonucunda ${c.temsilci} sınıf veli temsilcisi olarak belirlendi.`, k: c => `Sınıf veli temsilcisi olarak ${c.temsilci} seçilmiştir.` },
+      gorus, dilek
+    ],
+    donem1Sonu: [
+      { id: 'acilis', b: 'Açılış', g: c => `Toplantı, sınıf rehber öğretmeni ${c.ogretmen} tarafından açıldı. ${c.katilim}` },
+      { id: 'basari', b: '1. dönem başarı ve devam durumu', g: c => `Sınıfın 1. dönem genel başarı ve devam durumu hakkında bilgi verildi. Genel başarı durumu: ${B('bilgi yazınız')}. Öğrencilerin daha çok desteğe ihtiyaç duyduğu dersler ve konular: ${B('bilgi yazınız')}. Öğrencilerin bireysel durumlarının velilerle ayrıca görüşüleceği belirtildi.`, k: c => `Desteğe ihtiyaç duyan öğrencilerin velileriyle bireysel görüşmeler yapılacaktır.` },
+      karne,
+      mat('Yarıyıl tatilinde çocukları yormayacak kısa tekrarların ve matematik oyunlarının yararlı olacağı belirtildi.'),
+      { id: 'tatil', b: 'Yarıyıl tatili önerileri', g: c => `Yarıyıl tatilinin dinlenme ve aile ile vakit geçirme fırsatı olduğu belirtildi. Tatilde kitap okuma, kısa tekrar çalışmaları ve ekran süresinin dengelenmesi önerildi.`, k: c => `Öğrencilere yarıyıl tatili için kitap okuma ve kısa tekrar çalışmaları önerilecektir.` },
+      iletisim, gorus, dilek
+    ],
+    donem2: [
+      { id: 'acilis', b: 'Açılış', g: c => `Toplantı, sınıf rehber öğretmeni ${c.ogretmen} tarafından açıldı. ${c.katilim}` },
+      { id: 'basari', b: '1. dönemin değerlendirilmesi ve 2. dönem hedefleri', g: c => `1. dönem başarı durumu kısaca hatırlatıldı ve 2. dönemde yapılacak sınavlar, performans görevleri ve projeler hakkında bilgi verildi. 2. dönemde öncelikli hedefler: ${B('bilgi yazınız')}.`, k: c => `Sınav ve performans görevi tarihleri velilere önceden duyurulacaktır.` },
+      { id: 'devam', b: 'Devam-devamsızlık durumu', g: c => `Sınıfın devam durumu değerlendirildi. Bahar aylarında artabilen devamsızlıkların konu eksiklerine yol açtığı ve öğrencinin başarısını olumsuz etkilediği hatırlatıldı.`, k: c => `Veliler öğrencinin devam durumunu e-Okul üzerinden takip edecektir.` },
+      { id: 'sinav', b: 'Merkezî sınava hazırlık', s8: true, g: c => `8. sınıf öğrencilerinin merkezî sınava hazırlık süreci hakkında bilgi verildi. Bu dönemde öğrencinin düzenli tekrar yapmasının, yeterli uyku ve dinlenmenin önemli olduğu; aşırı baskı ve sık kıyaslamanın sınav kaygısını artırabileceği vurgulandı.`, k: c => `Veliler sınava hazırlık sürecinde çocuklarına baskı yapmadan destek olacak; kaygı yaşayan öğrenciler rehberlik servisine yönlendirilecektir.` },
+      mat(''),
+      { id: 'rehber', b: 'Rehberlik ve mesleki gelişim çalışmaları', g: c => `Rehberlik servisinin bu dönemdeki çalışmaları hakkında bilgi verildi.${c.s8 ? ' Ortaöğretim kurumları ve tercih süreci hakkında velilere ayrıca bilgilendirme yapılacağı belirtildi.' : ' Öğrencilerin ilgi ve yeteneklerini tanımalarına yönelik çalışmaların sürdüğü belirtildi.'}` },
+      iletisim, gorus, dilek
+    ],
+    yilSonu: [
+      { id: 'acilis', b: 'Açılış', g: c => `Toplantı, sınıf rehber öğretmeni ${c.ogretmen} tarafından açıldı. ${c.katilim}` },
+      { id: 'basari', b: 'Yıl sonu başarı durumu', g: c => `Sınıfın yıl sonu başarı ve devam durumu hakkında bilgi verildi. Genel başarı durumu: ${B('bilgi yazınız')}. Yıl içinde öğrencilerin özellikle ${B('gelişim gösterdiği alanlar')} konusunda gelişim gösterdiği belirtildi.` },
+      karne,
+      { id: 'yaz', b: 'Yaz tatili önerileri', g: c => `Yaz tatilinin dinlenme, oyun ve aile ile vakit geçirme dönemi olduğu belirtildi. Bu dönemde düzenli kitap okuma, kısa tekrar çalışmaları, spor ve sanat etkinlikleri önerildi; ekran süresinin dengelenmesinin önemi vurgulandı.`, k: c => `Öğrencilere yaz tatili için kitap listesi ve kısa tekrar çalışmaları önerilecektir.` },
+      mat('Yaz tatilinde haftada birkaç kez yapılacak kısa tekrarların, bir üst sınıfa geçişte öğrencinin işini kolaylaştıracağı belirtildi.'),
+      { id: 'gelecek', b: 'Gelecek yıla hazırlık', g: c => c.s8 ? `8. sınıf öğrencilerinin ortaöğretime geçiş süreci, tercih ve kayıt işlemleri hakkında bilgi verildi. Velilerin bu süreçte rehberlik servisiyle iş birliği yapması önerildi.` : `Gelecek eğitim-öğretim yılına hazırlık konusunda velilere bilgi verildi. Öğrencilerin yeni yıla dinlenmiş ve hazır başlamalarının önemi vurgulandı.` },
+      gorus, dilek
+    ]
+  };
+
+  const simdi = new Date();
+  const yilVars = simdi.getMonth() >= 7 ? `${simdi.getFullYear()}-${simdi.getFullYear() + 1}` : `${simdi.getFullYear() - 1}-${simdi.getFullYear()}`;
+  const bugun = [simdi.getFullYear(), String(simdi.getMonth() + 1).padStart(2, '0'), String(simdi.getDate()).padStart(2, '0')].join('-');
+  let D = { tur: 'yilBasi', kapali: {}, ek: true, f: { yil: yilVars, tarih: bugun, saat: '14:00', sinif: '7', sube: 'A' } };
+  try { const k = JSON.parse(localStorage.getItem(KEY) || 'null'); if (k) D = Object.assign(D, k); } catch (e) {}
+  const kaydet = () => { try { localStorage.setItem(KEY, JSON.stringify(D)); } catch (e) {} };
+  for (const el of form.elements) if (el.name && D.f[el.name] != null) el.value = D.f[el.name];
+  $('vtEk').checked = D.ek;
+
+  const tarihYaz = t => { if (!t) return B('../../....'); const [y, a, g] = t.split('-'); return `${g}.${a}.${y}`; };
+  const sinifAd = () => `${D.f.sinif || '..'}/${h(BUYUK(D.f.sube || '..'))}`;
+  const baglam = () => {
+    const f = D.f;
+    const katilim = `Toplantıya ${f.ogrSay ? h(f.ogrSay) : B('..')} öğrencinin ${f.veliSay ? h(f.veliSay) : B('..')} velisi katıldı.`;
+    return { ogretmen: f.ogretmen ? h(f.ogretmen) : B('Ad Soyad'), temsilci: f.temsilci ? h(f.temsilci) : B('Ad Soyad'), katilim, s8: f.sinif === '8' };
+  };
+  const maddeler = () => GUNDEM[D.tur].filter(m => !m.s8 || D.f.sinif === '8');
+
+  function gundemCiz() {
+    const kap = D.kapali[D.tur] || [];
+    $('vtGundem').innerHTML = maddeler().map(m => `<label><input type="checkbox" data-id="${m.id}" ${kap.includes(m.id) ? '' : 'checked'}> ${h(m.b)}</label>`).join('');
+    document.querySelectorAll('#vtTur [data-t]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.t === D.tur)));
+  }
+  function belgeCiz() {
+    const f = D.f, c = baglam();
+    const kap = D.kapali[D.tur] || [];
+    const sec = maddeler().filter(m => !kap.includes(m.id));
+    const kararlar = sec.filter(m => m.k).map(m => m.k(c));
+    const satir = Math.min(45, Math.max(10, +f.ogrSay || 30));
+    belge.innerHTML = `
+      <div class="zt-ust">T.C.<br>${f.ilce ? h(BUYUK(f.ilce)) + ' KAYMAKAMLIĞI' : (f.il ? h(BUYUK(f.il)) + ' VALİLİĞİ' : B('İLÇE') + ' KAYMAKAMLIĞI')}<br>${f.okul ? h(BUYUK(f.okul)) : B('OKUL ADI')} MÜDÜRLÜĞÜ</div>
+      <h3 class="zt-baslik">${h(f.yil || yilVars)} EĞİTİM-ÖĞRETİM YILI<br>${sinifAd()} SINIFI ${BUYUK(TUR[D.tur])}<br>VELİ TOPLANTISI TUTANAĞI</h3>
+      <table class="zt-bilgi">
+        <tr><th>Tarih</th><td>${tarihYaz(f.tarih)}</td><th>Saat</th><td>${f.saat ? h(f.saat) : B('..:..')}</td></tr>
+        <tr><th>Yer</th><td>${f.yer ? h(f.yer) : sinifAd() + ' sınıfı'}</td><th>Katılım</th><td>${f.veliSay ? h(f.veliSay) : B('..')} / ${f.ogrSay ? h(f.ogrSay) : B('..')} veli</td></tr>
+        <tr><th>Toplantıyı Yöneten</th><td colspan="3">${c.ogretmen} (Sınıf Rehber Öğretmeni)</td></tr>
+      </table>
+      <h4>I. GÜNDEM MADDELERİ</h4>
+      <ol>${sec.map(m => `<li>${h(m.b)}</li>`).join('')}</ol>
+      <h4>II. GÜNDEM MADDELERİNİN GÖRÜŞÜLMESİ</h4>
+      ${sec.map((m, i) => `<p><b>${i + 1}. ${h(m.b)}:</b> ${m.g(c)}</p>`).join('')}
+      <h4>III. ALINAN KARARLAR</h4>
+      <ol>${kararlar.map(x => `<li>${x}</li>`).join('')}</ol>
+      <div class="zt-imzalar zt-iki-imza"><div>${c.ogretmen}<br>Sınıf Rehber Öğretmeni<br><span class="zt-imza">İmza</span></div><div>${c.temsilci}<br>Sınıf Veli Temsilcisi<br><span class="zt-imza">İmza</span></div></div>
+      <div class="zt-onay">UYGUNDUR<br>${tarihYaz(f.tarih)}<br><br>${f.mudur ? h(f.mudur) : B('Ad Soyad')}<br>Okul Müdürü</div>
+      ${D.ek ? `<div class="zt-ek"><h4 style="text-align:center">EK: VELİ KATILIM LİSTESİ (${sinifAd()} – ${tarihYaz(f.tarih)})</h4>
+      <table class="zt-bilgi zt-liste"><tr><th>S.No</th><th>Öğrencinin Adı Soyadı</th><th>Velinin Adı Soyadı</th><th>Yakınlığı</th><th>İmza</th></tr>
+      ${Array.from({ length: satir }, (_, i) => `<tr><td>${i + 1}</td><td></td><td></td><td></td><td></td></tr>`).join('')}</table></div>` : ''}`;
+  }
+  const hepsi = () => { gundemCiz(); belgeCiz(); };
+
+  $('vtTur').addEventListener('click', e => { const b = e.target.closest('[data-t]'); if (!b) return; D.tur = b.dataset.t; kaydet(); hepsi(); });
+  const degisti = e => {
+    const el = e.target;
+    if (el.name) { D.f[el.name] = el.value; if (el.name === 'sinif') gundemCiz(); }
+    else if (el.id === 'vtEk') D.ek = el.checked;
+    else if (el.dataset.id) D.kapali[D.tur] = [...document.querySelectorAll('#vtGundem input:not(:checked)')].map(x => x.dataset.id);
+    kaydet(); belgeCiz();
+  };
+  form.addEventListener('input', degisti);
+  form.addEventListener('change', e => { if (e.target.tagName === 'SELECT') degisti(e); });
+  $('vtTemizle').onclick = () => { if (!confirm('Formdaki bilgiler silinsin mi?')) return; try { localStorage.removeItem(KEY); } catch (e) {} location.reload(); };
+
+  // --- Çıktılar ---
+  const dosyaAdi = () => `Veli-Toplantisi-${(D.f.sinif || '')}${(D.f.sube || '')}-${TUR[D.tur].replace(/[. ]+/g, '-')}`.replace(/-+/g, '-');
+  $('vtYazdir').onclick = () => { try { window.print(); } catch (e) { toast('Yazdırma bu cihazda desteklenmiyor. Word olarak indirmeyi dene.'); } };
+  $('vtWord').onclick = async () => {
+    const icerik = belge.cloneNode(true);
+    icerik.querySelectorAll('.zt-bos').forEach(s => s.replaceWith(document.createTextNode(s.textContent)));
+    const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>Veli Toplantısı Tutanağı</title>
+<style>@page{size:A4;margin:2cm}body{font-family:'Times New Roman',serif;font-size:12pt;line-height:1.4}h3,.zt-ust{text-align:center;font-weight:bold}h3{font-size:12pt}h4{font-size:12pt;margin:12pt 0 4pt}p{text-align:justify;margin:0 0 6pt}table{border-collapse:collapse;width:100%}th,td{border:1px solid #000;padding:4pt 6pt;text-align:left;font-size:11pt}.zt-liste td{height:20pt}.zt-imzalar{margin-top:24pt}.zt-imzalar div{display:inline-block;width:48%;text-align:center;vertical-align:top;margin-bottom:18pt}.zt-imza{color:#888}.zt-onay{text-align:center;margin-top:18pt}.zt-ek{page-break-before:always}</style></head><body>${icerik.innerHTML}</body></html>`;
+    const blob = new Blob(['﻿', html], { type: 'application/msword' });
+    const ad = dosyaAdi() + '.doc';
+    try {
+      const file = new File([blob], ad, { type: 'application/msword' });
+      if (navigator.canShare && navigator.canShare({ files: [file] }) && /iPhone|iPad|Macintosh/.test(navigator.userAgent) && 'ontouchend' in document) { await navigator.share({ files: [file], title: ad }); return; }
+    } catch (e) { if (e && e.name === 'AbortError') return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = ad;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    toast('Word dosyası indirildi 📝');
+  };
+  $('vtKopya').onclick = async () => {
+    try { await navigator.clipboard.writeText(belge.innerText); toast('Tutanak metni kopyalandı 📋'); }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(belge); const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy'); toast('Tutanak metni kopyalandı 📋'); }
+  };
+
+  hepsi();
+})();
+</script>
+</body>
+</html>
