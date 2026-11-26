@@ -1006,3 +1006,17 @@ button.bd-top{cursor:pointer}
   .pz-net-alt,.pz-soru{grid-template-columns:1fr;justify-items:center}
   .pz-soru-metin{text-align:center}
 }
+
+/* ---------- KATLA, KES, AÇ ---------- */
+.kk-ust{display:flex;justify-content:space-between;font-weight:800;color:var(--muted);margin-bottom:8px}
+.kk-sahne{position:relative;background:#FFFDF6 radial-gradient(circle,rgba(123,79,168,.13) 1.2px,transparent 1.3px) 0 0/18px 18px;border:2px solid #E5DCF3;border-radius:20px;overflow:hidden}
+.kk-sahne canvas{display:block;width:100%;height:360px}
+.kk-adim{position:absolute;left:12px;right:12px;top:10px;text-align:center;font:800 .95rem 'Nunito';color:var(--lilac-dark);background:rgba(255,255,255,.85);border-radius:12px;padding:6px 10px}
+.kk-renk{display:flex;justify-content:center;gap:14px;margin-top:8px;font-size:.82rem;font-weight:800;color:var(--muted)}
+.kk-renk i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:4px;border:1px solid rgba(45,36,64,.2)}
+.kk-butonlar{display:flex;justify-content:center;margin-top:12px;min-height:8px}
+.kk-soru-metin{font:800 1.15rem 'Nunito';text-align:center;margin:14px 0 10px}
+.kk-neden{margin-top:12px;background:var(--yellow-light);border-radius:14px;padding:11px 14px;line-height:1.5}
+.kk-neden b{color:var(--lilac-dark)}
+.kk-ileri{display:flex;justify-content:center;margin-top:12px}
+@media (max-width:560px){.kk-sahne canvas{height:280px}.kk-adim{font-size:.82rem}}
