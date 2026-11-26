@@ -690,3 +690,14 @@ a.grade-card{color:inherit;text-decoration:none}
 /* ---------- YAKINLAŞTIRMA KAPALI ----------
    Çift dokunmada yakınlaşma olmasın (iOS/Android); sürükleme alanlarındaki touch-action:none kuralları geçerli kalır. */
 :where(html,body,a,button,input,select,textarea,label,summary){touch-action:manipulation}
+
+/* ---------- ZAMAN ÇİZELGESİ GİRİŞİ (ana sayfa) ---------- */
+.zc-giris{display:flex;align-items:center;gap:16px;margin:0 0 18px;padding:18px 22px;border-radius:var(--radius);color:#fff;
+  background:linear-gradient(120deg,#2D2440 0%,#4B3784 55%,#7B4FA8 100%);box-shadow:var(--shadow);transition:transform .15s}
+.zc-giris:hover{transform:translateY(-2px)}
+.zc-g-ikon{font-size:2.2rem;line-height:1}
+.zc-g-yazi{flex:1;display:grid;gap:3px}
+.zc-g-yazi b{font-family:'Baloo 2',cursive;font-size:1.3rem;line-height:1.1}
+.zc-g-yazi small{opacity:.85;font-weight:700;font-size:.9rem;line-height:1.35}
+.zc-g-ok{width:42px;height:42px;border-radius:50%;background:var(--yellow);color:var(--ink);display:grid;place-items:center;font-weight:900;font-size:1.2rem;flex-shrink:0}
+@media (max-width:560px){.zc-giris{padding:14px 16px;gap:12px}.zc-g-ikon{font-size:1.8rem}.zc-g-yazi b{font-size:1.1rem}.zc-g-ok{width:36px;height:36px}}

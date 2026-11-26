@@ -1,7 +1,7 @@
 /* Hipotenüs service worker: çevrimdışı çalışma ve hızlı açılış */
-const VERSION = 'hipotenus-v86';
+const VERSION = 'hipotenus-v87';
 const SHELL = [
-  './', 'index.html', 'giris.html', 'sifre-yenile.html', 'gizlilik.html', 'oyunlar.html', 'oyun.html', 'olustur.html', 'aci-ustasi.html', 'aci-ustasi.js', 'pergel.html', 'pergel.js', 'yaricap-tasi.html', 'yaricap-tasi.js', 'es-dogru.html', 'es-dogru.js', 'saat-aci.html', 'saat-aci.js', 'acinim.html', 'acinim.js', 'kup-gorunum.html', 'kup-gorunum.js', 'basamak-degeri.html', 'basamak-degeri.js', 'cekirge.html', 'cekirge.js', 'termometre.html', 'termometre.js', 'ucgen-avcisi.html', 'ucgen-avcisi.js', 'cember-ucgen.html', 'cember-ucgen.js', 'esit-aralik.html', 'esit-aralik.js', 'fayans.html', 'fayans.js', 'sinif.html', 'sinif.js', 'carpim-merdiveni.html', 'carpim-merdiveni.js', 'aci-boyama.html', 'aci-boyama.js', 'serit-modeli.html', 'serit-modeli.js', 'cay-bardagi.html', 'cay-bardagi.js', 'takip.html', 'takip.js', 'kazanimlar.html', 'kazanimlar.js', 'kazanimlar-veri.js', 'calisma-kagitlari.html', 'etkinlik-setleri.html', 'degerlendirme-testleri.html', 'style.css', 'games.css', 'app.js', 'games.js', 'ses.js', 'config.js', 'vendor/supabase.js', 'manifest.webmanifest',
+  './', 'index.html', 'giris.html', 'sifre-yenile.html', 'gizlilik.html', 'oyunlar.html', 'oyun.html', 'olustur.html', 'aci-ustasi.html', 'aci-ustasi.js', 'pergel.html', 'pergel.js', 'yaricap-tasi.html', 'yaricap-tasi.js', 'es-dogru.html', 'es-dogru.js', 'saat-aci.html', 'saat-aci.js', 'acinim.html', 'acinim.js', 'kup-gorunum.html', 'kup-gorunum.js', 'basamak-degeri.html', 'basamak-degeri.js', 'cekirge.html', 'cekirge.js', 'termometre.html', 'termometre.js', 'ucgen-avcisi.html', 'ucgen-avcisi.js', 'cember-ucgen.html', 'cember-ucgen.js', 'esit-aralik.html', 'esit-aralik.js', 'fayans.html', 'fayans.js', 'sinif.html', 'sinif.js', 'carpim-merdiveni.html', 'carpim-merdiveni.js', 'aci-boyama.html', 'aci-boyama.js', 'serit-modeli.html', 'serit-modeli.js', 'cay-bardagi.html', 'cay-bardagi.js', 'takip.html', 'takip.js', 'kazanimlar.html', 'kazanimlar.js', 'kazanimlar-veri.js', 'calisma-kagitlari.html', 'etkinlik-setleri.html', 'degerlendirme-testleri.html', 'zaman-cizelgesi.html', 'tarih.js', 'style.css', 'games.css', 'app.js', 'games.js', 'ses.js', 'config.js', 'vendor/supabase.js', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png', 'icons/favicon-32.png',
 ];
 
@@ -25,6 +25,7 @@ self.addEventListener('fetch', e => {
   const sameOrigin = url.origin === location.origin;
   const fonts = url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com';
   if (!sameOrigin && !fonts) return;
+  if (sameOrigin && url.pathname.includes('/videolar/')) return; // videolar doğrudan ağdan (aralıklı istekler)
 
   // Sitenin kendi dosyaları: önce ağ (güncellemeler hemen görünsün), bağlantı yoksa önbellek
   if (sameOrigin) {
