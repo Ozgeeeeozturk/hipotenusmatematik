@@ -1258,3 +1258,8 @@ button.bd-top{cursor:pointer}
 .gy-top3d canvas{width:100%;max-width:320px;aspect-ratio:1;height:auto;display:block;margin:0 auto;cursor:grab;background:radial-gradient(circle at 50% 45%,#F1E7FA 0,#fff 70%);border-radius:50%}
 .gy-top3d canvas:active{cursor:grabbing}
 @media (max-width:640px){.gy-top3d{grid-template-columns:1fr}}
+.gy-neden{background:#fff;border-radius:16px;padding:14px;margin-top:14px}
+.gy-neden h3{font-family:'Baloo 2',cursive;font-size:1.2rem;margin-bottom:8px}
+.gy-neden-liste{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.gy-neden-liste>div{background:var(--yellow-light);border-radius:14px;padding:10px 12px}
+.gy-neden-liste p{font-size:.92rem;line-height:1.5;margin-top:4px}
