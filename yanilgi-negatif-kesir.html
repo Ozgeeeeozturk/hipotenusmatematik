@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>0’dan Zıpla: Negatif Kesirler | Hipotenüs</title>
+<link rel="canonical" href="https://hipotenusmatematik.com/yanilgi-negatif-kesir.html">
+<meta name="description" content="Kavram yanılgısı etkinliği: negatif kesirleri sayı doğrusunda −1’den saymak. Yanılgıyı ortaya çıkaran, çelişki yaratan ve 6 soruyla pekiştiren etkileşimli etkinlik.">
+<meta name="theme-color" content="#2E9E78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="games.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <a href="index.html" class="logo" aria-label="Hipotenüs ana sayfa">
+      <svg viewBox="0 0 745 745" aria-hidden="true">
+        <rect width="745" height="745" rx="168" fill="#6E58BD"/>
+        <rect x="176" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <rect x="461" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <polygon points="461,346 461,485 322,485" fill="#8FDDC6"/>
+        <rect x="404" y="435" width="57" height="50" fill="#6E58BD"/>
+        <rect x="422" y="453" width="39" height="32" fill="#8FDDC6"/>
+        <line x1="489" y1="277" x2="260" y2="503" stroke="#FFD453" stroke-width="74" stroke-linecap="round"/>
+      </svg>
+      <span>Hipoten<b>ü</b>s</span>
+    </a>
+    <div class="bar-actions">
+      <a class="btn-login btn-ghost" href="index.html"><span aria-hidden="true">🏠</span><span class="lbl">Ana Sayfa</span></a>
+      <div id="userArea"></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap isp" style="padding-bottom:48px">
+  <div class="page-head">
+    <div><h1>🐸 0’dan Zıpla!</h1><p>Negatif kesirleri sayı doğrusunda doğru yere yerleştirme etkinliği · Rasyonel sayılar</p></div>
+  </div>
+
+  <section class="isp-card isp-soru">
+    <span class="isp-etiket">1 · Ali’nin çözümü</span>
+    <p>Ali’den sayı doğrusunda <b><span class="n">−</span><span class="f c2"><i>3</i><i>4</i></span></b> sayısını göstermesi istendi. Ali, 0 ile −1 arasını 4 eş parçaya böldü ve şöyle saydı:</p>
+    <div class="yk-dogru"><svg id="aliSvg" viewBox="0 0 680 150" role="img" aria-label="Ali'nin sayı doğrusu"></svg></div>
+    <p class="isp-buyuk" style="font-size:1.3rem">Ali’nin çözümü doğru mu?</p>
+    <div class="isp-secenek" id="aliSec"><button data-c="e">👍 Evet, doğru</button><button data-c="h">👎 Hayır, yanlış</button></div>
+  </section>
+
+  <section class="isp-card" id="catisma" hidden>
+    <h2>🔍 2 · Birlikte kontrol edelim</h2>
+    <p id="aliGeri" class="isp-geri"></p>
+    <p><b>Soru:</b> Ali’nin işaretlediği nokta <b>0’a kaç parça</b> uzaklıkta? Parçaları say: 0’dan Ali’nin noktasına kadar yalnızca <b>1 parça</b> var. Yani Ali’nin noktası aslında <span class="n">−</span><span class="f"><i>1</i><i>4</i></span>.</p>
+    <p><span class="n">−</span><span class="f"><i>3</i><i>4</i></span> ise 0’dan <b>3 parça</b> uzakta olmalı. Kurbağayı 0’dan zıplatalım:</p>
+    <div class="yk-dogru"><svg id="dogruSvg" viewBox="0 0 680 150" role="img" aria-label="Doğru yerleşim: 0'dan sola üç zıplama"></svg></div>
+    <div class="isp-dugmeler"><button class="btn btn-primary" id="zipla">🐸 0’dan zıpla</button></div>
+  </section>
+
+  <section class="isp-card isp-model" id="kural" hidden>
+    <h2>📌 3 · Kurbağa kuralı</h2>
+    <div class="isp-bilgiler">
+      <div class="isp-bilgi"><b>1</b><div><h3>Kurbağa her zaman 0’dan başlar</h3><p>−1’den ya da başka bir uçtan değil. Bir sayının yeri, 0’a olan uzaklığıyla bulunur.</p></div></div>
+      <div class="isp-bilgi"><b>2</b><div><h3>Payda: birimi kaç eş parçaya bölüyoruz?</h3><p><span class="n">−</span><span class="f"><i>3</i><i>4</i></span> için 0 ile −1 arası <b>4</b> eş parça.</p></div></div>
+      <div class="isp-bilgi"><b>3</b><div><h3>Pay: kaç kez zıplıyoruz?</h3><p><b>3</b> kez. Eksi işareti yönü söyler: <b>sola</b> zıpla.</p></div></div>
+    </div>
+    <p>💡 <b>Kontrol yolu:</b> <span class="f"><i>3</i><i>4</i></span> ile <span class="n">−</span><span class="f"><i>3</i><i>4</i></span> sayılarının 0’a uzaklığı aynıdır. Biri 0’ın sağında, diğeri solunda, tam karşılıklı durur.</p>
+    <div class="isp-dugmeler"><button class="btn btn-primary" id="basla">Şimdi sen dene ▶</button></div>
+  </section>
+
+  <section class="isp-card isp-dene" id="uygula" hidden>
+    <h2>🎯 4 · Sıra sende</h2>
+    <div class="yk-ust"><span id="soruNo">Soru 1 / 6</span><span id="puan">⭐ 0</span></div>
+    <p class="yk-soru" id="soruMetin"></p>
+    <div class="yk-dogru"><svg id="oyunSvg" viewBox="0 0 680 150" role="img" aria-label="Etkinlik sayı doğrusu"></svg></div>
+    <div class="isp-secenek" id="okuSec" hidden></div>
+    <p class="isp-geri" id="oyunGeri" hidden></p>
+    <div class="isp-dugmeler"><button class="btn btn-primary" id="sonraki" hidden>Sonraki soru ▶</button></div>
+  </section>
+
+  <section class="isp-card isp-ornek" id="sonuc" hidden>
+    <h2>🏁 Etkinlik bitti!</h2>
+    <p class="isp-buyuk" id="sonucMetin" style="font-size:1.4rem"></p>
+    <p id="sonucYorum"></p>
+    <div class="isp-dugmeler"><button class="btn btn-primary" id="tekrar">↺ Yeni sorularla tekrar</button></div>
+  </section>
+
+  <section class="isp-card isp-dikkat">
+    <h2>👩‍🏫 Öğretmen notu</h2>
+    <p><b>Yanılgı:</b> Öğrenci 0 ile −1 arasını doğru böler ama saymaya <b>−1’den</b> başlar. Bu yüzden <span class="n">−</span><span class="f"><i>3</i><i>4</i></span> yerine <span class="n">−</span><span class="f"><i>1</i><i>4</i></span> noktasını işaretler.</p>
+    <p><b>Neden olur?</b> Pozitif kesirlerde sayma hep aralığın sol ucundan (0’dan) başlar. Öğrenci “soldan sağa say” alışkanlığını negatif tarafa taşır ve aralığın sol ucu olan −1’i başlangıç sanır.</p>
+    <p><b>Etkinliğin akışı:</b> Yanılgıyı ortaya çıkar (Ali’nin çözümü) → çelişki yarat (Ali’nin noktası 0’a kaç parça uzak?) → kuralı birlikte kur (Kurbağa kuralı) → pekiştir (6 soru). Yanlış cevaplarda etkinlik bu yanılgıyı tanır ve öğrenciye özel geri bildirim verir.</p>
+    <p><b>Sınıfta:</b> Zemine bantla bir sayı doğrusu yapın. Öğrenciler 0’ın üzerinde durup payda kadar parçaya bölünmüş birimde geriye doğru adım atsın. Tanı sorusu olarak: “−3/4, −1/4 ve −1½ sayılarını aynı sayı doğrusunda gösteriniz.”</p>
+  </section>
+
+  <p style="text-align:center;margin-top:18px"><a class="kz-mini" href="kavram-yanilgilari.html">← Kavram Yanılgıları</a></p>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="games.js"></script>
+<script>
+initPage();
+(function () {
+  const W = 680, Y = 72, P = 40, YESIL = '#2E9E78', KIRMIZI = '#C2415B', MOR = '#7B4FA8';
+  const $ = id => document.getElementById(id);
+  const ebob = (a, b) => b ? ebob(b, a % b) : a;
+
+  // Sayı doğrusu çizimi
+  function dogru(svg, min, max, b) {
+    const X = v => P + (v - min) / (max - min) * (W - 2 * P);
+    let s = `<defs>${[['ok', YESIL], ['no', KIRMIZI]].map(([id, c]) => `<marker id="m${id}${svg.id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9z" fill="${c}"/></marker>`).join('')}</defs>`;
+    s += `<line x1="${P - 22}" y1="${Y}" x2="${W - P + 22}" y2="${Y}" stroke="#2D2440" stroke-width="3"/>`;
+    s += `<path d="M${P - 30} ${Y}l12 -7v14z M${W - P + 30} ${Y}l-12 -7v14z" fill="#2D2440"/>`;
+    for (let k = Math.round(min * b); k <= Math.round(max * b); k++) {
+      const v = k / b, x = X(v), tam = k % b === 0;
+      s += `<line x1="${x}" y1="${Y - (tam ? 15 : 9)}" x2="${x}" y2="${Y + (tam ? 15 : 9)}" stroke="#2D2440" stroke-width="${tam ? 3 : 2}"/>`;
+      if (tam) s += `<text x="${x}" y="${Y + 40}" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="20" fill="#2D2440">${v < 0 ? '−' + (-v) : v}</text>`;
+    }
+    svg.innerHTML = s + '<g class="katman"></g>';
+    return X;
+  }
+  const katman = svg => svg.querySelector('.katman');
+  function ekle(svg, html) { katman(svg).insertAdjacentHTML('beforeend', html); }
+  function yay(svg, x1, x2, renk, tur) {
+    ekle(svg, `<path d="M${x1} ${Y - 5} Q ${(x1 + x2) / 2} ${Y - 46} ${x2} ${Y - 7}" fill="none" stroke="${renk}" stroke-width="3" marker-end="url(#m${tur}${svg.id})"/>`);
+  }
+  function nokta(svg, x, renk, etiket) {
+    ekle(svg, `<circle cx="${x}" cy="${Y}" r="10" fill="${renk}" stroke="#fff" stroke-width="3"/>` + (etiket ? `<text x="${x}" y="${Y + 66}" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="15" fill="${renk}">${etiket}</text>` : ''));
+  }
+  function carpi(svg, x) {
+    ekle(svg, `<path d="M${x - 9} ${Y - 9}L${x + 9} ${Y + 9}M${x + 9} ${Y - 9}L${x - 9} ${Y + 9}" stroke="${KIRMIZI}" stroke-width="4" stroke-linecap="round"/>`);
+  }
+  function zipla(svg, X, bas, adim, n, renk, tur, bitti) {
+    let i = 0;
+    (function bir() {
+      if (i >= n) { bitti && bitti(); return; }
+      yay(svg, X(bas + i * adim), X(bas + (i + 1) * adim), renk, tur); i++;
+      setTimeout(bir, 380);
+    })();
+  }
+  const kesirHtml = (p, q, eksi) => `${eksi ? '<span class="n">−</span>' : ''}<span class="f"><i>${p}</i><i>${q}</i></span>`;
+
+  // 1. Ali'nin çözümü
+  const aliSvg = $('aliSvg'), aX = dogru(aliSvg, -1, 1, 4);
+  zipla(aliSvg, aX, -1, 0.25, 3, KIRMIZI, 'no', () => { carpi(aliSvg, aX(-0.25)); ekle(aliSvg, `<text x="${aX(-0.25)}" y="${Y + 66}" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="15" fill="${KIRMIZI}">Ali: “−3/4”</text>`); });
+  $('aliSec').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    $('aliSec').querySelectorAll('button').forEach(x => { x.disabled = true; x.classList.toggle('dogru', x.dataset.c === 'h'); });
+    if (b.dataset.c === 'e') b.classList.add('yanlis');
+    $('aliGeri').className = 'isp-geri' + (b.dataset.c === 'h' ? ' ok' : '');
+    $('aliGeri').textContent = b.dataset.c === 'h' ? 'Doğru tespit! Ali bir yerde hata yaptı. Nerede olduğunu birlikte bulalım.' : 'Çoğu öğrenci de böyle düşünüyor. Ama bir kontrol edelim…';
+    $('catisma').hidden = false; $('catisma').scrollIntoView({ block: 'start' });
+  });
+
+  // 2. Doğru yerleşim
+  const dSvg = $('dogruSvg'), dX = dogru(dSvg, -1, 1, 4);
+  carpi(dSvg, dX(-0.25));
+  ekle(dSvg, `<text x="${dX(-0.25)}" y="${Y + 66}" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="15" fill="${KIRMIZI}">Ali</text>`);
+  $('zipla').onclick = () => {
+    $('zipla').disabled = true;
+    zipla(dSvg, dX, 0, -0.25, 3, YESIL, 'ok', () => { nokta(dSvg, dX(-0.75), YESIL, '−3/4 ✓'); $('kural').hidden = false; });
+  };
+  $('basla').onclick = () => { $('uygula').hidden = false; yeniTur(); $('uygula').scrollIntoView({ block: 'start' }); };
+
+  // 4. Uygulama: 6 soru (yerleştir / oku)
+  const YER = [[3, 4], [2, 5], [5, 6], [1, 3], [7, 8], [5, 4], [5, 3], [2, 3], [3, 5], [7, 4]];
+  const OKU = [[3, 4], [1, 4], [2, 3], [1, 5], [4, 5], [5, 6], [3, 8], [1, 6]];
+  const karistir = a => a.map(x => [Math.random(), x]).sort((p, q) => p[0] - q[0]).map(x => x[1]);
+  let sorular = [], si = 0, puan = 0, ilk = true, bitti = false;
+  function yeniTur() {
+    const y = karistir(YER).slice(0, 4), o = karistir(OKU).slice(0, 2);
+    sorular = [['y', y[0]], ['y', y[1]], ['o', o[0]], ['y', y[2]], ['o', o[1]], ['y', y[3]]];
+    si = 0; puan = 0; $('sonuc').hidden = true; $('uygula').hidden = false; soru();
+  }
+  let X = null, cevap = 0, b = 0, aralik = [-1, 1];
+  function soru() {
+    const [tur, [p, q]] = sorular[si];
+    b = q; cevap = -p / q; ilk = true; bitti = false;
+    aralik = cevap < -1 ? [-2, 1] : [-1, 1];
+    const svg = $('oyunSvg'); X = dogru(svg, aralik[0], aralik[1], q);
+    $('soruNo').textContent = `Soru ${si + 1} / 6`; $('puan').textContent = `⭐ ${puan}`;
+    $('oyunGeri').hidden = true; $('sonraki').hidden = true;
+    if (tur === 'y') {
+      $('soruMetin').innerHTML = `${kesirHtml(p, q, true)} sayısını sayı doğrusunda göster. <small>Doğru çentiğe dokun.</small>`;
+      $('okuSec').hidden = true;
+      // dokunma alanları
+      const adimPx = X(1 / q) - X(0);
+      let s = '';
+      for (let k = Math.round(aralik[0] * q); k <= Math.round(aralik[1] * q); k++) s += `<rect class="yk-hedef" data-k="${k}" x="${X(k / q) - adimPx / 2}" y="${Y - 40}" width="${adimPx}" height="80" fill="transparent"/>`;
+      ekle(svg, s);
+    } else {
+      $('soruMetin').innerHTML = 'Mor nokta hangi sayıyı gösteriyor?';
+      nokta(svg, X(cevap), MOR, '');
+      const sec = karistir([['d', kesirHtml(p, q, true)], ['a', kesirHtml(q - p, q, true)], ['p', kesirHtml(p, q, false)]]);
+      $('okuSec').innerHTML = sec.map(([k, h]) => `<button data-c="${k}">${h}</button>`).join('');
+      $('okuSec').hidden = false;
+    }
+  }
+  function geri(metin, ok) { const g = $('oyunGeri'); g.hidden = false; g.className = 'isp-geri' + (ok ? ' ok' : ''); g.innerHTML = metin; }
+  function dogruGoster(sonra) {
+    const svg = $('oyunSvg'), [, [p]] = sorular[si];
+    zipla(svg, X, 0, -1 / b, p, YESIL, 'ok', sonra);
+  }
+  function tamam() {
+    bitti = true; if (ilk) puan++;
+    $('puan').textContent = `⭐ ${puan}`;
+    $('sonraki').hidden = false;
+    $('sonraki').textContent = si === 5 ? 'Sonucu gör ▶' : 'Sonraki soru ▶';
+  }
+  $('oyunSvg').addEventListener('click', e => {
+    const r = e.target.closest('.yk-hedef'); if (!r || bitti || sorular[si][0] !== 'y') return;
+    const k = +r.dataset.k, v = k / b, [, [p, q]] = sorular[si], svg = $('oyunSvg');
+    if (Math.abs(v - cevap) < 1e-9) {
+      nokta(svg, X(v), YESIL, '');
+      dogruGoster(() => ekle(svg, `<text x="${X(v)}" y="${Y + 66}" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="15" fill="${YESIL}">−${p}/${q} ✓</text>`));
+      geri(`Harika! 0’dan sola ${p} zıplama, her biri ${kesirHtml(1, q)} birim.`, true); tamam(); return;
+    }
+    ilk = false; carpi(svg, X(v));
+    const tam = Math.floor(-cevap), ayna = -(tam + (q - (p - tam * q)) / q);
+    if (Math.abs(v - ayna) < 1e-9) geri(`Dikkat! Saymaya <b>${tam ? '−' + (tam + 1) : '−1'}’den</b> başladın gibi görünüyor. Kurbağa her zaman <b>0’dan</b> başlar. Tekrar dene!`);
+    else if (v > 0) geri('Sayı negatif: 0’ın <b>solunda</b> olmalı. Tekrar dene!');
+    else if (v === 0 || Number.isInteger(v)) geri('Bu bir tam sayı. Kesrin yeri iki tam sayının arasında. Tekrar dene!');
+    else geri(`0’dan başla ve <b>${p}</b> kez sola zıpla; her zıplama ${kesirHtml(1, q)} birim. Tekrar dene!`);
+  });
+  $('okuSec').addEventListener('click', e => {
+    const bt = e.target.closest('button'); if (!bt || bitti) return;
+    const [, [p, q]] = sorular[si];
+    if (bt.dataset.c === 'd') {
+      bt.classList.add('dogru'); $('okuSec').querySelectorAll('button').forEach(x => x.disabled = true);
+      dogruGoster(); geri(`Doğru! Nokta 0’dan ${p} parça solda: ${kesirHtml(p, q, true)}.`, true); tamam(); return;
+    }
+    ilk = false; bt.classList.add('yanlis'); bt.disabled = true;
+    geri(bt.dataset.c === 'a' ? 'Parçaları <b>−1’den</b> saydın gibi görünüyor. 0’dan noktaya kadar kaç parça var? Tekrar dene!' : 'Nokta 0’ın <b>solunda</b>, yani sayı negatif. Tekrar dene!');
+  });
+  $('sonraki').onclick = () => {
+    if (si < 5) { si++; soru(); return; }
+    $('uygula').hidden = true; $('sonuc').hidden = false;
+    $('sonucMetin').textContent = `6 sorudan ${puan} tanesini ilk denemede doğru yaptın ⭐`;
+    $('sonucYorum').textContent = puan >= 5 ? 'Süper! Kurbağa kuralını öğrendin: her zaman 0’dan başla.' : puan >= 3 ? 'Güzel gidiyorsun! Bir tur daha yaparak pekiştirebilirsin.' : 'Kuralı hatırla: 0’dan başla, payda kadar parçaya böl, pay kadar sola zıpla. Bir tur daha deneyelim!';
+    $('sonuc').scrollIntoView({ block: 'start' });
+  };
+  $('tekrar').onclick = () => { yeniTur(); $('uygula').scrollIntoView({ block: 'start' }); };
+})();
+</script>
+</body>
+</html>

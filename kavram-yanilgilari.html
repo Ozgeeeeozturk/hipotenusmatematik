@@ -83,7 +83,18 @@
 <script src="games.js"></script>
 <script>
 // Kavram yanılgıları: y = öğrencinin düşüncesi, d = doğrusu, n = neden olur, i = sınıfta nasıl düzeltilir
-const YANILGILAR = [];
+const YANILGILAR = [
+  {
+    s: [7], konu: 'Rasyonel Sayılar', baslik: 'Negatif kesri sayı doğrusunda yanlış uçtan saymak',
+    y: '−3/4 → −1’den sağa 3 parça',
+    yAc: '<p>Öğrenci 0 ile −1 arasını 4 eş parçaya doğru böler ama saymaya −1’den başlar. Üçüncü çentiğe “−3/4” yazar; oysa işaretlediği nokta aslında −1/4’tür.</p>',
+    d: '−3/4 → 0’dan sola 3 parça',
+    dAc: '<p>Negatif bir kesrin yeri, 0’a olan uzaklığıyla bulunur: −3/4, 0’ın 3/4 birim solundadır. Saymaya her zaman 0’dan başlanır.</p>',
+    n: 'Pozitif kesirlerde sayma hep aralığın sol ucundan (0’dan) başlar. Öğrenci “soldan sağa say” alışkanlığını negatif tarafa taşır ve aralığın sol ucu olan −1’i başlangıç noktası sanır. Sayının 0’a uzaklığı yerine çentiklerin sırasına odaklanır.',
+    i: '“Kurbağa kuralı”nı kurun: kurbağa her zaman 0’dan başlar, birim payda kadar eş parçaya bölünür, pay kadar <b>sola</b> zıplanır. Zemine bantla bir sayı doğrusu yapıp öğrenciyi 0’dan geriye adım attırın. 3/4 ile −3/4’ü aynı doğruda gösterip 0’a uzaklıklarının eşit olduğunu karşılaştırın.',
+    oyun: ['yanilgi-negatif-kesir.html', 'Giderme etkinliği: 0’dan Zıpla']
+  }
+];
 (function () {
   initPage();
   const RENK = { 5: '#9EE6C9', 6: '#C8A2E8', 7: '#FFD84D', 8: '#7B4FA8' };

@@ -1129,3 +1129,13 @@ button.bd-top{cursor:pointer}
 .isp-tabanlar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
 .isp-us>div{grid-template-columns:1fr auto 90px 52px}
 @media print{.isp-secenek,.isp-geri,#oruntuBtn{display:none!important}}
+
+/* Kavram yanılgısı etkinlikleri */
+.yk-dogru{background:#fff;border-radius:16px;padding:6px;margin:10px 0}
+.yk-dogru svg{display:block;width:100%;height:auto}
+.isp-soru .yk-dogru{box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.yk-hedef{cursor:pointer}
+.yk-hedef:hover{fill:rgba(200,162,232,.25)}
+.yk-ust{display:flex;justify-content:space-between;font-weight:800;color:var(--lilac-dark)}
+.yk-soru{font-size:1.2rem;font-weight:800;text-align:center}
+.yk-soru small{display:block;font-size:.85rem;color:var(--muted);font-weight:700}
