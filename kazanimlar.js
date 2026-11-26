@@ -116,7 +116,7 @@
         <div class="kz-actions">
           <button class="kz-done${d.has(w.no) ? ' on' : ''}" id="kzDone">${d.has(w.no) ? '✓ İşlendi' : '☐ İşlendi olarak işaretle'}</button>
           <button class="kz-mini" id="kzCopy">📋 Kopyala</button>
-          <button class="kz-mini" id="kzPrint">🖨️ Yazdır</button>
+          <button class="kz-mini web-only" id="kzPrint">🖨️ Yazdır</button>
         </div>
       </article>
       <p class="kz-src">Kaynak: MEB, 2026-2027 ${grade}. Sınıf Matematik Taslak Çerçeve Yıllık Planı (<a href="https://tymm.meb.gov.tr/taslak-cerceve-planlari/temel-egitim" target="_blank" rel="noopener">tymm.meb.gov.tr</a>) · ${maarif ? 'Türkiye Yüzyılı Maarif Modeli' : '2018 Öğretim Programı'}. Zümre kararıyla haftalar değişebilir.</p>`;

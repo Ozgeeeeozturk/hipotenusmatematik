@@ -70,6 +70,16 @@ function trError(err) {
 const SITE_URL = /^https?:$/.test(location.protocol) && !/localhost|127\.0\.0\.1/.test(location.hostname)
   ? location.origin : (CFG.siteUrl || location.origin);
 const IS_APP = !/^https?:$/.test(location.protocol) || !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+// Uygulamada yazdırma/indirme desteklenmez: bu düğmeler gizlenir, PDF'ler sitenin canlı adresinden Safari'de açılır (oradan yazdırılıp paylaşılabilir)
+if (IS_APP) {
+  document.documentElement.classList.add('is-app');
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('a[href]');
+    if (!a || !/\.pdf($|[?#])/i.test(a.getAttribute('href'))) return;
+    e.preventDefault();
+    location.href = new URL(a.getAttribute('href'), (CFG.siteUrl || 'https://hipotenusmatematik.com') + '/').href;
+  }, true);
+}
 
 const toProfile = user => user ? {
   id: user.id,

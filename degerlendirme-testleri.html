@@ -139,7 +139,7 @@
       pencere(`<h3>🔑 ${esc(data.baslik)}</h3>
         <div class="cevap-izgara">${A.map(a => `<section style="--c:${a.renk}"><b>${esc(a.ad)}</b>${a.sorular.map(s => `<span><i>${s.no}.</i>${s.c}</span>`).join('')}</section>`).join('')}</div>
         <details class="cevap-cozum"><summary>Kısa çözümleri göster</summary>${A.flatMap(a => a.sorular).map(s => `<p><b>${s.no}. (${s.c})</b> ${esc(s.cz)}</p>`).join('')}</details>
-        <div class="modal-actions"><button class="btn btn-plain" data-kapat>Kapat</button><button class="btn btn-yellow" style="justify-content:center" onclick="this.closest('.cevap-back').querySelector('details').open=true;window.print()">🖨 Yazdır</button></div>`, true);
+        <div class="modal-actions"><button class="btn btn-plain" data-kapat>Kapat</button><button class="btn btn-yellow web-only" style="justify-content:center" onclick="this.closest('.cevap-back').querySelector('details').open=true;window.print()">🖨 Yazdır</button></div>`, true);
     } catch (e) {
       toast(e && e.message === 'bulunamadi' ? 'Bu testin cevap anahtarı henüz eklenmemiş.' : 'Cevap anahtarı açılamadı, internet bağlantını kontrol et.');
     } finally { btn.disabled = false; }
