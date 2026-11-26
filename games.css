@@ -1322,3 +1322,86 @@ button.bd-top{cursor:pointer}
 .zt-bilgi.zt-liste th:last-child{width:18%}
 .zt-liste td:first-child,.zt-liste th:first-child{text-align:center}
 @media print{.zt-ek{break-before:page;border:0;margin:0;padding:0}}
+
+/* Tema oyunları ortak motoru */
+.to-sinif{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 12px}
+.to-gorsel{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:4px 0 12px}
+.to-gorsel>svg,.to-gorsel>.vd-tablo{max-width:100%}
+.to-gorsel>svg{width:100%;max-width:440px;height:auto}
+.to-cevap{margin-bottom:6px}
+.g-options.to-opts{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.to-opts .g-opt{white-space:normal;text-align:left;font-size:1rem;min-height:54px;line-height:1.3}
+.to-opts .g-opt>span{flex:1;min-width:0}
+.to-giris{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap}
+.to-giris input{width:130px;font:800 1.4rem 'Nunito',sans-serif;text-align:center;border:3px solid var(--lilac);border-radius:14px;padding:8px;color:var(--ink);background:#fff}
+.to-giris input.ok{border-color:var(--mint-dark);background:var(--mint-light)}
+.to-giris input.bad{border-color:var(--danger);background:#FDE8EC}
+.to-giris input.shake{animation:to-sallan .35s}
+@keyframes to-sallan{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.to-giris>span{font-weight:800}
+.to-aciklama{display:block;margin-top:6px;font-weight:600}
+/* Veri Dedektifi */
+.vd-svg{background:#fff;border-radius:14px}
+.vd-baslik{font:800 13px 'Nunito',sans-serif;fill:var(--ink)}
+.vd-eks{font:700 10px 'Nunito',sans-serif;fill:var(--muted)}
+.vd-kat{font:800 10.5px 'Nunito',sans-serif;fill:var(--ink)}
+.vd-izgara{stroke:#ECE6F3;stroke-width:1}
+.vd-eksen{stroke:var(--ink);stroke-width:1.5}
+.vd-bos{fill:#fff;stroke:var(--lilac);stroke-dasharray:5 4;stroke-width:2}
+.vd-soru{font:800 28px 'Baloo 2',cursive;fill:var(--lilac-dark)}
+.vd-dilim{font:800 11px 'Nunito',sans-serif;fill:#fff}
+.vd-tablo{border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;font-weight:700;font-size:.95rem}
+.vd-tablo th,.vd-tablo td{border:2px solid var(--lilac-light);padding:6px 10px;text-align:center}
+.vd-tablo th{background:var(--lilac-light)}
+.vd-cetele td:last-child{text-align:left;font:800 1.25rem monospace;letter-spacing:2px;min-width:140px}
+.vd-c5{text-decoration:line-through;text-decoration-thickness:2px;margin-right:10px}
+.vd-mini{display:block;width:100%}
+.vd-mini svg{width:100%;max-width:210px;height:auto;display:block}
+.g-opt .vd-svg.kucuk{width:110px;height:auto;background:transparent}
+.vd-ayar-g{display:flex;justify-content:center}
+.vd-ayar-g svg{width:100%;max-width:440px;height:auto}
+.vd-ayar{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:8px;font-weight:700}
+.vd-ayar .btn-ghost-dark{min-width:56px}
+@media (max-width:640px){.vd-tablo{font-size:.82rem}.vd-tablo th,.vd-tablo td{padding:5px 6px}}
+/* Olasılık Çarkı */
+.ol-svg{background:transparent}
+.ol-svg.torba{width:220px;max-width:100%;height:auto}
+.ol-svg.cark{width:200px;max-width:100%;height:auto}
+.ol-svg.cark g{transition:transform .1s linear}
+.ol-zar{width:46px;height:46px}
+.ol-zar.buyuk{width:80px;height:80px}
+.ol-zarlar{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.ol-kartlar{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;max-width:440px}
+.ol-kartlar span{width:36px;height:46px;border-radius:8px;background:#fff;border:2px solid var(--lilac);display:grid;place-items:center;font-weight:800;color:var(--lilac-dark)}
+.ol-iki{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;text-align:center;font-weight:800}
+.ol-iki>div{display:grid;justify-items:center}
+.ol-iki .ol-svg.torba{width:170px}
+.ol-olcek{display:flex;justify-content:space-between;width:100%;max-width:420px;background:linear-gradient(90deg,#FDE8EC,var(--yellow-light),var(--mint-light));border-radius:14px;padding:10px 14px;font:800 1.3rem 'Nunito',sans-serif}
+.ol-olcek span{display:grid;justify-items:center}
+.ol-olcek small{font-size:.75rem;color:var(--muted)}
+.ol-deney{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;align-items:center}
+.ol-sayac{display:grid;gap:6px;font-weight:700;background:#fff;border-radius:14px;padding:12px 16px}
+.ol-sayac i{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:6px;vertical-align:-2px}
+.ol-n{color:var(--muted)}
+.ol-sor{text-align:center;font-weight:700;margin:10px 0}
+/* Terazi Dengesi */
+.tz-svg{width:100%;max-width:440px;height:auto}
+.tz-x{fill:var(--lilac);stroke:var(--lilac-dark);stroke-width:2}
+.tz-xt{font:800 16px 'Nunito',sans-serif;fill:#fff;font-style:italic}
+.tz-1{fill:var(--yellow);stroke:var(--yellow-dark);stroke-width:2}
+.tz-1t{font:800 11px 'Nunito',sans-serif;fill:var(--ink)}
+.tz-n{fill:#fff;stroke:var(--mint-dark);stroke-width:2}
+.tz-kutu{fill:var(--yellow-light);stroke:var(--yellow-dark);stroke-width:2;stroke-dasharray:4 3}
+.tz-nt{font:800 15px 'Nunito',sans-serif;fill:var(--ink)}
+.tz-buyuk{display:inline-block;font:800 1.25rem 'Nunito',sans-serif;margin-top:6px;letter-spacing:.3px}
+.tz-oruntu{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;align-items:flex-end}
+.tz-oruntu span{max-width:90px;word-break:break-all;color:var(--lilac-dark);font-size:.9rem;line-height:1;background:#fff;border-radius:10px;padding:6px}
+.tz-sahne{display:flex;justify-content:center}
+.tz-denk{text-align:center;font:800 1.5rem 'Nunito',sans-serif;margin:4px 0 10px}
+.tz-dugmeler{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}
+.tz-dugmeler .btn-ghost-dark{font-size:.92rem}
+.tz-mesaj{text-align:center;font-weight:700;margin-top:8px;min-height:1.4em}
+.tz-5t{font:800 14px 'Nunito',sans-serif;fill:var(--ink)}
+.tz-dugmeler button{background:var(--lilac-light);border:2px solid var(--lilac);border-radius:12px;padding:10px 12px;font:700 .95rem 'Nunito',sans-serif;color:var(--ink);cursor:pointer}
+.tz-dugmeler button:hover:not(:disabled){background:var(--lilac);color:#fff}
+.tz-dugmeler button:disabled{opacity:.5;cursor:default}
