@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Sıfırıncı Kuvvet Neden 1? | Hipotenüs</title>
+<link rel="canonical" href="https://hipotenusmatematik.com/ispat-sifirinci-kuvvet.html">
+<meta name="description" content="Bir sayının sıfırıncı kuvveti neden 1’dir? Azalan kuvvetler örüntüsüyle adım adım ispat, üslü ifadelerde bölme yolu, başka tabanla dene bölümü ve sık yapılan hatalar.">
+<meta name="theme-color" content="#2E9E78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="games.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <a href="index.html" class="logo" aria-label="Hipotenüs ana sayfa">
+      <svg viewBox="0 0 745 745" aria-hidden="true">
+        <rect width="745" height="745" rx="168" fill="#6E58BD"/>
+        <rect x="176" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <rect x="461" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <polygon points="461,346 461,485 322,485" fill="#8FDDC6"/>
+        <rect x="404" y="435" width="57" height="50" fill="#6E58BD"/>
+        <rect x="422" y="453" width="39" height="32" fill="#8FDDC6"/>
+        <line x1="489" y1="277" x2="260" y2="503" stroke="#FFD453" stroke-width="74" stroke-linecap="round"/>
+      </svg>
+      <span>Hipoten<b>ü</b>s</span>
+    </a>
+    <div class="bar-actions">
+      <a class="btn-login btn-ghost" href="index.html"><span aria-hidden="true">🏠</span><span class="lbl">Ana Sayfa</span></a>
+      <div id="userArea"></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap isp" style="padding-bottom:48px">
+  <div class="page-head">
+    <div><h1>🧮 Bir Sayının Sıfırıncı Kuvveti Neden 1?</h1><p>“Hiç çarpmadıysak sonuç 0 olmaz mı?” Hayır! Azalan kuvvetlerin örüntüsü cevabı gösteriyor.</p></div>
+  </div>
+
+  <section class="isp-card isp-soru">
+    <span class="isp-etiket">Soru</span>
+    <p class="isp-buyuk">2<sup>0</sup> = <span class="isp-q">?</span></p>
+    <p>Üs, tabanı kaç kez çarptığımızı söyler. Peki üs <b>0</b> olunca ne olur? Cevap 0 mı, 2 mi, yoksa <b>1</b> mi? Örüntüyle bulalım.</p>
+  </section>
+
+  <section class="isp-card isp-onbilgi">
+    <h2>🧰 Kullanacağımız 2 bilgi</h2>
+    <div class="isp-bilgiler">
+      <div class="isp-bilgi"><b>1</b><div><h3>Üslü ifade tekrarlı çarpmadır</h3><p>2<sup>3</sup> = 2 · 2 · 2 &nbsp;·&nbsp; 5<sup>2</sup> = 5 · 5</p></div></div>
+      <div class="isp-bilgi"><b>2</b><div><h3>Bir çarpanı çıkarmak, o sayıya bölmektir</h3><p>2 · 2 · 2 = 8 iken bir tane 2’yi çıkarırsak 2 · 2 = 4 olur. Yani 8 ÷ 2 = 4.</p></div></div>
+    </div>
+  </section>
+
+  <section class="isp-card">
+    <h2>🪜 İspat: azalan kuvvetler örüntüsü</h2>
+    <ol class="isp-adimlar">
+      <li class="isp-adim">
+        <span class="isp-no">1</span>
+        <div class="isp-mat">2<sup>3</sup> = 2 · 2 · 2 = <span class="isp-hedef">8</span></div>
+        <p><b>Bildiğimiz bir kuvvetle başlayalım.</b> Üç tane 2’yi çarpıyoruz.</p>
+        <p class="isp-neden"><span>Neden?</span> 1. bilgi: Üs 3, tabanı 3 kez çarparız.</p>
+      </li>
+      <li class="isp-adim">
+        <span class="isp-no">2</span>
+        <div class="isp-mat">2<sup>2</sup> = 2 · 2 = <span class="isp-hedef">4</span> &nbsp;<small class="isp-ok">8 ÷ 2</small></div>
+        <p><b>Üs 1 azaldı, değer 2’ye bölündü.</b></p>
+        <p class="isp-neden"><span>Neden?</span> 2. bilgi: Üs 1 azalınca çarpımdan bir tane 2 çıkar; bu da 2’ye bölmek demektir.</p>
+      </li>
+      <li class="isp-adim">
+        <span class="isp-no">3</span>
+        <div class="isp-mat">2<sup>1</sup> = 2 = <span class="isp-hedef">2</span> &nbsp;<small class="isp-ok">4 ÷ 2</small></div>
+        <p><b>Yine üs 1 azaldı, yine 2’ye böldük.</b> Örüntü açık: <b>üs 1 azalınca değer 2’ye bölünür.</b></p>
+        <p class="isp-neden"><span>Gördük ki:</span> 8 → 4 → 2. Her adımda aynı kural çalışıyor.</p>
+      </li>
+      <li class="isp-adim isp-sorulu">
+        <span class="isp-no">4</span>
+        <div class="isp-mat">2<sup>0</sup> = <span class="isp-bosluk" id="bosluk">?</span> &nbsp;<small class="isp-ok">2 ÷ 2</small></div>
+        <p><b>Sıra sende!</b> Örüntü bozulmadan devam etsin. 2<sup>1</sup> = 2 ise 2<sup>0</sup> kaç olmalı?</p>
+        <div class="isp-secenek" id="secenek">
+          <button data-c="0">0</button><button data-c="1">1</button><button data-c="2">2</button>
+        </div>
+        <p class="isp-geri" id="geri" hidden></p>
+      </li>
+      <li class="isp-adim">
+        <span class="isp-no">5</span>
+        <div class="isp-mat isp-sonuc">2<sup>0</sup> = 2 ÷ 2 = <span class="p">1</span></div>
+        <p><b>Örüntüyü bozmamak için 2<sup>0</sup> = 1 olmalı.</b> İspat tamamlandı! ✅</p>
+        <p class="isp-neden"><span>Genel kural:</span> Aynı örüntü her taban için çalışır: <b>a<sup>0</sup> = a ÷ a = 1</b> (a ≠ 0).</p>
+      </li>
+    </ol>
+    <div class="isp-dugmeler">
+      <button class="btn btn-primary" id="ileri">Sonraki adım ▶</button>
+      <button class="kz-mini" id="hepsi">Tümünü göster</button>
+      <button class="kz-mini" id="basa" hidden>↺ Baştan</button>
+    </div>
+  </section>
+
+  <section class="isp-card isp-dikkat">
+    <h2>🤔 Ya 0 olsaydı?</h2>
+    <p>Diyelim ki biri “2<sup>0</sup> = 0” dedi. Örüntüde üs 1 artınca değer 2 ile çarpılır. O zaman:</p>
+    <p class="isp-yanlis">2<sup>1</sup> = 2<sup>0</sup> · 2 = 0 · 2 = <span class="n">0</span> &nbsp;❌</p>
+    <p>Ama 2<sup>1</sup>’in <b>2</b> olduğunu biliyoruz! 0 ile başlayan bir örüntü sonsuza dek 0 kalır; hiçbir zaman 2, 4, 8’e ulaşamaz. Kuralların <b>tutarlı</b> kalması için 2<sup>0</sup> = 1 olmak zorundadır.</p>
+  </section>
+
+  <section class="isp-card isp-ornek">
+    <h2>🔢 Başka tabanla dene</h2>
+    <p>Bir taban seç ve örüntüyü sen sürdür. Her adımda hangi sayıya bölüyoruz?</p>
+    <div class="isp-tabanlar" id="tabanlar"></div>
+    <div class="isp-tablo isp-us" id="oruntu"></div>
+    <button class="kz-mini" id="oruntuBtn">Örüntüyü sürdür ▶</button>
+    <p id="oruntuSon" hidden>Taban ne olursa olsun, son adımda <b>sayıyı kendisine bölüyoruz</b>: sonuç her zaman <b>1</b>.</p>
+  </section>
+
+  <section class="isp-card isp-model">
+    <h2>➗ İkinci yol: üslü ifadelerde bölme</h2>
+    <p>Bir sayıyı kendisine bölersek sonuç 1’dir. Bunu üslü ifadelerle iki şekilde yazalım:</p>
+    <div class="isp-satirlar">
+      <div><span class="f"><i>2<sup>3</sup></i><i>2<sup>3</sup></i></span> = <span class="f"><i>8</i><i>8</i></span> = <span class="p">1</span></div>
+      <div><span class="f"><i>2<sup>3</sup></i><i>2<sup>3</sup></i></span> = <span class="f"><i>2 · 2 · 2</i><i>2 · 2 · 2</i></span> = 2<sup>3 − 3</sup> = 2<sup>0</sup></div>
+      <div class="isp-vurgu">Aynı işlemin sonucu olduğu için: 2<sup>0</sup> = 1</div>
+    </div>
+    <p>Pay ve paydadaki 2’lerin hepsi sadeleşir; geriye “hiç 2 kalmaz” ama sonuç 0 değil, <b>1</b>’dir. Çünkü çarpmada etkisiz eleman 1’dir.</p>
+  </section>
+
+  <section class="isp-card isp-dikkat">
+    <h2>⚠️ Sık yapılan hatalar</h2>
+    <p class="isp-yanlis">❌ 5<sup>0</sup> = 0 &nbsp;&nbsp; ❌ 5<sup>0</sup> = 5 &nbsp;&nbsp; ✅ 5<sup>0</sup> = 1</p>
+    <p><b>Parantez önemlidir:</b> (−3)<sup>0</sup> = 1, ama −3<sup>0</sup> = −(3<sup>0</sup>) = −1. Parantez yoksa üs yalnızca 3’e aittir.</p>
+    <p><b>0<sup>0</sup></b> ise ortaokulda <b>tanımsız</b> kabul edilir; çünkü ispatımızda sayıyı kendisine böldük ve 0’a bölme yapılamaz.</p>
+  </section>
+
+  <p style="text-align:center;margin-top:18px"><a class="kz-mini" href="formul-ispatlari.html">← Formül İspatları</a></p>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="games.js"></script>
+<script>
+initPage();
+(function () {
+  const adim = [...document.querySelectorAll('.isp-adim')];
+  const soruI = adim.findIndex(a => a.classList.contains('isp-sorulu'));
+  let n = 1, cozuldu = false;
+  const ileri = document.getElementById('ileri'), hepsi = document.getElementById('hepsi'), basa = document.getElementById('basa');
+  const bosluk = document.getElementById('bosluk'), geri = document.getElementById('geri');
+  function goster(kaydir) {
+    adim.forEach((a, i) => a.classList.toggle('gizli', i >= n));
+    const bitti = n >= adim.length, bekle = n === soruI + 1 && !cozuldu;
+    ileri.hidden = hepsi.hidden = bitti; basa.hidden = !bitti;
+    ileri.disabled = bekle; ileri.textContent = bekle ? 'Önce soruyu cevapla ☝️' : 'Sonraki adım ▶';
+    if (kaydir) adim[n - 1].scrollIntoView({ block: 'nearest' });
+  }
+  function coz() {
+    cozuldu = true; bosluk.textContent = '1'; bosluk.classList.add('dogru');
+    document.querySelectorAll('#secenek button').forEach(b => { b.disabled = true; b.classList.toggle('dogru', b.dataset.c === '1'); });
+  }
+  const ipucu = { '0': '2 ÷ 2 = 0 değil! İki elmayı iki kişiye paylaştırırsan her biri 1 elma alır. Tekrar dene!', '2': 'Örüntüde her adımda 2’ye bölüyoruz; 2 olarak kalırsa örüntü bozulur. Tekrar dene!' };
+  document.getElementById('secenek').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || cozuldu) return;
+    geri.hidden = false;
+    if (b.dataset.c === '1') { coz(); geri.className = 'isp-geri ok'; geri.textContent = 'Harika! 2 ÷ 2 = 1. Demek ki 2⁰ = 1.'; goster(false); }
+    else { b.classList.add('yanlis'); b.disabled = true; geri.className = 'isp-geri'; geri.textContent = ipucu[b.dataset.c]; }
+  });
+  ileri.onclick = () => { n++; goster(true); };
+  hepsi.onclick = () => { if (!cozuldu) coz(); n = adim.length; goster(false); };
+  basa.onclick = () => {
+    n = 1; cozuldu = false; bosluk.textContent = '?'; bosluk.classList.remove('dogru'); geri.hidden = true;
+    document.querySelectorAll('#secenek button').forEach(b => { b.disabled = false; b.className = ''; });
+    goster(false);
+  };
+  goster(false);
+
+  // Başka tabanla dene: a⁴ … a⁰
+  const tabanlar = [3, 5, 10, 7], kutu = document.getElementById('tabanlar'), tablo = document.getElementById('oruntu');
+  const ob = document.getElementById('oruntuBtn'), son = document.getElementById('oruntuSon');
+  let a = 3, k = 2;
+  kutu.innerHTML = tabanlar.map(t => `<button class="chip" data-t="${t}" aria-pressed="${t === a}">Taban ${t}</button>`).join('');
+  kutu.addEventListener('click', e => {
+    const b = e.target.closest('[data-t]'); if (!b) return;
+    a = +b.dataset.t; k = 2;
+    kutu.querySelectorAll('[data-t]').forEach(x => x.setAttribute('aria-pressed', x === b));
+    ciz();
+  });
+  function ciz() {
+    const satir = [4, 3, 2, 1, 0].slice(0, k);
+    tablo.innerHTML = satir.map((u, i) => {
+      const deger = a ** u, acik = u ? Array(u).fill(a).join(' · ') : '';
+      return `<div class="${u === 0 ? 'son' : ''}"><span>${a}<sup>${u}</sup>${acik && u > 1 ? ` = ${acik}` : ''}</span><b>=</b><span class="${u === 0 ? 'p' : ''}">${deger.toLocaleString('tr-TR')}</span>${i ? `<em>÷${a}</em>` : '<em></em>'}</div>`;
+    }).join('');
+    ob.hidden = k >= 5; son.hidden = k < 5;
+  }
+  ob.onclick = () => { k++; ciz(); };
+  ciz();
+})();
+</script>
+</body>
+</html>

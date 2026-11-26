@@ -1124,4 +1124,8 @@ button.bd-top{cursor:pointer}
 .isp-tablo em:empty{background:none}
 .isp-tablo .son{background:var(--yellow-light);outline:3px solid var(--yellow)}
 .isp-ornek .kz-mini{margin-top:6px}
+.isp sup{font-size:.62em;vertical-align:super;line-height:0}
+.isp-ok{display:inline-block;font-size:.8rem;font-weight:800;background:var(--mint-light);color:var(--mint-dark);border-radius:999px;padding:2px 10px;vertical-align:middle}
+.isp-tabanlar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.isp-us>div{grid-template-columns:1fr auto 90px 52px}
 @media print{.isp-secenek,.isp-geri,#oruntuBtn{display:none!important}}
