@@ -1254,3 +1254,7 @@ button.bd-top{cursor:pointer}
 .gy-notalar{display:flex;flex-wrap:wrap;gap:8px}
 .gy-notalar button:disabled{opacity:.45;cursor:default}
 @media (max-width:640px){.gy-ikili{grid-template-columns:1fr}.gy-cubuk>div{grid-template-columns:110px 1fr 44px;font-size:.85rem}}
+.gy-top3d{display:grid;grid-template-columns:320px 1fr;gap:16px;align-items:center;background:#fff;border-radius:16px;padding:14px;margin:8px 0}
+.gy-top3d canvas{width:100%;max-width:320px;aspect-ratio:1;height:auto;display:block;margin:0 auto;cursor:grab;background:radial-gradient(circle at 50% 45%,#F1E7FA 0,#fff 70%);border-radius:50%}
+.gy-top3d canvas:active{cursor:grabbing}
+@media (max-width:640px){.gy-top3d{grid-template-columns:1fr}}
