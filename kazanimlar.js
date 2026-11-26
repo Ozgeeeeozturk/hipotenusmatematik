@@ -101,7 +101,7 @@
           ${w.gunler ? `<p class="kz-day">📅 ${esc(w.gunler).replace(/\n/g, ' · ')}</p>` : ''}
         </div>
         ${outs ? `<div class="kz-block m">
-          <div class="kz-bh"><span class="kz-ic">🎯</span><h3>Bu haftanın kazanımı</h3></div>
+          <div class="kz-bh"><span class="kz-ic">🎯</span><h3>Bu Haftanın Kazanımı</h3></div>
           <ul class="kz-outs">${outs}</ul>
         </div>` : ''}
         ${stepsHtml ? `<div class="kz-block l${stepList.length > 3 ? ' kz-fold' : ''}" id="kzSteps">
