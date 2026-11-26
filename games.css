@@ -956,3 +956,53 @@ button.bd-top{cursor:pointer}
   .cb-masa.n4 .cb-lupe{width:34px;height:34px;right:-10px;top:-12px;border-width:3px}
 }
 .cb-masa.durgun .cb-cay{animation:none}
+
+/* ---------- PRİZMALARI TANIYALIM ---------- */
+.pz-sekmeler{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.pz-sekme{border:0;border-radius:14px;padding:10px 6px;font:800 .95rem 'Nunito';background:var(--lilac-light);color:var(--ink);cursor:pointer;box-shadow:0 4px 0 #D8C4EC}
+.pz-sekme.on{background:var(--lilac-dark);color:#fff;box-shadow:0 4px 0 #5B3F8E}
+.pz-cisimler{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.pz-cisim{display:inline-flex;align-items:center;gap:6px;border:2px solid #E5DCF3;background:#fff;border-radius:999px;padding:7px 14px;font:800 .9rem 'Nunito';cursor:pointer;color:var(--ink)}
+.pz-cisim.on{border-color:var(--mint-dark);background:var(--mint-light)}
+.pz-sahne{position:relative;background:linear-gradient(160deg,#FFFFFF 0%,var(--mint-light) 100%);border:2px solid #E5DCF3;border-radius:20px;overflow:hidden}
+.pz-sahne canvas{display:block;width:100%;height:340px;touch-action:none;cursor:grab}
+.pz-sahne canvas.tut{cursor:grabbing}
+.pz-sahne.kucuk canvas{height:260px}
+.pz-ipucu{position:absolute;left:12px;bottom:10px;font:800 .78rem 'Nunito';color:var(--muted);background:rgba(255,255,255,.8);border-radius:999px;padding:3px 10px;pointer-events:none}
+.pz-sayilar{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.pz-say{border:0;border-radius:16px;padding:10px 6px;background:#fff;box-shadow:0 4px 14px rgba(45,36,64,.08);cursor:pointer;display:grid;justify-items:center;gap:1px;color:var(--ink)}
+.pz-say b{font:800 2rem 'Baloo 2',cursive;line-height:1}
+.pz-say span{font-weight:800}
+.pz-say small{font-size:.72rem;font-weight:800;color:var(--lilac-dark)}
+.pz-say[data-v="yuz"] b{color:var(--lilac-dark)}
+.pz-say[data-v="ayrit"] b{color:#E8434F}
+.pz-say[data-v="kose"] b{color:var(--mint-dark)}
+.pz-say.on{outline:3px solid var(--yellow)}
+.pz-not{margin-top:12px;line-height:1.55;color:var(--ink)}
+.pz-tur{display:inline-block;margin-top:4px;font-weight:800;color:var(--muted);font-size:.92rem}
+.pz-sayac{margin-top:8px;text-align:center;font-weight:800;color:var(--lilac-dark);min-height:1.5em}
+.pz-yonler{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.pz-yon{border:2px solid #E5DCF3;border-radius:16px;background:#fff;padding:6px;cursor:pointer;display:grid;justify-items:center;gap:4px;font:800 .88rem 'Nunito';color:var(--ink)}
+.pz-yon canvas{width:100%;height:120px;display:block}
+.pz-yon.on{border-color:var(--lilac-dark);background:var(--lilac-light)}
+.pz-capraz{align-content:center}
+.pz-ikon{font-size:2.2rem}
+.pz-katla{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+.pz-kaydir{flex:1;display:flex;align-items:center;gap:8px;font-weight:800;font-size:.85rem;color:var(--muted);min-width:200px}
+.pz-kaydir input{flex:1;accent-color:var(--lilac-dark)}
+.pz-net-alt{display:grid;grid-template-columns:200px 1fr;gap:14px;align-items:center;margin-top:12px}
+.pz-net-alt canvas{width:200px;height:200px;background:#fff;border-radius:14px;border:2px solid #E5DCF3}
+.pz-soru-ust{display:flex;justify-content:space-between;font-weight:800;color:var(--muted);margin-bottom:8px}
+.pz-soru{display:grid;grid-template-columns:220px 1fr;gap:14px;align-items:center;margin-bottom:12px}
+.pz-soru canvas{width:220px;height:190px;background:linear-gradient(160deg,#fff,var(--mint-light));border-radius:16px;border:2px solid #E5DCF3}
+.pz-soru-metin{font:800 1.15rem 'Nunito';line-height:1.4}
+.pz-secenek.resimli{grid-template-columns:1fr 1fr!important}
+.pz-secenek.resimli .g-opt{padding:8px}
+.pz-secenek.resimli canvas{width:100%;height:100px;display:block;border-radius:10px}
+@media (max-width:640px){
+  .pz-sekmeler{grid-template-columns:repeat(2,1fr)}
+  .pz-sahne canvas{height:280px}
+  .pz-yonler{grid-template-columns:repeat(2,1fr)}
+  .pz-net-alt,.pz-soru{grid-template-columns:1fr;justify-items:center}
+  .pz-soru-metin{text-align:center}
+}
