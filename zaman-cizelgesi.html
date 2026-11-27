@@ -20,19 +20,23 @@
 <link rel="stylesheet" href="games.css">
 <style>
   .zc-ust{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
-  .zc-chip{display:inline-flex;align-items:center;gap:7px;border:2px solid var(--c);background:var(--white);color:var(--ink);border-radius:999px;padding:6px 12px;font:800 .85rem 'Nunito';cursor:pointer}
+  .zc-chip{display:inline-flex;align-items:center;gap:7px;border:2px solid var(--c);background:var(--white);box-shadow:0 3px 0 rgba(45,36,64,.1);color:var(--ink);border-radius:999px;padding:6px 12px;font:800 .85rem 'Nunito';cursor:pointer}
   .zc-chip i{width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 0 1px rgba(45,36,64,.15)}
   .zc-chip[aria-pressed="false"]{opacity:.45;border-style:dashed}
-  .zc-kutu{position:relative;background:linear-gradient(135deg,var(--mint-light) 0%,#FFFFFF 45%,var(--lilac-light) 100%);border:2px solid #E5DCF3;border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
+  .zc-kutu{position:relative;background:#FBF8FF;border:3px solid var(--lilac);border-radius:26px;box-shadow:0 14px 40px rgba(123,79,168,.22);overflow:hidden}
+  .zc-kutu::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(123,79,168,.13) 1.2px,transparent 1.3px);background-size:22px 22px}
   .zc-kaydir{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;cursor:grab;scrollbar-color:var(--lilac) transparent}
   .zc-kaydir.surukle{cursor:grabbing;user-select:none}
   .zc-alan{position:relative}
-  .zc-cag{position:absolute;top:0;bottom:0;border-left:2px dashed rgba(123,79,168,.18)}
-  .zc-cag:nth-child(even){background:rgba(255,216,77,.08)}
-  .zc-cag b{position:absolute;bottom:34px;left:10px;font:800 1.05rem 'Baloo 2',cursive;color:rgba(123,79,168,.38);white-space:nowrap;letter-spacing:.5px}
-  .zc-eksen{position:absolute;left:0;right:0;bottom:0;height:28px;border-top:2px solid rgba(123,79,168,.25);background:rgba(255,255,255,.6)}
-  .zc-eksen span{position:absolute;top:5px;transform:translateX(-50%);font:800 .72rem 'Nunito';color:var(--muted);white-space:nowrap}
-  .zc-eksen span::before{content:'';position:absolute;left:50%;top:-7px;height:6px;border-left:2px solid rgba(123,79,168,.35)}
+  .zc-cag{position:absolute;top:0;bottom:0;border-left:3px dashed rgba(123,79,168,.28)}
+  .zc-cag:nth-child(4n+1){background:linear-gradient(180deg,#EADCF8,#F4ECFC)}
+  .zc-cag:nth-child(4n+2){background:linear-gradient(180deg,#D3F3E4,#E9FAF2)}
+  .zc-cag:nth-child(4n+3){background:linear-gradient(180deg,#FFEFB5,#FFF7D9)}
+  .zc-cag:nth-child(4n){background:linear-gradient(180deg,#FFDCCB,#FFEDE4)}
+  .zc-cag b{position:absolute;bottom:38px;left:12px;font:800 1.25rem 'Baloo 2',cursive;color:rgba(91,63,142,.55);white-space:nowrap;letter-spacing:.5px;text-shadow:0 2px 0 rgba(255,255,255,.7)}
+  .zc-eksen{position:absolute;left:0;right:0;bottom:0;height:30px;background:linear-gradient(90deg,var(--lilac-dark),#5B3F8E 50%,var(--mint-dark));z-index:1}
+  .zc-eksen span{position:absolute;top:6px;transform:translateX(-50%);font:800 .74rem 'Nunito';color:#fff;white-space:nowrap}
+  .zc-eksen span::before{content:'';position:absolute;left:50%;top:-12px;height:9px;border-left:3px solid var(--yellow);border-radius:2px}
   .zc-kisi{position:absolute;height:38px;display:flex;align-items:center;gap:8px;border-radius:999px;padding:0 14px 0 3px;background:var(--c);color:var(--t);font:800 .92rem 'Nunito';white-space:nowrap;cursor:pointer;border:0;box-shadow:0 4px 0 rgba(45,36,64,.18);transition:transform .12s,filter .12s,opacity .2s}
   .zc-kisi:hover,.zc-kisi:focus-visible{transform:translateY(-2px);filter:brightness(1.05);outline:none}
   .zc-kisi.secili{box-shadow:0 0 0 3px var(--white),0 0 0 6px var(--lilac-dark)}
@@ -55,7 +59,19 @@
   .zc-kart .alt span{font-size:.76rem;font-weight:800;color:var(--muted)}
   .zc-kart .devam{border:0;background:var(--lilac-light);color:#5B3F8E;border-radius:999px;padding:6px 12px;font:800 .82rem 'Nunito';cursor:pointer}
   .zc-kart .kapat{position:absolute;top:6px;right:8px;border:0;background:none;font-size:1rem;color:var(--muted);cursor:pointer}
-  .zc-ipucu{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-weight:700;font-size:.85rem;margin-top:10px}
+  .zc-ipucu{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:#5B3F8E;font-weight:800;font-size:.85rem;margin-top:12px}
+  .zc-ipucu span{background:rgba(255,255,255,.85);border-radius:999px;padding:5px 12px;box-shadow:0 3px 10px rgba(123,79,168,.12)}
+  body.zc-sayfa{background:radial-gradient(circle at 8% 0%,var(--yellow-light) 0,transparent 38%),radial-gradient(circle at 95% 12%,var(--lilac-light) 0,transparent 42%),radial-gradient(circle at 50% 100%,var(--mint-light) 0,transparent 50%),#F7F2FC}
+  .zc-hero{position:relative;overflow:hidden;margin:16px 0 14px;padding:26px 26px 24px;border-radius:28px;color:#fff;background:linear-gradient(120deg,var(--lilac-dark) 0%,#5B3F8E 45%,var(--mint-dark) 100%);box-shadow:0 14px 34px rgba(91,63,142,.3)}
+  .zc-hero h1{font:800 2.1rem 'Baloo 2',cursive;line-height:1.1;position:relative;color:#fff}
+  .zc-hero h1 b{color:var(--yellow)}
+  .zc-hero p{position:relative;max-width:720px;margin-top:6px;font-weight:700;opacity:.95;line-height:1.5}
+  .zc-hero .sem{position:absolute;font:800 2.4rem 'Baloo 2',cursive;color:rgba(255,255,255,.14);animation:zcSuz 7s ease-in-out infinite;user-select:none}
+  .zc-hero .sem:nth-child(2n){color:rgba(255,216,77,.3);animation-duration:9s}
+  @keyframes zcSuz{50%{transform:translateY(-10px) rotate(6deg)}}
+  .zc-hero .rozetler{position:relative;display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .zc-hero .rozetler span{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:5px 12px;font-weight:800;font-size:.85rem}
+  @media (max-width:560px){.zc-hero{padding:20px 18px}.zc-hero h1{font-size:1.6rem}.zc-hero .sem{font-size:1.8rem}}
   /* Ayrıntı paneli */
   .zc-perde{position:fixed;inset:0;z-index:190;background:rgba(45,36,64,.45);opacity:0;pointer-events:none;transition:opacity .2s}
   .zc-perde.acik{opacity:1;pointer-events:auto}
@@ -88,7 +104,7 @@
   @media (max-width:560px){ .zc-kisi{height:34px;font-size:.84rem} .zc-kisi .av,.zc-kisi img.av{min-width:28px;width:auto;height:28px} .zc-kisi img.av{width:28px} .zc-kart{width:260px} .zc-kaynak ul{columns:1} }
 </style>
 </head>
-<body>
+<body class="zc-sayfa">
 
 <header class="site-header">
   <div class="bar">
@@ -112,8 +128,11 @@
 </header>
 
 <main class="wrap" style="padding-bottom:48px">
-  <div class="page-head">
-    <div><h1>Matematiğin Büyük İsimleri</h1><p>Antik Çağ’dan bugüne matematiğe yön veren insanlar. Bir isme dokun, kısa hikâyesini oku; “Devamını oku” ile ayrıntılara ve tarih videosuna ulaş.</p></div>
+  <div class="zc-hero">
+    <span class="sem" style="top:8%;right:6%" aria-hidden="true">π</span><span class="sem" style="top:52%;right:20%" aria-hidden="true">√</span><span class="sem" style="bottom:6%;right:4%" aria-hidden="true">∞</span><span class="sem" style="top:10%;right:32%" aria-hidden="true">Σ</span><span class="sem" style="bottom:10%;right:40%" aria-hidden="true">△</span><span class="sem" style="top:40%;right:52%" aria-hidden="true">÷</span>
+    <h1>🏛️ Matematiğin <b>Büyük İsimleri</b></h1>
+    <p>Antik Çağ’dan bugüne matematiğe yön veren insanlar. Bir isme dokun, kısa hikâyesini oku; “Devamını oku” ile ayrıntılara ve tarih videosuna ulaş.</p>
+    <div class="rozetler" id="zcRozet"></div>
   </div>
   <div class="zc-ust" id="lejant" role="group" aria-label="Bölgeye göre süz"></div>
   <div class="zc-kutu"><div class="zc-kaydir" id="kaydir"><div class="zc-alan" id="alan"></div></div></div>
@@ -133,6 +152,7 @@
 (function () {
   initPage();
   const K = TARIH_KISILER.slice().sort((a, b) => a.d - b.d), B = TARIH_BOLGE, RS = typeof TARIH_RESIM !== 'undefined' ? TARIH_RESIM : {};
+  { const z = document.getElementById('zcRozet'); if (z) { const ilk = K[0].d; z.innerHTML = '<span>👥 ' + K.length + ' matematikçi</span><span>🗺️ ' + Object.keys(B).length + ' bölge</span>' + (K.some(k => k.video) ? '<span>🎬 ' + K.filter(k => k.video).length + ' tarih videosu</span>' : '') + '<span>⏳ ' + (ilk < 0 ? 'MÖ ' + (-ilk) : ilk) + ' → bugün</span>'; } }
   const BUGUN = new Date().getFullYear();
   const resim = k => RS[k.id] ? 'tarih-resim/' + k.id + '.jpg' : null;
   const KIRIK = [[-650, 0, .75], [0, 1000, .42], [1000, 1500, .95], [1500, 1800, 2.6], [1800, 2035, 3.3]];
