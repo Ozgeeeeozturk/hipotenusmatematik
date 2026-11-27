@@ -1657,3 +1657,13 @@ button.bd-top{cursor:pointer}
 .yn-balon p{margin:0}
 .yn-tebrik{font:800 1.3rem 'Baloo 2',cursive;color:var(--mint-dark);width:100%;text-align:center}
 @media (max-width:640px){.yn-siklar{grid-template-columns:1fr 1fr}.yn-soru{padding:12px}.yn-balon{width:min(280px,82vw)}}
+.yn-ikili{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center;width:100%}
+.yn-ikili .yn-svg{width:100%}
+.yn-siklar-g{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.yn-siklar-g>div{display:flex;gap:6px;align-items:flex-start;background:#FAF8FD;border-radius:12px;padding:6px}
+.yn-svg.kucuk{max-width:250px}
+.yn-opts.grafik{grid-template-columns:1fr 1fr}
+.yn-opts.grafik .yn-opt{display:block;padding:6px}
+.yn-sik-g{display:flex;gap:6px;align-items:flex-start}
+.yn-sik-g .yn-svg{width:100%}
+@media (max-width:640px){.yn-ikili{grid-template-columns:1fr}.yn-siklar-g,.yn-opts.grafik{grid-template-columns:1fr 1fr;gap:6px}}
