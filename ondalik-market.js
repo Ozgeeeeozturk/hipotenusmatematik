@@ -1,4 +1,4 @@
-/* Ondalık Market: ondalık gösterimlerle toplama ve çıkarma (6. sınıf), negatif ondalıklarla işlemler (7. sınıf) */
+/* Ondalık Market: ondalık gösterimlerle toplama ve çıkarma (pozitif ondalık sayılar) */
 (function () {
   const { rnd, sec } = R_;
   // Tüm hesaplar kuruş (yüzde bir) cinsinden tam sayıyla yapılır; kayan nokta hatası olmaz
@@ -75,7 +75,7 @@
       aciklama: `Virgüller alt alta gelmeli: ${as}0 + ${bs} = ${kisa(dogru)}. Sayıları sağa yaslayan öğrenci ${kisa(kaymis)} buldu (virgüller kaydı); bir diğeri eldeyi yanlış ekledi.` };
   };
   const paraUstu = () => {
-    const t = fiyat() + rnd(0, 2) * 1000, ver = t <= 5000 ? 5000 : t <= 10000 ? 10000 : 20000, u = sec(URUN);
+    const t = fiyat() + rnd(0, 2) * 1000, ver = t < 5000 ? 5000 : t < 10000 ? 10000 : 20000, u = sec(URUN);
     return { tip: 'sayi', soru: `💵 <b>Kasiyer sensin!</b> Müşteri ${u[0]} <b>${u[1]}</b> aldı ve kasaya <b>${ver / 100} TL</b> verdi. Para üstü kaç TL?`, gorsel: `<div class="om-para"><span class="om-banknot">💵 ${ver / 100} TL</span><span class="om-eksi">−</span>${etiket(u, t)}</div>`,
       cevap: (ver - t) / 100, birim: 'TL', aciklama: `${ver / 100},00 − ${yaz(t)} = ${yaz(ver - t)} TL. İpucu: ${ver / 100} tam sayısını ${ver / 100},00 diye yaz, sonra alt alta çıkar.` };
   };
@@ -94,29 +94,11 @@
         aciklama: `Tam kısımlar: ${Math.floor(a / 100)} + ${Math.floor(b / 100)} = ${ta}. Ondalık kısımlar ${kisa(a % 100)} ve ${kisa(b % 100)}${t % 100 < (a % 100) + (b % 100) ? ' toplamı 1’i geçiyor, 1 eklenir' : ''} → sonuç ${kisa(t)}` }; },
   ];
 
-  // ---- 7. sınıf: negatif ondalıklar ----
-  const S7 = [
-    () => { const a = -(rnd(1, 9) * 100 + sec([25, 50, 75, 5])), b = rnd(2, 12) * 100 + sec([0, 25, 75, 40]);
-      return { tip: 'sayi', soru: `🌡️ Sabah hava sıcaklığı <b>${kisa(a)} °C</b> idi. Öğlene kadar <b>${kisa(b)} °C</b> arttı. Öğlen hava sıcaklığı kaç °C oldu?`, gorsel: '<div class="om-ikon">❄️ 🌡️ ➡️ ☀️</div>', cevap: (a + b) / 100, birim: '°C', aciklama: `${kisa(a)} + ${kisa(b)} = ${kisa(a + b)} °C. Farklı işaretli sayılarda büyük mutlak değerden küçüğü çıkarılır, büyüğün işareti alınır.` }; },
-    () => { const a = -(rnd(5, 30) * 100 + sec([40, 25, 60])), b = rnd(1, 4) * 100 + sec([85, 15, 50]);
-      return { tip: 'sayi', soru: `🤿 Bir dalgıç deniz seviyesinin <b>${kisa(-a)} m</b> altındadır (${kisa(a)} m). <b>${kisa(b)} m</b> daha aşağı inerse kaç metrede olur?`, gorsel: '<div class="om-ikon">🌊 🤿 ⬇️</div>', cevap: (a - b) / 100, birim: 'm', aciklama: `${kisa(a)} − ${kisa(b)} = ${kisa(a - b)} m` }; },
-    () => { const a = -(rnd(1, 9) * 100 + rnd(1, 9) * 10), b = rnd(1, 9) * 100 + rnd(11, 99); const bu = Math.max(b, -a), ku = Math.min(b, -a);
-      return { tip: 'ozel', soru: `<b>${kisa(b)} + (${kisa(a)})</b> işleminde büyük mutlak değerden küçüğünü çıkarırız. Virgülleri hizalayıp <b>${kisa(bu)} − ${kisa(ku)}</b> işlemini yap, sonra işareti düşün!`, kur: hizala(bu, ku, '−'), aciklama: `İşaret, mutlak değeri büyük olanınkidir: ${kisa(b)} + (${kisa(a)}) = <b>${kisa(b + a)}</b>` }; },
-    () => { const a = rnd(1, 9) * 100 + sec([5, 25, 75]), b = rnd(1, 9) * 100 + sec([50, 45, 35]), c = -(rnd(1, 5) * 100 + sec([0, 25, 5]));
-      return { tip: 'sayi', soru: `<span class="tz-buyuk">${kisa(a)} − ${kisa(b)} + (${kisa(c)}) = ?</span>`, cevap: (a - b + c) / 100, aciklama: `Soldan sağa: ${kisa(a)} − ${kisa(b)} = ${kisa(a - b)}; ${kisa(a - b)} + (${kisa(c)}) = ${kisa(a - b + c)}` }; },
-    () => ({ tip: 'ozel', soru: '🎯 <b>Hedef sepet!</b> Raftan ürün seçerek sepeti tam hedef tutara getir.', kur: hedefSepet() }),
-    () => { const a = -(rnd(1, 9) * 100 + sec([5, 25, 50])), b = -(rnd(1, 9) * 100 + sec([75, 15, 40])); const t = a + b;
-      return { tip: 'secim', soru: `<span class="tz-buyuk">(${kisa(a)}) + (${kisa(b)})</span> işleminin sonucu hangisidir?`, ...temaSecenek(kisa(t), [kisa(-t), kisa(a - b), kisa(b - a), kisa(t - 100)]), aciklama: `İki negatif sayı toplanınca mutlak değerler toplanır, sonuç negatif olur: −(${kisa(-a)} + ${kisa(-b)}) = ${kisa(t)}` }; },
-    paraUstu,
-  ];
-
   temaOyunu({
-    siniflar: [6, 7],
+    siniflar: [6],
     unvan: 'Market ustası! 🛒',
-    not: g => `<div class="pg-def om-not"><span class="pg-def-ic" aria-hidden="true">🛒</span><p>${g === 6
-      ? 'Ondalık sayıları toplarken ya da çıkarırken <mark>virgülleri alt alta</mark> getir. Eksik basamaklara 0 yazabilirsin: 4,5 = 4,50'
-      : 'Negatif ondalık sayılarda tam sayıların kuralları geçerli: <b>aynı işaretliler</b> toplanır; <b>farklı işaretlilerde</b> büyükten küçük çıkarılır, büyüğün işareti alınır.'}</p></div>`,
-    uret: g => temaKaristir(g === 6 ? S6 : S7, 8),
+    not: () => '<div class="pg-def om-not"><span class="pg-def-ic" aria-hidden="true">🛒</span><p>Ondalık sayıları toplarken ya da çıkarırken <mark>virgülleri alt alta</mark> getir. Eksik basamaklara 0 yazabilirsin: 4,5 = 4,50</p></div>',
+    uret: () => temaKaristir(S6, 8),
     kural: () => 'Virgül virgülün altına, onda birler onda birlerin altına!',
   });
 })();
