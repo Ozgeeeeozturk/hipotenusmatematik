@@ -357,9 +357,47 @@ function trackPlays() {
       const total = s ? Number((s.textContent.match(/\d+/) || [])[0]) : NaN;
       open();
       Classes.track(game, title(), 'bitirdi', score, total);
+      const yildiz = r.querySelectorAll('.g-stars .on').length || (total ? Math.min(3, Math.round(3 * score / total)) : 1);
+      Seri.kaydet(game, yildiz);
     });
   }).observe(stage, { childList: true, subtree: true });
 }
+
+// ---- 🔥 Seri ve ⭐ yıldızlar (yalnızca bu cihazda tutulur) ----
+// Günde en az 1 oyun bitirmek seriyi sürdürür. Her hafta (Pzt-Paz) kaçırılan 1 gün “seri koruyucu” ile köprülenir.
+const Seri = (() => {
+  const KEY = 'hp-seri-v1';
+  const gunAd = d => [d.getFullYear(), String(d.getMonth() + 1).padStart(2, '0'), String(d.getDate()).padStart(2, '0')].join('-');
+  const oku = () => { try { return Object.assign({ gunler: [], oyun: {}, enUzun: 0 }, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) { return { gunler: [], oyun: {}, enUzun: 0 }; } };
+  const yaz = v => { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} };
+  const hafta = d => { const x = new Date(d); x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); return gunAd(x); };
+  function hesap(v = oku()) {
+    const set = new Set(v.gunler), bugun = new Date();
+    const d = new Date(bugun); if (!set.has(gunAd(d))) d.setDate(d.getDate() - 1);
+    let seri = 0; const korunan = new Set(); let kullanilanKoruyucu = null;
+    for (let i = 0; i < 400; i++) {
+      const g = gunAd(d);
+      if (set.has(g)) { seri++; d.setDate(d.getDate() - 1); continue; }
+      const once = new Date(d); once.setDate(once.getDate() - 1);
+      const h = hafta(d);
+      if ((seri > 0 || i === 0) && set.has(gunAd(once)) && !korunan.has(h)) { korunan.add(h); if (!kullanilanKoruyucu) kullanilanKoruyucu = g; d.setDate(d.getDate() - 1); continue; }
+      break;
+    }
+    const bugunTamam = set.has(gunAd(bugun));
+    const koruyucuVar = !korunan.has(hafta(bugun));
+    const yildiz = Object.values(v.oyun).reduce((a, b) => a + b, 0);
+    return { seri, bugunTamam, koruyucuVar, yildiz, enUzun: Math.max(v.enUzun || 0, seri), oyun: v.oyun };
+  }
+  function kaydet(oyun, yildiz) {
+    const v = oku(), g = gunAd(new Date()), ilk = !v.gunler.includes(g);
+    if (ilk) v.gunler = [...v.gunler, g].slice(-120);
+    v.oyun[oyun] = Math.max(v.oyun[oyun] || 0, yildiz || 0);
+    const h = hesap(v); v.enUzun = h.enUzun;
+    yaz(v);
+    if (ilk) setTimeout(() => toast(h.seri > 1 ? `🔥 Serin <b>${h.seri} gün</b> oldu! Yarın da gel, seriyi sürdür.` : '🔥 Bugünün hedefi tamam! Serin başladı.', 4200), 900);
+  }
+  return { hesap, kaydet };
+})();
 
 // ---- Çalışma kâğıtları (PDF) ----
 const WORKSHEETS = [

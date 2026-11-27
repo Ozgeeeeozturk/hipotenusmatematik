@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Oyun Adası: Matematik Macerası | Hipotenüs</title>
+<link rel="canonical" href="https://hipotenusmatematik.com/oyun-adasi.html">
+<meta name="description" content="Hipotenüs Oyun Adası: Sayılar, Kesirler, Geometri, Cebir ve Yeni Nesil Problem Çözme adalarında 5-8. sınıf matematik oyunları. Her gün bir oyun bitir, serini büyüt, yıldız topla.">
+<meta name="theme-color" content="#2E9E78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="games.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <a href="index.html" class="logo" aria-label="Hipotenüs ana sayfa">
+      <svg viewBox="0 0 745 745" aria-hidden="true">
+        <rect width="745" height="745" rx="168" fill="#6E58BD"/>
+        <rect x="176" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <rect x="461" y="145" width="112" height="475" rx="32" fill="#fff"/>
+        <polygon points="461,346 461,485 322,485" fill="#8FDDC6"/>
+        <rect x="404" y="435" width="57" height="50" fill="#6E58BD"/>
+        <rect x="422" y="453" width="39" height="32" fill="#8FDDC6"/>
+        <line x1="489" y1="277" x2="260" y2="503" stroke="#FFD453" stroke-width="74" stroke-linecap="round"/>
+      </svg>
+      <span>Hipoten<b>ü</b>s</span>
+    </a>
+    <div class="bar-actions">
+      <a class="btn-login btn-ghost" href="index.html"><span aria-hidden="true">🏠</span><span class="lbl">Ana Sayfa</span></a>
+      <div id="userArea"></div>
+    </div>
+  </div>
+</header>
+
+<main class="oa">
+  <section class="oa-ust wrap">
+    <div class="oa-baslik"><h1>🏝️ Oyun Adası</h1><p>Adaları keşfet, oyunları bitir, yıldızları topla. Her gün bir oyun bitirerek serini büyüt!</p></div>
+    <div class="oa-hud" id="oaHud" aria-live="polite"></div>
+    <div class="oa-sinif" role="group" aria-label="Sınıf seç" id="oaSinif"></div>
+  </section>
+
+  <section class="oa-deniz" aria-label="Ada haritası">
+    <svg class="oa-yol" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M15 72 C 22 55, 26 40, 33 32 S 44 58, 51 68 S 64 38, 71 28 S 82 55, 87 66" /></svg>
+    <div class="oa-bulut b1"></div><div class="oa-bulut b2"></div><div class="oa-bulut b3"></div>
+    <div id="oaAdalar"></div>
+  </section>
+
+  <section class="oa-panel wrap" id="oaPanel" hidden></section>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="games.js"></script>
+<script>
+initPage();
+(function () {
+  const $ = id => document.getElementById(id);
+  const EK = { 'yanilgi-negatif-kesir.html': { icon: '🐸', title: '0’dan Zıpla: Negatif Kesirler', text: 'Negatif kesirleri sayı doğrusunda doğru uçtan say', grades: [7], etkinlik: true } };
+  const ADALAR = [
+    { id: 'sayilar', ad: 'Sayılar Adası', renk: '#9EE6C9', koyu: '#2E9E78', x: 15, y: 72, oyunlar: ['basamak-degeri', 'carpim-merdiveni', 'cekirge', 'termometre', 'us-kulesi', 'kare-bahce'] },
+    { id: 'kesirler', ad: 'Kesirler Adası', renk: '#FFE07A', koyu: '#C99A12', x: 33, y: 30, oyunlar: ['cay-bardagi', 'serit-modeli', 'yanilgi-negatif-kesir', 'limonata-orani'] },
+    { id: 'geometri', ad: 'Geometri Adası', renk: '#D9BDF2', koyu: '#7B4FA8', x: 51, y: 68, oyunlar: ['aci-ustasi', 'aci-boyama', 'saat-aci', 'ucgen-avcisi', 'es-dogru', 'pergel', 'cember-ucgen', 'yaricap-tasi', 'katla-kes', 'alan-atolyesi', 'acinim', 'prizmalar', 'kup-gorunum', 'ucgen-elemanlari', 'donusum', 'benzerlik'] },
+    { id: 'cebir', ad: 'Cebir Adası', renk: '#A9DBF7', koyu: '#2C7FB8', x: 71, y: 28, oyunlar: ['terazi', 'cebir-karolari', 'esitsizlik'] },
+    { id: 'yeninesil', ad: 'Yeni Nesil Problem Çözme Adası', kisa: 'Yeni Nesil Adası', renk: '#FFC2A3', koyu: '#D2622D', x: 87, y: 66, oyunlar: ['veri-dedektifi', 'olasilik-carki', 'esit-aralik', 'fayans'] },
+  ];
+  const oyun = slug => {
+    const h = slug + '.html', b = BUILTIN_GAMES.find(g => g.href === h);
+    return b ? { slug, href: h, icon: b.icon, title: b.title, text: b.text, grades: b.grades } : EK[h] ? Object.assign({ slug, href: h }, EK[h]) : null;
+  };
+
+  // ---- Ada çizimleri (özgün SVG) ----
+  function ada(A) {
+    const R = A.renk, K = A.koyu;
+    const susler = {
+      sayilar: `<g transform="translate(70 18)"><rect x="0" y="40" width="30" height="30" rx="6" fill="#fff" stroke="${K}" stroke-width="3"/><text x="15" y="62" text-anchor="middle" class="oa-sk">1</text><rect x="34" y="22" width="30" height="48" rx="6" fill="#FFD84D" stroke="#C99A12" stroke-width="3"/><text x="49" y="52" text-anchor="middle" class="oa-sk">2</text><rect x="68" y="4" width="30" height="66" rx="6" fill="#C8A2E8" stroke="#7B4FA8" stroke-width="3"/><text x="83" y="42" text-anchor="middle" class="oa-sk">3</text><text x="112" y="30" class="oa-sk k">×</text></g>`,
+      kesirler: `<g transform="translate(120 50)"><circle r="38" fill="#F6C86B" stroke="#C9842B" stroke-width="4"/><circle r="31" fill="#E8573F"/>${[0, 1, 2, 3, 4, 5].map(i => `<line x1="0" y1="0" x2="${31 * Math.cos(i * Math.PI / 3)}" y2="${31 * Math.sin(i * Math.PI / 3)}" stroke="#F6C86B" stroke-width="3"/>`).join('')}<circle cx="-12" cy="-10" r="4" fill="#FFF3C4"/><circle cx="10" cy="12" r="4" fill="#FFF3C4"/><circle cx="14" cy="-12" r="3.5" fill="#3B7A3B"/><path d="M48 -30 L48 4 L78 -14 Z" fill="#E8573F" stroke="#C9842B" stroke-width="3" transform="rotate(10)"/></g>`,
+      geometri: `<g transform="translate(58 10)"><path d="M40 70 L76 4 L112 70 Z" fill="#FFD84D" stroke="#2D2440" stroke-width="3"/><path d="M76 4 L112 70 L92 70 Z" fill="#E0B820"/><g transform="translate(8 34)"><path d="M0 12 L22 0 L44 12 L22 24 Z" fill="#9EE6C9" stroke="#2D2440" stroke-width="2.5"/><path d="M0 12 L22 24 L22 50 L0 38 Z" fill="#5FC9A0" stroke="#2D2440" stroke-width="2.5"/><path d="M44 12 L22 24 L22 50 L44 38 Z" fill="#2E9E78" stroke="#2D2440" stroke-width="2.5"/></g><circle cx="132" cy="56" r="14" fill="#fff" stroke="#7B4FA8" stroke-width="3"/><line x1="132" y1="56" x2="146" y2="56" stroke="#7B4FA8" stroke-width="2"/></g>`,
+      cebir: `<g transform="translate(60 8)"><rect x="57" y="10" width="6" height="58" fill="#7B4FA8"/><path d="M40 72 h40 l-6 -8 h-28 Z" fill="#7B4FA8"/><line x1="10" y1="16" x2="110" y2="16" stroke="#7B4FA8" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="14" r="6" fill="#FFD84D" stroke="#7B4FA8" stroke-width="2"/><path d="M0 40 h40 l-5 8 h-30 Z" fill="#E3F8EF" stroke="#2E9E78" stroke-width="2"/><path d="M80 40 h40 l-5 8 h-30 Z" fill="#E3F8EF" stroke="#2E9E78" stroke-width="2"/><line x1="10" y1="16" x2="4" y2="40" stroke="#9A8BB5"/><line x1="10" y1="16" x2="36" y2="40" stroke="#9A8BB5"/><line x1="110" y1="16" x2="84" y2="40" stroke="#9A8BB5"/><line x1="110" y1="16" x2="116" y2="40" stroke="#9A8BB5"/><rect x="8" y="22" width="22" height="18" rx="4" fill="#C8A2E8" stroke="#7B4FA8" stroke-width="2"/><text x="19" y="36" text-anchor="middle" class="oa-sk x">x</text><circle cx="92" cy="33" r="7" fill="#FFD84D" stroke="#C99A12" stroke-width="2"/><circle cx="108" cy="33" r="7" fill="#FFD84D" stroke="#C99A12" stroke-width="2"/></g>`,
+      yeninesil: `<g transform="translate(92 0)"><path d="M20 80 L26 20 L44 20 L50 80 Z" fill="#fff" stroke="#2D2440" stroke-width="3"/><path d="M23 52 L47 52 L48 62 L22 62 Z M25 34 L45 34 L46 42 L24 42 Z" fill="#E8573F"/><rect x="22" y="10" width="26" height="12" rx="3" fill="#2D2440"/><circle cx="35" cy="6" r="9" fill="#FFE45C" class="oa-isik"/><text x="35" y="10" text-anchor="middle" class="oa-sk s">?</text><g transform="translate(-48 46)"><path d="M0 8 h10 a6 6 0 1 1 12 0 h10 v10 a6 6 0 1 0 0 12 v10 h-32 Z" fill="#9EE6C9" stroke="#2E9E78" stroke-width="2.5"/></g><g transform="translate(70 50)"><circle cx="10" cy="10" r="10" fill="none" stroke="#2D2440" stroke-width="4"/><line x1="17" y1="17" x2="28" y2="28" stroke="#2D2440" stroke-width="5" stroke-linecap="round"/></g></g>`,
+    }[A.id];
+    return `<svg viewBox="0 0 240 200" class="oa-svg" aria-hidden="true">
+      <ellipse cx="120" cy="188" rx="80" ry="9" fill="rgba(13,60,110,.25)"/>
+      <path d="M22 96 Q120 72 218 96 L196 132 L162 168 L128 184 L100 172 L66 150 L38 126 Z" fill="#7A6A8F"/>
+      <path d="M22 96 L38 126 L66 150 L100 172 L120 140 L80 112 Z" fill="#5E5072"/>
+      <path d="M120 140 L128 184 L162 168 Z" fill="#8F80A6"/>
+      <ellipse cx="120" cy="94" rx="100" ry="30" fill="${K}"/>
+      <ellipse cx="120" cy="90" rx="98" ry="27" fill="${R}"/>
+      <ellipse cx="96" cy="82" rx="40" ry="7" fill="rgba(255,255,255,.35)"/>
+      ${susler}
+    </svg>`;
+  }
+
+  // ---- Durum ----
+  let u = null; try { u = Auth.current(); } catch (e) {}
+  let sinif = 0; // 0 = tüm sınıflar
+  try { sinif = +(localStorage.getItem('hp-ada-sinif') || (u && u.grade) || 0); } catch (e) {}
+  let acik = null;
+
+  const yildizlar = n => `<span class="oa-yildiz">${[1, 2, 3].map(k => `<i class="${k <= n ? 'on' : ''}">★</i>`).join('')}</span>`;
+  const gorunen = A => A.oyunlar.map(oyun).filter(o => o && (!sinif || o.grades.includes(sinif)));
+
+  function hud() {
+    const h = Seri.hesap();
+    $('oaHud').innerHTML = `
+      <div class="oa-kart seri${h.seri ? ' yanik' : ''}"><span class="oa-ik">🔥</span><b>${h.seri}</b><small>gün seri</small></div>
+      <div class="oa-kart"><span class="oa-ik">⭐</span><b>${h.yildiz}</b><small>yıldız</small></div>
+      <div class="oa-kart hedef${h.bugunTamam ? ' tamam' : ''}"><span class="oa-ik">🎯</span><b>${h.bugunTamam ? '✓' : '0/1'}</b><small>${h.bugunTamam ? 'bugün tamam' : 'bugünün hedefi'}</small></div>
+      <div class="oa-kart"><span class="oa-ik">🛡️</span><b>${h.koruyucuVar ? '1' : '0'}</b><small>seri koruyucu</small></div>
+      <div class="oa-kart"><span class="oa-ik">🏆</span><b>${h.enUzun}</b><small>en uzun seri</small></div>`;
+  }
+  function sinifCiz() {
+    $('oaSinif').innerHTML = [0, 5, 6, 7, 8].map(s => `<button class="chip" data-s="${s}" aria-pressed="${s === sinif}">${s ? s + '. Sınıf' : 'Tüm sınıflar'}</button>`).join('');
+    $('oaSinif').querySelectorAll('[data-s]').forEach(b => b.addEventListener('click', () => {
+      sinif = +b.dataset.s; try { localStorage.setItem('hp-ada-sinif', sinif); } catch (e) {}
+      sinifCiz(); adalarCiz(); if (acik) panel(acik, false);
+    }));
+  }
+  function adalarCiz() {
+    const yd = Seri.hesap().oyun;
+    $('oaAdalar').innerHTML = ADALAR.map((A, i) => {
+      const os = gorunen(A), biten = os.filter(o => yd[o.slug]).length;
+      return `<button class="oa-ada${acik && acik.id === A.id ? ' secili' : ''}" style="--x:${A.x}%;--y:${A.y}%;--r:${A.renk};--k:${A.koyu};--d:${i * 0.6}s" data-ada="${A.id}" aria-label="${A.ad}: ${os.length} oyun">
+        ${ada(A)}
+        <span class="oa-ad">${A.kisa || A.ad}</span>
+        <span class="oa-ilerleme">${os.length ? `${biten}/${os.length} oyun` : 'Bu sınıfta oyun yok'}</span>
+      </button>`;
+    }).join('');
+    $('oaAdalar').querySelectorAll('[data-ada]').forEach(b => b.addEventListener('click', () => panel(ADALAR.find(A => A.id === b.dataset.ada), true)));
+  }
+  function panel(A, kaydir) {
+    acik = A; adalarCiz();
+    const yd = Seri.hesap().oyun, os = gorunen(A);
+    const ilkEksik = os.findIndex(o => !yd[o.slug]);
+    $('oaPanel').hidden = false;
+    $('oaPanel').style.setProperty('--r', A.renk); $('oaPanel').style.setProperty('--k', A.koyu);
+    $('oaPanel').innerHTML = `
+      <div class="oa-panel-bas"><div>${ada(A)}</div><div><h2>${A.ad}</h2><p>${os.length ? `${os.filter(o => yd[o.slug]).length} / ${os.length} oyun tamamlandı` : ''}</p></div><button class="oa-kapat" aria-label="Kapat">✕</button></div>
+      ${os.length ? `<ol class="oa-patika">${os.map((o, i) => {
+        const y = yd[o.slug] || 0;
+        return `<li class="${y ? 'bitti' : ''}${i === ilkEksik ? ' siradaki' : ''}">
+          <a href="${o.href}" class="oa-tas" aria-label="${o.title}">${y ? '<span class="oa-tik">✓</span>' : ''}<span class="oa-tas-ik">${o.icon}</span></a>
+          <div class="oa-bilgi"><a href="${o.href}"><b>${o.title}</b></a><small>${o.grades.join(', ')}. sınıf${o.etkinlik ? ' · etkinlik' : ''}</small>${o.etkinlik ? '' : yildizlar(y)}${i === ilkEksik ? `<a class="btn btn-yellow oa-basla" href="${o.href}">▶ Başla</a>` : ''}</div>
+        </li>`;
+      }).join('')}</ol>` : `<p class="oa-bos">Bu adada ${sinif}. sınıfa uygun oyun henüz yok. <button class="kz-mini" id="oaTum">Tüm sınıfları göster</button></p>`}`;
+    $('oaPanel').querySelector('.oa-kapat').addEventListener('click', () => { acik = null; $('oaPanel').hidden = true; adalarCiz(); });
+    const t = $('oaPanel').querySelector('#oaTum'); if (t) t.addEventListener('click', () => { sinif = 0; try { localStorage.setItem('hp-ada-sinif', 0); } catch (e) {} sinifCiz(); panel(A, false); });
+    if (kaydir) $('oaPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  hud(); sinifCiz(); adalarCiz();
+  const q = new URLSearchParams(location.search).get('ada'); if (q) { const A = ADALAR.find(x => x.id === q); if (A) panel(A, true); }
+  window.addEventListener('pageshow', () => { hud(); adalarCiz(); if (acik) panel(acik, false); });
+})();
+</script>
+</body>
+</html>
