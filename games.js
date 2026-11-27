@@ -298,6 +298,7 @@ const BUILTIN_GAMES = [
   { href: 'benzerlik.html', icon: '🔍', type: 'Büyüteç Oyunu', title: 'Benzerlik Büyüteci', text: 'Şekli oranla büyüt; eş mi benzer mi, benzerlik oranı ve eksik kenar', grades: [8], unit: 'Eşlik ve Benzerlik', color: 'y' },
   { href: 'yeni-nesil-carpanlar.html', icon: '🧩', type: 'Adım Adım Problem', title: 'Yeni Nesil Problemler: Çarpanlar ve Katlar', text: 'MEB örnek sorularını adım adım çöz; takılınca 💬 yol gösterici baloncuğu aç', grades: [8], unit: 'Çarpanlar ve Katlar', color: 'y' },
   { href: 'yeni-nesil-veri.html', icon: '📈', type: 'Adım Adım Problem', title: 'Yeni Nesil Problemler: Veri Analizi', text: 'Daire ve sütun grafiklerini birlikte yorumla; takılınca 💬 yol gösterici baloncuğu aç', grades: [8], unit: 'Veri Analizi', color: 'l' },
+  { href: 'ondalik-market.html', icon: '🛒', type: 'Market Oyunu', title: 'Ondalık Market: Toplama ve Çıkarma', text: 'Virgülleri hizala, kasada topla, para üstü ver, hedef sepeti tuttur', grades: [6,7], unit: 'Sayılar ve Nicelikler (2)', units: {'7':'Sayılar ve Nicelikler (1)'}, color: 'm' },
   { href: 'carpim-merdiveni.html', icon: '✖️', type: 'Hız Oyunu', title: 'Çarpım Tablosu Oyunu', text: '10 seviye zihinden çarpma, 100 puana ulaş', grades: [5, 6, 7, 8], color: 'y' },
 ];
 const gRange = gs => (gs.length < 2 ? `${gs[0]}` : gs.every((x, i) => !i || x === gs[i - 1] + 1) ? `${gs[0]}–${gs[gs.length - 1]}` : gs.join(', '));
